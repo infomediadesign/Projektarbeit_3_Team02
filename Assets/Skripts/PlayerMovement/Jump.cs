@@ -28,6 +28,10 @@ public class Jump : BaseState
         {
             state.TransitionState(state.jumpBlockState);
         }
+        else if (Input.GetKey(KeyCode.R))
+        {
+            state.TransitionState(state.rollState);
+        }
         else if (state.isGrounded)
         {
             state.TransitionState(state.walkState);
