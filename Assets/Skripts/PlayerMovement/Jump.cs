@@ -23,12 +23,16 @@ public class Jump : BaseState
         {
             state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.rb.linearVelocity.y * state.jumpMultiplier);
         }
+        else if (Input.GetKeyDown(KeyCode.Space) && !state.isGrounded) //hier noch kollision mit enemy einfügen
+        {
+            state.TransitionState(state.airCounterState);
+        }
 
         else if (Input.GetKey(KeyCode.B))
         {
             state.TransitionState(state.jumpBlockState);
         }
-        else if (Input.GetKey(KeyCode.R))
+        else if (Input.GetKey(KeyCode.R) && Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.R) && Input.GetKey(KeyCode.A)) //damit nicht gerollt wird, wenn der spieler nur nach oben springt
         {
             state.TransitionState(state.rollState);
         }

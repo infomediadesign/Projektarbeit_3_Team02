@@ -13,7 +13,11 @@ public class JumpBlock : BaseState
     {
         Debug.Log("jumpblock");
 
-        state.TransitionState(state.idleState);
+        if (state.isGrounded)
+        {
+            state.TransitionState(state.walkState);
+        }
+      
 
     }
 
