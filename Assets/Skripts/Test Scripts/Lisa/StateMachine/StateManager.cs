@@ -43,7 +43,9 @@ public class StateManager : MonoBehaviour
 
     public void TransitionState(BaseState state)
     {
+        state.ExitState(this);
         currentState = state;
         state.EnterState(this);
+
     }
 }
