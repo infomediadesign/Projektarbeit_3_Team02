@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 18357831}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.05, z: 0}
+  m_LocalPosition: {x: 0, y: -1.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -323,15 +323,20 @@ MonoBehaviour:
   position: {fileID: 18905973}
   walkingSpeed: 5
   jumpForce: 15
-  isGrounded: 0
   groundCheckPos: {fileID: 1411220006}
   groundCheckRad: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   jumpMultiplier: 0.4
+  enemyCheckPos: {fileID: 18357832}
+  enemyCheckRad: 0.2
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
   rollDistance: 5
   rollSpeed: 8
+  inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!114 &18905975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +470,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
