@@ -15,6 +15,7 @@ public class Jump : BaseState
     {
         xInput = Input.GetAxisRaw("Horizontal");
         state.rb.linearVelocity = new Vector2(xInput * state.walkingSpeed, state.rb.linearVelocity.y);
+
         if (Input.GetKey(KeyCode.Space) && state.isGrounded)
         {
             state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.jumpForce);
@@ -23,11 +24,12 @@ public class Jump : BaseState
         {
             state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.rb.linearVelocity.y * state.jumpMultiplier);
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && !state.isGrounded) //hier noch kollision mit enemy einfügen
+
+
+        else if (Input.GetKeyDown(KeyCode.Space) && !state.isGrounded && state.isEnemy)
         {
             state.TransitionState(state.airCounterState);
         }
-
         else if (Input.GetKey(KeyCode.B))
         {
             state.TransitionState(state.jumpBlockState);

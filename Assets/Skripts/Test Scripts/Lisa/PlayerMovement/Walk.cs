@@ -31,7 +31,14 @@ public class Walk : BaseState
         {
             state.TransitionState(state.rollState);
         }
-
+        else if (Input.GetKey(KeyCode.B))
+        {
+            state.TransitionState(state.blockState);
+        }
+        else if (Input.GetKey(KeyCode.C))
+        {
+            state.TransitionState(state.counterState);
+        }
     }
 
     override public void ExitState(StateManager state)

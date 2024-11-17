@@ -23,6 +23,12 @@ public class StateManager : MonoBehaviour
     public LayerMask groundLayer;
     public float jumpMultiplier = 0.5f;
 
+    public bool isEnemy;
+    public Transform enemyCheckPos;
+    public float enemyCheckRad = 0.5f;
+    public LayerMask enemyLayer;
+
+
     public float rollDistance = 3;
     public float rollSpeed = 3;
 
@@ -37,6 +43,7 @@ public class StateManager : MonoBehaviour
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheckPos.position, groundCheckRad, groundLayer);
+        isEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, enemyCheckRad, enemyLayer);
 
         currentState.UpdateState(this);
     }

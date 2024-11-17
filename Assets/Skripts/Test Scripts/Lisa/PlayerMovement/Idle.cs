@@ -22,6 +22,10 @@ public class Idle : BaseState
         {
             state.TransitionState(state.jumpState);
         }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            state.TransitionState(state.counterState);
+        }
     }
 
     override public void ExitState(StateManager state)
