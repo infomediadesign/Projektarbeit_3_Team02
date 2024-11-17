@@ -16,7 +16,7 @@ public class Walk : BaseState
 
     override public void UpdateState(StateManager state)
     {
-        elapsedTime += Time.deltaTime;
+        
         xInput = Input.GetAxisRaw("Horizontal");
         state.rb.linearVelocity = new Vector2(xInput * state.walkingSpeed, state.rb.linearVelocity.y);
         if (Input.GetKeyDown(KeyCode.Space) && state.isGrounded)
@@ -38,6 +38,14 @@ public class Walk : BaseState
         else if (Input.GetKey(KeyCode.C))
         {
             state.TransitionState(state.counterState);
+        }
+        else if(xInput == 0)
+        {
+            elapsedTime += Time.deltaTime;
+        }
+        else if(xInput > 0)
+        {
+            elapsedTime = 0;
         }
     }
 
