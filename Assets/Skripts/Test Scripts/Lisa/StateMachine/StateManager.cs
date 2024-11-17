@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class StateManager : MonoBehaviour
 {
+    //UNTEN sollte größtenteil in Scriptable Object
+
     public Rigidbody2D rb;
     public Transform position;
     public float walkingSpeed = 5;
@@ -17,13 +20,13 @@ public class StateManager : MonoBehaviour
     public Block blockState = new Block();
     public Idle idleState = new Idle();
 
-    public bool isGrounded;
+    public bool isGrounded { get; private set; }
     public Transform groundCheckPos;
     public float groundCheckRad = 0.2f;
     public LayerMask groundLayer;
     public float jumpMultiplier = 0.5f;
 
-    public bool isEnemy;
+    public bool isEnemy { get; private set; }
     public Transform enemyCheckPos;
     public float enemyCheckRad = 0.5f;
     public LayerMask enemyLayer;
@@ -31,6 +34,28 @@ public class StateManager : MonoBehaviour
 
     public float rollDistance = 3;
     public float rollSpeed = 3;
+
+    // OBEN sollte größtenteils in Scriptable Object
+
+    public InputActionAsset inputActions;
+
+    private InputAction walkAction;
+    private InputAction jumpAction;
+    private InputAction blockAction;
+
+    public InputAction GetWalkAction() => walkAction;
+    public InputAction GetJumpAction() => jumpAction;
+    public InputAction GetBlockAction() => blockAction;
+    void Awake()
+    {
+        walkAction = inputActions.FindAction("Walk");
+        jumpAction = inputActions.FindAction("Jump");
+        blockAction = inputActions.FindAction("Block");
+
+        walkAction.Enable();
+        jumpAction.Enable();
+        blockAction.Enable();
+    }
 
     void Start()
     {
@@ -55,4 +80,11 @@ public class StateManager : MonoBehaviour
         state.EnterState(this);
 
     }
+    void OnDisable()
+    {
+        walkAction.Disable();
+        jumpAction.Disable();
+        blockAction.Disable();
+    }
+
 }
