@@ -18,9 +18,14 @@ public class JumpBlock : BaseState
         Debug.Log("jumpblock");
         renderer.color = Color.green;
 
-        if (state.isGrounded)
+        if (state.isGrounded && Input.GetKey(KeyCode.B))
         {
             state.TransitionState(state.blockState);
+        }
+        else if (state.isGrounded)
+        {
+            state.TransitionState(state.walkState);
+            renderer.color = Color.white;
         }
       
 
