@@ -13,7 +13,7 @@ public class Jump : BaseState
 
     override public void UpdateState(StateManager state)
     {
-        xInput = Input.GetAxisRaw("Horizontal");
+        xInput = state.walk.ReadValue<float>();
         state.rb.linearVelocity = new Vector2(xInput * state.walkingSpeed, state.rb.linearVelocity.y);
 
         if (Input.GetKey(KeyCode.Space) && state.isGrounded)

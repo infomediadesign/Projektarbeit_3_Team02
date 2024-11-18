@@ -1,8 +1,10 @@
 
 using UnityEngine;
+using UnityEngine.InputSystem.XInput;
 
 public class Idle : BaseState
 {
+    private float xInput;
     override public void EnterState(StateManager state)
     {
         Debug.Log("entering idle state");
@@ -13,16 +15,18 @@ public class Idle : BaseState
     {
         Debug.Log("idle");
         state.rb.linearVelocity = new Vector2(0,0);
-        
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+        xInput = state.walk.ReadValue<float>();
+
+        if (xInput != 0)
         {
             state.TransitionState(state.walkState);
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && state.isGrounded)
+     
+        else if (state.jump.triggered && state.isGrounded)
         {
             state.TransitionState(state.jumpState);
         }
-        else if (Input.GetKeyDown(KeyCode.C))
+        else if (state.counter.triggered)
         {
             state.TransitionState(state.counterState);
         }
