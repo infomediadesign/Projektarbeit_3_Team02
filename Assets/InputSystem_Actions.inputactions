@@ -996,15 +996,6 @@
             "id": "90c5ed4e-ec77-42ce-a330-4cff4556b8a3",
             "actions": [
                 {
-                    "name": "Walk",
-                    "type": "Button",
-                    "id": "1af90fb9-e78a-42c9-8d5f-468a8ce432ba",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "19c62aa2-b8db-48af-b4e0-b761b380ea13",
@@ -1039,31 +1030,27 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Walk",
+                    "type": "Value",
+                    "id": "883f6e78-bcbc-443f-af6b-2d57a399a6be",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "AirCounter",
+                    "type": "Button",
+                    "id": "11a43ef8-9a77-4d58-a8f4-6b5b5588dc29",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "24cd006b-8d45-4f86-9057-b7dceff8f20e",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Walk",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "eab2c052-1504-4619-b2a3-6b0e9e4e50fc",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Walk",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "857afeb5-829b-4903-9a64-10c1b09d9155",
@@ -1105,6 +1092,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "7461f953-d376-48fa-83a8-54f30f9bf555",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Negative",
+                    "id": "62d4f67e-c859-4671-a0dc-3e80e032ca7b",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Positive",
+                    "id": "94de749f-5bed-4fcc-9e70-28739735519f",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "dd4d7461-a77e-4c5e-8853-96092528e2c2",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AirCounter",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

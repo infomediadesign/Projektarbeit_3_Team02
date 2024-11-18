@@ -17,7 +17,7 @@ public class AirCounter : BaseState
     {
         Debug.Log("airCounter");
 
-        xInput = Input.GetAxisRaw("Horizontal");
+        xInput = state.walk.ReadValue<float>();
         state.rb.linearVelocity = new Vector2(xInput * state.walkingSpeed, state.rb.linearVelocity.y);
 
         if (Input.GetKey(KeyCode.Space) && state.isEnemy && hasCountered == false)
@@ -40,7 +40,7 @@ public class AirCounter : BaseState
             state.TransitionState(state.walkState);
         }
 
-        if (Input.GetKey(KeyCode.B))
+        if (state.block.triggered)
         {
             state.TransitionState(state.jumpBlockState);
         }

@@ -3,6 +3,15 @@ using UnityEngine.InputSystem;
 
 public class StateManager : MonoBehaviour
 {
+    public InputSystem_Actions playerControls;
+    public InputAction walk { get; private set; }
+    public InputAction jump { get; private set; }
+    public InputAction block { get; private set; }
+    public InputAction roll { get; private set; }
+    public InputAction counter { get; private set; }
+    public InputAction airCounter { get; private set; }
+
+
     //UNTEN sollte größtenteil in Scriptable Object
 
     public Rigidbody2D rb;
@@ -37,29 +46,38 @@ public class StateManager : MonoBehaviour
 
     // OBEN sollte größtenteils in Scriptable Object
 
-    public InputActionAsset inputActions;
+    //public InputActionAsset inputActions;
 
-    private InputAction walkAction;
-    private InputAction jumpAction;
-    private InputAction blockAction;
+   
 
-    public InputAction GetWalkAction() => walkAction;
+    /*public InputAction GetWalkAction() => walkAction;
     public InputAction GetJumpAction() => jumpAction;
-    public InputAction GetBlockAction() => blockAction;
+    public InputAction GetBlockAction() => blockAction;*/
     void Awake()
     {
-        walkAction = inputActions.FindAction("Walk");
-        jumpAction = inputActions.FindAction("Jump");
-        blockAction = inputActions.FindAction("Block");
+        playerControls = new InputSystem_Actions();
+    }
 
-        walkAction.Enable();
-        jumpAction.Enable();
-        blockAction.Enable();
+    private void OnEnable()
+    {
+        walk = playerControls.Test.Walk;
+        walk.Enable();
+        jump = playerControls.Test.Jump;
+        jump.Enable();
+        roll = playerControls.Test.Roll;
+        roll.Enable();
+        counter = playerControls.Test.Counter;
+        counter.Enable();
+        block = playerControls.Test.Block;
+        block.Enable();
+        airCounter = playerControls.Test.AirCounter;
+        airCounter.Enable();
     }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+     
         currentState = idleState;
         currentState.EnterState(this);
     }
@@ -78,13 +96,17 @@ public class StateManager : MonoBehaviour
         state.ExitState(this);
         currentState = state;
         state.EnterState(this);
+        
 
     }
     void OnDisable()
     {
-        walkAction.Disable();
-        jumpAction.Disable();
-        blockAction.Disable();
+        walk.Disable();
+        jump.Disable();
+        block.Disable();
+        roll.Disable();
+        counter.Disable();
+        airCounter.Disable();
     }
 
 }
