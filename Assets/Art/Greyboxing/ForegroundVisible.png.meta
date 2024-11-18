@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8ade5f5f2600ac848a6a9c6baecb6b6e
+guid: 28e4be2821289694fa6260151a3c6f61
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4506078587719956224
-    second: ScreenBackgroundScreen5_0
+      213: 7960559693005531757
+    second: ForegroundVisible_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 60
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ScreenBackgroundScreen5_0
+      name: ForegroundVisible_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1920
-        height: 1080
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 00945f016613771c0800000000000000
-      internalID: -4506078587719956224
+      spriteID: d6a23ea2dd6997e60800000000000000
+      internalID: 7960559693005531757
       vertices: []
       indices: 
       edges: []
@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ForegroundVisible_0: 7960559693005531757
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
