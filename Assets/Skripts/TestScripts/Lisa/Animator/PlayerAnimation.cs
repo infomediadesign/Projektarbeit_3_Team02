@@ -15,6 +15,7 @@ public class PlayerAnimation : MonoBehaviour
     const string playerCounter = "playerCounter";
     const string playerRoll = "playerRoll";
     const string playerAirCounter = "playerAirCounter";
+    const string playerFalling = "playerFalling";
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -56,6 +57,10 @@ public class PlayerAnimation : MonoBehaviour
         else if (stateManager.currentState == stateManager.counterState)
         {
             AnimStateTransition(playerCounter);
+        }
+        else if (stateManager.currentState == stateManager.fallingState) 
+        {
+            AnimStateTransition(playerFalling);
         }
     }
 

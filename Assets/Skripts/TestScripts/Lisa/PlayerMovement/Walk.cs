@@ -40,6 +40,10 @@ public class Walk : BaseState
         {
             state.TransitionState(state.idleState);
         }
+        else if(state.rb.linearVelocityY < 0)
+        {
+            state.TransitionState(state.fallingState);
+        }
     }
 
     override public void ExitState(StateManager state)

@@ -30,6 +30,10 @@ public class Idle : BaseState
         {
             state.TransitionState(state.counterState);
         }
+        else if (state.block.triggered)
+        {
+            state.TransitionState(state.blockState);
+        }
     }
 
     override public void ExitState(StateManager state)

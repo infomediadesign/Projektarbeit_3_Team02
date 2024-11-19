@@ -28,6 +28,7 @@ public class StateManager : MonoBehaviour
     public AirCounter airCounterState = new AirCounter();
     public Block blockState = new Block();
     public Idle idleState = new Idle();
+    public Falling fallingState = new Falling();
 
     public bool isGrounded { get; private set; }
     public Transform groundCheckPos;

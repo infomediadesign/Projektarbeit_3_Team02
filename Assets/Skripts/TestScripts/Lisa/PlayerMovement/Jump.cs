@@ -24,6 +24,10 @@ public class Jump : BaseState
         {
             state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.rb.linearVelocity.y * state.jumpMultiplier);
         }
+        else if(state.rb.linearVelocityY < 0)
+        {
+            state.TransitionState(state.fallingState);
+        }
 
 
         else if (Input.GetKeyDown(KeyCode.Space) && !state.isGrounded && state.isEnemy)
