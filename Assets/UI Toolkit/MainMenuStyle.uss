@@ -1,0 +1,72 @@
+.header {
+    -unity-font-definition: url("project://database/Assets/Art/Placeholder/UI%20Placeholder/hpunk.ttf?fileID=12800000&guid=824d94276c112564ab6e682ebbaeef29&type=3#hpunk");
+    font-size: 150px;
+    -unity-font-style: normal;
+    -unity-text-align: middle-center;
+    color: rgb(161, 117, 65);
+    margin-top: 38px;
+    margin-right: 38px;
+    margin-bottom: 38px;
+    margin-left: 38px;
+    -unity-text-outline-width: 0;
+    -unity-text-outline-color: rgba(204, 193, 114, 0);
+    letter-spacing: 9px;
+    word-spacing: 21px;
+    -unity-paragraph-spacing: 0;
+    white-space: normal;
+    text-overflow: clip;
+    background-image: url("project://database/Assets/Art/Placeholder/UI%20Placeholder/Main%20Menu%20Background%20Placeholder/tileset%20grass%20platform.png?fileID=5859738994199496719&guid=a3964469dcc8f9f489312c0c46667e8b&type=3#tileset grass platform_16");
+}
+
+.button {
+    font-size: 97px;
+    -unity-font-definition: url("project://database/Assets/Art/Placeholder/UI%20Placeholder/parangrusak.ttf?fileID=12800000&guid=209b0ec8955378541b238f4920575292&type=3#parangrusak");
+    color: rgb(161, 117, 65);
+    -unity-text-align: middle-center;
+    width: 500px;
+    height: 200px;
+    align-self: center;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    background-image: url("project://database/Assets/Art/Placeholder/UI%20Placeholder/Main%20Menu%20Background%20Placeholder/tileset%20grass%20platform.png?fileID=-2475567346553660007&guid=a3964469dcc8f9f489312c0c46667e8b&type=3#tileset grass platform_6");
+    -unity-background-image-tint-color: rgba(24, 50, 83, 0.96);
+    background-size: 102% 160%;
+    -unity-font-style: normal;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    visibility: visible;
+    overflow: visible;
+    opacity: 1;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    background-position-y: center 0;
+    background-position-x: center 0;
+    -unity-slice-left: -13;
+    -unity-slice-top: -13;
+    -unity-slice-right: -13;
+    -unity-slice-bottom: -13;
+    -unity-slice-scale: 1.4px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    transition-duration: 0.3s;
+}
+
+.button:hover {
+    scale: 1.1 1.1;
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url("project://database/Assets/Art/Placeholder/UI%20Placeholder/Main%20Menu%20Background%20Placeholder/tileset%20grass%20platform.png?fileID=-2475567346553660007&guid=a3964469dcc8f9f489312c0c46667e8b&type=3#tileset grass platform_6");
+    -unity-background-image-tint-color: rgb(0, 145, 245);
+}
