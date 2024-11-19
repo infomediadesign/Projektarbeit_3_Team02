@@ -1,0 +1,9 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=86c292152ae543149b0d9c9ddcc91fa8&amp;type=3#MainMenuStyle" />
+    <engine:VisualElement name="Container" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/Placeholder/Environment%20Placeholder/Combined%20background%20-%20Blue.png?fileID=6873756781528416986&amp;guid=64f599c9a3a11434193b77632f3cbd48&amp;type=3#Combined background - Blue_0&quot;); -unity-background-image-tint-color: rgb(29, 135, 95);">
+        <engine:Label text="Main Menu" name="Header" class="header" style="color: rgba(221, 180, 94, 0.64);" />
+        <engine:Button text="Play" parse-escape-sequences="false" name="PlayButton" class="button" style="justify-content: flex-start;" />
+        <engine:Button text="Options" name="OptionsButton" selectable="true" class="button" />
+        <engine:Button text="Exit" name="ExitButton" class="button" />
+    </engine:VisualElement>
+</engine:UXML>
