@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5108607322610700552
+--- !u!1 &2565632003454515905
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8881016105837773274}
-  - component: {fileID: 6172546942318355153}
-  - component: {fileID: 1647986190387586213}
-  - component: {fileID: 6932008896439100644}
-  m_Layer: 0
-  m_Name: Enemy
+  - component: {fileID: 1679190657158325009}
+  - component: {fileID: 8275584363409368329}
+  - component: {fileID: 830185801711442140}
+  - component: {fileID: 2645885875862132764}
+  m_Layer: 7
+  m_Name: CounterObjectSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8881016105837773274
+--- !u!4 &1679190657158325009
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5108607322610700552}
+  m_GameObject: {fileID: 2565632003454515905}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.07, y: -6.39, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: 59, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6172546942318355153
+--- !u!212 &8275584363409368329
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5108607322610700552}
+  m_GameObject: {fileID: 2565632003454515905}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -78,8 +78,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 0.009433985, b: 0.009433985, a: 1}
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Color: {r: 0.8301887, g: 0, b: 0.6738142, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -89,13 +89,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &1647986190387586213
-PolygonCollider2D:
+--- !u!58 &830185801711442140
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5108607322610700552}
+  m_GameObject: {fileID: 2565632003454515905}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -119,39 +119,26 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
-  m_UseDelaunayMesh: 0
---- !u!114 &6932008896439100644
+  m_Radius: 0.5
+--- !u!114 &2645885875862132764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5108607322610700552}
+  m_GameObject: {fileID: 2565632003454515905}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83e2a49f926f8f343b02d13797cd0b3d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f90297fcd8909f4c9feda4d20a2398d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 1
-  isPatrolling: 0
-  patrolStarPos: {x: 0, y: 0}
-  patrolEndPos: {x: 0, y: 0}
+  direction: {x: 0, y: -1}
+  cooldown: 8
+  startOffset: 0
+  numberOfShots: 1
+  timeBetweenShots: 4
