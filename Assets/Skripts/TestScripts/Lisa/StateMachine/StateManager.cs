@@ -18,6 +18,7 @@ public class StateManager : MonoBehaviour
     public Transform position;
     public float walkingSpeed = 5;
     public float jumpForce = 10;
+    public CapsuleCollider2D capCol;
 
     public BaseState currentState;
     public Walk walkState = new Walk();
@@ -78,6 +79,7 @@ public class StateManager : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        capCol = GetComponent<CapsuleCollider2D>();
      
         currentState = idleState;
         currentState.EnterState(this);
@@ -94,7 +96,7 @@ public class StateManager : MonoBehaviour
 
     public void TransitionState(BaseState state)
     {
-        state.ExitState(this);
+        currentState.ExitState(this);
         currentState = state;
         state.EnterState(this);
         

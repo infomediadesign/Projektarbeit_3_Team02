@@ -20,6 +20,8 @@ public class Roll : BaseState
         }
         //je anchdem ob facing right oder nicht wird rollspeed negativ oder positiv gesetzt yay
         state.rb.linearVelocity = new Vector2(FacingRight ? state.rollSpeed : -state.rollSpeed, state.rb.linearVelocity.y);
+        state.capCol.size = new Vector2(1, 0.1f);
+      
     }
 
     override public void UpdateState(StateManager state)
@@ -28,7 +30,7 @@ public class Roll : BaseState
 
         if (FacingRight)
         {
-            if (state.transform.position.x - startPositionX < state.rollDistance)
+            if (state.transform.position.x - startPositionX < state.rollDistance) //oder collision mit tag "decke"
             {
                 state.rb.linearVelocity = new Vector2(state.rollSpeed, state.rb.linearVelocity.y);
             }
@@ -55,6 +57,7 @@ public class Roll : BaseState
     override public void ExitState(StateManager state)
     {
         Debug.Log("exiting roll state");
+        state.capCol.size = new Vector2(1, 1.5f);
     }
 }
 

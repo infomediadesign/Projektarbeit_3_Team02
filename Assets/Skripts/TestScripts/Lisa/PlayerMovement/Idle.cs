@@ -13,7 +13,7 @@ public class Idle : BaseState
 
     override public void UpdateState(StateManager state)
     {
-        Debug.Log("idle");
+      
         state.rb.linearVelocity = new Vector2(0,0);
         xInput = state.walk.ReadValue<float>();
 
