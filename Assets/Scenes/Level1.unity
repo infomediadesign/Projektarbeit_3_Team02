@@ -1987,9 +1987,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 720577675297078237, guid: 4ffad702df6bd34409f8744dc96d93a9, type: 3}
+      propertyPath: sceneBuildIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4379344231177236780, guid: 4ffad702df6bd34409f8744dc96d93a9, type: 3}
       propertyPath: m_Name
       value: MoveToNextLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379344231177236780, guid: 4ffad702df6bd34409f8744dc96d93a9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5530235215782627574, guid: 4ffad702df6bd34409f8744dc96d93a9, type: 3}
       propertyPath: m_LocalPosition.x
