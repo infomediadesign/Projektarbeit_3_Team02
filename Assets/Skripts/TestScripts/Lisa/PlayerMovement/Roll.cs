@@ -12,11 +12,11 @@ public class Roll : BaseState
         startPositionX = state.transform.position.x;
         originOffset = state.capCol.offset;
 
-        if (Input.GetKey(KeyCode.A))
+        if (state.rb.linearVelocityX < 0)
         {
             FacingRight = false;
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (state.rb.linearVelocityX > 0)
         {
             FacingRight = true;
         }

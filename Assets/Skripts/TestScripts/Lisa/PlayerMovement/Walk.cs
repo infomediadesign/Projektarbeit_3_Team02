@@ -7,7 +7,7 @@ public class Walk : BaseState
 
     override public void EnterState(StateManager state)
     {
-        Debug.Log("entering walking state");
+        Debug.Log("entering walking state...");
    
     }
 
@@ -18,19 +18,19 @@ public class Walk : BaseState
         xInput = state.walk.ReadValue<float>();
         state.rb.linearVelocity = new Vector2(xInput * state.walkingSpeed, state.rb.linearVelocity.y);
        
-        if (Input.GetKeyDown(KeyCode.Space) && state.isGrounded)
+        if (state.jump.triggered && state.isGrounded)
         {
             state.TransitionState(state.jumpState);
         }
-        else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.R) || Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.R))
+        else if (state.roll.triggered && state.rb.linearVelocityX != 0)
         {
             state.TransitionState(state.rollState);
         }
-        else if (Input.GetKey(KeyCode.B))
+        else if (state.block.triggered)
         {
             state.TransitionState(state.blockState);
         }
-        else if (Input.GetKey(KeyCode.C))
+        else if (state.counter.triggered)
         {
             state.TransitionState(state.counterState);
         }

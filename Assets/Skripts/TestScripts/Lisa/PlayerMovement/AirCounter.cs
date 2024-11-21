@@ -6,10 +6,13 @@ public class AirCounter : BaseState
 {
     private float xInput;
     private bool hasCountered;
+    private bool airCounterReleased;
     override public void EnterState(StateManager state)
     {
         Debug.Log("entering airCounter state");
         hasCountered = false;
+        state.airCounter.canceled += OnAirCounterCanceled;
+        airCounterReleased = false;
     }
 
 
@@ -20,7 +23,7 @@ public class AirCounter : BaseState
         xInput = state.walk.ReadValue<float>();
         state.rb.linearVelocity = new Vector2(xInput * state.walkingSpeed, state.rb.linearVelocity.y);
 
-        if (Input.GetKey(KeyCode.Space) && state.isEnemy && hasCountered == false)
+        if (state.isEnemy && hasCountered == false)
         {
             state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.jumpForce);
         }
@@ -28,7 +31,7 @@ public class AirCounter : BaseState
         {
             hasCountered = true;
         }
-        else if (Input.GetKeyUp(KeyCode.Space) && state.rb.linearVelocity.y > 0)
+        else if (airCounterReleased && state.rb.linearVelocity.y > 0)
         {
             state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.rb.linearVelocity.y * state.jumpMultiplier);
             hasCountered = true;
@@ -59,5 +62,10 @@ public class AirCounter : BaseState
     override public void ExitState(StateManager state)
     {
         Debug.Log("exiting state");
+        state.airCounter.canceled -= OnAirCounterCanceled;
+    }
+    private void OnAirCounterCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        airCounterReleased = true;
     }
 }

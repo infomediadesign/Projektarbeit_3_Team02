@@ -13,6 +13,10 @@ public class StateManager : MonoBehaviour
 
 
     //UNTEN sollte größtenteil in Scriptable Object
+    private float xInput;
+    private bool isMovementPressed;
+    private bool isJumpPressed;
+
 
     public Rigidbody2D rb;
     public Transform position;
@@ -21,15 +25,7 @@ public class StateManager : MonoBehaviour
     public CapsuleCollider2D capCol;
 
     public BaseState currentState;
-    public Walk walkState = new Walk();
-    public Jump jumpState = new Jump();
-    public JumpBlock jumpBlockState = new JumpBlock();
-    public Roll rollState = new Roll();
-    public Counter counterState = new Counter();
-    public AirCounter airCounterState = new AirCounter();
-    public Block blockState = new Block();
-    public Idle idleState = new Idle();
-    public Falling fallingState = new Falling();
+    //public StateFactory states;
 
     public bool isGrounded { get; private set; }
     public Transform groundCheckPos;
@@ -49,20 +45,27 @@ public class StateManager : MonoBehaviour
     private bool facingRight = true;
 
     // OBEN sollte größtenteils in Scriptable Object
+    public Walk walkState = new Walk();
+    public Jump jumpState = new Jump();
+    public JumpBlock jumpBlockState = new JumpBlock();
+    public Roll rollState = new Roll();
+    public Counter counterState = new Counter();
+    public AirCounter airCounterState = new AirCounter();
+    public Block blockState = new Block();
+    public Idle idleState = new Idle();
+    public Falling fallingState = new Falling();
+   // public Grounded groundedState = new Grounded();
 
-    //public InputActionAsset inputActions;
 
-
-
-    /*public InputAction GetWalkAction() => walkAction;
-    public InputAction GetJumpAction() => jumpAction;
-    public InputAction GetBlockAction() => blockAction;*/
     void Awake()
     {
         playerControls = new InputSystem_Actions();
+       // states = new StateFactory(this);
+        currentState = idleState;
+      
     }
 
-    private void OnEnable()
+    private void OnEnable() //kann man auch mit ganzer map machen
     {
         walk = playerControls.Test.Walk;
         walk.Enable();
@@ -77,13 +80,22 @@ public class StateManager : MonoBehaviour
         airCounter = playerControls.Test.AirCounter;
         airCounter.Enable();
     }
+    void OnDisable()
+    {
+        walk.Disable();
+        jump.Disable();
+        block.Disable();
+        roll.Disable();
+        counter.Disable();
+        airCounter.Disable();
+    }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         capCol = GetComponent<CapsuleCollider2D>();
      
-        currentState = idleState;
+        //currentState = idleState;
         currentState.EnterState(this);
     }
 
@@ -104,15 +116,7 @@ public class StateManager : MonoBehaviour
         
 
     }
-    void OnDisable()
-    {
-        walk.Disable();
-        jump.Disable();
-        block.Disable();
-        roll.Disable();
-        counter.Disable();
-        airCounter.Disable();
-    }
+   
 
     public void SetFacingDirection(bool isFacingRight)
     {
@@ -125,5 +129,8 @@ public class StateManager : MonoBehaviour
             transform.localScale = localScale;
         }
     }
+
+
+
 
 }
