@@ -4,9 +4,7 @@ public class Walk : BaseState
 {
 
     private float xInput;
-   
 
-  
     override public void EnterState(StateManager state)
     {
         Debug.Log("entering walking state");
@@ -17,9 +15,9 @@ public class Walk : BaseState
     override public void UpdateState(StateManager state)
     {
         
-       // xInput = Input.GetAxisRaw("Horizontal");
         xInput = state.walk.ReadValue<float>();
         state.rb.linearVelocity = new Vector2(xInput * state.walkingSpeed, state.rb.linearVelocity.y);
+       
         if (Input.GetKeyDown(KeyCode.Space) && state.isGrounded)
         {
             state.TransitionState(state.jumpState);
@@ -44,6 +42,15 @@ public class Walk : BaseState
         {
             state.TransitionState(state.fallingState);
         }
+        else if (state.rb.linearVelocity.x > 0)
+        {
+            state.SetFacingDirection(true);
+        }
+        else
+        {
+            state.SetFacingDirection(false);
+        }
+
     }
 
     override public void ExitState(StateManager state)

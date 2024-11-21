@@ -26,10 +26,20 @@ public class PlayerAnimation : MonoBehaviour
     // es fehlen noch animator parameter, die in den states oder im state manager gesetzt werden (zb walkleft oder right)
     void Update()
     {
+        if (stateManager.left == true)
+        {
+            animator.SetBool("left", true);
+        }
+        else
+        {
+            animator.SetBool ("left", false);
+        }
         if (stateManager.currentState == stateManager.walkState)
         {
+           
             AnimStateTransition(playerWalk);
             Debug.Log("walk anim");
+
         }
         else if (stateManager.currentState == stateManager.idleState)
         {
