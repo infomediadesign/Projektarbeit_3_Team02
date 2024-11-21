@@ -36,6 +36,7 @@ public class StateManager : MonoBehaviour
     public float groundCheckRad = 0.2f;
     public LayerMask groundLayer;
     public float jumpMultiplier = 0.5f;
+    public bool left;
 
     public bool isEnemy { get; private set; }
     public Transform enemyCheckPos;
@@ -45,12 +46,13 @@ public class StateManager : MonoBehaviour
 
     public float rollDistance = 3;
     public float rollSpeed = 3;
+    private bool facingRight = true;
 
     // OBEN sollte größtenteils in Scriptable Object
 
     //public InputActionAsset inputActions;
 
-   
+
 
     /*public InputAction GetWalkAction() => walkAction;
     public InputAction GetJumpAction() => jumpAction;
@@ -110,6 +112,18 @@ public class StateManager : MonoBehaviour
         roll.Disable();
         counter.Disable();
         airCounter.Disable();
+    }
+
+    public void SetFacingDirection(bool isFacingRight)
+    {
+        if (facingRight != isFacingRight)
+        {
+            facingRight = isFacingRight;
+
+            Vector3 localScale = transform.localScale;
+            localScale.x = isFacingRight ? Mathf.Abs(localScale.x) : -Mathf.Abs(localScale.x);
+            transform.localScale = localScale;
+        }
     }
 
 }

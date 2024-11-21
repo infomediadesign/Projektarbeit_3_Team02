@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.InputSystem.XInput;
+using UnityEngine.Windows;
 
 public class Falling : BaseState
 {
+    private float xInput;
     override public void EnterState(StateManager state)
     {
         Debug.Log("entering fall state");
@@ -9,8 +12,9 @@ public class Falling : BaseState
 
     public override void UpdateState(StateManager state)
     {
-        
-        if(state.isGrounded && state.rb.linearVelocityX != 0)
+        xInput = state.walk.ReadValue<float>();
+        state.rb.linearVelocity = new Vector2(xInput * state.walkingSpeed, state.rb.linearVelocity.y);
+        if (state.isGrounded && state.rb.linearVelocityX != 0)
         {
             state.TransitionState(state.walkState);
         }
@@ -26,7 +30,16 @@ public class Falling : BaseState
         {
             state.TransitionState(state.airCounterState);
         }
-    }
+        if (state.rb.linearVelocityX < 0)
+        {
+            state.SetFacingDirection(false);
+        }
+        else
+        {
+            state.SetFacingDirection(true);
+        }
+    
+}
 
     public override void ExitState(StateManager state) 
     {

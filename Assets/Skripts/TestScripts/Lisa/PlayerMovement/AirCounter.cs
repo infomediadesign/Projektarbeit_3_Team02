@@ -44,8 +44,16 @@ public class AirCounter : BaseState
         {
             state.TransitionState(state.jumpBlockState);
         }
-       
-        
+        if (state.rb.linearVelocityX < 0)
+        {
+            state.SetFacingDirection(false);
+        }
+        else
+        {
+            state.SetFacingDirection(true);
+        }
+
+
     }
 
     override public void ExitState(StateManager state)
