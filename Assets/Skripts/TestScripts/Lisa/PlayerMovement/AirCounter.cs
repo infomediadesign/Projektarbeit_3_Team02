@@ -5,14 +5,15 @@ using UnityEngine;
 public class AirCounter : BaseState
 {
     private float xInput;
-    private bool hasCountered;
     private bool airCounterReleased;
+    private bool airCounterPressed;
     override public void EnterState(StateManager state)
     {
         Debug.Log("entering airCounter state");
-        hasCountered = false;
         state.playerControls.AirCounter.canceled += OnAirCounterCanceled;
+        state.playerControls.AirCounter.performed += OnAirCounterPressed;
         airCounterReleased = false;
+        airCounterPressed = true;
     }
 
 
@@ -23,19 +24,17 @@ public class AirCounter : BaseState
         xInput = state.playerControls.Walk.ReadValue<float>();
         state.rb.linearVelocity = new Vector2(xInput * state.playerStats.walkingSpeed, state.rb.linearVelocity.y);
 
-        if (state.isEnemy && hasCountered == false)
+        if (state.isEnemy && airCounterPressed)
         {
             state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.playerStats.jumpForce);
-        }
-        else if (!state.isEnemy)
-        {
-            hasCountered = true;
+            airCounterPressed = false;
         }
         else if (airCounterReleased && state.rb.linearVelocity.y > 0)
         {
             state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.rb.linearVelocity.y * state.playerStats.jumpMultiplier);
-            hasCountered = true;
+            airCounterReleased = false;
         }
+       
 
 
         if (state.isGrounded)
@@ -67,5 +66,11 @@ public class AirCounter : BaseState
     private void OnAirCounterCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
         airCounterReleased = true;
+        airCounterPressed = false;
+    }
+    private void OnAirCounterPressed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        airCounterReleased = false;
+        airCounterPressed = true;
     }
 }
