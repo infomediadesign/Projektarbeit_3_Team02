@@ -4,12 +4,16 @@ using UnityEngine;
 public class Block : BaseState
 {
     SpriteRenderer renderer;
+    private bool blockReleased;
     override public void EnterState(StateManager state)
     {
         Debug.Log("entering Block state");
         renderer = state.GetComponent<SpriteRenderer>();
         state.rb.linearVelocity = new Vector2(0, 0);
-        
+        state.playerControls.Block.canceled += OnBlockCanceled;
+        blockReleased = false;
+
+
     }
 
 
@@ -19,17 +23,22 @@ public class Block : BaseState
         renderer.color = Color.green;
 
 
-        if (Input.GetKeyUp(KeyCode.B))
+        if (blockReleased)
         {
             renderer.color = Color.white;
             state.TransitionState(state.walkState);
         }
+       
     }
 
     override public void ExitState(StateManager state)
     {
         Debug.Log("exiting state");
-        
+        state.playerControls.Block.canceled -= OnBlockCanceled;
+    }
+    private void OnBlockCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        blockReleased = true;
     }
 }
 
