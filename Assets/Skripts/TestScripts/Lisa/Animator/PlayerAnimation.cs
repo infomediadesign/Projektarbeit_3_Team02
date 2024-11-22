@@ -22,39 +22,23 @@ public class PlayerAnimation : MonoBehaviour
         stateManager = GetComponent<StateManager>();
    
     }
-
-    // es fehlen noch animator parameter, die in den states oder im state manager gesetzt werden (zb walkleft oder right)
     void Update()
     {
-        if (stateManager.left == true)
-        {
-            animator.SetBool("left", true);
-        }
-        else
-        {
-            animator.SetBool ("left", false);
-        }
         if (stateManager.currentState == stateManager.walkState)
-        {
-           
+        {          
             AnimStateTransition(playerWalk);
-            Debug.Log("walk anim");
-
         }
         else if (stateManager.currentState == stateManager.idleState)
         {
             AnimStateTransition(playerIdle);
-            Debug.Log("idle anim");
         }
         else if (stateManager.currentState == stateManager.rollState)
         {
             AnimStateTransition(playerRoll);
-            Debug.Log("roll anim");
         }
         else if (stateManager.currentState == stateManager.jumpState)
         {
             AnimStateTransition(playerJump);
-            Debug.Log("jump anim");
         }
         else if (stateManager.currentState == stateManager.blockState || stateManager.currentState == stateManager.jumpBlockState)
         {
@@ -70,7 +54,8 @@ public class PlayerAnimation : MonoBehaviour
         }
         else if (stateManager.currentState == stateManager.fallingState) 
         {
-            AnimStateTransition(playerFalling);
+            //AnimStateTransition(playerFalling);
+            AnimStateTransition(playerIdle);
         }
     }
 

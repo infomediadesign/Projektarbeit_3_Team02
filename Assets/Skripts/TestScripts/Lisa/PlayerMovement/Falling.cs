@@ -12,8 +12,8 @@ public class Falling : BaseState
 
     public override void UpdateState(StateManager state)
     {
-        xInput = state.walk.ReadValue<float>();
-        state.rb.linearVelocity = new Vector2(xInput * state.walkingSpeed, state.rb.linearVelocity.y);
+        xInput = state.playerControls.Walk.ReadValue<float>();
+        state.rb.linearVelocity = new Vector2(xInput * state.playerStats.walkingSpeed, state.rb.linearVelocity.y);
         if (state.isGrounded && state.rb.linearVelocityX != 0)
         {
             state.TransitionState(state.walkState);
@@ -22,11 +22,11 @@ public class Falling : BaseState
         {
             state.TransitionState(state.idleState);
         }
-        else if(state.block.triggered)
+        else if(state.playerControls.Block.triggered)
         {
             state.TransitionState(state.jumpBlockState);
         }
-        else if (state.airCounter.triggered)
+        else if (state.playerControls.AirCounter.triggered)
         {
             state.TransitionState(state.airCounterState);
         }

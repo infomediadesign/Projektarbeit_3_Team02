@@ -10,7 +10,7 @@ public class Block : BaseState
         Debug.Log("entering Block state");
         renderer = state.GetComponent<SpriteRenderer>();
         state.rb.linearVelocity = new Vector2(0, 0);
-        state.block.canceled += OnBlockCanceled;
+        state.playerControls.Block.canceled += OnBlockCanceled;
         blockReleased = false;
 
 
@@ -34,7 +34,7 @@ public class Block : BaseState
     override public void ExitState(StateManager state)
     {
         Debug.Log("exiting state");
-        state.block.canceled -= OnBlockCanceled;
+        state.playerControls.Block.canceled -= OnBlockCanceled;
     }
     private void OnBlockCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {

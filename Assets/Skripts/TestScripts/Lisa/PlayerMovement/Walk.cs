@@ -14,23 +14,22 @@ public class Walk : BaseState
 
     override public void UpdateState(StateManager state)
     {
-        
-        xInput = state.walk.ReadValue<float>();
-        state.rb.linearVelocity = new Vector2(xInput * state.walkingSpeed, state.rb.linearVelocity.y);
+        xInput = state.playerControls.Walk.ReadValue<float>();
+        state.rb.linearVelocity = new Vector2(xInput * state.playerStats.walkingSpeed, state.rb.linearVelocity.y);
        
-        if (state.jump.triggered && state.isGrounded)
+        if (state.playerControls.Jump.triggered && state.isGrounded)
         {
             state.TransitionState(state.jumpState);
         }
-        else if (state.roll.triggered && state.rb.linearVelocityX != 0)
+        else if (state.playerControls.Roll.triggered && state.rb.linearVelocityX != 0)
         {
             state.TransitionState(state.rollState);
         }
-        else if (state.block.triggered)
+        else if (state.playerControls.Block.triggered)
         {
             state.TransitionState(state.blockState);
         }
-        else if (state.counter.triggered)
+        else if (state.playerControls.Counter.triggered)
         {
             state.TransitionState(state.counterState);
         }

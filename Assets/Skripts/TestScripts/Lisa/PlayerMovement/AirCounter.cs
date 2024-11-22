@@ -11,7 +11,7 @@ public class AirCounter : BaseState
     {
         Debug.Log("entering airCounter state");
         hasCountered = false;
-        state.airCounter.canceled += OnAirCounterCanceled;
+        state.playerControls.AirCounter.canceled += OnAirCounterCanceled;
         airCounterReleased = false;
     }
 
@@ -20,12 +20,12 @@ public class AirCounter : BaseState
     {
         Debug.Log("airCounter");
 
-        xInput = state.walk.ReadValue<float>();
-        state.rb.linearVelocity = new Vector2(xInput * state.walkingSpeed, state.rb.linearVelocity.y);
+        xInput = state.playerControls.Walk.ReadValue<float>();
+        state.rb.linearVelocity = new Vector2(xInput * state.playerStats.walkingSpeed, state.rb.linearVelocity.y);
 
         if (state.isEnemy && hasCountered == false)
         {
-            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.jumpForce);
+            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.playerStats.jumpForce);
         }
         else if (!state.isEnemy)
         {
@@ -33,7 +33,7 @@ public class AirCounter : BaseState
         }
         else if (airCounterReleased && state.rb.linearVelocity.y > 0)
         {
-            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.rb.linearVelocity.y * state.jumpMultiplier);
+            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.rb.linearVelocity.y * state.playerStats.jumpMultiplier);
             hasCountered = true;
         }
 
@@ -43,7 +43,7 @@ public class AirCounter : BaseState
             state.TransitionState(state.walkState);
         }
 
-        if (state.block.triggered)
+        if (state.playerControls.Block.triggered)
         {
             state.TransitionState(state.jumpBlockState);
         }
@@ -62,7 +62,7 @@ public class AirCounter : BaseState
     override public void ExitState(StateManager state)
     {
         Debug.Log("exiting state");
-        state.airCounter.canceled -= OnAirCounterCanceled;
+        state.playerControls.AirCounter.canceled -= OnAirCounterCanceled;
     }
     private void OnAirCounterCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {

@@ -322,24 +322,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd4a3fcc1731f88418cf31c46294c34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStats: {fileID: 11400000, guid: 01bddd4fdb1bb0247b5e80e0bf855d90, type: 2}
   rb: {fileID: 0}
   position: {fileID: 18905973}
-  walkingSpeed: 5
-  jumpForce: 15
   capCol: {fileID: 0}
   groundCheckPos: {fileID: 1411220006}
-  groundCheckRad: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  jumpMultiplier: 0.4
   enemyCheckPos: {fileID: 18357832}
-  enemyCheckRad: 0.2
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  rollDistance: 5
-  rollSpeed: 8
 --- !u!114 &18905975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -973,7 +967,7 @@ Transform:
   m_GameObject: {fileID: 1651021568}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.19, y: -3.47, z: 0}
+  m_LocalPosition: {x: -3.64, y: -3.47, z: 0}
   m_LocalScale: {x: 3.746188, y: 0.29559433, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

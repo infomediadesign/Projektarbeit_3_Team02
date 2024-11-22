@@ -18,7 +18,7 @@ public class JumpBlock : BaseState
         Debug.Log("jumpblock");
         renderer.color = Color.green;
 
-        if (state.isGrounded && Input.GetKey(KeyCode.B))
+        if (state.isGrounded && state.playerControls.Block.triggered)
         {
             state.TransitionState(state.blockState);
         }

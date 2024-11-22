@@ -3,25 +3,17 @@ using UnityEngine.InputSystem;
 
 public class StateManager : MonoBehaviour
 {
-    public InputSystem_Actions playerControls;
-    public InputAction walk { get; private set; }
-    public InputAction jump { get; private set; }
-    public InputAction block { get; private set; }
-    public InputAction roll { get; private set; }
-    public InputAction counter { get; private set; }
-    public InputAction airCounter { get; private set; }
+    public InputSystem_Actions inputActions;
+    public InputSystem_Actions.TestActions playerControls;
+    //public PlayerInputConfig playerInput;
+    public PlayerStats playerStats;
 
-
-    //UNTEN sollte größtenteil in Scriptable Object
-    private float xInput;
+   /* private float xInput;
     private bool isMovementPressed;
-    private bool isJumpPressed;
-
+    private bool isJumpPressed;*/
 
     public Rigidbody2D rb;
     public Transform position;
-    public float walkingSpeed = 5;
-    public float jumpForce = 10;
     public CapsuleCollider2D capCol;
 
     public BaseState currentState;
@@ -29,22 +21,14 @@ public class StateManager : MonoBehaviour
 
     public bool isGrounded { get; private set; }
     public Transform groundCheckPos;
-    public float groundCheckRad = 0.2f;
     public LayerMask groundLayer;
-    public float jumpMultiplier = 0.5f;
-    public bool left;
 
     public bool isEnemy { get; private set; }
     public Transform enemyCheckPos;
-    public float enemyCheckRad = 0.5f;
     public LayerMask enemyLayer;
 
-
-    public float rollDistance = 3;
-    public float rollSpeed = 3;
     private bool facingRight = true;
 
-    // OBEN sollte größtenteils in Scriptable Object
     public Walk walkState = new Walk();
     public Jump jumpState = new Jump();
     public JumpBlock jumpBlockState = new JumpBlock();
@@ -59,37 +43,18 @@ public class StateManager : MonoBehaviour
 
     void Awake()
     {
-        playerControls = new InputSystem_Actions();
+        inputActions = new InputSystem_Actions();
+        playerControls = inputActions.Test;
        // states = new StateFactory(this);
         currentState = idleState;
       
     }
 
-    private void OnEnable() //kann man auch mit ganzer map machen
+    private void OnEnable()
     {
-        walk = playerControls.Test.Walk;
-        walk.Enable();
-        jump = playerControls.Test.Jump;
-        jump.Enable();
-        roll = playerControls.Test.Roll;
-        roll.Enable();
-        counter = playerControls.Test.Counter;
-        counter.Enable();
-        block = playerControls.Test.Block;
-        block.Enable();
-        airCounter = playerControls.Test.AirCounter;
-        airCounter.Enable();
+        playerControls.Enable();
     }
-    void OnDisable()
-    {
-        walk.Disable();
-        jump.Disable();
-        block.Disable();
-        roll.Disable();
-        counter.Disable();
-        airCounter.Disable();
-    }
-
+  
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -102,8 +67,8 @@ public class StateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheckPos.position, groundCheckRad, groundLayer);
-        isEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, enemyCheckRad, enemyLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheckPos.position, playerStats.groundCheckRad, groundLayer);
+        isEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
 
         currentState.UpdateState(this);
     }
@@ -113,8 +78,7 @@ public class StateManager : MonoBehaviour
         currentState.ExitState(this);
         currentState = state;
         state.EnterState(this);
-        
-
+       
     }
    
 
@@ -129,8 +93,10 @@ public class StateManager : MonoBehaviour
             transform.localScale = localScale;
         }
     }
-
-
+    void OnDisable()
+    {
+        playerControls.Disable();
+    }
 
 
 }

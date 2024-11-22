@@ -15,22 +15,22 @@ public class Idle : BaseState
     {
       
         state.rb.linearVelocity = new Vector2(0,0);
-        xInput = state.walk.ReadValue<float>();
+        xInput = state.playerControls.Walk.ReadValue<float>();
 
         if (xInput != 0)
         {
             state.TransitionState(state.walkState);
         }
      
-        else if (state.jump.triggered && state.isGrounded)
+        else if (state.playerControls.Jump.triggered && state.isGrounded)
         {
             state.TransitionState(state.jumpState);
         }
-        else if (state.counter.triggered)
+        else if (state.playerControls.Counter.triggered)
         {
             state.TransitionState(state.counterState);
         }
-        else if (state.block.triggered)
+        else if (state.playerControls.Block.triggered)
         {
             state.TransitionState(state.blockState);
         }
