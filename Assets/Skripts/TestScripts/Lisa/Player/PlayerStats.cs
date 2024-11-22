@@ -10,4 +10,6 @@ public class PlayerStats : ScriptableObject
     public float groundCheckRad = 0.2f;
     public float enemyCheckRad = 0.2f;
     public float jumpMultiplier = 0.5f;
+    public float airCounterForce = 15;
+    public float airCounterMultiplier = 0.5f;
 }

@@ -26,12 +26,12 @@ public class AirCounter : BaseState
 
         if (state.isEnemy && airCounterPressed)
         {
-            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.playerStats.jumpForce);
+            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.playerStats.airCounterForce);
             airCounterPressed = false;
         }
         else if (airCounterReleased && state.rb.linearVelocity.y > 0)
         {
-            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.rb.linearVelocity.y * state.playerStats.jumpMultiplier);
+            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.rb.linearVelocity.y * state.playerStats.airCounterMultiplier);
             airCounterReleased = false;
         }
        
