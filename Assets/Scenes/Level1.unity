@@ -476,7 +476,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.014999
+  orthographic size: 9.015
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -565,8 +565,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FollowSpeed: 2
   target: {fileID: 1531513403}
-  minBounds: {x: 145.08609, y: -8.899498}
-  maxBounds: {x: 305.1561, y: 9.130501}
+  minBounds: {x: -16.01392, y: -8.999498}
+  maxBounds: {x: 144.05608, y: 9.030502}
 --- !u!1 &250518843
 GameObject:
   m_ObjectHideFlags: 0
@@ -15156,6 +15156,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3404275767701597315, guid: 3c2a3d3370a9fff41a81cbc344b23541, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3404275767701597315, guid: 3c2a3d3370a9fff41a81cbc344b23541, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4064649978157747917, guid: 3c2a3d3370a9fff41a81cbc344b23541, type: 3}
