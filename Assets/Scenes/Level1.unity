@@ -476,7 +476,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.015
+  orthographic size: 9.014999
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -565,8 +565,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FollowSpeed: 2
   target: {fileID: 1531513403}
-  minBounds: {x: -16.01392, y: -8.999498}
-  maxBounds: {x: 144.05608, y: 9.030502}
+  minBounds: {x: 145.08609, y: -8.899498}
+  maxBounds: {x: 305.1561, y: 9.130501}
 --- !u!1 &250518843
 GameObject:
   m_ObjectHideFlags: 0
@@ -15753,6 +15753,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6905620627022898035, guid: 064f6c442077e7443a4eb235c16b63e0, type: 3}
+      propertyPath: m_Size.y
+      value: 18.271404
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905620627022898035, guid: 064f6c442077e7443a4eb235c16b63e0, type: 3}
+      propertyPath: m_Offset.y
+      value: 5.153566
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905620627022898035, guid: 064f6c442077e7443a4eb235c16b63e0, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
@@ -15769,6 +15777,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1767983668}
     m_Modifications:
+    - target: {fileID: 502133034031582082, guid: c87387a7d5da0c740b0cd0d08587e39f, type: 3}
+      propertyPath: m_Size.y
+      value: 15.996935
+      objectReference: {fileID: 0}
+    - target: {fileID: 502133034031582082, guid: c87387a7d5da0c740b0cd0d08587e39f, type: 3}
+      propertyPath: m_Offset.y
+      value: 2.6247215
+      objectReference: {fileID: 0}
     - target: {fileID: 502133034031582082, guid: c87387a7d5da0c740b0cd0d08587e39f, type: 3}
       propertyPath: m_IsTrigger
       value: 1
