@@ -13,7 +13,10 @@ public abstract class EnemyBase : MonoBehaviour
     public virtual void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        if (currentHealth <= 0) Die();
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
     protected virtual void Die()

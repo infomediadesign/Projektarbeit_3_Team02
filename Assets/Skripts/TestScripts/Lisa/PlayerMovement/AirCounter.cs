@@ -7,6 +7,7 @@ public class AirCounter : BaseState
     private float xInput;
     private bool airCounterReleased;
     private bool airCounterPressed;
+    private bool attacked;
     override public void EnterState(StateManager state)
     {
         Debug.Log("entering airCounter state");
@@ -14,6 +15,7 @@ public class AirCounter : BaseState
         state.playerControls.AirCounter.performed += OnAirCounterPressed;
         airCounterReleased = false;
         airCounterPressed = true;
+        attacked = false;
     }
 
 
@@ -28,6 +30,7 @@ public class AirCounter : BaseState
         {
             state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.playerStats.jumpForce);
             airCounterPressed = false;
+            attacked = false;
         }
         else if (airCounterReleased && state.rb.linearVelocity.y > 0)
         {
@@ -55,12 +58,19 @@ public class AirCounter : BaseState
             state.SetFacingDirection(true);
         }
 
+        if (!attacked && state.CheckForEnemy())
+        {
+            state.playerCombat.Attack(state.currentEnemy);
+            attacked = true;
+        }
+
 
     }
 
     override public void ExitState(StateManager state)
     {
         Debug.Log("exiting state");
+        attacked = false;
         state.playerControls.AirCounter.canceled -= OnAirCounterCanceled;
     }
     private void OnAirCounterCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)

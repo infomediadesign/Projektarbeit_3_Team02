@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class Counter : BaseState
 {
+    private bool attacked;
     override public void EnterState(StateManager state)
     {
-        Debug.Log("entering Counter state");
+        attacked = false;
     }
 
 
@@ -13,7 +14,16 @@ public class Counter : BaseState
     {
         Debug.Log("Counter");
 
-        state.TransitionState(state.idleState);
+        if(!attacked && state.CheckForEnemy())
+        {
+            state.playerCombat.Attack(state.currentEnemy);
+            attacked = true;
+        }
+        else
+        {
+            state.TransitionState(state.idleState);
+        }
+        
 
     }
 
