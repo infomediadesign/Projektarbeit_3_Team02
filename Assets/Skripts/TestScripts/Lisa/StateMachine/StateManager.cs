@@ -3,6 +3,11 @@ using UnityEngine.InputSystem;
 
 public class StateManager : MonoBehaviour
 {
+    [HideInInspector] public PlayerCombat playerCombat;
+    public GameObject player;
+    public EnemyBase targetEnemy;
+    [HideInInspector] public EnemyBase currentEnemy;
+
     public InputSystem_Actions inputActions;
     public InputSystem_Actions.TestActions playerControls;
     //public PlayerInputConfig playerInput;
@@ -24,6 +29,7 @@ public class StateManager : MonoBehaviour
     public LayerMask groundLayer;
 
     public bool isEnemy { get; private set; }
+    public bool shielded { get; private set; }
     public Transform enemyCheckPos;
     public LayerMask enemyLayer;
 
@@ -59,6 +65,7 @@ public class StateManager : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         capCol = GetComponent<CapsuleCollider2D>();
+        playerCombat = GetComponent<PlayerCombat>();
      
         //currentState = idleState;
         currentState.EnterState(this);
@@ -69,6 +76,14 @@ public class StateManager : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheckPos.position, playerStats.groundCheckRad, groundLayer);
         isEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
+        if(currentState == blockState)
+        {
+            shielded = true;
+        }
+        else
+        {
+            shielded = false;
+        }
 
         currentState.UpdateState(this);
     }
@@ -96,6 +111,18 @@ public class StateManager : MonoBehaviour
     void OnDisable()
     {
         playerControls.Disable();
+    }
+    public bool CheckForEnemy() //hier muss für normalen counter noch ein radius eingefügt werden
+    {
+        Collider2D enemyCollider = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
+        if (enemyCollider != null)
+        {
+            currentEnemy = enemyCollider.GetComponent<EnemyBase>();
+            return currentEnemy != null; 
+        }
+
+        currentEnemy = null;
+        return false;
     }
 
 
