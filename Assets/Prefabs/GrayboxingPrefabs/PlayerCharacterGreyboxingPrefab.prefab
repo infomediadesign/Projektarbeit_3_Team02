@@ -130,8 +130,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.5}
-  m_Size: {x: 0.8, y: 0.8}
+  m_Offset: {x: 0, y: -0.55}
+  m_Size: {x: 0.6, y: 1.2}
   m_Direction: 0
 --- !u!50 &1841821557200073883
 Rigidbody2D:
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   position: {fileID: 4829726634668175692}
-  walkingSpeed: 5
+  walkingSpeed: 6
   jumpForce: 18
   groundCheckPos: {fileID: 6726991412568838043}
   groundCheckRad: 0.2
@@ -202,8 +202,8 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  rollDistance: 5
-  rollSpeed: 8
+  rollDistance: 6
+  rollSpeed: 9
 --- !u!95 &8370948653497538909
 Animator:
   serializedVersion: 7
