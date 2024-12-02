@@ -5,7 +5,7 @@ public class StateManager : MonoBehaviour
 {
     [HideInInspector] public PlayerCombat playerCombat;
     public GameObject player;
-    public EnemyBase targetEnemy;
+    [HideInInspector] public EnemyBase targetEnemy;
     [HideInInspector] public EnemyBase currentEnemy;
 
     public InputSystem_Actions inputActions;
@@ -13,13 +13,13 @@ public class StateManager : MonoBehaviour
     //public PlayerInputConfig playerInput;
     public PlayerStats playerStats;
 
-   /* private float xInput;
-    private bool isMovementPressed;
-    private bool isJumpPressed;*/
+    /* private float xInput;
+     private bool isMovementPressed;
+     private bool isJumpPressed;*/
 
-    public Rigidbody2D rb;
+    [HideInInspector] public Rigidbody2D rb;
     public Transform position;
-    public CapsuleCollider2D capCol;
+    [HideInInspector] public CapsuleCollider2D capCol;
 
     public BaseState currentState;
     //public StateFactory states;
