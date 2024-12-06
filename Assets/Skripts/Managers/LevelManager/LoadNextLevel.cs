@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;  //Needed for Scene Management ans switching scenes
+using UnityEngine.SceneManagement;  //Needed for Scene Management and switching scenes
 
 public class LoadNextLevel : MonoBehaviour
 {
