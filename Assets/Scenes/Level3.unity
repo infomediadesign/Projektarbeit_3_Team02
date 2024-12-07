@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 15766005}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 108.65, y: 11.94, z: 0}
+  m_LocalPosition: {x: -19.403, y: 83.913, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -213,7 +213,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.014999
+  orthographic size: 8.758848
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -302,8 +302,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FollowSpeed: 2
   target: {fileID: 378532308}
-  minBounds: {x: 0, y: 0}
-  maxBounds: {x: 0, y: 0}
+  minBounds: {x: 273.64606, y: -44.849495}
+  maxBounds: {x: 305.6631, y: 45.153507}
 --- !u!1001 &137839007
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6557,7 +6557,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 521317924}
-  - component: {fileID: 521317923}
+  - component: {fileID: 521317925}
   m_Layer: 0
   m_Name: CameraBounds
   m_TagString: Untagged
@@ -6565,22 +6565,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &521317923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 521317922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5d47905709c1264fba1d86ac6e18d97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boundaryColor: {r: 1, g: 0, b: 0, a: 1}
-  showBoundary: 1
-  topRight: {fileID: 15766006}
-  bottomLeft: {fileID: 1384676516}
 --- !u!4 &521317924
 Transform:
   m_ObjectHideFlags: 0
@@ -6598,6 +6582,22 @@ Transform:
   - {fileID: 1384676516}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &521317925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521317922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43203e3e2880d5044a1607ae03045cc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boundaryColor: {r: 1, g: 0, b: 0, a: 1}
+  showBoundary: 1
+  topRight: {fileID: 15766006}
+  bottomLeft: {fileID: 1384676516}
 --- !u!1001 &524072137
 PrefabInstance:
   m_ObjectHideFlags: 0
