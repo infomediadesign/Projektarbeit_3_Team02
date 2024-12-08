@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Collectables : MonoBehaviour
 {
-    SoundManager soundManager;
+    //SoundManager soundManager;
     public string itemType;
 
-    private void Awake()
+    /*private void Awake()
     {
         soundManager = GameObject.FindGameObjectWithTag("Sound").GetComponent<SoundManager>();
     }
@@ -17,5 +17,5 @@ public class Collectables : MonoBehaviour
             soundManager.PlaySFX(soundManager.collectableLives);
         }
         
-    }
+    }*/
 }

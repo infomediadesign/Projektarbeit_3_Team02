@@ -1,25 +1,37 @@
 using UnityEngine;
 
+public enum SoundType
+{
+    COLLECTABLELIVES,
+    COLLECTABLEMEMORIES,
+    BACKGROUND,
+
+}
+
+[RequireComponent(typeof(AudioSource))]     //always requires a sound
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] AudioSource musicSource;
-    [SerializeField] AudioSource SFXSource;
+   [SerializeField] private AudioClip[] soundList;
+   private static SoundManager instance;
+   private AudioSource audioSource;
 
-    [Header("Background Music")]
-    public AudioClip background;
+   private void Awake()
+   {
+        instance = this;
+   }
 
-    [Header("SFX")]
-    public AudioClip collectableLives;
-    public AudioClip collectableMemories;
+   private void Start()
+   {
+        audioSource = GetComponent<AudioSource>();
+   }
 
-    private void Start()
-    {
-        musicSource.clip = background;
-        musicSource.Play();
-    }
+   public static void PlaySound(SoundType sound, float volume = 1)
+   {
+        instance.audioSource.PlayOneShot(instance.soundList[(int)sound], volume);    //OneShot only plays the audio once
+   }
 
-    public void PlaySFX(AudioClip clip)
-    {
-        SFXSource.PlayOneShot(clip);
-    }
+
+
+
+
 }
