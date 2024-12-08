@@ -8,4 +8,16 @@ public class MainMenuScript : MonoBehaviour
         SceneManager.LoadSceneAsync(1);
     }
 
+    //Test
+    private void Start()
+    {
+        MusicManager.Instance.PlayMusic("MainMenu");
+    }
+
+    public void Play()
+    {
+        //SceneManager.Instance.LoadSceneAsync("Game");
+        MusicManager.Instance.PlayMusic("Game");
+    }
+
 }
