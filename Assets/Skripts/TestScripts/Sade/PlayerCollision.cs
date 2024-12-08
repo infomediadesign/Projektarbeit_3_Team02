@@ -24,6 +24,8 @@ public class PlayerCollision : MonoBehaviour
            print("Inventory lenght:" + inventory.Count);
 
            Destroy(collision.gameObject);
+
+           SoundManager.Instance.PlaySound2D("Collectable"); //test
            
         }
     }
