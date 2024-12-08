@@ -26,6 +26,11 @@ public class Projectile : EnemyBase
     {
 
     }
+
+    public override void StopAttack()
+    {
+
+    }
     bool IsGrounded()
     {
         return Physics2D.OverlapCircle(transform.position, 0.1f, groundLayer);
