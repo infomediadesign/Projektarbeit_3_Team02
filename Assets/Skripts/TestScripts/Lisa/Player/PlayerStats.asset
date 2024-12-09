@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 774b37624e2ae8241ad9baf0d40fe8bb, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  walkingSpeed: 5
-  jumpForce: 15
-  rollDistance: 5
-  rollSpeed: 8
+  walkingSpeed: 6
+  jumpForce: 18
+  rollDistance: 6
+  rollSpeed: 9
   groundCheckRad: 0.2
   enemyCheckRad: 0.2
-  jumpMultiplier: 0.5
+  jumpMultiplier: 0.4
+  airCounterForce: 18
+  airCounterMultiplier: 0.4
