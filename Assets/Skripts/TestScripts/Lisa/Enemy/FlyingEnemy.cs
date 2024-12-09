@@ -6,9 +6,10 @@ public class FlyingEnemy : EnemyBase
     protected PlayerHealth playerHealth;
     protected SpriteRenderer spriteRenderer;
     protected Animator anim;
+    public GameObject player;
 
     public Transform[] patrolPoints;
-    public int targetPoint;
+    private int targetPoint;
 
     public GameObject firePrefab;
     public Transform shootPoint;
@@ -28,7 +29,7 @@ public class FlyingEnemy : EnemyBase
 
     public override void Attack()
     {
-        Vector2 direction = (playerHealth.transform.position - shootPoint.position).normalized;
+        Vector2 direction = (player.transform.position - shootPoint.position).normalized;
 
         GameObject projectile = Instantiate(firePrefab, shootPoint.position, Quaternion.identity);
         projectile.GetComponent<Fire>().FireShot(direction);
@@ -80,7 +81,7 @@ public class FlyingEnemy : EnemyBase
     }
     private void CheckForPlayerAndShoot()
     {
-        float distanceToPlayer = Vector2.Distance(transform.position, playerHealth.transform.position);
+        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
         if (distanceToPlayer <= fStats.shootingRange && Time.time >= nextShootTime)
         {
