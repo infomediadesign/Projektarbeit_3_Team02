@@ -7,6 +7,7 @@ public class StationaryEnemy : EnemyBase
     public StationaryEnemyStats eStats;
     protected PlayerHealth playerHealth;
     protected SpriteRenderer spriteRenderer;
+    private bool isObstacle;
 
     public Transform player;
     protected bool canAttack = true;
@@ -26,8 +27,12 @@ public class StationaryEnemy : EnemyBase
 
     void Update()
     {
-        Rotate();
-        CheckDistance();
+        if (!isObstacle)
+        {
+            Rotate();
+            CheckDistance();
+        }
+      
     }
 
     public override void Attack()
