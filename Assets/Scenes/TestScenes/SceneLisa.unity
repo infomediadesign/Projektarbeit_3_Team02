@@ -701,8 +701,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 2085921288334566838, guid: 4dc12857e744ad245be71f9623241fa8, type: 3}
   spawnPoint: {fileID: 835266653}
-  startTime: 1
-  endTime: 20
+  startTime: 0
+  endTime: 100
   spawnRate: 4
 --- !u!4 &835266655
 Transform:
@@ -1972,6 +1972,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 709546396926025445, guid: 1a82702e24300a649b4f4c0bc534707b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 18905973}
     - target: {fileID: 1615244996219024835, guid: 1a82702e24300a649b4f4c0bc534707b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.27
