@@ -1,37 +1,41 @@
 using UnityEngine;
 
-public enum SoundType
-{
-    COLLECTABLELIVES,
-    COLLECTABLEMEMORIES,
-    BACKGROUND,
-
-}
-
-[RequireComponent(typeof(AudioSource))]     //always requires a sound
 public class SoundManager : MonoBehaviour
 {
-   [SerializeField] private AudioClip[] soundList;
-   private static SoundManager instance;
-   private AudioSource audioSource;
+    public static SoundManager Instance;    //access from anywhere
+    
+    [SerializeField] private SoundLibrary sfxLibrary;   //reference to sound library
+    [SerializeField] private AudioSource sfx2DSource;
 
-   private void Awake()
-   {
-        instance = this;
-   }
+    private void Awake()
+    {
+        if(Instance != null)        //checks for instance -> if it already exists -> destroy
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);      //otherwise makes sure it does not get destroyed
+        }
+    }
 
-   private void Start()
-   {
-        audioSource = GetComponent<AudioSource>();
-   }
+    public void PlaySound3D(AudioClip clip, Vector3 pos)
+    {
+        if (clip != null)
+        {
+            AudioSource.PlayClipAtPoint(clip, pos);     //will spawn audio source at that position and play it 
+        }                                               //this method is helpful if we play a clip outside our library
+    }
 
-   public static void PlaySound(SoundType sound, float volume = 1)
-   {
-        instance.audioSource.PlayOneShot(instance.soundList[(int)sound], volume);    //OneShot only plays the audio once
-   }
+    public void PlaySound3D(string soundName, Vector3 pos)
+    {
+        PlaySound3D(sfxLibrary.GetClipFromName(soundName), pos);    //accesses Library and gets the sound
+    }
 
-
-
-
-
+    public void PlaySound2D(string soundName)
+    {
+        sfx2DSource.PlayOneShot(sfxLibrary.GetClipFromName(soundName));
+    }
+  
 }

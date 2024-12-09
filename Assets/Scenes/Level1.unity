@@ -9373,7 +9373,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -15919,6 +15919,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd420f957bd8cd74abe984cd74cd8920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundEffects:
+  - groupID: Collectables
+    clips:
+    - {fileID: 8300000, guid: f17bac10ee4c44148a1e9088e7540c55, type: 3}
+    - {fileID: 8300000, guid: 1916972b0254443a2ac996968e38335c, type: 3}
 --- !u!114 &1652542583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15931,7 +15936,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c4e751e3d2cac34b9f79c88e61ee837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundList: []
+  sfxLibrary: {fileID: 1652542582}
+  sfx2DSource: {fileID: 544134262}
 --- !u!82 &1652542584
 AudioSource:
   m_ObjectHideFlags: 0
