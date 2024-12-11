@@ -6,6 +6,7 @@ public class MainMenuScript : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadSceneAsync(1);
+        MusicManager.Instance.PlayMusic("Game");
     }
 
     //Test
@@ -17,7 +18,7 @@ public class MainMenuScript : MonoBehaviour
     public void Play()
     {
         //SceneManager.Instance.LoadSceneAsync("Game");
-        MusicManager.Instance.PlayMusic("Game");
+        //MusicManager.Instance.PlayMusic("Game");
     }
 
 }
