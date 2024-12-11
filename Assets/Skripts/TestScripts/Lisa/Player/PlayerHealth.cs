@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour
     private float currentHealth;
     public float maxHealth;
     private StateManager state;
-    //hier dann noch je nachdem healthslider oderso einfügen
+    //hier dann noch je nachdem healthslider oderso einfï¿½gen
     private void Start()
     {
         state = GetComponent<StateManager>();
@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal(float amount)
     {
-        currentHealth = Mathf.Min(currentHealth + amount, maxHealth); // nicht über maxHelath
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth); // nicht ï¿½ber maxHelath
     }
 
     private void Die()
