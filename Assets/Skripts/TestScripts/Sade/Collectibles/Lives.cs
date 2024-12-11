@@ -11,6 +11,7 @@ public class Lives : Collectibles
             if (playerHealth != null)
             {
                 playerHealth.Heal(healAmount); 
+                SoundManager.Instance.PlaySound2D("Collectibles");
                 Destroy(gameObject);
             }
             else

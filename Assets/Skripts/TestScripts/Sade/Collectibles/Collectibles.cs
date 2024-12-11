@@ -6,6 +6,6 @@ public abstract class Collectibles : MonoBehaviour
     {
         OnCollect(collision.GetComponent<Player>());
     }
-
+    
     public abstract void OnCollect(Player player);
 }
