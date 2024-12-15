@@ -2,64 +2,89 @@ using UnityEngine;
 
 public class Jump : BaseState
 {
+    public Jump(StateManager currentContext, StateFactory factory)
+    : base(currentContext, factory) 
+    {
+        InitializeSubState();
+        isRootState = true;
+    }
     private float xInput;
     private bool jumpReleased;
-    override public void EnterState(StateManager state)
+    
+    override public void EnterState()
     {
-        Debug.Log("entering jump state");
-        state.playerControls.Jump.canceled += OnJumpCanceled;       
+        context.playerControls.Jump.canceled += OnJumpCanceled;       
     }
-    override public void UpdateState(StateManager state)
+    override public void UpdateState()
     {
-        xInput = state.playerControls.Walk.ReadValue<float>();
-        state.rb.linearVelocity = new Vector2(xInput * state.playerStats.walkingSpeed, state.rb.linearVelocity.y);
+        CheckSwitchStates();
+        xInput = context.playerControls.Walk.ReadValue<float>();
+        context.rb.linearVelocity = new Vector2(xInput * context.playerStats.walkingSpeed, context.rb.linearVelocity.y);
 
-        if (state.isGrounded)
+        if (context.isGrounded)
         {
-            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.playerStats.jumpForce);
+            context.rb.linearVelocity = new Vector2(context.rb.linearVelocity.x, context.playerStats.jumpForce);
         }
-        else if (jumpReleased && state.rb.linearVelocity.y > 0)
+        else if (jumpReleased && context.rb.linearVelocity.y > 0)
         {
-            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.rb.linearVelocity.y * state.playerStats.jumpMultiplier);
+            context.rb.linearVelocity = new Vector2(context.rb.linearVelocity.x, context.rb.linearVelocity.y * context.playerStats.jumpMultiplier);
             jumpReleased = false;
         }
-        else if(state.rb.linearVelocityY < 0)
-        {
-            state.TransitionState(state.fallingState);
-        }
 
-
-        else if (state.playerControls.AirCounter.triggered && !state.isGrounded && state.isEnemy)
+        if(context.rb.linearVelocityX < 0)
         {
-            state.TransitionState(state.airCounterState);
-        }
-        else if (state.playerControls.Block.triggered)
-        {
-            state.TransitionState(state.jumpBlockState);
-        }
-        else if (state.playerControls.Roll.triggered && state.rb.linearVelocityX != 0)
-        {
-            state.TransitionState(state.rollState);
-        }
-        else if (state.isGrounded)
-        {
-            state.TransitionState(state.walkState);
-        }
-
-        if(state.rb.linearVelocityX < 0)
-        {
-            state.SetFacingDirection(false);
+            context.SetFacingDirection(false);
         }
         else
         {
-            state.SetFacingDirection(true);
+            context.SetFacingDirection(true);
         }
     }
 
-    override public void ExitState(StateManager state)
+    public override void CheckSwitchStates()
     {
-        Debug.Log("exiting state");
-        state.playerControls.Jump.canceled -= OnJumpCanceled;
+        if (context.isGrounded)
+        {
+            //state.TransitionState(state.walkState);
+            SwitchState(factory.Ground());
+        }
+    }
+
+    public override void InitializeSubState()
+    {
+        if (context.rb.linearVelocityY < 0)
+        {
+            //context.TransitionState(context.fallingState);
+            SetSubState(factory.Fall());
+        }
+        else if (context.playerControls.AirCounter.triggered && !context.isGrounded && context.isEnemy)
+        {
+            //state.TransitionState(state.airCounterState);
+            SetSubState(factory.AirCountering());
+        }
+        else if (context.playerControls.Block.triggered)
+        {
+            //state.TransitionState(state.jumpBlockState);
+            SetSubState(factory.Blocking());
+        }
+        else if (context.playerControls.Roll.triggered && context.rb.linearVelocityX != 0)
+        {
+            //state.TransitionState(state.rollState);
+            SetSubState(factory.Rolling());
+        }
+        else if (context.playerControls.Walk.triggered)
+        {
+            SetSubState(factory.Walking());
+        }
+        else
+        {
+            SetSubState(factory.Idleing());
+        }
+    }
+
+    override public void ExitState()
+    {
+        context.playerControls.Jump.canceled -= OnJumpCanceled;
     }
     private void OnJumpCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {

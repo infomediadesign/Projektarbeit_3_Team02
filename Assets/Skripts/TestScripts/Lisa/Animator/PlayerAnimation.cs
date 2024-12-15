@@ -24,35 +24,35 @@ public class PlayerAnimation : MonoBehaviour
     }
     void Update()
     {
-        if (stateManager.currentState == stateManager.walkState)
+        if (stateManager.currentState == stateManager.states.Walking())
         {          
             AnimStateTransition(playerWalk);
         }
-        else if (stateManager.currentState == stateManager.idleState)
+        else if (stateManager.currentState == stateManager.states.Idleing())
         {
             AnimStateTransition(playerIdle);
         }
-        else if (stateManager.currentState == stateManager.rollState)
+        else if (stateManager.currentState == stateManager.states.Rolling())
         {
             AnimStateTransition(playerRoll);
         }
-        else if (stateManager.currentState == stateManager.jumpState)
+        else if (stateManager.currentState == stateManager.states.Jumping())
         {
             AnimStateTransition(playerJump);
         }
-        else if (stateManager.currentState == stateManager.blockState || stateManager.currentState == stateManager.jumpBlockState)
+        else if (stateManager.currentState == stateManager.states.Blocking() || stateManager.currentState == stateManager.states.JumpBlocking())
         {
             AnimStateTransition(playerBlock);
         }
-        else if (stateManager.currentState == stateManager.airCounterState)
+        else if (stateManager.currentState == stateManager.states.AirCountering())
         {
             AnimStateTransition(playerAirCounter);
         }
-        else if (stateManager.currentState == stateManager.counterState)
+        else if (stateManager.currentState == stateManager.states.Countering())
         {
             AnimStateTransition(playerCounter);
         }
-        else if (stateManager.currentState == stateManager.fallingState) 
+        else if (stateManager.currentState == stateManager.states.Fall()) 
         {
             //AnimStateTransition(playerFalling);
             AnimStateTransition(playerIdle);

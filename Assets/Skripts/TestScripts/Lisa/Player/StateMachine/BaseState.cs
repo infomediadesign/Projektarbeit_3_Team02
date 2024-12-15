@@ -3,16 +3,56 @@ using UnityEngine;
 
 public abstract class BaseState
 {
-   // protected StateFactory factory;
+    protected bool isRootState = false;
+    protected StateFactory factory;
     protected StateManager context;
-    /*public BaseState(StateManager currentContext, StateFactory sFactory)
+    protected BaseState currentSubState;
+    protected BaseState currentSuperState;
+    public BaseState(StateManager currentContext, StateFactory sFactory)
     {
         context = currentContext;
         factory = sFactory;
-    }*/
-    public abstract void EnterState(StateManager state);
+    }
+    public abstract void EnterState();
 
-    public abstract void UpdateState(StateManager state);
+    public abstract void UpdateState();
 
-    public abstract void ExitState(StateManager state);
+    public abstract void ExitState();
+
+    public abstract void CheckSwitchStates();
+
+    public abstract void InitializeSubState();
+
+    public void UpdateStates() 
+    {
+        UpdateState();
+        if(currentSubState != null)
+        {
+            currentSubState.UpdateStates();
+        }
+    }
+    protected void SwitchState(BaseState newState)
+    {
+        ExitState();
+        newState.EnterState();
+        if (isRootState)
+        {
+            context.currentState = newState;
+        }
+        else if(currentSuperState != null)
+        {
+            currentSuperState.SetSubState(newState);
+        }
+    }
+
+    protected void SetSuperState(BaseState newSuperState)
+    {
+        currentSuperState = newSuperState;
+    }
+
+    protected void SetSubState(BaseState newSubState)
+    {
+        currentSubState = newSubState;
+        newSubState.SetSuperState(this);
+    }
 }
