@@ -54,7 +54,7 @@ public class AirCounter : BaseState
             context.playerCombat.Attack(context.currentEnemy);
             attacked = true;
         }
-
+        CheckSwitchStates();
 
     }
     public override void InitializeSubState()
@@ -62,15 +62,13 @@ public class AirCounter : BaseState
     }
     public override void CheckSwitchStates()
     {
-       /* if (context.isGrounded)
-        {
-            state.TransitionState(state.walkState);
-        }*/
-
         if (context.playerControls.Block.triggered)
         {
-            //state.TransitionState(state.jumpBlockState);
             SwitchState(factory.Blocking());
+        }
+        else if(context.rb.linearVelocityY < 0)
+        {
+            SwitchState(factory.Fall());
         }
     }
     override public void ExitState()

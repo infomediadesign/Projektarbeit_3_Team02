@@ -3,35 +3,45 @@ using UnityEngine;
 public class Jump : BaseState
 {
     public Jump(StateManager currentContext, StateFactory factory)
-    : base(currentContext, factory) 
-    {
-        InitializeSubState();
-        isRootState = true;
-    }
+    : base(currentContext, factory) { }
+
     private float xInput;
-    private bool jumpReleased;
-    
+    private bool hasJumped = false;
+    private bool hasReleased = false;
+
     override public void EnterState()
     {
-        context.playerControls.Jump.canceled += OnJumpCanceled;       
+        hasReleased = false;
+        hasJumped = false;
     }
+
     override public void UpdateState()
     {
-        CheckSwitchStates();
+        
         xInput = context.playerControls.Walk.ReadValue<float>();
         context.rb.linearVelocity = new Vector2(xInput * context.playerStats.walkingSpeed, context.rb.linearVelocity.y);
 
         if (context.isGrounded)
         {
-            context.rb.linearVelocity = new Vector2(context.rb.linearVelocity.x, context.playerStats.jumpForce);
+            if (!hasJumped)
+            {
+                context.rb.linearVelocity = new Vector2(context.rb.linearVelocity.x, context.playerStats.jumpForce);
+                hasJumped = true;
+            }
+            
         }
-        else if (jumpReleased && context.rb.linearVelocity.y > 0)
+        else if (context.jumpReleased && context.rb.linearVelocity.y > 0 )
         {
-            context.rb.linearVelocity = new Vector2(context.rb.linearVelocity.x, context.rb.linearVelocity.y * context.playerStats.jumpMultiplier);
-            jumpReleased = false;
+            if (!hasReleased)
+            {
+                context.rb.linearVelocity = new Vector2(context.rb.linearVelocity.x, context.rb.linearVelocity.y * context.playerStats.jumpMultiplier);
+                context.jumpReleased = false;
+                hasReleased = true;
+            }
+
         }
 
-        if(context.rb.linearVelocityX < 0)
+        if (context.rb.linearVelocity.x < 0)
         {
             context.SetFacingDirection(false);
         }
@@ -39,55 +49,34 @@ public class Jump : BaseState
         {
             context.SetFacingDirection(true);
         }
+        CheckSwitchStates();
     }
 
     public override void CheckSwitchStates()
     {
-        if (context.isGrounded)
+        if (context.rb.linearVelocity.y < 0)
         {
-            //state.TransitionState(state.walkState);
-            SwitchState(factory.Ground());
+            SwitchState(factory.Fall());
+        }
+        else if (context.playerControls.AirCounter.triggered && !context.isGrounded && context.isEnemy)
+        {
+            SwitchState(factory.AirCountering());
+        }
+        else if (context.playerControls.Block.triggered)
+        {
+            SwitchState(factory.Blocking());
         }
     }
 
     public override void InitializeSubState()
     {
-        if (context.rb.linearVelocityY < 0)
-        {
-            //context.TransitionState(context.fallingState);
-            SetSubState(factory.Fall());
-        }
-        else if (context.playerControls.AirCounter.triggered && !context.isGrounded && context.isEnemy)
-        {
-            //state.TransitionState(state.airCounterState);
-            SetSubState(factory.AirCountering());
-        }
-        else if (context.playerControls.Block.triggered)
-        {
-            //state.TransitionState(state.jumpBlockState);
-            SetSubState(factory.Blocking());
-        }
-        else if (context.playerControls.Roll.triggered && context.rb.linearVelocityX != 0)
-        {
-            //state.TransitionState(state.rollState);
-            SetSubState(factory.Rolling());
-        }
-        else if (context.playerControls.Walk.triggered)
-        {
-            SetSubState(factory.Walking());
-        }
-        else
-        {
-            SetSubState(factory.Idleing());
-        }
     }
 
     override public void ExitState()
     {
-        context.playerControls.Jump.canceled -= OnJumpCanceled;
+        
     }
-    private void OnJumpCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
-    {
-        jumpReleased = true;
-    }
+
+   
 }
+

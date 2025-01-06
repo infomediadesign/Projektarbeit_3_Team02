@@ -8,14 +8,13 @@ public class Walk : BaseState
 
     override public void EnterState()
     {
-        Debug.Log("entering walking state...");  
     }
 
     override public void UpdateState()
     {
         xInput = context.playerControls.Walk.ReadValue<float>();
         context.rb.linearVelocity = new Vector2(xInput * context.playerStats.walkingSpeed, context.rb.linearVelocity.y);
-               
+
         if (context.rb.linearVelocity.x > 0)
         {
             context.SetFacingDirection(true);

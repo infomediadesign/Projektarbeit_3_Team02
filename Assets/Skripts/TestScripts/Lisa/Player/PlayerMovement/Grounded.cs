@@ -15,7 +15,6 @@ public class Grounded : BaseState
     override public void UpdateState()
     {
         CheckSwitchStates();
-
     }
 
     public override void InitializeSubState()
@@ -44,13 +43,13 @@ public class Grounded : BaseState
 
     public override void CheckSwitchStates()
     {
-        if(context.playerControls.Jump.triggered)
+        if(context.playerControls.Jump.phase == UnityEngine.InputSystem.InputActionPhase.Performed || context.rb.linearVelocityY < 0)
         {
-            SwitchState(factory.Jumping());
+            SwitchState(factory.Air());
         }
     }
     override public void ExitState()
     {
-
+        Debug.Log("EXITING GROUNDED STATE");
     }
 }

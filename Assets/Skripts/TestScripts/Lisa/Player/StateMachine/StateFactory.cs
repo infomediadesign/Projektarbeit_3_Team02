@@ -7,18 +7,6 @@ public class StateFactory
     {
         context = currentContext;
     }
-
-    /*public Walk walkState = new Walk();
-    public Jump jumpState = new Jump();
-    public JumpBlock jumpBlockState = new JumpBlock();
-    public Roll rollState = new Roll();
-    public Counter counterState = new Counter();
-    public AirCounter airCounterState = new AirCounter();
-    public Block blockState = new Block();
-    public Idle idleState = new Idle();
-    public Falling fallingState = new Falling();
-    public Grounded groundedState = new Grounded();*/
-
     public BaseState Idleing()
     {
         return new Idle(context, this);
@@ -58,5 +46,10 @@ public class StateFactory
     public BaseState Ground()
     {
         return new Grounded(context, this);
+    }
+
+    public BaseState Air()
+    {
+        return new Airborne(context, this);
     }
 }

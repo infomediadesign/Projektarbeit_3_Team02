@@ -9,10 +9,12 @@ public class Falling : BaseState
     private float xInput;
     override public void EnterState()
     {
+
     }
 
     public override void UpdateState()
     {
+        
         xInput = context.playerControls.Walk.ReadValue<float>();
         context.rb.linearVelocity = new Vector2(xInput * context.playerStats.walkingSpeed, context.rb.linearVelocity.y);
         if (context.rb.linearVelocityX < 0)
@@ -23,29 +25,19 @@ public class Falling : BaseState
         {
             context.SetFacingDirection(true);
         }
-    
-}
+        CheckSwitchStates();
+    }
     public override void InitializeSubState(){}
     public override void CheckSwitchStates()
     {
-        if (context.rb.linearVelocityX != 0)
+  
+        if (context.playerControls.Block.triggered)
         {
-            //state.TransitionState(state.walkState);
-            SwitchState(factory.Walking());
-        }
-        else if (context.rb.linearVelocityX == 0)
-        {
-            //state.TransitionState(state.idleState);
-            SwitchState(factory.Idleing());
-        }
-        else if (context.playerControls.Block.triggered)
-        {
-            //state.TransitionState(state.jumpBlockState);
             SwitchState(factory.Blocking());
         }
-        else if (context.playerControls.AirCounter.triggered)
+        else if (context.playerControls.AirCounter.triggered && context.isEnemy)
         {
-            //state.TransitionState(state.airCounterState);
+            Debug.Log("AirCounter Triggered");
             SwitchState(factory.AirCountering());
         }
     }

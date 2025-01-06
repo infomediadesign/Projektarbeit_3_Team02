@@ -25,10 +25,13 @@ public class StateManager : MonoBehaviour
 
     public bool isEnemy { get; private set; }
     public bool shielded { get; private set; }
+    public bool jumping { get; private set; }
+    public bool jumpReleased;
     public Transform enemyCheckPos;
     public LayerMask enemyLayer;
 
     private bool facingRight = true;
+
 
     void Awake()
     {
@@ -42,13 +45,14 @@ public class StateManager : MonoBehaviour
         currentState = states.Ground();
         currentState.EnterState();
 
-
     }
 
 
     private void OnEnable()
     {
         playerControls.Enable();
+        playerControls.Jump.canceled += OnJumpCanceled;
+        playerControls.Jump.started += OnJumpStarted;
     }
   
    
@@ -64,6 +68,14 @@ public class StateManager : MonoBehaviour
         else
         {
             shielded = false;
+        }
+        if (currentState == states.Jumping())
+        {
+            jumping = true;
+        }
+        else
+        {
+            jumping = false;
         }
 
         currentState.UpdateStates();
@@ -83,6 +95,20 @@ public class StateManager : MonoBehaviour
     void OnDisable()
     {
         playerControls.Disable();
+        playerControls.Jump.canceled -= OnJumpCanceled;
+        playerControls.Jump.started -= OnJumpStarted;
+    }
+    private void OnJumpCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+
+        jumpReleased = true;
+   
+    }
+    private void OnJumpStarted(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+
+        jumpReleased = false;
+
     }
     public bool CheckForEnemy() //hier muss für normalen counter noch ein radius eingefügt werden
     {
