@@ -6,8 +6,7 @@ public class PlayerAnimation : MonoBehaviour
     StateManager stateManager;
     private string currentState;
 
-    //daraus sollte man enum machen
-
+    // Animationszustände
     const string playerIdle = "playerIdle";
     const string playerWalk = "playerWalk";
     const string playerJump = "playerJump";
@@ -16,46 +15,67 @@ public class PlayerAnimation : MonoBehaviour
     const string playerRoll = "playerRoll";
     const string playerAirCounter = "playerAirCounter";
     const string playerFalling = "playerFalling";
+
     void Start()
     {
         animator = GetComponent<Animator>();
         stateManager = GetComponent<StateManager>();
-   
     }
+
     void Update()
     {
-        if (stateManager.currentState == stateManager.states.Walking())
-        {          
+        if (stateManager.currentState is Grounded groundedState)
+        {
+            HandleGroundedAnimations(groundedState);
+        }
+
+        else if (stateManager.currentState is Airborne airborneState)
+        {
+            HandleAirborneAnimations(airborneState);
+        }
+    }
+
+    void HandleGroundedAnimations(Grounded groundedState)
+    {
+        var currentSubState = groundedState.GetCurrentSubState();
+
+        if (currentSubState is Walk)
+        {
             AnimStateTransition(playerWalk);
         }
-        else if (stateManager.currentState == stateManager.states.Idleing())
+        else if (currentSubState is Idle)
         {
             AnimStateTransition(playerIdle);
         }
-        else if (stateManager.currentState == stateManager.states.Rolling())
+        else if (currentSubState is Roll)
         {
             AnimStateTransition(playerRoll);
         }
-        else if (stateManager.currentState == stateManager.states.Jumping())
-        {
-            AnimStateTransition(playerJump);
-        }
-        else if (stateManager.currentState == stateManager.states.Blocking() || stateManager.currentState == stateManager.states.JumpBlocking())
+        else if (currentSubState is Block)
         {
             AnimStateTransition(playerBlock);
         }
-        else if (stateManager.currentState == stateManager.states.AirCountering())
-        {
-            AnimStateTransition(playerAirCounter);
-        }
-        else if (stateManager.currentState == stateManager.states.Countering())
+        else if (currentSubState is Counter)
         {
             AnimStateTransition(playerCounter);
         }
-        else if (stateManager.currentState == stateManager.states.Fall()) 
+    }
+
+    void HandleAirborneAnimations(Airborne airborneState)
+    {
+        var currentSubState = airborneState.GetCurrentSubState();
+
+        if (currentSubState is Jump)
         {
-            //AnimStateTransition(playerFalling);
-            AnimStateTransition(playerIdle);
+            AnimStateTransition(playerJump);
+        }
+        else if (currentSubState is AirCounter)
+        {
+            AnimStateTransition(playerAirCounter);
+        }
+        else if (currentSubState is Falling)
+        {
+            AnimStateTransition(playerFalling);
         }
     }
 
@@ -67,3 +87,4 @@ public class PlayerAnimation : MonoBehaviour
         currentState = stateNew;
     }
 }
+

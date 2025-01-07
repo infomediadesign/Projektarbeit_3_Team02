@@ -7,6 +7,11 @@ public class Grounded : BaseState
         InitializeSubState();
         isRootState = true;
     }
+
+    public BaseState GetCurrentSubState()
+    {
+        return currentSubState; 
+    }
     override public void EnterState()
     {
         Debug.Log("grounded");
@@ -52,4 +57,5 @@ public class Grounded : BaseState
     {
         Debug.Log("EXITING GROUNDED STATE");
     }
+
 }

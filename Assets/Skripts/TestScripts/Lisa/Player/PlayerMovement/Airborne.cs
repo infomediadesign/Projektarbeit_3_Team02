@@ -8,7 +8,10 @@ public class Airborne : BaseState
         isRootState = true;
         InitializeSubState();
     }
-
+    public BaseState GetCurrentSubState()
+    {
+        return currentSubState;
+    }
     public override void EnterState()
     {
         Debug.Log("Entered Airborne State");

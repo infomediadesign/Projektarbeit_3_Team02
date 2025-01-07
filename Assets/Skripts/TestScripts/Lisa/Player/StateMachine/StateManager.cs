@@ -17,6 +17,7 @@ public class StateManager : MonoBehaviour
     [HideInInspector] public CapsuleCollider2D capCol;
 
     public BaseState currentState;
+    public BaseState currentSubState;
     public StateFactory states;
 
     public bool isGrounded { get; private set; }
