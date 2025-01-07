@@ -77,6 +77,10 @@ public class PlayerAnimation : MonoBehaviour
         {
             AnimStateTransition(playerFalling);
         }
+        else if (currentSubState is Block)
+        {
+            AnimStateTransition(playerBlock);
+        }
     }
 
     public void AnimStateTransition(string stateNew)
