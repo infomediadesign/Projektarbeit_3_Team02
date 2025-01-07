@@ -2,81 +2,92 @@ using UnityEngine;
 
 public class Roll : BaseState
 {
+    public Roll(StateManager currentContext, StateFactory factory)
+   : base(currentContext, factory) { }
+
     private bool FacingRight;
     private float startPositionX;
     private Vector2 originOffset;
     private float lastFramePositionX;
 
-    override public void EnterState(StateManager state)
+    override public void EnterState()
     {
-        Debug.Log("entering roll state");
-        startPositionX = state.transform.position.x;
-        originOffset = state.capCol.offset;
+        startPositionX = context.transform.position.x;
+        originOffset = context.capCol.offset;
 
-        if (state.rb.linearVelocityX < 0)
+        if (context.rb.linearVelocityX < 0)
         {
             FacingRight = false;
         }
-        else if (state.rb.linearVelocityX > 0)
+        else if (context.rb.linearVelocityX > 0)
         {
             FacingRight = true;
         }
         //je anchdem ob facing right oder nicht wird rollspeed negativ oder positiv gesetzt 
-        state.rb.linearVelocity = new Vector2(FacingRight ? state.playerStats.rollSpeed : -state.playerStats.rollSpeed, state.rb.linearVelocity.y);
-        state.capCol.size = new Vector2(1, 0.3f);
-        state.capCol.offset = new Vector2(0, -0.6f);
+        context.rb.linearVelocity = new Vector2(FacingRight ? context.playerStats.rollSpeed : -context.playerStats.rollSpeed, context.rb.linearVelocity.y);
+        context.capCol.size = new Vector2(1, 0.3f);
+        context.capCol.offset = new Vector2(0, -0.6f);
     }
 
-    override public void UpdateState(StateManager state)
+    override public void UpdateState()
     {
-        float distanceTraveledRight = Mathf.Abs(state.transform.position.x - lastFramePositionX);
-        float distanceTraveledLeft = Mathf.Abs(lastFramePositionX - state.transform.position.x);
+        float distanceTraveledRight = Mathf.Abs(context.transform.position.x - lastFramePositionX);
+        float distanceTraveledLeft = Mathf.Abs(lastFramePositionX - context.transform.position.x);
 
         if (FacingRight)
         {
   
-            if (state.transform.position.x - startPositionX < state.playerStats.rollDistance) 
+            if (context.transform.position.x - startPositionX < context.playerStats.rollDistance) 
             {
-                state.rb.linearVelocity = new Vector2(state.playerStats.rollSpeed, state.rb.linearVelocity.y);
-                lastFramePositionX = state.transform.position.x;
+                context.rb.linearVelocity = new Vector2(context.playerStats.rollSpeed, context.rb.linearVelocity.y);
+                lastFramePositionX = context.transform.position.x;
                 if (distanceTraveledRight <= 0.001f)
                 {
-                    state.TransitionState(state.walkState);
+                    //context.TransitionState(state.walkState);
+                    SwitchState(factory.Walking());
                     return;
                 }
             }
             else
             {
-                state.rb.linearVelocity = new Vector2(0f, state.rb.linearVelocity.y);
-                state.TransitionState(state.walkState); 
+                context.rb.linearVelocity = new Vector2(0f, context.rb.linearVelocity.y);
+                //state.TransitionState(state.walkState); 
+                SwitchState(factory.Walking());
             }
         }
         else
         {
          
-            if (startPositionX - state.transform.position.x < state.playerStats.rollDistance)
+            if (startPositionX - context.transform.position.x < context.playerStats.rollDistance)
             {
-                state.rb.linearVelocity = new Vector2(-state.playerStats.rollSpeed, state.rb.linearVelocity.y);
-                lastFramePositionX = state.transform.position.x;
+                context.rb.linearVelocity = new Vector2(-context.playerStats.rollSpeed, context.rb.linearVelocity.y);
+                lastFramePositionX = context.transform.position.x;
                 if (distanceTraveledLeft <= 0.001f)
                 {
-                    state.TransitionState(state.walkState);
+                    //state.TransitionState(state.walkState);
+                    SwitchState(factory.Walking());
                     return;
                 }
             }
             else
             {
-                state.rb.linearVelocity = new Vector2(0f, state.rb.linearVelocity.y);
-                state.TransitionState(state.walkState);
+                context.rb.linearVelocity = new Vector2(0f, context.rb.linearVelocity.y);
+                //state.TransitionState(state.walkState);
+                SwitchState(factory.Walking());
             }
         }
     }
+    public override void InitializeSubState(){}
 
-    override public void ExitState(StateManager state)
+    public override void CheckSwitchStates()
+    {
+
+    }
+    override public void ExitState()
     {
         Debug.Log("exiting roll state");
-        state.capCol.size = new Vector2(1, 1.5f);
-        state.capCol.offset = originOffset;
+        context.capCol.size = new Vector2(1, 1.5f);
+        context.capCol.offset = originOffset;
     }
 }
 

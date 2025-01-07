@@ -2,67 +2,81 @@ using UnityEngine;
 
 public class Jump : BaseState
 {
+    public Jump(StateManager currentContext, StateFactory factory)
+    : base(currentContext, factory) { }
+
     private float xInput;
-    private bool jumpReleased;
-    override public void EnterState(StateManager state)
+    private bool hasJumped = false;
+    private bool hasReleased = false;
+
+    override public void EnterState()
     {
-        Debug.Log("entering jump state");
-        state.playerControls.Jump.canceled += OnJumpCanceled;       
+        hasReleased = false;
+        hasJumped = false;
     }
-    override public void UpdateState(StateManager state)
+
+    override public void UpdateState()
     {
-        xInput = state.playerControls.Walk.ReadValue<float>();
-        state.rb.linearVelocity = new Vector2(xInput * state.playerStats.walkingSpeed, state.rb.linearVelocity.y);
+        
+        xInput = context.playerControls.Walk.ReadValue<float>();
+        context.rb.linearVelocity = new Vector2(xInput * context.playerStats.walkingSpeed, context.rb.linearVelocity.y);
 
-        if (state.isGrounded)
+        if (context.isGrounded)
         {
-            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.playerStats.jumpForce);
+            if (!hasJumped)
+            {
+                context.rb.linearVelocity = new Vector2(context.rb.linearVelocity.x, context.playerStats.jumpForce);
+                hasJumped = true;
+            }
+            
         }
-        else if (jumpReleased && state.rb.linearVelocity.y > 0)
+        else if (context.jumpReleased && context.rb.linearVelocity.y > 0 )
         {
-            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.rb.linearVelocity.y * state.playerStats.jumpMultiplier);
-            jumpReleased = false;
-        }
-        else if(state.rb.linearVelocityY < 0)
-        {
-            state.TransitionState(state.fallingState);
-        }
+            if (!hasReleased)
+            {
+                context.rb.linearVelocity = new Vector2(context.rb.linearVelocity.x, context.rb.linearVelocity.y * context.playerStats.jumpMultiplier);
+                context.jumpReleased = false;
+                hasReleased = true;
+            }
 
-
-        else if (state.playerControls.AirCounter.triggered && !state.isGrounded && state.isEnemy)
-        {
-            state.TransitionState(state.airCounterState);
-        }
-        else if (state.playerControls.Block.triggered)
-        {
-            state.TransitionState(state.jumpBlockState);
-        }
-        else if (state.playerControls.Roll.triggered && state.rb.linearVelocityX != 0)
-        {
-            state.TransitionState(state.rollState);
-        }
-        else if (state.isGrounded)
-        {
-            state.TransitionState(state.walkState);
         }
 
-        if(state.rb.linearVelocityX < 0)
+        if (context.rb.linearVelocity.x < 0)
         {
-            state.SetFacingDirection(false);
+            context.SetFacingDirection(false);
         }
         else
         {
-            state.SetFacingDirection(true);
+            context.SetFacingDirection(true);
+        }
+        CheckSwitchStates();
+    }
+
+    public override void CheckSwitchStates()
+    {
+        if (context.rb.linearVelocity.y < 0)
+        {
+            SwitchState(factory.Fall());
+        }
+        else if (context.playerControls.AirCounter.triggered && !context.isGrounded && context.isEnemy)
+        {
+            SwitchState(factory.AirCountering());
+        }
+        else if (context.playerControls.Block.triggered)
+        {
+            SwitchState(factory.Blocking());
         }
     }
 
-    override public void ExitState(StateManager state)
+    public override void InitializeSubState()
     {
-        Debug.Log("exiting state");
-        state.playerControls.Jump.canceled -= OnJumpCanceled;
     }
-    private void OnJumpCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
+
+    override public void ExitState()
     {
-        jumpReleased = true;
+        
     }
+
+   
 }
+

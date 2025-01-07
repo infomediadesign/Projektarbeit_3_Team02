@@ -4,39 +4,37 @@ using UnityEngine.InputSystem.XInput;
 
 public class Idle : BaseState
 {
+    public Idle(StateManager currentContext, StateFactory factory)
+    : base(currentContext, factory) { }
     private float xInput;
-    override public void EnterState(StateManager state)
+    override public void EnterState()
     {
-        Debug.Log("entering idle state");
     }
-
-
-    override public void UpdateState(StateManager state)
+    override public void UpdateState()
     {
-      
-        state.rb.linearVelocity = new Vector2(0,0);
-        xInput = state.playerControls.Walk.ReadValue<float>();
-
+        CheckSwitchStates();
+        context.rb.linearVelocity = new Vector2(0, 0);
+       
+        xInput = context.playerControls.Walk.ReadValue<float>();
+     
+    }
+    public override void InitializeSubState(){}
+    public override void CheckSwitchStates()
+    {
         if (xInput != 0)
         {
-            state.TransitionState(state.walkState);
+            SwitchState(factory.Walking());
         }
-     
-        else if (state.playerControls.Jump.triggered && state.isGrounded)
+        else if (context.playerControls.Counter.triggered)
         {
-            state.TransitionState(state.jumpState);
+            SwitchState(factory.Countering());
         }
-        else if (state.playerControls.Counter.triggered)
+        else if (context.playerControls.Block.IsPressed())
         {
-            state.TransitionState(state.counterState);
-        }
-        else if (state.playerControls.Block.triggered)
-        {
-            state.TransitionState(state.blockState);
+            SwitchState(factory.Blocking());
         }
     }
-
-    override public void ExitState(StateManager state)
+    override public void ExitState()
     {
         Debug.Log("exiting state");
     }

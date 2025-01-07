@@ -4,74 +4,78 @@ using UnityEngine;
 
 public class AirCounter : BaseState
 {
+    public AirCounter(StateManager currentContext, StateFactory factory)
+    : base(currentContext, factory) { }
     private float xInput;
     private bool airCounterReleased;
     private bool airCounterPressed;
     private bool attacked;
-    override public void EnterState(StateManager state)
+    override public void EnterState()
     {
         Debug.Log("entering airCounter state");
-        state.playerControls.AirCounter.canceled += OnAirCounterCanceled;
-        state.playerControls.AirCounter.performed += OnAirCounterPressed;
+        context.playerControls.AirCounter.canceled += OnAirCounterCanceled;
+        context.playerControls.AirCounter.performed += OnAirCounterPressed;
         airCounterReleased = false;
         airCounterPressed = true;
         attacked = false;
     }
 
 
-    override public void UpdateState(StateManager state)
+    override public void UpdateState()
     {
         Debug.Log("airCounter");
 
-        xInput = state.playerControls.Walk.ReadValue<float>();
-        state.rb.linearVelocity = new Vector2(xInput * state.playerStats.walkingSpeed, state.rb.linearVelocity.y);
+        xInput = context.playerControls.Walk.ReadValue<float>();
+        context.rb.linearVelocity = new Vector2(xInput * context.playerStats.walkingSpeed, context.rb.linearVelocity.y);
 
-        if (state.isEnemy && airCounterPressed)
+        if (context.isEnemy && airCounterPressed)
         {
-            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.playerStats.airCounterForce);
+            context.rb.linearVelocity = new Vector2(context.rb.linearVelocity.x, context.playerStats.airCounterForce);
             airCounterPressed = false;
             attacked = false;
         }
-        else if (airCounterReleased && state.rb.linearVelocity.y > 0)
+        else if (airCounterReleased && context.rb.linearVelocity.y > 0)
         {
-            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.rb.linearVelocity.y * state.playerStats.airCounterMultiplier);
+            context.rb.linearVelocity = new Vector2(context.rb.linearVelocity.x, context.rb.linearVelocity.y * context.playerStats.airCounterMultiplier);
             airCounterReleased = false;
         }
-       
 
-
-        if (state.isGrounded)
+        if (context.rb.linearVelocityX < 0)
         {
-            state.TransitionState(state.walkState);
-        }
-
-        if (state.playerControls.Block.triggered)
-        {
-            state.TransitionState(state.jumpBlockState);
-        }
-        if (state.rb.linearVelocityX < 0)
-        {
-            state.SetFacingDirection(false);
+            context.SetFacingDirection(false);
         }
         else
         {
-            state.SetFacingDirection(true);
+            context.SetFacingDirection(true);
         }
 
-        if (!attacked && state.CheckForEnemy())
+        if (!attacked && context.CheckForEnemy())
         {
-            state.playerCombat.Attack(state.currentEnemy);
+            context.playerCombat.Attack(context.currentEnemy);
             attacked = true;
         }
-
+        CheckSwitchStates();
 
     }
-
-    override public void ExitState(StateManager state)
+    public override void InitializeSubState()
+    {
+    }
+    public override void CheckSwitchStates()
+    {
+        if (context.playerControls.Block.triggered)
+        {
+            SwitchState(factory.Blocking());
+        }
+        else if(context.rb.linearVelocityY < 0)
+        {
+            SwitchState(factory.Fall());
+        }
+    }
+    override public void ExitState()
     {
         Debug.Log("exiting state");
         attacked = false;
-        state.playerControls.AirCounter.canceled -= OnAirCounterCanceled;
+        context.playerControls.AirCounter.canceled -= OnAirCounterCanceled;
     }
     private void OnAirCounterCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
