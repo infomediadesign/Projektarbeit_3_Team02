@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 
 [ExecuteInEditMode]
 public class CameraBoundsHelper : MonoBehaviour
@@ -67,4 +67,4 @@ public class CameraBoundsHelper : MonoBehaviour
             Gizmos.DrawWireCube(center, new Vector3(width, height, 0.1f));
         }
     }
-}
+}*/
