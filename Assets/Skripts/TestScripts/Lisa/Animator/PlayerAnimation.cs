@@ -6,7 +6,6 @@ public class PlayerAnimation : MonoBehaviour
     StateManager stateManager;
     private string currentState;
 
-    // Animationszustände
     const string playerIdle = "playerIdle";
     const string playerWalk = "playerWalk";
     const string playerJump = "playerJump";
@@ -71,11 +70,11 @@ public class PlayerAnimation : MonoBehaviour
         }
         else if (currentSubState is AirCounter)
         {
-            AnimStateTransition(playerAirCounter);
+            AnimStateTransition(playerJump);
         }
         else if (currentSubState is Falling)
         {
-            AnimStateTransition(playerFalling);
+            AnimStateTransition(playerJump);
         }
         else if (currentSubState is Block)
         {
