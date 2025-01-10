@@ -1,23 +1,33 @@
 using UnityEngine;
 public class Parallex_Level3 : MonoBehaviour
 {
-    private float length_3, startpos_3;
-    public GameObject cam_3;
-    public float parallexEffect_3;
+    private float length, startpos;
+    public float parallexEffect;
+    [HideInInspector] public Camera mainCamera;
 
     void Start()
     {
-        startpos_3 = transform.position.y;  // Geändert von x zu y
-        length_3 = GetComponent<SpriteRenderer>().bounds.size.y;  // Geändert von x zu y
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
+        if (mainCamera == null)
+        {
+            Debug.LogWarning("Could not find camera for parallax effect on: " + gameObject.name);
+            return;
+        }
+
+        startpos = transform.position.y;  // Vertikale Position
+        length = GetComponent<SpriteRenderer>().bounds.size.y;  // Vertikale Länge
     }
 
     void FixedUpdate()
     {
-        float temp = (cam_3.transform.position.y * (1 - parallexEffect_3));  // Geändert von x zu y
-        float dist = (cam_3.transform.position.y * parallexEffect_3);  // Geändert von x zu y
-        transform.position = new Vector3(transform.position.x, startpos_3 + dist, transform.position.z);  // x und y Position getauscht
+        if (mainCamera == null) return;  // Sicherheitscheck
 
-        if (temp > startpos_3 + length_3) startpos_3 += length_3;
-        else if (temp < startpos_3 - length_3) startpos_3 -= length_3;
+        float temp = (mainCamera.transform.position.y * (1 - parallexEffect));
+        float dist = (mainCamera.transform.position.y * parallexEffect);
+
+        transform.position = new Vector3(transform.position.x, startpos + dist, transform.position.z);
+
+        if (temp > startpos + length) startpos += length;
+        else if (temp < startpos - length) startpos -= length;
     }
 }
