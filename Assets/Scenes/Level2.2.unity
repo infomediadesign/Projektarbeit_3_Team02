@@ -426,7 +426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &89546133
 Rigidbody2D:
   serializedVersion: 5
@@ -6880,7 +6880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33caf693691eb74ba0b09ebfc10ce3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  mainCamera: {fileID: 0}
   parallexEffect: 0.5
 --- !u!212 &582844937
 SpriteRenderer:
@@ -8937,7 +8937,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!60 &1456250591
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -8984,10 +8984,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 251.51718, y: -25.475922}
+    - - {x: 283.82993, y: 46.81658}
+      - {x: 251.28864, y: 46.742054}
+      - {x: 251.1863, y: -25.53033}
       - {x: 155.55615, y: -25.676352}
       - {x: 155.58282, y: -43.52617}
-      - {x: 251.50636, y: -43.52338}
+      - {x: 284.0502, y: -43.614796}
   m_UseDelaunayMesh: 0
 --- !u!4 &1456250592
 Transform:
@@ -9049,7 +9051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33caf693691eb74ba0b09ebfc10ce3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  mainCamera: {fileID: 0}
   parallexEffect: 0
 --- !u!212 &1460152152
 SpriteRenderer:
@@ -9208,7 +9210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1527257547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9328,7 +9330,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.87
+  orthographic size: 6.73
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -9353,7 +9355,7 @@ Transform:
   m_GameObject: {fileID: 1527257546}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 198.14182, y: -35.906868, z: -2889.2302}
+  m_LocalPosition: {x: 288.9445, y: -33.35067, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9661,10 +9663,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d47905709c1264fba1d86ac6e18d97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boundaryColor: {r: 1, g: 0, b: 0, a: 1}
-  showBoundary: 1
-  topRight: {fileID: 1169262706}
-  bottomLeft: {fileID: 568200516}
 --- !u!4 &1594684098
 Transform:
   m_ObjectHideFlags: 0
@@ -10643,7 +10641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33caf693691eb74ba0b09ebfc10ce3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  mainCamera: {fileID: 0}
   parallexEffect: 0.2
 --- !u!212 &2006293418
 SpriteRenderer:
