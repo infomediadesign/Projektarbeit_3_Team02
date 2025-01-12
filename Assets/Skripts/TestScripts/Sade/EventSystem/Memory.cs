@@ -7,19 +7,17 @@ public class Memory : MonoBehaviour
 
     private void Start()
     {
-         pickUpMemory.AddListener(GameObject.FindGameObjectWithTag("Memory").GetComponent<MemoryUIText>().IncrementMemoryCount);
+        //update UI text
+        pickUpMemory.AddListener(GameObject.FindGameObjectWithTag("Memory").GetComponent<MemoryUIText>().IncrementMemoryCount);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            // ui text update number
             pickUpMemory.Invoke();
-            SoundManager.Instance.PlaySound2D("Collectibles");
+            SoundManager.Instance.PlaySound2D("Collectibles");      //play sound on pickup
+            //object glows
             Destroy(gameObject);
-            
-            //collect
-            //glow
         }
     }
 }

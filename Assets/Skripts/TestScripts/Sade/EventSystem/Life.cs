@@ -7,6 +7,7 @@ public class Life : MonoBehaviour
 
    private void Start()
    {
+        //update UI text 
         pickUpLife.AddListener(GameObject.FindGameObjectWithTag("Life").GetComponent<LifeUIText>().IncrementLifeCount);
    }
 
@@ -14,18 +15,10 @@ public class Life : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            // ui text update number
             pickUpLife.Invoke();
             SoundManager.Instance.PlaySound2D("Collectibles");
+            //add player health 
             Destroy(gameObject);
-            
-            //collect
-            //glow
         }
-    }
-
-    public void TestMethod()
-    {
-        print("test test test");
     }
 }
