@@ -6,7 +6,7 @@ public class FlyingEnemy : EnemyBase
     protected PlayerHealth playerHealth;
     protected SpriteRenderer spriteRenderer;
     protected Animator anim;
-    public GameObject player;
+    public Transform player;
 
     public Transform[] patrolPoints;
     private int targetPoint;
@@ -19,6 +19,14 @@ public class FlyingEnemy : EnemyBase
     {
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (player == null)
+        {
+            GameObject playerObject = GameObject.FindWithTag("Player");
+            if (playerObject != null)
+            {
+                player = playerObject.transform;
+            }
+        }
     }
 
     void Update()

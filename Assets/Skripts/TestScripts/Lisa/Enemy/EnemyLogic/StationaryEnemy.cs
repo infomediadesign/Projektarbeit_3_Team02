@@ -23,6 +23,14 @@ public class StationaryEnemy : EnemyBase
         intTimer = timer;
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (player == null)
+        {
+            GameObject playerObject = GameObject.FindWithTag("Player");
+            if (playerObject != null)
+            {
+                player = playerObject.transform;
+            }
+        }
     }
 
     void Update()
