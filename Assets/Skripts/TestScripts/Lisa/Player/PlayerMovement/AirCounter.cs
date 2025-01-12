@@ -12,7 +12,7 @@ public class AirCounter : BaseState
     private bool attacked;
     override public void EnterState()
     {
-        Debug.Log("entering airCounter state");
+
         context.playerControls.AirCounter.canceled += OnAirCounterCanceled;
         context.playerControls.AirCounter.performed += OnAirCounterPressed;
         airCounterReleased = false;
@@ -23,7 +23,6 @@ public class AirCounter : BaseState
 
     override public void UpdateState()
     {
-        Debug.Log("airCounter");
 
         xInput = context.playerControls.Walk.ReadValue<float>();
         context.rb.linearVelocity = new Vector2(xInput * context.playerStats.walkingSpeed, context.rb.linearVelocity.y);
@@ -73,7 +72,7 @@ public class AirCounter : BaseState
     }
     override public void ExitState()
     {
-        Debug.Log("exiting state");
+
         attacked = false;
         context.playerControls.AirCounter.canceled -= OnAirCounterCanceled;
     }

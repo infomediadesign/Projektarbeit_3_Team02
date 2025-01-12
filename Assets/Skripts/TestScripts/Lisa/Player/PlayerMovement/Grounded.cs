@@ -14,7 +14,7 @@ public class Grounded : BaseState
     }
     override public void EnterState()
     {
-        Debug.Log("grounded");
+        Debug.Log("Entering Grounded State");
     }
 
     override public void UpdateState()
@@ -55,7 +55,7 @@ public class Grounded : BaseState
     }
     override public void ExitState()
     {
-        Debug.Log("EXITING GROUNDED STATE");
+
     }
 
 }
