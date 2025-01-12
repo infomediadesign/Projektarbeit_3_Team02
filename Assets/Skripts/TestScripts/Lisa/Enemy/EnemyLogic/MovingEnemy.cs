@@ -113,7 +113,7 @@ public class MovingEnemy : StationaryEnemy
             playerHealth = other.GetComponent<PlayerHealth>();
 
             playerHealth.TakeDamage(stats.damage);
-            Debug.Log("taking damage");
+            Debug.Log("taking damage: " + stats.damage);
         }
      }
     

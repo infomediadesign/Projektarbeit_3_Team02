@@ -55,7 +55,7 @@ public class Grounded : BaseState
     }
     override public void ExitState()
     {
-        Debug.Log("Exiting Grounded State");
+
     }
 
 }
