@@ -8,7 +8,7 @@ public class StateManager : MonoBehaviour
     [HideInInspector] public EnemyBase targetEnemy;
     [HideInInspector] public EnemyBase currentEnemy;
     [HideInInspector] public CapsuleCollider2D mainCollider;
-    public BoxCollider2D rollTrigger;
+    public CapsuleCollider2D rollTrigger;
 
     public InputSystem_Actions inputActions;
     public InputSystem_Actions.TestActions playerControls;
