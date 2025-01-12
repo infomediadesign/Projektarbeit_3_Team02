@@ -37,12 +37,10 @@ public class Falling : BaseState
         }
         else if (context.playerControls.AirCounter.triggered && context.isEnemy)
         {
-            Debug.Log("AirCounter Triggered");
             SwitchState(factory.AirCountering());
         }
     }
     public override void ExitState() 
     {
-        Debug.Log("exiting fall state");
     }
 }

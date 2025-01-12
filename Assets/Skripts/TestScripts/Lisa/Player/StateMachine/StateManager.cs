@@ -28,7 +28,7 @@ public class StateManager : MonoBehaviour
 
     public bool isEnemy { get; private set; }
     public bool shielded { get; private set; }
-    public bool jumping { get; private set; }
+    public bool rolling { get; private set; }
     public bool jumpReleased;
     public Transform enemyCheckPos;
     public LayerMask enemyLayer;
@@ -73,13 +73,13 @@ public class StateManager : MonoBehaviour
         {
             shielded = false;
         }
-        if (currentState == states.Jumping())
+        if (currentState == states.Rolling())
         {
-            jumping = true;
+            rolling = true;
         }
         else
         {
-            jumping = false;
+            rolling = false;
         }
 
         currentState.UpdateStates();

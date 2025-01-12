@@ -9,7 +9,7 @@ public class JumpBlock : BaseState
     SpriteRenderer renderer;
     override public void EnterState()
     {
-        Debug.Log("entering jumpblock state");
+
         renderer = context.GetComponent<SpriteRenderer>();
         context.rb.linearVelocity = new Vector2(0, context.rb.linearVelocity.y);
     }
@@ -43,7 +43,7 @@ public class JumpBlock : BaseState
     }
     override public void ExitState()
     {
-        Debug.Log("exiting state");
+
     }
 }
 

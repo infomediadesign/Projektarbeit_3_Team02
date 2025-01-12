@@ -9,7 +9,7 @@ public class Block : BaseState
     private bool blockReleased;
     override public void EnterState()
     {
-        Debug.Log("entering Block state");
+
         renderer = context.GetComponent<SpriteRenderer>();
         context.rb.linearVelocity = new Vector2(0, 0);
         context.playerControls.Block.canceled += OnBlockCanceled;
@@ -42,7 +42,7 @@ public class Block : BaseState
     }
     override public void ExitState()
     {
-        Debug.Log("exiting state");
+
         context.playerControls.Block.canceled -= OnBlockCanceled;
     }
     private void OnBlockCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)

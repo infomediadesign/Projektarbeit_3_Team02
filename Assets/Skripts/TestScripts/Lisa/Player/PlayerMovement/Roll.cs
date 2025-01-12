@@ -7,14 +7,12 @@ public class Roll : BaseState
 
     private bool FacingRight;
     private float startPositionX;
-    private Vector2 originOffset;
     private float lastFramePositionX;
     
 
     override public void EnterState()
     {
         startPositionX = context.transform.position.x;
-        originOffset = context.capCol.offset;
 
         if (context.rb.linearVelocityX < 0)
         {
@@ -26,14 +24,16 @@ public class Roll : BaseState
         }
         //je anchdem ob facing right oder nicht wird rollspeed negativ oder positiv gesetzt 
         context.rb.linearVelocity = new Vector2(FacingRight ? context.playerStats.rollSpeed : -context.playerStats.rollSpeed, context.rb.linearVelocity.y);
-        context.mainCollider.enabled = false;
+        
         context.rollTrigger.enabled = true;
+        context.mainCollider.enabled = false;
     }
 
     override public void UpdateState()
     {
         float distanceTraveledRight = Mathf.Abs(context.transform.position.x - lastFramePositionX);
         float distanceTraveledLeft = Mathf.Abs(lastFramePositionX - context.transform.position.x);
+        
 
         if (FacingRight)
         {
@@ -45,6 +45,7 @@ public class Roll : BaseState
                 lastFramePositionX = context.transform.position.x;
                 if (distanceTraveledRight <= 0.001f && !IsSpaceInFront(FacingRight))
                 {
+
                     SwitchState(factory.Walking());
                     return;
                 }
@@ -89,22 +90,18 @@ public class Roll : BaseState
     private bool IsSpaceAbove()
     {
         Vector2 rollPosition = (Vector2)context.transform.position + context.rollTrigger.offset;
-        float raycastLength = 0.5f; 
+        float raycastLength = 0.8f; 
         RaycastHit2D hit = Physics2D.Raycast(rollPosition, Vector2.up, raycastLength, context.groundLayer);
-
-        Debug.DrawRay(rollPosition, Vector2.up * raycastLength, Color.red);
 
         return hit.collider != null;
     }
     private bool IsSpaceInFront(bool facingRight)
     {
-        Vector2 direction = facingRight ? Vector2.right : Vector2.left;
+        Vector2 direction = facingRight ? Vector2.left : Vector2.right;
         Vector2 origin = (Vector2)context.transform.position + context.rollTrigger.offset;
         float raycastLength = 0.5f;
 
         RaycastHit2D hit = Physics2D.Raycast(origin, direction, raycastLength, context.groundLayer);
-
-        Debug.DrawRay(origin, direction * raycastLength, Color.blue);
 
         return hit.collider == null;
     }
@@ -116,9 +113,9 @@ public class Roll : BaseState
     }
     override public void ExitState()
     {
-        Debug.Log("exiting roll state");
-        context.rollTrigger.enabled = false;
         context.mainCollider.enabled = true;
+        context.rollTrigger.enabled = false;
+        
     }
 }
 

@@ -36,6 +36,6 @@ public class Idle : BaseState
     }
     override public void ExitState()
     {
-        Debug.Log("exiting state");
+
     }
 }
