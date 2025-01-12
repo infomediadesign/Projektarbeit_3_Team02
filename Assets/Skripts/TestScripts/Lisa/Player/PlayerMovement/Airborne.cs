@@ -14,7 +14,7 @@ public class Airborne : BaseState
     }
     public override void EnterState()
     {
-        Debug.Log("Entered Airborne State");
+        Debug.Log("Entering Airborne State");
     }
 
     public override void UpdateState()
