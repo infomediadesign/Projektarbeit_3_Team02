@@ -17683,6 +17683,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 523427146254059707, guid: eee04e39ff6165f43b53ca89f20f5819, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1517815478168477901, guid: eee04e39ff6165f43b53ca89f20f5819, type: 3}
       propertyPath: m_LocalPosition.x
       value: 132.17908
@@ -17730,6 +17734,22 @@ PrefabInstance:
     - target: {fileID: 4737307436897672140, guid: eee04e39ff6165f43b53ca89f20f5819, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751019259941918922, guid: eee04e39ff6165f43b53ca89f20f5819, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751019259941918922, guid: eee04e39ff6165f43b53ca89f20f5819, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6823468371941226559, guid: eee04e39ff6165f43b53ca89f20f5819, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.396797
+      objectReference: {fileID: 0}
+    - target: {fileID: 6823468371941226559, guid: eee04e39ff6165f43b53ca89f20f5819, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.6955112
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18020,7 +18040,6 @@ SceneRoots:
   - {fileID: 1897080220}
   - {fileID: 617420009}
   - {fileID: 2046863922}
-  - {fileID: 1501719695361681951}
   - {fileID: 179018080}
   - {fileID: 567992659}
   - {fileID: 780442223}
@@ -18033,3 +18052,4 @@ SceneRoots:
   - {fileID: 1153879653}
   - {fileID: 1625127505}
   - {fileID: 128660136}
+  - {fileID: 1501719695361681951}
