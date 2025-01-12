@@ -7,6 +7,8 @@ public class StateManager : MonoBehaviour
     public GameObject player;
     [HideInInspector] public EnemyBase targetEnemy;
     [HideInInspector] public EnemyBase currentEnemy;
+    [HideInInspector] public CapsuleCollider2D mainCollider;
+    public BoxCollider2D rollTrigger;
 
     public InputSystem_Actions inputActions;
     public InputSystem_Actions.TestActions playerControls;
@@ -39,6 +41,7 @@ public class StateManager : MonoBehaviour
         inputActions = new InputSystem_Actions();
         playerControls = inputActions.Test;
         states = new StateFactory(this);
+        mainCollider = GetComponent<CapsuleCollider2D>();
    
         rb = GetComponent<Rigidbody2D>();
         capCol = GetComponent<CapsuleCollider2D>();

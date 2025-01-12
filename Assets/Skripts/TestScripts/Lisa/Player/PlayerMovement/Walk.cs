@@ -19,10 +19,11 @@ public class Walk : BaseState
         {
             context.SetFacingDirection(true);
         }
-        else
+        if (context.rb.linearVelocity.x < 0)
         {
             context.SetFacingDirection(false);
         }
+        
         CheckSwitchStates();
 
     }

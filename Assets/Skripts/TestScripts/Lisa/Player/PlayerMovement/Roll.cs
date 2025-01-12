@@ -9,6 +9,7 @@ public class Roll : BaseState
     private float startPositionX;
     private Vector2 originOffset;
     private float lastFramePositionX;
+    
 
     override public void EnterState()
     {
@@ -25,8 +26,8 @@ public class Roll : BaseState
         }
         //je anchdem ob facing right oder nicht wird rollspeed negativ oder positiv gesetzt 
         context.rb.linearVelocity = new Vector2(FacingRight ? context.playerStats.rollSpeed : -context.playerStats.rollSpeed, context.rb.linearVelocity.y);
-        context.capCol.size = new Vector2(1, 0.3f);
-        context.capCol.offset = new Vector2(0, -0.6f);
+        context.mainCollider.enabled = false;
+        context.rollTrigger.enabled = true;
     }
 
     override public void UpdateState()
@@ -36,14 +37,14 @@ public class Roll : BaseState
 
         if (FacingRight)
         {
+        
   
-            if (context.transform.position.x - startPositionX < context.playerStats.rollDistance) 
+            if (ShouldContinueRolling()) 
             {
                 context.rb.linearVelocity = new Vector2(context.playerStats.rollSpeed, context.rb.linearVelocity.y);
                 lastFramePositionX = context.transform.position.x;
-                if (distanceTraveledRight <= 0.001f)
+                if (distanceTraveledRight <= 0.0001f)
                 {
-                    //context.TransitionState(state.walkState);
                     SwitchState(factory.Walking());
                     return;
                 }
@@ -51,20 +52,18 @@ public class Roll : BaseState
             else
             {
                 context.rb.linearVelocity = new Vector2(0f, context.rb.linearVelocity.y);
-                //state.TransitionState(state.walkState); 
                 SwitchState(factory.Walking());
             }
         }
         else
         {
          
-            if (startPositionX - context.transform.position.x < context.playerStats.rollDistance)
+            if (ShouldContinueRolling())
             {
                 context.rb.linearVelocity = new Vector2(-context.playerStats.rollSpeed, context.rb.linearVelocity.y);
                 lastFramePositionX = context.transform.position.x;
-                if (distanceTraveledLeft <= 0.001f)
+                if (distanceTraveledLeft <= 0.0001f)
                 {
-                    //state.TransitionState(state.walkState);
                     SwitchState(factory.Walking());
                     return;
                 }
@@ -72,10 +71,30 @@ public class Roll : BaseState
             else
             {
                 context.rb.linearVelocity = new Vector2(0f, context.rb.linearVelocity.y);
-                //state.TransitionState(state.walkState);
                 SwitchState(factory.Walking());
             }
         }
+    }
+
+    private bool ShouldContinueRolling()
+    {
+        float distanceRolled = Mathf.Abs(context.transform.position.x - startPositionX);
+        bool withinNormalRollDistance = distanceRolled < context.playerStats.rollDistance;
+
+        bool isLowCeiling = IsSpaceAbove();
+
+        return withinNormalRollDistance || isLowCeiling;
+    }
+
+    private bool IsSpaceAbove()
+    {
+        Vector2 rollPosition = (Vector2)context.transform.position + context.rollTrigger.offset;
+        float raycastLength = 0.3f; 
+        RaycastHit2D hit = Physics2D.Raycast(rollPosition, Vector2.up, raycastLength, context.groundLayer);
+
+        Debug.DrawRay(rollPosition, Vector2.up * raycastLength, Color.red);
+
+        return hit.collider != null;
     }
     public override void InitializeSubState(){}
 
@@ -86,8 +105,8 @@ public class Roll : BaseState
     override public void ExitState()
     {
         Debug.Log("exiting roll state");
-        context.capCol.size = new Vector2(1, 1.5f);
-        context.capCol.offset = originOffset;
+        context.rollTrigger.enabled = false;
+        context.mainCollider.enabled = true;
     }
 }
 

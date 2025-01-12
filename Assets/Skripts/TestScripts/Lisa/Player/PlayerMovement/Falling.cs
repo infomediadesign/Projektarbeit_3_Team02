@@ -21,7 +21,7 @@ public class Falling : BaseState
         {
             context.SetFacingDirection(false);
         }
-        else
+        if (context.rb.linearVelocityX > 0)
         {
             context.SetFacingDirection(true);
         }

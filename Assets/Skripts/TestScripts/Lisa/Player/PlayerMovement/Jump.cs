@@ -45,7 +45,7 @@ public class Jump : BaseState
         {
             context.SetFacingDirection(false);
         }
-        else
+        if (context.rb.linearVelocity.x > 0)
         {
             context.SetFacingDirection(true);
         }

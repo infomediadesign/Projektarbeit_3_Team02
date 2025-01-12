@@ -44,7 +44,7 @@ public class AirCounter : BaseState
         {
             context.SetFacingDirection(false);
         }
-        else
+        if (context.rb.linearVelocityX > 0)
         {
             context.SetFacingDirection(true);
         }
