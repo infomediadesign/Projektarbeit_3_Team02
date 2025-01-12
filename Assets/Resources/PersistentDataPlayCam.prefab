@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 242518753422773393}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -295.4294, y: 40.418312, z: -10.742551}
+  m_LocalPosition: {x: -295.4294, y: 40.41831, z: -10.742551}
   m_LocalScale: {x: 1.1667, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -59,7 +59,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60
-    OrthographicSize: 6
+    OrthographicSize: 8.9
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   SlowingDistance: 6
   OversizeWindow:
     Enabled: 1
-    MaxWindowSize: 0
+    MaxWindowSize: 9
     Padding: 0
   m_LegacyMaxWindowSize: -2
 --- !u!1 &666530274734199632
@@ -1235,7 +1235,7 @@ Transform:
   m_GameObject: {fileID: 6239491860012354114}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.28022, y: -5.896961, z: -10.674077}
+  m_LocalPosition: {x: -6.4540787, y: -1.5325612, z: -10.674077}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1276,7 +1276,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 8.9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1517,18 +1517,18 @@ CompositeCollider2D:
       - X: -137260592
         Y: 121375600
       - X: -137260592
-        Y: -57172872
+        Y: -56141756
       - X: 1477853824
-        Y: -57172872
+        Y: -56141756
   - m_Collider: {fileID: 1929870191344555937}
     m_ColliderPaths:
-    - - X: 2118150272
+    - - X: 2137550720
         Y: 121121672
       - X: 1474376576
         Y: 121121672
       - X: 1474376576
         Y: -58090552
-      - X: 2118150272
+      - X: 2137550720
         Y: -58090552
   - m_Collider: {fileID: 3231635978486424070}
     m_ColliderPaths:
@@ -1560,13 +1560,13 @@ CompositeCollider2D:
       - {x: 180.1918, y: -41.46187}
       - {x: 276.0332, y: -41.4619}
       - {x: 276.03323, y: -41.82139}
-    - - {x: 211.815, y: -5.8090553}
-      - {x: 211.815, y: 12.112167}
+    - - {x: 213.75505, y: -5.8090553}
+      - {x: 213.75505, y: 12.112167}
       - {x: 147.78539, y: 12.112197}
       - {x: 147.78535, y: 12.13756}
       - {x: -13.726059, y: 12.13753}
-      - {x: -13.72603, y: -5.717287}
-      - {x: 147.43765, y: -5.717317}
+      - {x: -13.72603, y: -5.614176}
+      - {x: 147.43765, y: -5.614205}
       - {x: 147.43768, y: -5.8090553}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
@@ -1606,7 +1606,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 1
   m_CompositeOrder: 0
-  m_Offset: {x: 67.02966, y: 3.2101362}
+  m_Offset: {x: 67.02966, y: 3.2616923}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1616,7 +1616,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 161.51144, y: 17.854847}
+  m_Size: {x: 161.51144, y: 17.751736}
   m_EdgeRadius: 0
 --- !u!61 &1929870191344555937
 BoxCollider2D:
@@ -1652,7 +1652,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 1
   m_CompositeOrder: 0
-  m_Offset: {x: 179.62634, y: 3.151556}
+  m_Offset: {x: 180.59636, y: 3.151556}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1662,7 +1662,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 64.37738, y: 17.921223}
+  m_Size: {x: 66.31741, y: 17.921223}
   m_EdgeRadius: 0
 --- !u!61 &3231635978486424070
 BoxCollider2D:
