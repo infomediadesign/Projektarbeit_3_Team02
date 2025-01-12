@@ -43,11 +43,10 @@ public class Roll : BaseState
             {
                 context.rb.linearVelocity = new Vector2(context.playerStats.rollSpeed, context.rb.linearVelocity.y);
                 lastFramePositionX = context.transform.position.x;
-                if (distanceTraveledRight <= 0.001f && !IsSpaceInFront(FacingRight))
+                if (distanceTraveledRight <= 0.001f && !IsSpaceInFront())
                 {
 
                     SwitchState(factory.Walking());
-                    return;
                 }
             }
             else
@@ -63,10 +62,9 @@ public class Roll : BaseState
             {
                 context.rb.linearVelocity = new Vector2(-context.playerStats.rollSpeed, context.rb.linearVelocity.y);
                 lastFramePositionX = context.transform.position.x;
-                if (distanceTraveledLeft <= 0.001f && !IsSpaceInFront(!FacingRight))
+                if (distanceTraveledLeft <= 0.001f && !IsSpaceInFront())
                 {
                     SwitchState(factory.Walking());
-                    return;
                 }
             }
             else
@@ -95,9 +93,18 @@ public class Roll : BaseState
 
         return hit.collider != null;
     }
-    private bool IsSpaceInFront(bool facingRight)
+    private bool IsSpaceInFront()
     {
-        Vector2 direction = facingRight ? Vector2.left : Vector2.right;
+
+        Vector2 direction;
+        if (FacingRight)
+        {
+            direction = Vector2.right;
+        }
+        else
+        {
+            direction = Vector2.left;
+        }
         Vector2 origin = (Vector2)context.transform.position + context.rollTrigger.offset;
         float raycastLength = 0.5f;
 
