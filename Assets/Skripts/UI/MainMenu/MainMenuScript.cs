@@ -15,10 +15,12 @@ public class MainMenuScript : MonoBehaviour
         MusicManager.Instance.PlayMusic("MainMenu");
     }
 
-    public void Play()
+    public void ExitGame()
     {
-        //SceneManager.Instance.LoadSceneAsync("Game");
-        //MusicManager.Instance.PlayMusic("Game");
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+            Application.Quit();
     }
 
 }
