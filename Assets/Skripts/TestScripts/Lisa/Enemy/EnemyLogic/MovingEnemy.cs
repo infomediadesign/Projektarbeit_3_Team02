@@ -110,8 +110,13 @@ public class MovingEnemy : StationaryEnemy
         {
             target = other.gameObject;
             playerInRange = true;
+            playerHealth = other.GetComponent<PlayerHealth>();
+
+            playerHealth.TakeDamage(stats.damage);
+            Debug.Log("taking damage");
         }
-    }
+     }
+    
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -130,7 +135,6 @@ public class MovingEnemy : StationaryEnemy
 
     private void EnemyLogic()
     {
-        Debug.Log(distance);
         distance = Vector2.Distance(transform.position, player.transform.position);
         float verticalDifference = Mathf.Abs(transform.position.y - player.transform.position.y);
         if (!IsGroundAhead())

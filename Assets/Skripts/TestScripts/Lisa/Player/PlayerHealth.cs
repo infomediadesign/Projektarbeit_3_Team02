@@ -17,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
         if (!state.shielded && currentHealth > 0)
         {
             currentHealth -= damage;
+           
             
         }
        

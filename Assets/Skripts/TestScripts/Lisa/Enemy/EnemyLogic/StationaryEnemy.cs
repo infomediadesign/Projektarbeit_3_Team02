@@ -95,7 +95,6 @@ public class StationaryEnemy : EnemyBase
          
             playerHealth.TakeDamage(stats.damage);
             Debug.Log("taking damage");
-          
         }
     }
 
