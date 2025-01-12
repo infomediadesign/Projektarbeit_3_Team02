@@ -6,6 +6,9 @@ public class MovingEnemy : StationaryEnemy
 {
     public bool isPatroling;
     private bool playerInRange;
+    public Transform groundCheck; 
+    private float groundCheckDistance = 1f;
+    public LayerMask groundLayer;
 
     public MovingEnemyStats mStats;
 
@@ -95,6 +98,11 @@ public class MovingEnemy : StationaryEnemy
             increaseTarget();
         }
     }
+    private bool IsGroundAhead()
+    {
+        RaycastHit2D groundHit = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
+        return groundHit.collider != null; 
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -102,8 +110,21 @@ public class MovingEnemy : StationaryEnemy
         {
             target = other.gameObject;
             playerInRange = true;
-      
-
+        }
+    }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            float verticalDifference = Mathf.Abs(transform.position.y - other.transform.position.y);
+            if (verticalDifference <= mStats.maxVerticalRange)
+            {
+                playerInRange = true;
+            }
+            else
+            {
+                playerInRange = false;
+            }
         }
     }
 
@@ -112,6 +133,12 @@ public class MovingEnemy : StationaryEnemy
         Debug.Log(distance);
         distance = Vector2.Distance(transform.position, player.transform.position);
         float verticalDifference = Mathf.Abs(transform.position.y - player.transform.position.y);
+        if (!IsGroundAhead())
+        {
+            playerInRange = false;
+            isPatroling = true;
+            return;
+        }
         if (distance > mStats.attackRad)
         {
             Move();
@@ -123,6 +150,7 @@ public class MovingEnemy : StationaryEnemy
         }
         if (cooling)
         {
+            Cooldown();
             anim.SetBool("Attacking", false);
         }
     }
