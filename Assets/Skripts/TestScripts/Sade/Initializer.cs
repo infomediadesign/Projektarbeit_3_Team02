@@ -7,6 +7,6 @@ public class Initializer : MonoBehaviour
     public static void Execute()
     {
         Debug.Log("Loaded by the Persitent Objects from the Intitializer script");
-        Object.DontDestroyOnLoad(Object.Instantiate(Resources.Load("PersistentDataPlayCam")));
+        Object.DontDestroyOnLoad(Object.Instantiate(Resources.Load("PersistentData")));
     }
 }
