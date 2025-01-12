@@ -43,7 +43,7 @@ public class Roll : BaseState
             {
                 context.rb.linearVelocity = new Vector2(context.playerStats.rollSpeed, context.rb.linearVelocity.y);
                 lastFramePositionX = context.transform.position.x;
-                if (distanceTraveledRight <= 0.0001f)
+                if (distanceTraveledRight <= 0.001f && !IsSpaceInFront(FacingRight))
                 {
                     SwitchState(factory.Walking());
                     return;
@@ -62,7 +62,7 @@ public class Roll : BaseState
             {
                 context.rb.linearVelocity = new Vector2(-context.playerStats.rollSpeed, context.rb.linearVelocity.y);
                 lastFramePositionX = context.transform.position.x;
-                if (distanceTraveledLeft <= 0.0001f)
+                if (distanceTraveledLeft <= 0.001f && !IsSpaceInFront(!FacingRight))
                 {
                     SwitchState(factory.Walking());
                     return;
@@ -89,12 +89,24 @@ public class Roll : BaseState
     private bool IsSpaceAbove()
     {
         Vector2 rollPosition = (Vector2)context.transform.position + context.rollTrigger.offset;
-        float raycastLength = 0.3f; 
+        float raycastLength = 0.5f; 
         RaycastHit2D hit = Physics2D.Raycast(rollPosition, Vector2.up, raycastLength, context.groundLayer);
 
         Debug.DrawRay(rollPosition, Vector2.up * raycastLength, Color.red);
 
         return hit.collider != null;
+    }
+    private bool IsSpaceInFront(bool facingRight)
+    {
+        Vector2 direction = facingRight ? Vector2.right : Vector2.left;
+        Vector2 origin = (Vector2)context.transform.position + context.rollTrigger.offset;
+        float raycastLength = 0.5f;
+
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction, raycastLength, context.groundLayer);
+
+        Debug.DrawRay(origin, direction * raycastLength, Color.blue);
+
+        return hit.collider == null;
     }
     public override void InitializeSubState(){}
 
