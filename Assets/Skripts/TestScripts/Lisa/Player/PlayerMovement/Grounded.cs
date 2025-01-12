@@ -48,14 +48,14 @@ public class Grounded : BaseState
 
     public override void CheckSwitchStates()
     {
-        if(context.playerControls.Jump.phase == UnityEngine.InputSystem.InputActionPhase.Performed || context.rb.linearVelocityY < -1 && !context.rolling && context.mainCollider.enabled)
+        if(context.playerControls.Jump.phase == UnityEngine.InputSystem.InputActionPhase.Performed || context.rb.linearVelocityY < 0 && !context.rolling && context.mainCollider.enabled)
         {
             SwitchState(factory.Air());
         }
     }
     override public void ExitState()
     {
-        Debug.Log("Exiting Grounded State");
+
     }
 
 }

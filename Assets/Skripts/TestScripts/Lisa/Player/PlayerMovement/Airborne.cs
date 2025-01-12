@@ -52,7 +52,6 @@ public class Airborne : BaseState
     public override void ExitState()
     {
        
-        Debug.Log("Exiting Airborne State");
     }
 }
 
