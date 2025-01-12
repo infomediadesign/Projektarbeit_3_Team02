@@ -1,13 +1,12 @@
 using UnityEngine;
-public class Parallex : MonoBehaviour
+public class Parallex_L3 : MonoBehaviour
 {
-    [HideInInspector] public Camera mainCamera;  // Umbenennung für Klarheit
     private float length, startpos;
     public float parallexEffect;
+    [HideInInspector] public Camera mainCamera;
 
     void Start()
     {
-        // Finde die Kamera
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
         if (mainCamera == null)
         {
@@ -15,18 +14,18 @@ public class Parallex : MonoBehaviour
             return;
         }
 
-        startpos = transform.position.x;
-        length = GetComponent<SpriteRenderer>().bounds.size.x;
+        startpos = transform.position.y;  // Vertikale Position
+        length = GetComponent<SpriteRenderer>().bounds.size.y;  // Vertikale Länge
     }
 
     void FixedUpdate()
     {
         if (mainCamera == null) return;  // Sicherheitscheck
 
-        float temp = (mainCamera.transform.position.x * (1 - parallexEffect));
-        float dist = (mainCamera.transform.position.x * parallexEffect);
+        float temp = (mainCamera.transform.position.y * (1 - parallexEffect));
+        float dist = (mainCamera.transform.position.y * parallexEffect);
 
-        transform.position = new Vector3(startpos + dist, transform.position.y, transform.position.z);
+        transform.position = new Vector3(transform.position.x, startpos + dist, transform.position.z);
 
         if (temp > startpos + length) startpos += length;
         else if (temp < startpos - length) startpos -= length;
