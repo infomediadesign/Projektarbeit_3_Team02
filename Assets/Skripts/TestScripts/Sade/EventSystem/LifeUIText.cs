@@ -3,7 +3,7 @@ using TMPro;
 
 public class LifeUIText : MonoBehaviour
 {
-    int lifeCount;
+    private int lifeCount;
 
     public void IncrementLifeCount()
     {

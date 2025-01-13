@@ -3,7 +3,7 @@ using TMPro;
 
 public class MemoryUIText : MonoBehaviour
 {
-    int memoryCount;
+    private int memoryCount;
 
     public void IncrementMemoryCount()
     {
