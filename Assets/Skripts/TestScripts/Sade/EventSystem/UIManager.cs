@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
     private MemoryUIText memoryUIText;
     private LifeUIText lifeUIText;
 
-    private void Awake()
+    /*private void Awake()
     {
         if (Instance == null)
         {
@@ -18,13 +18,13 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
+    }*/
 
     private void Start()
     {
         //find the UI components
-        MemoryUIText memoryUIText = Object.FindFirstObjectByType<MemoryUIText>();
-        LifeUIText lifeUIText = Object.FindFirstObjectByType<LifeUIText>();
+        memoryUIText = Object.FindFirstObjectByType<MemoryUIText>();
+        lifeUIText = Object.FindFirstObjectByType<LifeUIText>();
 
         //ensure they were found
         if (memoryUIText == null)

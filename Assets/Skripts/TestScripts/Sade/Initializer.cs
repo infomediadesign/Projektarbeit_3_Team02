@@ -6,12 +6,14 @@ public class Initializer : MonoBehaviour
     public static void Execute()
     {
         Debug.Log("Loaded Persistent Objects from the Initializer script");
-
         //load the prefab from the Resources folder and instantiate it
-        GameObject persistentData = Object.Instantiate(Resources.Load("PersistentDataPlayCam")) as GameObject;
+        Object.DontDestroyOnLoad(Object.Instantiate(Resources.Load("PersistentDataPlayCam")));
+
+        
+        //GameObject persistentData = Object.Instantiate(Resources.Load("PersistentDataPlayCam")) as GameObject;
 
         //checks if the object was successfully loaded and instantiated
-        if (persistentData != null)
+        /*if (persistentData != null)
         {
             //mark the root GameObject as persistent across scenes
             Object.DontDestroyOnLoad(persistentData);
@@ -19,6 +21,6 @@ public class Initializer : MonoBehaviour
         else
         {
             Debug.LogError("Failed to load PersistentDataPlayCam prefab from Resources.");
-        }
+        }*/
     }
     }

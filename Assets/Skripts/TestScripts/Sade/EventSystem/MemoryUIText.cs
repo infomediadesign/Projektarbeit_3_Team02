@@ -7,7 +7,15 @@ public class MemoryUIText : MonoBehaviour
 
     public void IncrementMemoryCount()
     {
-        memoryCount++;
-        GetComponent<TextMeshProUGUI>().text = $"Memories: {memoryCount}";
+        if (this != null)  // Checking if the component is still valid
+        {
+            memoryCount++;
+            GetComponent<TextMeshProUGUI>().text = $"Memories: {memoryCount}";
+        }
+        else
+            {
+                Debug.LogWarning("LifeUIText component has been destroyed.");
+            }
+        
     }
 }

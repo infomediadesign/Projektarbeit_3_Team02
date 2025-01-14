@@ -7,7 +7,14 @@ public class LifeUIText : MonoBehaviour
 
     public void IncrementLifeCount()
     {
-        lifeCount++;
-        GetComponent<TextMeshProUGUI>().text = $"Lives: {lifeCount}";
+        if (this != null)  // Checking if the component is still valid
+            {
+                lifeCount++;
+                GetComponent<TextMeshProUGUI>().text = $"Lives: {lifeCount}";
+            }
+            else
+            {
+                Debug.LogWarning("LifeUIText component has been destroyed.");
+            }
     }
 }
