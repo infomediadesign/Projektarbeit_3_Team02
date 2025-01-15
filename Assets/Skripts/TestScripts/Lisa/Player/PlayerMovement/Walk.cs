@@ -2,59 +2,60 @@ using UnityEngine;
 
 public class Walk : BaseState
 {
-
+    public Walk(StateManager currentContext, StateFactory factory)
+    : base(currentContext, factory) { }
     private float xInput;
 
-    override public void EnterState(StateManager state)
+    override public void EnterState()
     {
-        Debug.Log("entering walking state...");
-   
     }
 
-
-    override public void UpdateState(StateManager state)
+    override public void UpdateState()
     {
-        xInput = state.playerControls.Walk.ReadValue<float>();
-        state.rb.linearVelocity = new Vector2(xInput * state.playerStats.walkingSpeed, state.rb.linearVelocity.y);
-       
-        if (state.playerControls.Jump.triggered && state.isGrounded)
+        xInput = context.playerControls.Walk.ReadValue<float>();
+        context.rb.linearVelocity = new Vector2(xInput * context.playerStats.walkingSpeed, context.rb.linearVelocity.y);
+
+        if (context.rb.linearVelocity.x > 0)
         {
-            state.TransitionState(state.jumpState);
+            context.SetFacingDirection(true);
         }
-        else if (state.playerControls.Roll.triggered && state.rb.linearVelocityX != 0)
+        if (context.rb.linearVelocity.x < 0)
         {
-            state.TransitionState(state.rollState);
+            context.SetFacingDirection(false);
         }
-        else if (state.playerControls.Block.triggered)
+        
+        CheckSwitchStates();
+
+    }
+    public override void InitializeSubState(){}
+
+    public override void CheckSwitchStates()
+    {
+
+        if (context.playerControls.Roll.triggered && context.rb.linearVelocityX != 0)
         {
-            state.TransitionState(state.blockState);
+            SwitchState(factory.Rolling());
         }
-        else if (state.playerControls.Counter.triggered)
+        else if (context.playerControls.Block.triggered)
         {
-            state.TransitionState(state.counterState);
+            SwitchState(factory.Blocking());
+        }
+        else if (context.playerControls.Counter.triggered)
+        {
+            SwitchState(factory.Countering());
         }
         else if (xInput == 0)
         {
-            state.TransitionState(state.idleState);
+            SwitchState(factory.Idleing());
         }
-        else if(state.rb.linearVelocityY < 0)
+        else if (context.rb.linearVelocityY < 0)
         {
-            state.TransitionState(state.fallingState);
+            SwitchState(factory.Fall());
         }
-        else if (state.rb.linearVelocity.x > 0)
-        {
-            state.SetFacingDirection(true);
-        }
-        else
-        {
-            state.SetFacingDirection(false);
-        }
-
     }
-
-    override public void ExitState(StateManager state)
+    override public void ExitState()
     {
-        Debug.Log("exiting state");
+      
     }
 
   

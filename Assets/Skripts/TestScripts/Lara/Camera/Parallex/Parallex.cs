@@ -1,27 +1,34 @@
 using UnityEngine;
-
 public class Parallex : MonoBehaviour
 {
-
+    [HideInInspector] public Camera mainCamera;  // Umbenennung für Klarheit
     private float length, startpos;
-    public GameObject cam;
     public float parallexEffect;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Finde die Kamera
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
+        if (mainCamera == null)
+        {
+            Debug.LogWarning("Could not find camera for parallax effect on: " + gameObject.name);
+            return;
+        }
+
         startpos = transform.position.x;
-        length= GetComponent<SpriteRenderer>().bounds.size.x;
+        length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        float temp = (cam.transform.position.x * (1 - parallexEffect));
-        float dist = (cam.transform.position.x * parallexEffect);
+        if (mainCamera == null) return;  // Sicherheitscheck
+
+        float temp = (mainCamera.transform.position.x * (1 - parallexEffect));
+        float dist = (mainCamera.transform.position.x * parallexEffect);
+
         transform.position = new Vector3(startpos + dist, transform.position.y, transform.position.z);
 
         if (temp > startpos + length) startpos += length;
-        else if(temp < startpos - length) startpos -= length;
+        else if (temp < startpos - length) startpos -= length;
     }
 }

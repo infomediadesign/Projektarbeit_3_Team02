@@ -11,12 +11,19 @@ public class PlayerHealth : MonoBehaviour
     {
         state = GetComponent<StateManager>();
         currentHealth = maxHealth;
+        EventManager.Instance.StartListening("LifeCollected", HealPlayer);  //NEW
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.StopListening("LifeCollected", HealPlayer);
     }
     public void TakeDamage(float damage)
     {
         if (!state.shielded && currentHealth > 0)
         {
             currentHealth -= damage;
+           
             
         }
        
@@ -24,6 +31,11 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
+    }
+
+    private void HealPlayer()
+    {
+        Heal(10f); // NEW healing amount
     }
 
     public void Heal(float amount)

@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Ground
   - Sound
+  - Teleporter
+  - Glow
+  - Life
+  - Memory
+  - SpawnPoint
+  - MemoryUI
   layers:
   - Default
   - TransparentFX
@@ -40,6 +46,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Parallex
+    uniqueID: 3127580407
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -48,6 +57,9 @@ TagManager:
     locked: 0
   - name: Interactable Objects
     uniqueID: 550221811
+    locked: 0
+  - name: UI
+    uniqueID: 688351575
     locked: 0
   m_RenderingLayers:
   - Default

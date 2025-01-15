@@ -3,46 +3,44 @@ using UnityEngine.InputSystem.XInput;
 using UnityEngine.Windows;
 
 public class Falling : BaseState
-{
+{   
+    public Falling(StateManager currentContext, StateFactory factory)
+    : base(currentContext, factory) { }
     private float xInput;
-    override public void EnterState(StateManager state)
+    override public void EnterState()
     {
-        Debug.Log("entering fall state");
+
     }
 
-    public override void UpdateState(StateManager state)
+    public override void UpdateState()
     {
-        xInput = state.playerControls.Walk.ReadValue<float>();
-        state.rb.linearVelocity = new Vector2(xInput * state.playerStats.walkingSpeed, state.rb.linearVelocity.y);
-        if (state.isGrounded && state.rb.linearVelocityX != 0)
+        
+        xInput = context.playerControls.Walk.ReadValue<float>();
+        context.rb.linearVelocity = new Vector2(xInput * context.playerStats.walkingSpeed, context.rb.linearVelocity.y);
+        if (context.rb.linearVelocityX < 0)
         {
-            state.TransitionState(state.walkState);
+            context.SetFacingDirection(false);
         }
-        else if(state.isGrounded && state.rb.linearVelocityX == 0) 
+        if (context.rb.linearVelocityX > 0)
         {
-            state.TransitionState(state.idleState);
+            context.SetFacingDirection(true);
         }
-        else if(state.playerControls.Block.triggered)
-        {
-            state.TransitionState(state.jumpBlockState);
-        }
-        else if (state.playerControls.AirCounter.triggered)
-        {
-            state.TransitionState(state.airCounterState);
-        }
-        if (state.rb.linearVelocityX < 0)
-        {
-            state.SetFacingDirection(false);
-        }
-        else
-        {
-            state.SetFacingDirection(true);
-        }
-    
-}
-
-    public override void ExitState(StateManager state) 
+        CheckSwitchStates();
+    }
+    public override void InitializeSubState(){}
+    public override void CheckSwitchStates()
     {
-        Debug.Log("exiting fall state");
+  
+        if (context.playerControls.Block.triggered)
+        {
+            SwitchState(factory.Blocking());
+        }
+        else if (context.playerControls.AirCounter.triggered && context.isEnemy)
+        {
+            SwitchState(factory.AirCountering());
+        }
+    }
+    public override void ExitState() 
+    {
     }
 }

@@ -2,67 +2,81 @@ using UnityEngine;
 
 public class Jump : BaseState
 {
+    public Jump(StateManager currentContext, StateFactory factory)
+    : base(currentContext, factory) { }
+
     private float xInput;
-    private bool jumpReleased;
-    override public void EnterState(StateManager state)
+    private bool hasJumped = false;
+    private bool hasReleased = false;
+
+    override public void EnterState()
     {
-        Debug.Log("entering jump state");
-        state.playerControls.Jump.canceled += OnJumpCanceled;       
-    }
-    override public void UpdateState(StateManager state)
-    {
-        xInput = state.playerControls.Walk.ReadValue<float>();
-        state.rb.linearVelocity = new Vector2(xInput * state.playerStats.walkingSpeed, state.rb.linearVelocity.y);
-
-        if (state.isGrounded)
-        {
-            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.playerStats.jumpForce);
-        }
-        else if (jumpReleased && state.rb.linearVelocity.y > 0)
-        {
-            state.rb.linearVelocity = new Vector2(state.rb.linearVelocity.x, state.rb.linearVelocity.y * state.playerStats.jumpMultiplier);
-            jumpReleased = false;
-        }
-        else if(state.rb.linearVelocityY < 0)
-        {
-            state.TransitionState(state.fallingState);
-        }
-
-
-        else if (state.playerControls.AirCounter.triggered && !state.isGrounded && state.isEnemy)
-        {
-            state.TransitionState(state.airCounterState);
-        }
-        else if (state.playerControls.Block.triggered)
-        {
-            state.TransitionState(state.jumpBlockState);
-        }
-        else if (state.playerControls.Roll.triggered && state.rb.linearVelocityX != 0)
-        {
-            state.TransitionState(state.rollState);
-        }
-        else if (state.isGrounded)
-        {
-            state.TransitionState(state.walkState);
-        }
-
-        if(state.rb.linearVelocityX < 0)
-        {
-            state.SetFacingDirection(false);
-        }
-        else
-        {
-            state.SetFacingDirection(true);
-        }
+        hasReleased = false;
+        hasJumped = false;
     }
 
-    override public void ExitState(StateManager state)
+    override public void UpdateState()
     {
-        Debug.Log("exiting state");
-        state.playerControls.Jump.canceled -= OnJumpCanceled;
+        
+        xInput = context.playerControls.Walk.ReadValue<float>();
+        context.rb.linearVelocity = new Vector2(xInput * context.playerStats.walkingSpeed, context.rb.linearVelocity.y);
+
+        if (context.isGrounded)
+        {
+            if (!hasJumped)
+            {
+                context.rb.linearVelocity = new Vector2(context.rb.linearVelocity.x, context.playerStats.jumpForce);
+                hasJumped = true;
+            }
+            
+        }
+        else if (context.jumpReleased && context.rb.linearVelocity.y > 0 )
+        {
+            if (!hasReleased)
+            {
+                context.rb.linearVelocity = new Vector2(context.rb.linearVelocity.x, context.rb.linearVelocity.y * context.playerStats.jumpMultiplier);
+                context.jumpReleased = false;
+                hasReleased = true;
+            }
+
+        }
+
+        if (context.rb.linearVelocity.x < 0)
+        {
+            context.SetFacingDirection(false);
+        }
+        if (context.rb.linearVelocity.x > 0)
+        {
+            context.SetFacingDirection(true);
+        }
+        CheckSwitchStates();
     }
-    private void OnJumpCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
+
+    public override void CheckSwitchStates()
     {
-        jumpReleased = true;
+        if (context.rb.linearVelocity.y < 0)
+        {
+            SwitchState(factory.Fall());
+        }
+        else if (context.playerControls.AirCounter.triggered && !context.isGrounded && context.isEnemy)
+        {
+            SwitchState(factory.AirCountering());
+        }
+        else if (context.playerControls.Block.triggered)
+        {
+            SwitchState(factory.Blocking());
+        }
     }
+
+    public override void InitializeSubState()
+    {
+    }
+
+    override public void ExitState()
+    {
+        
+    }
+
+   
 }
+

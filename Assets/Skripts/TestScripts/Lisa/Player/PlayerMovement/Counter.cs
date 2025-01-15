@@ -3,31 +3,37 @@ using UnityEngine;
 
 public class Counter : BaseState
 {
+    public Counter(StateManager currentContext, StateFactory factory)
+    : base(currentContext, factory) { }
     private bool attacked;
-    override public void EnterState(StateManager state)
+    override public void EnterState()
     {
         attacked = false;
     }
 
 
-    override public void UpdateState(StateManager state)
+    override public void UpdateState()
     {
         Debug.Log("Counter");
 
-        if(!attacked && state.CheckForEnemy())
+        if(!attacked && context.CheckForEnemy())
         {
-            state.playerCombat.Attack(state.currentEnemy);
+            context.playerCombat.Attack(context.currentEnemy);
             attacked = true;
         }
         else
         {
-            state.TransitionState(state.idleState);
+            // state.TransitionState(state.idleState);
+            SwitchState(factory.Idleing());
         }
         
 
     }
-
-    override public void ExitState(StateManager state)
+    public override void InitializeSubState(){}
+    public override void CheckSwitchStates()
+    {
+    }
+    override public void ExitState()
     {
         Debug.Log("exiting state");
     }

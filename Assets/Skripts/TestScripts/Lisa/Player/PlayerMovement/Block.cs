@@ -3,21 +3,23 @@ using UnityEngine;
 
 public class Block : BaseState
 {
+    public Block(StateManager currentContext, StateFactory factory)
+    : base(currentContext, factory) { }
     SpriteRenderer renderer;
     private bool blockReleased;
-    override public void EnterState(StateManager state)
+    override public void EnterState()
     {
-        Debug.Log("entering Block state");
-        renderer = state.GetComponent<SpriteRenderer>();
-        state.rb.linearVelocity = new Vector2(0, 0);
-        state.playerControls.Block.canceled += OnBlockCanceled;
+
+        renderer = context.GetComponent<SpriteRenderer>();
+        context.rb.linearVelocity = new Vector2(0, 0);
+        context.playerControls.Block.canceled += OnBlockCanceled;
         blockReleased = false;
 
 
     }
 
 
-    override public void UpdateState(StateManager state)
+    override public void UpdateState()
     {
         Debug.Log("block");
         renderer.color = Color.green;
@@ -26,15 +28,22 @@ public class Block : BaseState
         if (blockReleased)
         {
             renderer.color = Color.white;
-            state.TransitionState(state.walkState);
+            //state.TransitionState(state.walkState);
+            SwitchState(factory.Idleing());
         }
        
     }
-
-    override public void ExitState(StateManager state)
+    public override void InitializeSubState()
     {
-        Debug.Log("exiting state");
-        state.playerControls.Block.canceled -= OnBlockCanceled;
+
+    }
+    public override void CheckSwitchStates()
+    {
+    }
+    override public void ExitState()
+    {
+
+        context.playerControls.Block.canceled -= OnBlockCanceled;
     }
     private void OnBlockCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {

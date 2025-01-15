@@ -4,36 +4,46 @@ using UnityEngine.UIElements;
 
 public class JumpBlock : BaseState
 {
+    public JumpBlock(StateManager currentContext, StateFactory factory)
+    : base(currentContext, factory) { }
     SpriteRenderer renderer;
-    override public void EnterState(StateManager state)
+    override public void EnterState()
     {
-        Debug.Log("entering jumpblock state");
-        renderer = state.GetComponent<SpriteRenderer>();
-        state.rb.linearVelocity = new Vector2(0, state.rb.linearVelocity.y);
+
+        renderer = context.GetComponent<SpriteRenderer>();
+        context.rb.linearVelocity = new Vector2(0, context.rb.linearVelocity.y);
     }
 
 
-    override public void UpdateState(StateManager state)
+    override public void UpdateState()
     {
         Debug.Log("jumpblock");
         renderer.color = Color.green;
 
-        if (state.isGrounded && state.playerControls.Block.triggered)
+        /*if (context.isGrounded && context.playerControls.Block.triggered)
         {
             state.TransitionState(state.blockState);
         }
-        else if (state.isGrounded)
+        else if (context.isGrounded)
         {
             state.TransitionState(state.walkState);
             renderer.color = Color.white;
-        }
-      
-
+        }*/
     }
 
-    override public void ExitState(StateManager state)
+    public override void InitializeSubState(){ }
+
+    public override void CheckSwitchStates()
     {
-        Debug.Log("exiting state");
+        if (context.playerControls.Block.triggered)
+        {
+            //state.TransitionState(state.blockState);
+            SwitchState(factory.Blocking());
+        }
+    }
+    override public void ExitState()
+    {
+
     }
 }
 

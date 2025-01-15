@@ -21,12 +21,12 @@ public class EnemyManager : MonoBehaviour
     {
 
         enemies.Add(enemy);
-        Debug.Log(enemies.Count, gameObject);
+        //Debug.Log(enemies.Count, gameObject);
     }
     public void RemoveEnemy(EnemyConnector enemy)
     {
         enemies.Remove(enemy);
-        Debug.Log(enemies.Count, gameObject);
+        //Debug.Log(enemies.Count, gameObject);
     }
 
     public int GetCount()

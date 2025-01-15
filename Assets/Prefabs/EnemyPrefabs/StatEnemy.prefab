@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6512750751819587880}
   - component: {fileID: 5420764915275829293}
   - component: {fileID: 314374312111051847}
+  - component: {fileID: 3605451459720958113}
   m_Layer: 0
   m_Name: StatEnemy
   m_TagString: Untagged
@@ -104,9 +105,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: bafa283836e405b4a815cf40ecbb005b, type: 2}
   eStats: {fileID: 11400000, guid: bafa283836e405b4a815cf40ecbb005b, type: 2}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
   player: {fileID: 0}
   timer: 3
 --- !u!95 &5420764915275829293
@@ -168,3 +166,15 @@ CapsuleCollider2D:
   m_Offset: {x: 0.16783231, y: -0.016644007}
   m_Size: {x: 2.617286, y: 3.7643492}
   m_Direction: 0
+--- !u!114 &3605451459720958113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163626393039681014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58cd777d062af80469fe061b24571570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
