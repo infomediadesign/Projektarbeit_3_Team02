@@ -6,20 +6,26 @@ public class Counter : BaseState
     public Counter(StateManager currentContext, StateFactory factory)
     : base(currentContext, factory) { }
     private bool attacked;
+    StationaryEnemy enemy;
     override public void EnterState()
     {
         attacked = false;
+        enemy = new StationaryEnemy();
     }
 
 
     override public void UpdateState()
     {
-        Debug.Log("Counter");
+       
 
         if(!attacked && context.CheckForEnemy())
         {
-            context.playerCombat.Attack(context.currentEnemy);
-            attacked = true;
+            if (enemy.GetCounterPossible())
+            {
+                context.playerCombat.Attack(context.currentEnemy);
+                attacked = true;
+                Debug.Log("Counter");
+            }
         }
         else
         {

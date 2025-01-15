@@ -8,6 +8,7 @@ public class StationaryEnemy : EnemyBase
     protected PlayerHealth playerHealth;
     protected SpriteRenderer spriteRenderer;
     private bool isObstacle;
+    protected bool counterPossible = false;
 
     public Transform player;
     protected bool canAttack = true;
@@ -110,5 +111,17 @@ public class StationaryEnemy : EnemyBase
             cooling = false;
             timer = intTimer;
         }
+    }
+    protected void CounterPossible()
+    {
+        counterPossible = true;
+    }
+    protected void CounterNotPossible()
+    {
+        counterPossible = false;
+    }
+    public bool GetCounterPossible()
+    {
+        return counterPossible;
     }
 }
