@@ -40,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal(float amount)
     {
-        currentHealth = Mathf.Min(currentHealth + amount, maxHealth); // nicht �ber maxHelath
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth); // heal AMOUNT - nicht over maxHelath
     }
 
     private void Die()

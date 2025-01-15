@@ -189,8 +189,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8500035092933795450}
   - component: {fileID: 7596564872098733136}
+  - component: {fileID: 97161992834308138}
   m_Layer: 7
-  m_Name: Hitbox
+  m_Name: HitboxWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,7 +206,7 @@ Transform:
   m_GameObject: {fileID: 6873853912095171827}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.46, y: -0.41, z: 0}
+  m_LocalPosition: {x: -0.71, y: -0.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -257,3 +258,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.86789, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &97161992834308138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6873853912095171827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9991822515d804fa1364f63947b99a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: bafa283836e405b4a815cf40ecbb005b, type: 2}

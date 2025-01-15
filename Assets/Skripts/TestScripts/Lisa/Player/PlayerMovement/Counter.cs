@@ -23,7 +23,6 @@ public class Counter : BaseState
         }
         else
         {
-            // state.TransitionState(state.idleState);
             SwitchState(factory.Idleing());
         }
         
