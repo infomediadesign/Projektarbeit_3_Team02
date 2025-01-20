@@ -16,23 +16,22 @@ public class Counter : BaseState
 
     override public void UpdateState()
     {
-       
-
-        if(!attacked && context.CheckForEnemy())
+        if (!attacked && context.CheckForEnemy())
         {
             if (enemy.GetCounterPossible())
             {
-                context.playerCombat.Attack(context.currentEnemy);
-                attacked = true;
-                Debug.Log("Counter");
+                if (Input.GetKeyDown(KeyCode.C))
+                {
+                    context.playerCombat.Attack(context.currentEnemy);
+                    attacked = true;
+                    Debug.Log("Counter Successful!");
+                }
             }
         }
         else
         {
             SwitchState(factory.Idleing());
         }
-        
-
     }
     public override void InitializeSubState(){}
     public override void CheckSwitchStates()

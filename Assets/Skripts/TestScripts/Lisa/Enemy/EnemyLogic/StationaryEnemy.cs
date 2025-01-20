@@ -1,12 +1,14 @@
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class StationaryEnemy : EnemyBase
 {
     public StationaryEnemyStats eStats;
     protected PlayerHealth playerHealth;
     protected SpriteRenderer spriteRenderer;
+    protected CounterUI counterUI;
     private bool isObstacle;
     protected bool counterPossible = false;
 
@@ -50,6 +52,8 @@ public class StationaryEnemy : EnemyBase
         timer = intTimer;
         anim.SetBool("Moving", false);
         anim.SetBool("Attacking", true);
+        counterPossible = true;
+        Invoke("CounterNotPossible", 0.2f);
 
     }
 
@@ -115,6 +119,10 @@ public class StationaryEnemy : EnemyBase
     protected void CounterPossible()
     {
         counterPossible = true;
+        if (counterUI != null)
+        {
+            counterUI.ResetTimer();
+        }
     }
     protected void CounterNotPossible()
     {

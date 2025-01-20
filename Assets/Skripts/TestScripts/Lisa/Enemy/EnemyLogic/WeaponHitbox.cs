@@ -1,9 +1,12 @@
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class WeaponHitbox : EnemyBase
+
+public class CounterUI : EnemyBase
 {
     protected PlayerHealth playerHealth;
+    public Image timerImage;
     void Start()
     {
         
@@ -32,6 +35,21 @@ public class WeaponHitbox : EnemyBase
                 Debug.Log("taking damage: " + stats.damage);
             
             
+        }
+    }
+    public void UpdateTimer(float time, float maxTime)
+    {
+        if (timerImage != null)
+        {
+            timerImage.fillAmount = time / maxTime; 
+        }
+    }
+
+    public void ResetTimer()
+    {
+        if (timerImage != null)
+        {
+            timerImage.fillAmount = 1f;
         }
     }
 }
