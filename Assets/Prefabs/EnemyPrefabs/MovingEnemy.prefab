@@ -231,7 +231,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9991822515d804fa1364f63947b99a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 76000f2320a195c459b1ab5bb94df094, type: 2}
+  target: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
+  timerImage: {fileID: 0}
 --- !u!1 &8006489718769228220
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 76000f2320a195c459b1ab5bb94df094, type: 2}
   eStats: {fileID: 0}
+  counterUIPrefab: {fileID: 933634645434190062, guid: 999df9d5fedee014cb15e9525515e8c1, type: 3}
   player: {fileID: 0}
   timer: 2
   isPatroling: 0
