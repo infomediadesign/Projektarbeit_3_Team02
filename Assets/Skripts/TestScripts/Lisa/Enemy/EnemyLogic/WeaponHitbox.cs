@@ -1,55 +1,53 @@
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-public class CounterUI : EnemyBase
+public class CounterUI : MonoBehaviour
 {
-    protected PlayerHealth playerHealth;
+    public Transform target; // Gegner-Referenz
+    public Vector3 offset;   // Position des UIs relativ zum Gegner
+    private CanvasGroup canvasGroup;
     public Image timerImage;
-    void Start()
+
+    private void Awake()
     {
-        
+        canvasGroup = GetComponent<CanvasGroup>();
+        Hide();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
-    }
-    public override void Attack()
-    {
-    }
-    public override void StopAttack()
-    {
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
+        if (target != null)
         {
-            Debug.Log("trigger");
-            playerHealth = other.GetComponent<PlayerHealth>();
-
-           
-                playerHealth.TakeDamage(stats.damage);
-                Debug.Log("taking damage: " + stats.damage);
-            
-            
+            transform.position = Camera.main.WorldToScreenPoint(target.position + offset);
         }
     }
+
+    public void Show()
+    {
+        canvasGroup.alpha = 1f;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+    }
+
+    public void Hide()
+    {
+        canvasGroup.alpha = 0f;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+    }
+
     public void UpdateTimer(float time, float maxTime)
     {
         if (timerImage != null)
         {
-            timerImage.fillAmount = time / maxTime; 
+            timerImage.fillAmount = time / maxTime;
         }
     }
 
     public void ResetTimer()
     {
-        if (timerImage != null)
-        {
-            timerImage.fillAmount = 1f;
-        }
+        UpdateTimer(0, 1); // Setze den Timer zurück
     }
 }
+
+

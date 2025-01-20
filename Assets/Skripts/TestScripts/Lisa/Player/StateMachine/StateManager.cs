@@ -122,7 +122,16 @@ public class StateManager : MonoBehaviour
             currentEnemy = enemyCollider.GetComponent<EnemyBase>();
             return currentEnemy != null; 
         }
+        if (currentEnemy != null)
+        {
 
+            float distanceToEnemy = Vector2.Distance(transform.position, currentEnemy.transform.position);
+            if (distanceToEnemy <= playerStats.counterCheckRad && currentEnemy.GetCounterPossible())
+            {
+                Debug.Log("Enemy found and COunterpossible true");
+                return true;
+            }
+        }
         currentEnemy = null;
         return false;
     }

@@ -8,9 +8,12 @@ public class StationaryEnemy : EnemyBase
     public StationaryEnemyStats eStats;
     protected PlayerHealth playerHealth;
     protected SpriteRenderer spriteRenderer;
-    protected CounterUI counterUI;
     private bool isObstacle;
-    protected bool counterPossible = false;
+
+    public GameObject counterUIPrefab; 
+    private CounterUI counterUIInstance;
+    protected float counterTimer = 0.2f; // 2 frames
+    protected float counterTimerRemaining;
 
     public Transform player;
     protected bool canAttack = true;
@@ -26,6 +29,7 @@ public class StationaryEnemy : EnemyBase
         intTimer = timer;
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        counterPossible = false;
         if (player == null)
         {
             GameObject playerObject = GameObject.FindWithTag("Player");
@@ -33,6 +37,13 @@ public class StationaryEnemy : EnemyBase
             {
                 player = playerObject.transform;
             }
+        }
+        if (counterUIPrefab != null)
+        {
+            GameObject ui = Instantiate(counterUIPrefab);
+            counterUIInstance = ui.GetComponent<CounterUI>();
+            counterUIInstance.target = transform;
+            counterUIInstance.offset = new Vector3(0, 2, 0);
         }
     }
 
@@ -45,23 +56,68 @@ public class StationaryEnemy : EnemyBase
         }
       
     }
-
+    private void UpdateCounterUI()
+    {
+        if (counterUIInstance != null && counterPossible)
+        {
+            float timeLeft = Mathf.Max(0, timer); 
+            counterUIInstance.UpdateTimer(timeLeft, intTimer); 
+        }
+    }
     public override void Attack()
     {
         canAttack = true;
         timer = intTimer;
         anim.SetBool("Moving", false);
         anim.SetBool("Attacking", true);
-        counterPossible = true;
-        Invoke("CounterNotPossible", 0.2f);
+        StartCounterWindow();
 
     }
+    protected void StartCounterWindow()
+    {
+        counterPossible = true;
+        counterTimerRemaining = counterTimer;
+
+        if (counterUIInstance != null)
+        {
+            counterUIInstance.ResetTimer();
+            counterUIInstance.Show();
+        }
+
+        InvokeRepeating(nameof(UpdateCounterWindow), 0, 0.1f);
+    }
+    protected void UpdateCounterWindow()
+    {
+        if (!counterPossible) return;
+
+        counterTimerRemaining -= 0.1f;
+        if (counterUIInstance != null)
+        {
+            counterUIInstance.UpdateTimer(counterTimerRemaining, counterTimer);
+        }
+
+        if (counterTimerRemaining <= 0)
+        {
+            EndCounterWindow();
+        }
+    }
+    private void EndCounterWindow()
+    {
+        counterPossible = false;
+        CancelInvoke(nameof(UpdateCounterWindow));
+        if (counterUIInstance != null)
+        {
+            counterUIInstance.Hide();
+        }
+    }
+
 
     public override void StopAttack()
     {
         cooling = false;
         canAttack = false;
         anim.SetBool("Attacking", false);
+        EndCounterWindow();
     }
     protected void Rotate() // das einfach in base enemy packen
     {
@@ -116,20 +172,5 @@ public class StationaryEnemy : EnemyBase
             timer = intTimer;
         }
     }
-    protected void CounterPossible()
-    {
-        counterPossible = true;
-        if (counterUI != null)
-        {
-            counterUI.ResetTimer();
-        }
-    }
-    protected void CounterNotPossible()
-    {
-        counterPossible = false;
-    }
-    public bool GetCounterPossible()
-    {
-        return counterPossible;
-    }
+    
 }

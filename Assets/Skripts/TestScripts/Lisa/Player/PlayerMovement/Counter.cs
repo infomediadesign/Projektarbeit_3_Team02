@@ -6,11 +6,22 @@ public class Counter : BaseState
     public Counter(StateManager currentContext, StateFactory factory)
     : base(currentContext, factory) { }
     private bool attacked;
-    StationaryEnemy enemy;
+    EnemyBase enemy;
     override public void EnterState()
     {
         attacked = false;
-        enemy = new StationaryEnemy();
+        if (context.CheckForEnemy())
+        {
+            enemy = context.currentEnemy; //gegner reference
+        }
+        if (enemy == null)
+        {
+            Debug.LogError("no stationary enemy!");
+        }
+        else
+        {
+            Debug.Log("Enemy found");
+        }
     }
 
 
@@ -20,12 +31,12 @@ public class Counter : BaseState
         {
             if (enemy.GetCounterPossible())
             {
-                if (Input.GetKeyDown(KeyCode.C))
-                {
-                    context.playerCombat.Attack(context.currentEnemy);
-                    attacked = true;
-                    Debug.Log("Counter Successful!");
-                }
+                Debug.Log("Counter is possible now!");
+                context.playerCombat.Attack(context.currentEnemy);
+                
+                Debug.Log("Counter Successful!");
+                SwitchState(factory.Idleing());
+                attacked = true;
             }
         }
         else
