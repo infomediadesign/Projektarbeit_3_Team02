@@ -29,11 +29,13 @@ public class StateManager : MonoBehaviour
     public bool isEnemy { get; private set; }
     public bool shielded { get; private set; }
     public bool rolling { get; private set; }
+    public bool countering { get; private set; }
     public bool jumpReleased;
     public Transform enemyCheckPos;
     public LayerMask enemyLayer;
 
     private bool facingRight = true;
+
 
 
     void Awake()
@@ -73,13 +75,21 @@ public class StateManager : MonoBehaviour
         {
             shielded = false;
         }
-        if (currentState == states.Rolling())
+        if (currentState == states.Rolling()) //verwende ich das noch?
         {
             rolling = true;
         }
         else
         {
             rolling = false;
+        }
+        if (currentState == states.Countering())
+        {
+            countering = true;
+        }
+        else
+        {
+            countering = false;
         }
 
         currentState.UpdateStates();
@@ -114,7 +124,7 @@ public class StateManager : MonoBehaviour
         jumpReleased = false;
 
     }
-    public bool CheckForEnemy() //hier muss für normalen counter noch ein radius eingefügt werden
+    public bool CheckForEnemy() //radius für berühren und counter (extra)
     {
         Collider2D enemyCollider = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
         if (enemyCollider != null)
@@ -122,16 +132,19 @@ public class StateManager : MonoBehaviour
             currentEnemy = enemyCollider.GetComponent<EnemyBase>();
             return currentEnemy != null; 
         }
-        if (currentEnemy != null)
-        {
+        Collider2D[] enemiesInCounterRange = Physics2D.OverlapCircleAll(transform.position, playerStats.counterCheckRad, enemyLayer);
 
-            float distanceToEnemy = Vector2.Distance(transform.position, currentEnemy.transform.position);
-            if (distanceToEnemy <= playerStats.counterCheckRad && currentEnemy.GetCounterPossible())
+        foreach (Collider2D col in enemiesInCounterRange)
+        {
+            EnemyBase potentialEnemy = col.GetComponent<EnemyBase>();
+            if (potentialEnemy != null && potentialEnemy.GetCounterPossible())
             {
-                Debug.Log("Enemy found and COunterpossible true");
+            
+                currentEnemy = potentialEnemy;
                 return true;
             }
         }
+
         currentEnemy = null;
         return false;
     }

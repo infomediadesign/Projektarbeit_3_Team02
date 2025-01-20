@@ -43,7 +43,7 @@ public class StationaryEnemy : EnemyBase
             GameObject ui = Instantiate(counterUIPrefab);
             counterUIInstance = ui.GetComponent<CounterUI>();
             counterUIInstance.target = transform;
-            counterUIInstance.offset = new Vector3(0, 2, 0);
+            counterUIInstance.offset = new Vector3(-10, 4, 0);
         }
     }
 

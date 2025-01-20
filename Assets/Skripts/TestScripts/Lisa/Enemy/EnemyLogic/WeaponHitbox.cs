@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class CounterUI : MonoBehaviour
 {
-    public Transform target; // Gegner-Referenz
+    public Transform target; 
     public Vector3 offset;   // Position des UIs relativ zum Gegner
     private CanvasGroup canvasGroup;
     public Image timerImage;
@@ -40,14 +41,18 @@ public class CounterUI : MonoBehaviour
     {
         if (timerImage != null)
         {
-            timerImage.fillAmount = time / maxTime;
+            timerImage.fillAmount = 1f;
         }
     }
 
     public void ResetTimer()
     {
-        UpdateTimer(0, 1); // Setze den Timer zurück
+        if (timerImage != null)
+        {
+            timerImage.fillAmount = 1f; 
+        }
     }
+   
 }
 
 

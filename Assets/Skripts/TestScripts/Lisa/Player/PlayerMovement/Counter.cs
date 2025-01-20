@@ -16,12 +16,9 @@ public class Counter : BaseState
         }
         if (enemy == null)
         {
-            Debug.LogError("no stationary enemy!");
+            Debug.LogError("Counter to early/late!");
         }
-        else
-        {
-            Debug.Log("Enemy found");
-        }
+        
     }
 
 
@@ -31,7 +28,6 @@ public class Counter : BaseState
         {
             if (enemy.GetCounterPossible())
             {
-                Debug.Log("Counter is possible now!");
                 context.playerCombat.Attack(context.currentEnemy);
                 
                 Debug.Log("Counter Successful!");
@@ -50,6 +46,6 @@ public class Counter : BaseState
     }
     override public void ExitState()
     {
-        Debug.Log("exiting state");
+
     }
 }
