@@ -11,7 +11,7 @@ public class StationaryEnemy : EnemyBase
     private bool isObstacle;
 
     public GameObject counterUIPrefab; 
-    private CounterUI counterUIInstance;
+    protected CounterUI counterUIInstance;
     protected float counterTimer = 0.2f; // 2 frames
     protected float counterTimerRemaining;
 
@@ -56,14 +56,14 @@ public class StationaryEnemy : EnemyBase
         }
       
     }
-    private void UpdateCounterUI()
+    /*private void UpdateCounterUI()
     {
         if (counterUIInstance != null && counterPossible)
         {
             float timeLeft = Mathf.Max(0, timer); 
             counterUIInstance.UpdateTimer(timeLeft, intTimer); 
         }
-    }
+    }*/
     public override void Attack()
     {
         canAttack = true;
@@ -101,7 +101,7 @@ public class StationaryEnemy : EnemyBase
             EndCounterWindow();
         }
     }
-    private void EndCounterWindow()
+    protected void EndCounterWindow()
     {
         counterPossible = false;
         CancelInvoke(nameof(UpdateCounterWindow));

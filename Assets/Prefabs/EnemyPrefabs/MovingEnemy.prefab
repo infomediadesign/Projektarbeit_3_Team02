@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 967709782772763182}
   - component: {fileID: 768040657855109248}
   - component: {fileID: 7358659979665326261}
+  - component: {fileID: 5578169878180834537}
   m_Layer: 7
   m_Name: HitboxWeapon
   m_TagString: Untagged
@@ -234,6 +235,18 @@ MonoBehaviour:
   target: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   timerImage: {fileID: 0}
+--- !u!225 &5578169878180834537
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8003362064515256425}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8006489718769228220
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +437,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9159463832367514075}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
