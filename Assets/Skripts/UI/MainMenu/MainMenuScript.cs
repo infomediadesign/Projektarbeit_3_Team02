@@ -6,7 +6,7 @@ public class MainMenuScript : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadSceneAsync(1);
-        MusicManager.Instance.PlayMusic("Game");
+        MusicManager.Instance.PlayMusic("Level1");
     }
 
     //Test

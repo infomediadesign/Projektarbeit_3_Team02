@@ -8,7 +8,7 @@ public class Memory : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             EventManager.Instance.TriggerEvent("MemoryCollected");
-            SoundManager.Instance.PlaySound2D("Collectibles");
+            SoundManager.Instance.PlaySound2D("Memory");
             Destroy(gameObject);
         }
     }
