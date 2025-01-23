@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -7,21 +8,11 @@ public class UIManager : MonoBehaviour
     private MemoryUIText memoryUIText;
     private LifeUIText lifeUIText;
 
-    /*private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }*/
-
     private void Start()
     {
+        //play main menu music
+        MusicManager.Instance.PlayMusic("MainMenu");
+        
         //find the UI components
         memoryUIText = Object.FindFirstObjectByType<MemoryUIText>();
         lifeUIText = Object.FindFirstObjectByType<LifeUIText>();
@@ -46,7 +37,18 @@ public class UIManager : MonoBehaviour
             EventManager.Instance.StartListening("LifeCollected", lifeUIText.IncrementLifeCount);
         }
     }
-
+      public void StartGame()
+    {
+        SceneManager.LoadSceneAsync(1);
+        MusicManager.Instance.PlayMusic("Level1");
+    }
+    public void ExitGame()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+            Application.Quit();
+    }
     private void OnDestroy()
     {
         //unsubscribe to avoid memory leaks
