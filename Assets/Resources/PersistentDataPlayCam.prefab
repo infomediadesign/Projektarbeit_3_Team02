@@ -352,7 +352,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 228800061242163865}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0343b74004f9ce948ba04ce2a427607a, type: 3}
   m_Name: 
@@ -399,7 +399,7 @@ Transform:
   m_GameObject: {fileID: 242518753422773393}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -295.4294, y: 40.418312, z: -10.742551}
+  m_LocalPosition: {x: -295.4294, y: 40.41831, z: -10.742551}
   m_LocalScale: {x: 1.1667, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -699,7 +699,7 @@ GameObject:
   - component: {fileID: 4331905763371032316}
   m_Layer: 5
   m_Name: Erinnerungen
-  m_TagString: MemoryUI
+  m_TagString: Memory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -834,6 +834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bbfb9f3ed758884e848b46825a72596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  memoryText: {fileID: 6469173813281037048}
 --- !u!1 &1834805281685974793
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,6 +1386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95dad41ba62a5004aaba757f1d09f353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeText: {fileID: 8758966880679985430}
 --- !u!1 &3411529857080656829
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,18 +3,13 @@ using TMPro;
 
 public class LifeUIText : MonoBehaviour
 {
-    private int lifeCount;
+    public TextMeshProUGUI lifeText;
 
-    public void IncrementLifeCount()
+    private int lifeCount = 0;
+
+    public void IncrementLifeCount(int amount) // Update this method to accept an int parameter
     {
-        if (this != null)  // Checking if the component is still valid
-            {
-                lifeCount++;
-                GetComponent<TextMeshProUGUI>().text = $"Lives: {lifeCount}";
-            }
-            else
-            {
-                Debug.LogWarning("LifeUIText component has been destroyed.");
-            }
+        lifeCount += amount; // Increment life count
+        lifeText.text = lifeCount.ToString(); // Update UI
     }
 }

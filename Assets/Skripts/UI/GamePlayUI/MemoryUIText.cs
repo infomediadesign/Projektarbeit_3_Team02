@@ -3,19 +3,13 @@ using TMPro;
 
 public class MemoryUIText : MonoBehaviour
 {
-    private int memoryCount;
+   public TextMeshProUGUI memoryText;
 
-    public void IncrementMemoryCount()
+    private int memoryCount = 0;
+
+    public void IncrementMemoryCount(int amount)
     {
-        if (this != null)  // Checking if the component is still valid
-        {
-            memoryCount++;
-            GetComponent<TextMeshProUGUI>().text = $"Memories: {memoryCount}";
-        }
-        else
-            {
-                Debug.LogWarning("LifeUIText component has been destroyed.");
-            }
-        
+        memoryCount += amount; // Increment memory count
+        memoryText.text = memoryCount.ToString(); // Update UI
     }
 }
