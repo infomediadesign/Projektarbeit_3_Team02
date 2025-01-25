@@ -3,12 +3,23 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-     public static UIManager Instance { get; private set; }
+    public static UIManager Instance { get; private set; }
+    public GameObject mainMenuScreen;
+    public GameObject optionsScreen;
+    public GameObject audioScreen; 
+    public GameObject controlsScreen;
+    public GameObject memoriesScreen;
+    public GameObject creditsScreen;
+    public GameObject exitgameScreen;
+
+
     private MemoryUIText memoryUIText;
     private LifeUIText lifeUIText;
 
     private void Start()
     {
+        //ensure that main menu is active at start
+       // ShowScreen(mainMenuScreen);
         MusicManager.Instance.PlayMusic("MainMenu");
 
         memoryUIText = Object.FindFirstObjectByType<MemoryUIText>();
@@ -31,6 +42,67 @@ public class UIManager : MonoBehaviour
         {
             EventManager.Instance.StartListening<int>("LifeCollected", lifeUIText.IncrementLifeCount);
         }
+        EventManager.Instance.StartListening<string>("ShowScreen", HandleShowScreen);
+    }
+
+    /*public void ShowScreen(GameObject screenToShow)
+    {
+        //disable all screen
+        mainMenuScreen.SetActive(false);
+        optionsScreen.SetActive(false);
+
+        //activate the desired screen
+        screenToShow.SetActive(true);
+
+        //play sound when switching screens
+
+    }*/
+    private void HandleShowScreen(string screenName)
+    {
+        //activate screen based on screen name
+        if (screenName == "MAIN MENU SCREEN")
+        {
+            ShowScreen(mainMenuScreen);
+        }
+        else if (screenName == "OPTIONS SCREEN")// audio controls memories credits exit
+        {
+            ShowScreen(optionsScreen);
+        }
+        else if (screenName == "AUDIO SCREEN")
+        {
+            ShowScreen(audioScreen);
+        }
+         else if (screenName == "CONTROLS SCREEN")
+        {
+            ShowScreen(controlsScreen);
+        }
+        else if (screenName == "MEMORIES SCREEN")
+        {
+            ShowScreen(memoriesScreen);
+        }
+         else if (screenName == "CREDITS SCREEN")
+        {
+            ShowScreen(creditsScreen);
+        }
+         else if (screenName == "EXIT GAME SCREEN")
+        {
+            ShowScreen(exitgameScreen);
+        }
+    }
+
+    public void ShowScreen(GameObject screenToShow)
+    {
+        // Deactivate all screens
+        mainMenuScreen.SetActive(false);
+        optionsScreen.SetActive(false);
+        audioScreen.SetActive(false);
+        controlsScreen.SetActive(false);
+        memoriesScreen.SetActive(false);
+        creditsScreen.SetActive(false);
+        exitgameScreen.SetActive(false);
+
+        // Activate the requested screen
+        screenToShow.SetActive(true);
     }
 
     public void StartGame()
@@ -59,6 +131,8 @@ public class UIManager : MonoBehaviour
             {
                 EventManager.Instance.StopListening<int>("LifeCollected", lifeUIText.IncrementLifeCount);
             }
+
+            EventManager.Instance.StartListening<string>("ShowScreen", HandleShowScreen);
         }
     }
 }
