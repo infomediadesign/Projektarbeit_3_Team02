@@ -108,7 +108,7 @@ public class UIManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadSceneAsync(1);
-        MusicManager.Instance.PlayMusic("Level1");
+        MusicManager.Instance.PlayMusic("Game");
     }
 
     public void ExitGame()
