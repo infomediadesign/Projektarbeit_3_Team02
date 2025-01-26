@@ -3863,6 +3863,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7294329688139883449}
   - component: {fileID: 8228609328668508136}
+  - component: {fileID: 603087821620550972}
   m_Layer: 0
   m_Name: AUDIO SCREEN
   m_TagString: Untagged
@@ -3904,6 +3905,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 7191864064724365501}
   valueText: {fileID: 8077070691479156889}
+--- !u!114 &603087821620550972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3801846354769004656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddf210c2d1bfc44baeb20095c729aa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSlider: {fileID: 7895757818595107489}
+  sfxSlider: {fileID: 7191864064724365501}
 --- !u!1 &3806979671248100602
 GameObject:
   m_ObjectHideFlags: 0
@@ -5033,7 +5048,7 @@ GameObject:
   - component: {fileID: 2995915036314694221}
   - component: {fileID: 6896950942450592232}
   m_Layer: 5
-  m_Name: Volume Slider
+  m_Name: SFX Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5059,7 +5074,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 981.5068, y: 624.20154}
+  m_AnchoredPosition: {x: 981.5068, y: 364}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7191864064724365501
