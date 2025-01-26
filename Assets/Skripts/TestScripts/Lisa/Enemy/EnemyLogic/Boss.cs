@@ -8,24 +8,30 @@ public class Boss : EnemyBase
     public float fireCooldown = 3f;  
 
     private float fireCooldownTimer = 0f; 
-    private Transform playerTarget;
     void Awake()
     {
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player != null)
-        {
-            playerTarget = player.transform;
-        }
+
     }
 
     void Update()
     {
         fireCooldownTimer -= Time.deltaTime;
 
-        if (fireCooldownTimer <= 0 && playerTarget != null)
+        if (fireCooldownTimer <= 0)
         {
-            FireFollowingProjectile();
+            FireMissile();
             fireCooldownTimer = fireCooldown;
+        }
+    }
+    private void FireMissile()
+    {
+
+        GameObject missileInstance = Instantiate(firePrefab, shootPoint.position, shootPoint.rotation);
+
+        HomingMissile missile = missileInstance.GetComponent<HomingMissile>();
+        if (missile != null)
+        {
+            missile.target = GameObject.FindGameObjectWithTag("Player").transform; 
         }
     }
     public override void Attack()
@@ -56,18 +62,7 @@ public class Boss : EnemyBase
             Die();
         }
     }
-    void FireFollowingProjectile()
-    {
 
-        GameObject fireInstance = Instantiate(firePrefab, shootPoint.position, Quaternion.identity);
-
-        Fire fire = fireInstance.GetComponent<Fire>();
-        if (fire != null)
-        {
-            fire.FireFollowing(playerTarget); 
-        }
-        
-    }
     public override void StopAttack()
     {
         phaseCount++;

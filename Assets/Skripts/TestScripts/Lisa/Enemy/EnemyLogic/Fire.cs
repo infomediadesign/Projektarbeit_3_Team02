@@ -6,11 +6,12 @@ public class Fire : MonoBehaviour
     public int damage = 10;
 
     private Vector2 direction;
-    public float followDuration = 2f;
+    public float followDuration = 5f;
 
     private bool isFollowing;
     private float followingTimer;
     public Transform playerTarget;
+
     public void FireShot(Vector2 direction)
     {
         this.direction = direction;
@@ -22,6 +23,8 @@ public class Fire : MonoBehaviour
         playerTarget = target; //Spieler
         isFollowing = true;
         followingTimer = followDuration;
+
+        direction = (playerTarget.position - transform.position).normalized;
     }
 
     void Update()
@@ -38,7 +41,8 @@ public class Fire : MonoBehaviour
             }
         }
 
-        transform.Translate(direction * speed * Time.deltaTime);
+        //transform.Translate(direction * speed * Time.deltaTime);
+        transform.position += (Vector3)(direction * speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
