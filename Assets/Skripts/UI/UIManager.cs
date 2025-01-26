@@ -11,10 +11,12 @@ public class UIManager : MonoBehaviour
     public GameObject memoriesScreen;
     public GameObject creditsScreen;
     public GameObject exitgameScreen;
+    public GameObject pauseScreen;
 
 
     private MemoryUIText memoryUIText;
     private LifeUIText lifeUIText;
+    private bool isGamePaused = false;
 
     private void Start()
     {
@@ -43,20 +45,11 @@ public class UIManager : MonoBehaviour
             EventManager.Instance.StartListening<int>("LifeCollected", lifeUIText.IncrementLifeCount);
         }
         EventManager.Instance.StartListening<string>("ShowScreen", HandleShowScreen);
+        EventManager.Instance.StartListening("PauseGame", OnEnterPausePress);
+        EventManager.Instance.StartListening("ResumeGame", OnGameResumePress);
     }
 
-    /*public void ShowScreen(GameObject screenToShow)
-    {
-        //disable all screen
-        mainMenuScreen.SetActive(false);
-        optionsScreen.SetActive(false);
-
-        //activate the desired screen
-        screenToShow.SetActive(true);
-
-        //play sound when switching screens
-
-    }*/
+   
     private void HandleShowScreen(string screenName)
     {
         //activate screen based on screen name
@@ -119,6 +112,23 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void OnEnterPausePress()
+    {
+        Time.timeScale = 0; //pause game
+        pauseScreen.SetActive(true);
+        isGamePaused = true;
+    }
+
+    public void OnGameResumePress()
+    {
+        if (isGamePaused)
+        {
+            Time.timeScale = 1; // Resume the game
+            pauseScreen.SetActive(false);
+            isGamePaused = false;
+        }
+    }
+
     private void OnDestroy()
     {
         if (EventManager.Instance != null)
@@ -133,6 +143,8 @@ public class UIManager : MonoBehaviour
             }
 
             EventManager.Instance.StartListening<string>("ShowScreen", HandleShowScreen);
+            EventManager.Instance.StopListening("PauseGame", OnEnterPausePress);
+            EventManager.Instance.StopListening("ResumeGame", OnGameResumePress);
         }
     }
 }

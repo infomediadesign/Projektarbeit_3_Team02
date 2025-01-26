@@ -21,6 +21,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    //generic start listening
     public void StartListening<T>(string eventName, Action<T> listener)
     {
         if (eventDictionary.TryGetValue(eventName, out var existingEvent))
@@ -33,6 +34,20 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    //non-generic start listening
+    public void StartListening(string eventName, Action listener)
+    {
+        if (eventDictionary.TryGetValue(eventName, out var existingEvent))
+        {
+            eventDictionary[eventName] = existingEvent as Action + listener;
+        }
+        else
+        {
+            eventDictionary[eventName] = listener;
+        }
+    }
+
+    //generic stop listening
     public void StopListening<T>(string eventName, Action<T> listener)
     {
         if (eventDictionary.TryGetValue(eventName, out var existingEvent))
@@ -49,6 +64,25 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    //non-generic stop listening 
+    // Non-generic StopListening
+    public void StopListening(string eventName, Action listener)
+    {
+        if (eventDictionary.TryGetValue(eventName, out var existingEvent))
+        {
+            var newEvent = existingEvent as Action - listener;
+            if (newEvent == null)
+            {
+                eventDictionary.Remove(eventName);
+            }
+            else
+            {
+                eventDictionary[eventName] = newEvent;
+            }
+        }
+    }
+
+    //generic trigger event
     public void TriggerEvent<T>(string eventName, T param)
     {
         if (eventDictionary.TryGetValue(eventName, out var thisEvent))
@@ -56,6 +90,26 @@ public class EventManager : MonoBehaviour
             if (thisEvent is Action<T> action)
             {
                 action.Invoke(param);
+            }
+            else
+            {
+                Debug.LogError($"Event {eventName} does not match the expected parameter type.");
+            }
+        }
+        else
+        {
+            Debug.LogError($"No event found for {eventName}.");
+        }
+    }
+
+    //non-generic trigger event
+    public void TriggerEvent(string eventName)
+    {
+        if (eventDictionary.TryGetValue(eventName, out var thisEvent))
+        {
+            if (thisEvent is Action action)
+            {
+                action.Invoke();
             }
             else
             {
