@@ -37,5 +37,15 @@ public class SoundManager : MonoBehaviour
     {
         sfx2DSource.PlayOneShot(sfxLibrary.GetClipFromName(soundName));
     }
+
+    public void SetVolume(float volume)
+    {
+        sfx2DSource.volume = volume; // Set the 2D sound effects volume
+    }
+
+    public float GetVolume()
+    {
+        return sfx2DSource.volume; // Retrieve the current volume for the slider
+    }
   
 }

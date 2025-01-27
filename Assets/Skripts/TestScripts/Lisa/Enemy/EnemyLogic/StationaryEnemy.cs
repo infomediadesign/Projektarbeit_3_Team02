@@ -1,10 +1,13 @@
 using System.Threading;
+using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class StationaryEnemy : EnemyBase
 {
+    [InlineEditor(InlineEditorModes.GUIOnly)]
     public StationaryEnemyStats eStats;
     protected PlayerHealth playerHealth;
     protected SpriteRenderer spriteRenderer;
@@ -64,6 +67,7 @@ public class StationaryEnemy : EnemyBase
             counterUIInstance.UpdateTimer(timeLeft, intTimer); 
         }
     }*/
+    [Button]
     public override void Attack()
     {
         canAttack = true;
@@ -172,5 +176,11 @@ public class StationaryEnemy : EnemyBase
             timer = intTimer;
         }
     }
-    
+
+    /*public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, eStats.attackRad);
+        Gizmos.color = Color.white;
+    }*/
 }
