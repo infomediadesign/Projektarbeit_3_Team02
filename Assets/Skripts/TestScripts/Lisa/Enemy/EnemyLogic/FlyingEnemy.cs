@@ -25,6 +25,7 @@ public class FlyingEnemy : EnemyBase
             if (playerObject != null)
             {
                 player = playerObject.transform;
+                
             }
         }
     }

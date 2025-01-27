@@ -49,4 +49,15 @@ public class MusicManager : MonoBehaviour
 
     }
 
+    //set volume
+    public void SetVolume(float volume)
+    {
+        musicSource.volume = volume;
+    }
+    //get current volume
+    public float GetVolume()
+    {
+        return musicSource.volume;
+    }
+
 }

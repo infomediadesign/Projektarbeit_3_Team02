@@ -11,12 +11,14 @@ public class PlayerHealth : MonoBehaviour
     {
         state = GetComponent<StateManager>();
         currentHealth = maxHealth;
-        EventManager.Instance.StartListening("LifeCollected", HealPlayer);  //NEW
+        // Subscribe with a parameter
+        EventManager.Instance.StartListening<int>("LifeCollected", HealPlayer);
     }
 
     private void OnDestroy()
     {
-        EventManager.Instance.StopListening("LifeCollected", HealPlayer);
+        // Unsubscribe with a parameter
+        EventManager.Instance.StopListening<int>("LifeCollected", HealPlayer);
     }
     public void TakeDamage(float damage)
     {
@@ -33,14 +35,14 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    private void HealPlayer()
+    private void HealPlayer(int healAmount)
     {
-        Heal(10f); // NEW healing amount
+        Heal(healAmount);
     }
 
     public void Heal(float amount)
     {
-        currentHealth = Mathf.Min(currentHealth + amount, maxHealth); // nicht �ber maxHelath
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth); // heal AMOUNT - nicht over maxHelath
     }
 
     private void Die()

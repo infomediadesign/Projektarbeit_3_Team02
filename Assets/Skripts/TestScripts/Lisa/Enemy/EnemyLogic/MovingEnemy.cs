@@ -24,11 +24,12 @@ public class MovingEnemy : StationaryEnemy
     public int targetPoint;
 
 
-    private void Awake()
+    public void Awake()
     {
         intTimer = timer;
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        counterPossible = false;
         if (player == null)
         {
             GameObject playerObject = GameObject.FindWithTag("Player");
@@ -37,7 +38,15 @@ public class MovingEnemy : StationaryEnemy
                 player = playerObject.transform;
             }
         }
+        if (counterUIPrefab != null)
+        {
+            GameObject ui = Instantiate(counterUIPrefab);
+            counterUIInstance = ui.GetComponent<CounterUI>();
+            counterUIInstance.target = transform;
+            counterUIInstance.offset = new Vector3(-10, 4, 0);
+        }
     }
+   
 
     void Update()
     {

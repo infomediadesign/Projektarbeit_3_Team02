@@ -5,6 +5,7 @@ public abstract class EnemyBase : MonoBehaviour
 {
     public EnemyStats stats;
     protected float currentHealth;
+    protected bool counterPossible;
     protected virtual void Start()
     {
         currentHealth = stats.maxHealth;
@@ -23,7 +24,10 @@ public abstract class EnemyBase : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
+    public bool GetCounterPossible()
+    {
+        return counterPossible;
+    }
     public abstract void Attack();
     public abstract void StopAttack();
 }
