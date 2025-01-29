@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     public GameObject creditsScreen;
     public GameObject exitgameScreen;
     public GameObject pauseScreen;
+    public GameObject memoryScreenItem1;
 
 
     private MemoryUIText memoryUIText;
@@ -86,6 +87,10 @@ public class UIManager : MonoBehaviour
         {
             ShowScreen(exitgameScreen);
         }
+        else if (screenName == "MEMORY SCREEN ITEM 1")
+        {
+            ShowScreen(memoryScreenItem1);
+        }
     }
 
     private void RegisterDefaultButtons()
@@ -112,7 +117,8 @@ public class UIManager : MonoBehaviour
         memoriesScreen.SetActive(false);
         creditsScreen.SetActive(false);
         exitgameScreen.SetActive(false);
-
+        memoryScreenItem1.SetActive(false);
+        
         // Activate the requested screen
         screenToShow.SetActive(true);
     }

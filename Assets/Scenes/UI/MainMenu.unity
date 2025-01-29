@@ -1179,6 +1179,7 @@ MonoBehaviour:
   creditsScreen: {fileID: 0}
   exitgameScreen: {fileID: 0}
   pauseScreen: {fileID: 0}
+  memoryScreenItem1: {fileID: 0}
 --- !u!114 &292253760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3688,6 +3689,7 @@ MonoBehaviour:
   creditsScreen: {fileID: 875742386}
   exitgameScreen: {fileID: 327662027}
   pauseScreen: {fileID: 0}
+  memoryScreenItem1: {fileID: 0}
 --- !u!114 &824553085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6384,6 +6386,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430835797}
   m_CullTransparentMesh: 1
+--- !u!1 &1476028092 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2288788448418392315, guid: 66ec215fa449bcb44b9bc1eab9b87292, type: 3}
+  m_PrefabInstance: {fileID: 1923894467249700378}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1485668869
 GameObject:
   m_ObjectHideFlags: 0
@@ -10843,6 +10850,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 245.83807
       objectReference: {fileID: 0}
+    - target: {fileID: 6006813474757641261, guid: 66ec215fa449bcb44b9bc1eab9b87292, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1476028092}
     - target: {fileID: 6080527222180576411, guid: 66ec215fa449bcb44b9bc1eab9b87292, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 72.58856
