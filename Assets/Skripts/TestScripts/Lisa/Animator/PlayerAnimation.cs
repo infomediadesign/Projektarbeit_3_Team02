@@ -72,10 +72,10 @@ public class PlayerAnimation : MonoBehaviour
         {
             AnimStateTransition(playerJump);
         }
-        else if (currentSubState is Falling)
+       /* else if (currentSubState is Falling)
         {
             AnimStateTransition(playerJump);
-        }
+        }*/
         else if (currentSubState is Block)
         {
             AnimStateTransition(playerBlock);
