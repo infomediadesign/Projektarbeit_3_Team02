@@ -1,8 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private Button[] defaultSoundButtons; //buttons will use the default sound
+    [SerializeField] private string defaultButtonSoundEvent = "ButtonClicked"; //event for default sound (for example: start game button)
+
     public static UIManager Instance { get; private set; }
     public GameObject mainMenuScreen;
     public GameObject optionsScreen;
@@ -47,6 +51,7 @@ public class UIManager : MonoBehaviour
         EventManager.Instance.StartListening<string>("ShowScreen", HandleShowScreen);
         EventManager.Instance.StartListening("PauseGame", OnEnterPausePress);
         EventManager.Instance.StartListening("ResumeGame", OnGameResumePress);
+        RegisterDefaultButtons();
     }
 
    
@@ -57,7 +62,7 @@ public class UIManager : MonoBehaviour
         {
             ShowScreen(mainMenuScreen);
         }
-        else if (screenName == "OPTIONS SCREEN")// audio controls memories credits exit
+        else if (screenName == "OPTIONS SCREEN")
         {
             ShowScreen(optionsScreen);
         }
@@ -80,6 +85,20 @@ public class UIManager : MonoBehaviour
          else if (screenName == "EXIT GAME SCREEN")
         {
             ShowScreen(exitgameScreen);
+        }
+    }
+
+    private void RegisterDefaultButtons()
+    {
+        foreach (var button in defaultSoundButtons)
+        {
+            if (button != null)
+            {
+                button.onClick.AddListener(() =>
+                {
+                    EventManager.Instance.TriggerEvent(defaultButtonSoundEvent);
+                });
+            }
         }
     }
 
