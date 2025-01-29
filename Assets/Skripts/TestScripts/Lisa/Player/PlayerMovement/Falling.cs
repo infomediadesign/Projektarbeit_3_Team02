@@ -9,8 +9,8 @@ public class Falling : BaseState
     private float xInput;
     override public void EnterState()
     {
-        context.IdleCollider.enabled = true;
-        context.mainCollider.enabled = false;
+        context.IdleCollider.enabled = false;
+        context.mainCollider.enabled = true;
     }
 
     public override void UpdateState()

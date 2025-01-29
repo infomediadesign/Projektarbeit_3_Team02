@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Jump : BaseState
 {
@@ -13,6 +14,8 @@ public class Jump : BaseState
     {
         hasReleased = false;
         hasJumped = false;
+        context.IdleCollider.enabled = false;
+        context.mainCollider.enabled = true;
     }
 
     override public void UpdateState()
@@ -20,7 +23,7 @@ public class Jump : BaseState
         
         xInput = context.playerControls.Walk.ReadValue<float>();
         context.rb.linearVelocity = new Vector2(xInput * context.playerStats.walkingSpeed, context.rb.linearVelocity.y);
-
+       
         if (context.isGrounded)
         {
             if (!hasJumped)
@@ -74,7 +77,9 @@ public class Jump : BaseState
 
     override public void ExitState()
     {
-        
+ 
+
+      
     }
 
    
