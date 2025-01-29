@@ -9,6 +9,8 @@ public class Idle : BaseState
     private float xInput;
     override public void EnterState()
     {
+        context.IdleCollider.enabled = true;
+        context.mainCollider.enabled = false;
     }
     override public void UpdateState()
     {
@@ -36,6 +38,7 @@ public class Idle : BaseState
     }
     override public void ExitState()
     {
-
+        context.mainCollider.enabled = true;
+        context.IdleCollider.enabled = false;    
     }
 }

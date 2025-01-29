@@ -9,6 +9,7 @@ public class StateManager : MonoBehaviour
     [HideInInspector] public EnemyBase currentEnemy;
     [HideInInspector] public CapsuleCollider2D mainCollider;
     public CapsuleCollider2D rollTrigger;
+    public BoxCollider2D IdleCollider;
 
     public InputSystem_Actions inputActions;
     public InputSystem_Actions.TestActions playerControls;
@@ -148,6 +149,5 @@ public class StateManager : MonoBehaviour
         currentEnemy = null;
         return false;
     }
-
-
+   
 }
