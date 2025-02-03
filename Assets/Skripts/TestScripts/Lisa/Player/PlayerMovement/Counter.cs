@@ -34,6 +34,11 @@ public class Counter : BaseState
                 SwitchState(factory.Idleing());
                 attacked = true;
             }
+            else
+            {
+                Debug.LogError("Counter not Successful!");
+                SwitchState(factory.Idleing());
+            }
         }
         else
         {

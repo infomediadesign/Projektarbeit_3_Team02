@@ -46,15 +46,7 @@ public class StationaryEnemy : EnemyBase
                 player = playerObject.transform;
             }
         }
-        if (counterUIPrefab != null)
-        {
-            GameObject ui = Instantiate(counterUIPrefab);
-            counterUIInstance = ui.GetComponent<CounterUI>();
-            counterUIInstance.target = transform;
-            counterUIInstance.offset = new Vector3(-10, 4, 0);
-        }
     }
-
     void Update()
     {
         if (!isObstacle)
@@ -64,82 +56,19 @@ public class StationaryEnemy : EnemyBase
         }
       
     }
-
-    //[Button]
     public override void Attack()
     {
         canAttack = true;
         timer = intTimer;
         anim.SetBool("Moving", false);
         anim.SetBool("Attacking", true);
-        
-        BeforeCounterStart();
 
-    }
-
-    protected void BeforeCounterStart()
-    {
-        counterTimerRemaining = counterTimer;
-        InvokeRepeating(nameof(StartBeforeCounterWindow), 0, 0.1f);
-    }
-    protected void StartBeforeCounterWindow()
-    {
-        counterTimerRemaining -= 0.1f;
-        if(counterTimerRemaining <= 0)
-        {
-            InvokeRepeating(nameof(StartCounterWindow), 0, 0.1f);
-        }
-    }
-    protected void StartCounterWindow()
-    {
-        counterPossible = true;
-        counterPossibleTimerRemaining = counterPossibleTimer;
-        if (counterUIInstance != null)
-        {
-            counterUIInstance.ResetTimer();
-        }
-
-        InvokeRepeating(nameof(UpdateCounterWindow), 0, 0.1f);       
-    }
-    protected void UpdateCounterWindow()
-    {
-        counterAfterTimerRemaining = counterAfterTimer;
-        if (!counterPossible) return;
-
-        counterPossibleTimerRemaining -= 0.1f;
-        if (counterUIInstance != null)
-        {
-            counterUIInstance.UpdateTimer(counterTimerRemaining, counterTimer);
-        }
-
-        if (counterPossibleTimerRemaining <= 0)
-        {
-            afterTimer = true;
-            EndCounterWindow();
-        }
-    }
-    protected void EndCounterWindow()
-    {
-        counterPossible = false;
-        if (afterTimer)
-        {
-            counterAfterTimerRemaining -= 0.1f;
-
-            if (counterAfterTimerRemaining <= 0)
-            {
-                CancelInvoke(nameof(UpdateCounterWindow));
-                afterTimer = false;
-            }
-        }
-    }
-
-
+    }  
     public override void StopAttack()
     {
         cooling = false;
         canAttack = false;
         anim.SetBool("Attacking", false);
-        EndCounterWindow();
     }
     protected void Rotate() // das einfach in base enemy packen
     {
@@ -165,11 +94,11 @@ public class StationaryEnemy : EnemyBase
         }
         if (cooling)
         {
-            Cooldown();
             anim.SetBool("Attacking", false);
+            Cooldown(); 
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other) //weapon hitbox muss in den trigger
     {
         if (other.CompareTag("Player"))
         {
@@ -181,6 +110,20 @@ public class StationaryEnemy : EnemyBase
         }
     }
 
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        //timer hinzufügen
+        playerHealth.TakeDamage(stats.damage);
+        Debug.Log("taking damage: " + stats.damage);
+    }
+    protected void SetCounterPossible()
+    {
+        counterPossible = true;
+    }
+    protected void SetCounterNotPossible()
+    {
+        counterPossible = false;
+    }
     public void TriggerCooling()
     {
         cooling = true;
@@ -194,5 +137,4 @@ public class StationaryEnemy : EnemyBase
             timer = intTimer;
         }
     }
-
 }
