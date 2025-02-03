@@ -129,11 +129,11 @@ public class StationaryEnemy : EnemyBase
 
         if (direction < 0)
         {
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = false;
         }
         else if (direction > 0)
         {
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = true;
         }
     }
     private void CheckDistance()
