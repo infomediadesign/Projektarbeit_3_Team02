@@ -110,12 +110,12 @@ public class StationaryEnemy : EnemyBase
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    /*private void OnTriggerStay2D(Collider2D other)
     {
         //timer hinzufügen
         playerHealth.TakeDamage(stats.damage);
         Debug.Log("taking damage: " + stats.damage);
-    }
+    }*/
     protected void SetCounterPossible()
     {
         counterPossible = true;
