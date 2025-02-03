@@ -15,6 +15,7 @@ public class Grounded : BaseState
     override public void EnterState()
     {
         Debug.Log("Entering Grounded State");
+        context.inputActions.Test.Jump.Enable();
     }
 
     override public void UpdateState()

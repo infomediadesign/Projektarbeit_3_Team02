@@ -11,6 +11,7 @@ public class Falling : BaseState
     {
         context.IdleCollider.enabled = false;
         context.mainCollider.enabled = true;
+        context.inputActions.Test.Jump.Disable();
     }
 
     public override void UpdateState()

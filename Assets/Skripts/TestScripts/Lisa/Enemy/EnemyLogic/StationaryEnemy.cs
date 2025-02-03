@@ -15,8 +15,13 @@ public class StationaryEnemy : EnemyBase
 
     public GameObject counterUIPrefab; 
     protected CounterUI counterUIInstance;
-    protected float counterTimer = 0.2f; // 2 frames
+    protected float counterTimer = 0.6f; // frame 1-6
+    protected float counterPossibleTimer = 0.4f; // frame 7 bis 10
+    protected float counterAfterTimer = 0.5f; // frame 11 bis 15
+    protected float counterPossibleTimerRemaining;
     protected float counterTimerRemaining;
+    protected float counterAfterTimerRemaining;
+    protected bool afterTimer = false;
 
     public Transform player;
     protected bool canAttack = true;
@@ -59,59 +64,72 @@ public class StationaryEnemy : EnemyBase
         }
       
     }
-    /*private void UpdateCounterUI()
-    {
-        if (counterUIInstance != null && counterPossible)
-        {
-            float timeLeft = Mathf.Max(0, timer); 
-            counterUIInstance.UpdateTimer(timeLeft, intTimer); 
-        }
-    }*/
-    [Button]
+
+    //[Button]
     public override void Attack()
     {
         canAttack = true;
         timer = intTimer;
         anim.SetBool("Moving", false);
         anim.SetBool("Attacking", true);
-        StartCounterWindow();
+        
+        BeforeCounterStart();
 
+    }
+
+    protected void BeforeCounterStart()
+    {
+        counterTimerRemaining = counterTimer;
+        InvokeRepeating(nameof(StartBeforeCounterWindow), 0, 0.1f);
+    }
+    protected void StartBeforeCounterWindow()
+    {
+        counterTimerRemaining -= 0.1f;
+        if(counterTimerRemaining <= 0)
+        {
+            InvokeRepeating(nameof(StartCounterWindow), 0, 0.1f);
+        }
     }
     protected void StartCounterWindow()
     {
         counterPossible = true;
-        counterTimerRemaining = counterTimer;
-
+        counterPossibleTimerRemaining = counterPossibleTimer;
         if (counterUIInstance != null)
         {
             counterUIInstance.ResetTimer();
-            counterUIInstance.Show();
         }
 
-        InvokeRepeating(nameof(UpdateCounterWindow), 0, 0.1f);
+        InvokeRepeating(nameof(UpdateCounterWindow), 0, 0.1f);       
     }
     protected void UpdateCounterWindow()
     {
+        counterAfterTimerRemaining = counterAfterTimer;
         if (!counterPossible) return;
 
-        counterTimerRemaining -= 0.1f;
+        counterPossibleTimerRemaining -= 0.1f;
         if (counterUIInstance != null)
         {
             counterUIInstance.UpdateTimer(counterTimerRemaining, counterTimer);
         }
 
-        if (counterTimerRemaining <= 0)
+        if (counterPossibleTimerRemaining <= 0)
         {
+            afterTimer = true;
             EndCounterWindow();
         }
     }
     protected void EndCounterWindow()
     {
         counterPossible = false;
-        CancelInvoke(nameof(UpdateCounterWindow));
-        if (counterUIInstance != null)
+        if (afterTimer)
         {
-            counterUIInstance.Hide();
+            counterAfterTimerRemaining -= 0.1f;
+
+            if (counterAfterTimerRemaining <= 0)
+            {
+                CancelInvoke(nameof(UpdateCounterWindow));
+                afterTimer = false;
+            }
         }
     }
 
@@ -177,10 +195,4 @@ public class StationaryEnemy : EnemyBase
         }
     }
 
-    /*public void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, eStats.attackRad);
-        Gizmos.color = Color.white;
-    }*/
 }
