@@ -9,7 +9,7 @@ public class StateManager : MonoBehaviour
     [HideInInspector] public EnemyBase currentEnemy;
     [HideInInspector] public CapsuleCollider2D mainCollider;
     public CapsuleCollider2D rollTrigger;
-    public BoxCollider2D IdleCollider;
+    //public CapsuleCollider2D IdleCollider;
 
     public InputSystem_Actions inputActions;
     public InputSystem_Actions.TestActions playerControls;
@@ -25,6 +25,8 @@ public class StateManager : MonoBehaviour
 
     public bool isGrounded { get; private set; }
     public Transform groundCheckPos;
+    public Transform groundCheckLeft;
+    public Transform groundCheckRight;
     public LayerMask groundLayer;
 
     public bool isEnemy { get; private set; }
@@ -35,7 +37,7 @@ public class StateManager : MonoBehaviour
     public Transform enemyCheckPos;
     public LayerMask enemyLayer;
 
-    private bool facingRight = true;
+    private bool facingRight = false;
 
 
 
@@ -45,7 +47,7 @@ public class StateManager : MonoBehaviour
         playerControls = inputActions.Test;
         states = new StateFactory(this);
         mainCollider = GetComponent<CapsuleCollider2D>();
-   
+
         rb = GetComponent<Rigidbody2D>();
         capCol = GetComponent<CapsuleCollider2D>();
         playerCombat = GetComponent<PlayerCombat>();
@@ -61,14 +63,15 @@ public class StateManager : MonoBehaviour
         playerControls.Jump.canceled += OnJumpCanceled;
         playerControls.Jump.started += OnJumpStarted;
     }
-  
-   
+
+
 
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheckPos.position, playerStats.groundCheckRad, groundLayer);
+       // isGrounded = Physics2D.OverlapCircle(groundCheckPos.position, playerStats.groundCheckRad, groundLayer);
+
         isEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
-        if(currentState == states.Blocking())
+        if (currentState == states.Blocking())
         {
             shielded = true;
         }
@@ -103,7 +106,7 @@ public class StateManager : MonoBehaviour
             facingRight = isFacingRight;
 
             Vector3 localScale = transform.localScale;
-            localScale.x = isFacingRight ? Mathf.Abs(localScale.x) : -Mathf.Abs(localScale.x);
+            localScale.x = isFacingRight ? -Mathf.Abs(localScale.x) : Mathf.Abs(localScale.x); //habs umgedreht lul
             transform.localScale = localScale;
         }
     }
@@ -117,7 +120,7 @@ public class StateManager : MonoBehaviour
     {
 
         jumpReleased = true;
-   
+
     }
     private void OnJumpStarted(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
@@ -131,7 +134,7 @@ public class StateManager : MonoBehaviour
         if (enemyCollider != null)
         {
             currentEnemy = enemyCollider.GetComponent<EnemyBase>();
-            return currentEnemy != null; 
+            return currentEnemy != null;
         }
         Collider2D[] enemiesInCounterRange = Physics2D.OverlapCircleAll(transform.position, playerStats.counterCheckRad, enemyLayer);
 
@@ -140,7 +143,7 @@ public class StateManager : MonoBehaviour
             EnemyBase potentialEnemy = col.GetComponent<EnemyBase>();
             if (potentialEnemy != null && potentialEnemy.GetCounterPossible())
             {
-            
+
                 currentEnemy = potentialEnemy;
                 return true;
             }
@@ -149,5 +152,21 @@ public class StateManager : MonoBehaviour
         currentEnemy = null;
         return false;
     }
-   
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGrounded = true;
+    
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGrounded = false;
+        }
+
+    }
 }

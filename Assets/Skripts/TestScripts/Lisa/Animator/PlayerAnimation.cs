@@ -46,7 +46,7 @@ public class PlayerAnimation : MonoBehaviour
         {
             AnimStateTransition(playerIdle);
         }
-        else if (currentSubState is Roll)
+       /* else if (currentSubState is Roll)
         {
             AnimStateTransition(playerRoll);
         }
@@ -57,14 +57,14 @@ public class PlayerAnimation : MonoBehaviour
         else if (currentSubState is Counter)
         {
             AnimStateTransition(playerCounter);
-        }
+        }*/
     }
 
     void HandleAirborneAnimations(Airborne airborneState)
     {
         var currentSubState = airborneState.GetCurrentSubState();
 
-        if (currentSubState is Jump)
+       /* if (currentSubState is Jump)
         {
             AnimStateTransition(playerJump);
         }
@@ -72,14 +72,14 @@ public class PlayerAnimation : MonoBehaviour
         {
             AnimStateTransition(playerJump);
         }
-       /* else if (currentSubState is Falling)
+        else if (currentSubState is Falling)
         {
             AnimStateTransition(playerJump);
-        }*/
+        }
         else if (currentSubState is Block)
         {
             AnimStateTransition(playerBlock);
-        }
+        }*/
     }
 
     public void AnimStateTransition(string stateNew)

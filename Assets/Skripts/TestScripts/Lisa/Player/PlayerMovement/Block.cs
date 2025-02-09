@@ -7,11 +7,14 @@ public class Block : BaseState
     : base(currentContext, factory) { }
     SpriteRenderer renderer;
     private bool blockReleased;
+    private Vector2 linearVel;
     override public void EnterState()
     {
 
         renderer = context.GetComponent<SpriteRenderer>();
+        linearVel = context.rb.linearVelocity;
         context.rb.linearVelocity = new Vector2(0, 0);
+
         context.playerControls.Block.canceled += OnBlockCanceled;
         blockReleased = false;
 
@@ -25,10 +28,16 @@ public class Block : BaseState
         renderer.color = Color.green;
 
 
-        if (blockReleased)
+        /*if (blockReleased)
         {
             renderer.color = Color.white;
+            context.rb.linearVelocity = linearVel;
             //state.TransitionState(state.walkState);
+            SwitchState(factory.Idleing());
+        }*/
+        if(context.isGrounded)
+        {
+            renderer.color = Color.white;
             SwitchState(factory.Idleing());
         }
        

@@ -9,8 +9,8 @@ public class Falling : BaseState
     private float xInput;
     override public void EnterState()
     {
-        context.IdleCollider.enabled = false;
-        context.mainCollider.enabled = true;
+        //context.IdleCollider.enabled = false;
+        //context.mainCollider.enabled = true;
         context.inputActions.Test.Jump.Disable();
     }
 
@@ -44,8 +44,8 @@ public class Falling : BaseState
     }
     public override void ExitState() 
     {
-        context.mainCollider.enabled = true;
-        context.IdleCollider.enabled = false;
+        //context.mainCollider.enabled = true;
+        //context.IdleCollider.enabled = false;
         
     }
 }

@@ -14,8 +14,8 @@ public class Jump : BaseState
     {
         hasReleased = false;
         hasJumped = false;
-        context.IdleCollider.enabled = false;
-        context.mainCollider.enabled = true;
+       // context.IdleCollider.enabled = false;
+        //context.mainCollider.enabled = true;
     }
 
     override public void UpdateState()
