@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,7 @@ public class StateManager : MonoBehaviour
     [HideInInspector] public CapsuleCollider2D mainCollider;
     public CapsuleCollider2D rollTrigger;
     //public CapsuleCollider2D IdleCollider;
+    [HideInInspector] public CounterZone zone;
 
     public InputSystem_Actions inputActions;
     public InputSystem_Actions.TestActions playerControls;
@@ -49,6 +51,7 @@ public class StateManager : MonoBehaviour
         playerControls = inputActions.Test;
         states = new StateFactory(this);
         mainCollider = GetComponent<CapsuleCollider2D>();
+        zone = GetComponentInChildren<CounterZone>();
 
         rb = GetComponent<Rigidbody2D>();
         capCol = GetComponent<CapsuleCollider2D>();
@@ -73,7 +76,7 @@ public class StateManager : MonoBehaviour
        // isGrounded = Physics2D.OverlapCircle(groundCheckPos.position, playerStats.groundCheckRad, groundLayer);
 
         isEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
-        isGroundEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
+        isGroundEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, groundEnemyLayer);
 
         if (currentState == states.Blocking())
         {
@@ -143,26 +146,11 @@ public class StateManager : MonoBehaviour
         else
         {
             enemyCollider = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, groundEnemyLayer);
+
             if (enemyCollider != null)
             {
                 currentEnemy = enemyCollider.GetComponent<EnemyBase>();
                 return currentEnemy != null;
-            }
-        }
-        Collider2D[] enemiesInCounterRange = Physics2D.OverlapCircleAll(transform.position, playerStats.counterCheckRad, enemyLayer);
-        if(enemiesInCounterRange == null)
-        {
-            enemiesInCounterRange = Physics2D.OverlapCircleAll(transform.position, playerStats.counterCheckRad, groundEnemyLayer);
-        }
-
-        foreach (Collider2D col in enemiesInCounterRange)
-        {
-            EnemyBase potentialEnemy = col.GetComponent<EnemyBase>();
-            if (potentialEnemy != null && potentialEnemy.GetCounterPossible())
-            {
-
-                currentEnemy = potentialEnemy;
-                return true;
             }
         }
 

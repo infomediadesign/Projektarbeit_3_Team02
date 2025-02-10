@@ -311,6 +311,10 @@ PrefabInstance:
       propertyPath: groundLayer.m_Bits
       value: 64
       objectReference: {fileID: 0}
+    - target: {fileID: 1022494912841929114, guid: 1a82702e24300a649b4f4c0bc534707b, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 1615244996219024835, guid: 1a82702e24300a649b4f4c0bc534707b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 97.26273
@@ -351,9 +355,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5043583296319852925, guid: 1a82702e24300a649b4f4c0bc534707b, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7611137380560530366, guid: 1a82702e24300a649b4f4c0bc534707b, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003362064515256425, guid: 1a82702e24300a649b4f4c0bc534707b, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8006489718769228220, guid: 1a82702e24300a649b4f4c0bc534707b, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 9159463832367514075, guid: 1a82702e24300a649b4f4c0bc534707b, type: 3}
       propertyPath: m_Name
       value: MovingEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 9159463832367514075, guid: 1a82702e24300a649b4f4c0bc534707b, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -562,7 +586,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 215386905}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: groundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

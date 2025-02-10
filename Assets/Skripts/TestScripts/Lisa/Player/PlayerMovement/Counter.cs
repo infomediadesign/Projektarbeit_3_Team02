@@ -6,30 +6,29 @@ public class Counter : BaseState
     public Counter(StateManager currentContext, StateFactory factory)
     : base(currentContext, factory) { }
     private bool attacked;
+ 
     EnemyBase enemy;
     override public void EnterState()
     {
+        
         attacked = false;
-        if (context.CheckForEnemy())
-        {
-            enemy = context.currentEnemy; //gegner reference
-        }
+        enemy = context.zone.GetCounterableEnemy();
+
         if (enemy == null)
         {
-            Debug.LogError("Counter to early/late!");
+            Debug.LogError("no enemy!");
         }
-        
+
     }
-
-
+   
     override public void UpdateState()
     {
-        if (!attacked && context.CheckForEnemy())
+        if (!attacked)
         {
-            if (enemy.GetCounterPossible())
+            enemy = context.zone.GetCounterableEnemy();
+            if (enemy != null)
             {
-                context.playerCombat.Attack(context.currentEnemy);
-                
+                context.playerCombat.Attack(enemy);
                 Debug.Log("Counter Successful!");
                 SwitchState(factory.Idleing());
                 attacked = true;
@@ -39,10 +38,6 @@ public class Counter : BaseState
                 Debug.LogError("Counter not Successful!");
                 SwitchState(factory.Idleing());
             }
-        }
-        else
-        {
-            SwitchState(factory.Idleing());
         }
     }
     public override void InitializeSubState(){}
