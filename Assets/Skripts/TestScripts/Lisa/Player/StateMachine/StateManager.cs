@@ -28,8 +28,10 @@ public class StateManager : MonoBehaviour
     public Transform groundCheckLeft;
     public Transform groundCheckRight;
     public LayerMask groundLayer;
+    public LayerMask groundEnemyLayer;
 
     public bool isEnemy { get; private set; }
+    public bool isGroundEnemy { get; private set; }
     public bool shielded { get; private set; }
     public bool rolling { get; private set; }
     public bool countering { get; private set; }
@@ -71,6 +73,8 @@ public class StateManager : MonoBehaviour
        // isGrounded = Physics2D.OverlapCircle(groundCheckPos.position, playerStats.groundCheckRad, groundLayer);
 
         isEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
+        isGroundEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
+
         if (currentState == states.Blocking())
         {
             shielded = true;
@@ -136,7 +140,20 @@ public class StateManager : MonoBehaviour
             currentEnemy = enemyCollider.GetComponent<EnemyBase>();
             return currentEnemy != null;
         }
+        else
+        {
+            enemyCollider = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, groundEnemyLayer);
+            if (enemyCollider != null)
+            {
+                currentEnemy = enemyCollider.GetComponent<EnemyBase>();
+                return currentEnemy != null;
+            }
+        }
         Collider2D[] enemiesInCounterRange = Physics2D.OverlapCircleAll(transform.position, playerStats.counterCheckRad, enemyLayer);
+        if(enemiesInCounterRange == null)
+        {
+            enemiesInCounterRange = Physics2D.OverlapCircleAll(transform.position, playerStats.counterCheckRad, groundEnemyLayer);
+        }
 
         foreach (Collider2D col in enemiesInCounterRange)
         {
