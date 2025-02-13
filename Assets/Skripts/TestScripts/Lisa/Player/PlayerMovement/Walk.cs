@@ -40,10 +40,7 @@ public class Walk : BaseState
         {
             SwitchState(factory.Blocking());
         }
-        else if (context.playerControls.Counter.triggered )
-        {
-            SwitchState(factory.Countering());
-        }
+
         else if (!context.playerControls.Walk.IsPressed())
         {
             SwitchState(factory.Idleing());
