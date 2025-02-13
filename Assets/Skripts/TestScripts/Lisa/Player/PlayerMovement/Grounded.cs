@@ -25,7 +25,7 @@ public class Grounded : BaseState
 
     public override void InitializeSubState()
     {
-        if(context.playerControls.Walk.triggered)
+        if(context.playerControls.Walk.IsPressed())
         {
             SetSubState(factory.Walking());
         }
@@ -41,7 +41,7 @@ public class Grounded : BaseState
         {
             SetSubState(factory.Countering());
         }
-        else
+        else if(!context.playerControls.Walk.IsPressed())
         {
             SetSubState(factory.Idleing());
         }
@@ -49,7 +49,7 @@ public class Grounded : BaseState
 
     public override void CheckSwitchStates()
     {
-        if(context.playerControls.Jump.phase == UnityEngine.InputSystem.InputActionPhase.Performed || context.rb.linearVelocityY < 0 && !context.rolling && context.mainCollider.enabled )
+        if(context.playerControls.Jump.phase == UnityEngine.InputSystem.InputActionPhase.Performed || !context.isGrounded )
         {
             SwitchState(factory.Air());
         }

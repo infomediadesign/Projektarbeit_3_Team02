@@ -208,7 +208,9 @@ MonoBehaviour:
   currentEnemy: {fileID: 0}
   mainCollider: {fileID: 0}
   rollTrigger: {fileID: 264260841175203238}
+  jumpCollider: {fileID: 8959032036650142701}
   zone: {fileID: 0}
+  animator: {fileID: 0}
   playerStats: {fileID: 11400000, guid: 01bddd4fdb1bb0247b5e80e0bf855d90, type: 2}
   rb: {fileID: 0}
   position: {fileID: 2672584183661782627}
@@ -269,15 +271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea46ad4caa154e48b4ab56b9d79a620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rollStart: {fileID: 7400000, guid: 9d5cd4cd49b56b7449c86921712d8b41, type: 2}
-  rollLoop: {fileID: 7400000, guid: a1496eb003757e64881e3c8d5b1d1e14, type: 2}
-  rollEnd: {fileID: 7400000, guid: 303d7fad3766874439c8b6a077532b80, type: 2}
-  blockStart: {fileID: 7400000, guid: df466b40c5d9ba44db9c1f8669b78bcc, type: 2}
-  blockLoop: {fileID: 7400000, guid: 51add1b750a82d34bb345b092beaa014, type: 2}
-  blockEnd: {fileID: 7400000, guid: 4cb718a2e441f3442bc7b2f61ddb62f2, type: 2}
-  jumpStart: {fileID: 7400000, guid: 6d3ab1e6d53bfae4da7f385db3aa7e5a, type: 2}
-  jumpLoop: {fileID: 7400000, guid: 51add1b750a82d34bb345b092beaa014, type: 2}
-  jumpEnd: {fileID: 7400000, guid: fd9ac88a41611654c90dda9cc164246c, type: 2}
 --- !u!95 &9121781109231238378
 Animator:
   serializedVersion: 7
@@ -386,8 +379,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.12141692, y: -0.14309858}
-  m_Size: {x: 1.9593925, y: 1.0207739}
+  m_Offset: {x: 0.066027276, y: -0.14309858}
+  m_Size: {x: 1.848675, y: 1.0207739}
   m_Direction: 1
 --- !u!61 &1841281942444013812
 BoxCollider2D:
@@ -423,7 +416,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.12367821, y: -0.6561718}
+  m_Offset: {x: 0.12367821, y: -0.6724105}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -433,7 +426,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.4421616, y: 0.06142831}
+  m_Size: {x: 1.4421616, y: 0.09390575}
   m_EdgeRadius: 0
 --- !u!1 &242518753422773393
 GameObject:
@@ -3097,8 +3090,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5585569428982358586}
+  - component: {fileID: 8959032036650142701}
   m_Layer: 3
-  m_Name: IdleCollider
+  m_Name: JumpCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3119,6 +3113,43 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2672584183661782627}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &8959032036650142701
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7874107617068256710}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.16433868, y: -0.13307483}
+  m_Size: {x: 1.2859638, y: 0.9677012}
+  m_Direction: 1
 --- !u!1 &8816090960961473411
 GameObject:
   m_ObjectHideFlags: 0

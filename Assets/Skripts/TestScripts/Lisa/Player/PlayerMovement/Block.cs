@@ -10,7 +10,7 @@ public class Block : BaseState
     private Vector2 linearVel;
     override public void EnterState()
     {
-
+        context.animator.SetBool("blockFinished", false);
         renderer = context.GetComponent<SpriteRenderer>();
         linearVel = context.rb.linearVelocity;
         context.rb.linearVelocity = new Vector2(0, 0);
@@ -30,6 +30,7 @@ public class Block : BaseState
         if(context.isGrounded && blockReleased)
         {
             renderer.color = Color.white;
+           
             SwitchState(factory.Idleing());
         }
        
@@ -45,6 +46,8 @@ public class Block : BaseState
     {
 
         context.playerControls.Block.canceled -= OnBlockCanceled;
+        context.animator.SetBool("blockFinished", true);
+
     }
     private void OnBlockCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {

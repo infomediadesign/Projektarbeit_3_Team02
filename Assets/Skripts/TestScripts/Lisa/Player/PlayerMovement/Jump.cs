@@ -14,8 +14,9 @@ public class Jump : BaseState
     {
         hasReleased = false;
         hasJumped = false;
-       // context.IdleCollider.enabled = false;
-        //context.mainCollider.enabled = true;
+        context.jumpCollider.enabled = true;
+        context.mainCollider.enabled = false;
+        context.animator.SetBool("jumpFinished", false);
     }
 
     override public void UpdateState()
@@ -76,10 +77,11 @@ public class Jump : BaseState
     }
 
     override public void ExitState()
-    {
- 
+    {   
+        context.mainCollider.enabled = true;
+        context.jumpCollider.enabled = false;
+        context.animator.SetBool("jumpFinished", true);
 
-      
     }
 
    

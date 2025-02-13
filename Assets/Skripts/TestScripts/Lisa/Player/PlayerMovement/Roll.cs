@@ -12,6 +12,7 @@ public class Roll : BaseState
 
     override public void EnterState()
     {
+        context.animator.SetBool("rollFinished", false);
         startPositionX = context.transform.position.x;
 
         if (context.rb.linearVelocityX < 0)
@@ -122,7 +123,9 @@ public class Roll : BaseState
     {
         context.mainCollider.enabled = true;
         context.rollTrigger.enabled = false;
-        
+
+        context.animator.SetBool("rollFinished", true);
+
     }
 }
 

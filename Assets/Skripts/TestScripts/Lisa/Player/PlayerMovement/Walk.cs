@@ -44,14 +44,11 @@ public class Walk : BaseState
         {
             SwitchState(factory.Countering());
         }
-        else if (xInput == 0)
+        else if (!context.playerControls.Walk.IsPressed())
         {
             SwitchState(factory.Idleing());
         }
-        else if (context.rb.linearVelocityY < 0)
-        {
-            SwitchState(factory.Fall());
-        }
+        
     }
     override public void ExitState()
     {

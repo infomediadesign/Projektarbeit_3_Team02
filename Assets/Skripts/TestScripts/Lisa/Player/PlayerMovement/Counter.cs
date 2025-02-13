@@ -6,6 +6,7 @@ public class Counter : BaseState
     public Counter(StateManager currentContext, StateFactory factory)
     : base(currentContext, factory) { }
     private bool attacked;
+    private bool counterPossible;
  
     EnemyBase enemy;
     override public void EnterState()
@@ -26,18 +27,22 @@ public class Counter : BaseState
         if (!attacked)
         {
             enemy = context.zone.GetCounterableEnemy();
-            if (enemy != null)
+            if (counterPossible)
             {
-                context.playerCombat.Attack(enemy);
-                Debug.Log("Counter Successful!");
-                SwitchState(factory.Idleing());
-                attacked = true;
+                if (enemy != null)
+                {
+                    context.playerCombat.Attack(enemy);
+                    Debug.Log("Counter Successful!");
+                    SwitchState(factory.Idleing());
+                    attacked = true;
+                }
+                else
+                {
+                    Debug.LogError("Counter not Successful!");
+                    SwitchState(factory.Idleing());
+                }
             }
-            else
-            {
-                Debug.LogError("Counter not Successful!");
-                SwitchState(factory.Idleing());
-            }
+            
         }
     }
     public override void InitializeSubState(){}
@@ -47,5 +52,14 @@ public class Counter : BaseState
     override public void ExitState()
     {
 
+    }
+
+    public void setCounterPossible()
+    {
+        counterPossible = true;
+    }
+    public void setCounterNotPossible()
+    {
+        counterPossible = false;
     }
 }

@@ -1,44 +1,24 @@
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class PlayerAnimation : MonoBehaviour
 {
     Animator animator;
     StateManager stateManager;
     private string currentState;
-    private enum AnimationPhase { Start, Loop, End }
-    private AnimationPhase currentAnimationPhase = AnimationPhase.Start;
-
-    [SerializeField] private AnimationClip rollStart;
-    [SerializeField] private AnimationClip rollLoop;
-    [SerializeField] private AnimationClip rollEnd;
-
-    [SerializeField] private AnimationClip blockStart;
-    [SerializeField] private AnimationClip blockLoop;
-    [SerializeField] private AnimationClip blockEnd;
-
-    [SerializeField] private AnimationClip jumpStart;
-    [SerializeField] private AnimationClip jumpLoop;
-    [SerializeField] private AnimationClip jumpEnd;
 
     const string playerIdle = "playerIdle";
     const string playerWalk = "playerWalk";
     const string playerFalling = "playerFall";
     const string playerCounter = "playerCounter";
-
-    private AnimationPhases playerRoll;
-    private AnimationPhases playerBlock;
-    private AnimationPhases playerJump;
-
-
+    const string playerRoll = "playerRoll";
+    const string playerJump = "playerJump";
+    const string playerBlock = "playerBlock";
 
     void Start()
     {
         animator = GetComponent<Animator>();
         stateManager = GetComponent<StateManager>();
-
-        playerBlock = new AnimationPhases(blockStart, blockLoop, blockEnd);
-        playerRoll = new AnimationPhases(rollStart, rollLoop, rollEnd);
-        playerJump = new AnimationPhases(jumpStart, jumpLoop, jumpEnd);
     }
 
     void Update()
@@ -47,7 +27,6 @@ public class PlayerAnimation : MonoBehaviour
         {
             HandleGroundedAnimations(groundedState);
         }
-
         else if (stateManager.currentState is Airborne airborneState)
         {
             HandleAirborneAnimations(airborneState);
@@ -61,6 +40,7 @@ public class PlayerAnimation : MonoBehaviour
         if (currentSubState is Walk)
         {
             AnimStateTransitionString(playerWalk);
+
         }
         else if (currentSubState is Idle)
         {
@@ -68,11 +48,11 @@ public class PlayerAnimation : MonoBehaviour
         }
         else if (currentSubState is Roll)
         {
-            AnimStateTransition(playerRoll);
+            AnimStateTransitionString(playerRoll);
         }
         else if (currentSubState is Block)
         {
-            AnimStateTransition(playerBlock);
+            AnimStateTransitionString(playerBlock);
         }
         else if (currentSubState is Counter)
         {
@@ -86,11 +66,11 @@ public class PlayerAnimation : MonoBehaviour
 
         if (currentSubState is Jump)
         {
-            AnimStateTransition(playerJump);
+            AnimStateTransitionString(playerJump);
         }
         else if (currentSubState is AirCounter)
         {
-            AnimStateTransition(playerJump);
+            AnimStateTransitionString(playerJump);
         }
         else if (currentSubState is Falling)
         {
@@ -98,7 +78,7 @@ public class PlayerAnimation : MonoBehaviour
         }
         else if (currentSubState is Block)
         {
-            AnimStateTransition(playerBlock);
+            AnimStateTransitionString(playerBlock);
         }
     }
 
@@ -109,25 +89,10 @@ public class PlayerAnimation : MonoBehaviour
         animator.Play(stateNew);
         currentState = stateNew;
     }
-    void AnimStateTransition(AnimationPhases animPhases)
-    {
-        switch (currentAnimationPhase)
-        {
-            case AnimationPhase.Start:
-                animator.Play(animPhases.startAnim.name);
-                currentAnimationPhase = AnimationPhase.Loop;
-                break;
 
-            case AnimationPhase.Loop:
-                animator.Play(animPhases.loopAnim.name);
-                break;
+  
 
-            case AnimationPhase.End:
-                animator.Play(animPhases.endAnim.name);
-                currentAnimationPhase = AnimationPhase.Start;
-                break;
-        }
-    }
+
 }
 
 

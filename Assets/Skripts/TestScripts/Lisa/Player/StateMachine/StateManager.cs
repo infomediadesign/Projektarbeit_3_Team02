@@ -10,8 +10,9 @@ public class StateManager : MonoBehaviour
     [HideInInspector] public EnemyBase currentEnemy;
     [HideInInspector] public CapsuleCollider2D mainCollider;
     public CapsuleCollider2D rollTrigger;
-    //public CapsuleCollider2D IdleCollider;
+    public CapsuleCollider2D jumpCollider;
     [HideInInspector] public CounterZone zone;
+    [HideInInspector] public Animator animator;
 
     public InputSystem_Actions inputActions;
     public InputSystem_Actions.TestActions playerControls;
@@ -53,11 +54,13 @@ public class StateManager : MonoBehaviour
         mainCollider = GetComponent<CapsuleCollider2D>();
         zone = GetComponentInChildren<CounterZone>();
 
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         capCol = GetComponent<CapsuleCollider2D>();
         playerCombat = GetComponent<PlayerCombat>();
         currentState = states.Ground();
         currentState.EnterState();
+       
 
     }
 
