@@ -229,6 +229,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  counterPossible: 1
 --- !u!114 &5051107444858795921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1178,9 +1179,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tracks:
   - trackName: MainMenu
-    clip: {fileID: 8300000, guid: c25d4466da365cc4c8e14ee57f9e09a8, type: 3}
-  - trackName: Game
+    clip: {fileID: 8300000, guid: 1648949b36cbcc5408fdaafc3c6788dd, type: 3}
+  - trackName: GameBackground
     clip: {fileID: 8300000, guid: bde8814c2dfade540ac04157fc81764b, type: 3}
+  - trackName: Game
+    clip: {fileID: 8300000, guid: 8fc38641e7cef0f419757db5fe085f29, type: 3}
 --- !u!1 &1876124289185248837
 GameObject:
   m_ObjectHideFlags: 0

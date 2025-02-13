@@ -121,6 +121,7 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(1);
         MusicManager.Instance.PlayMusic("Game");
+        //MusicManager.Instance.PlayMusic("GameBackground");
     }
 
     public void ExitGame()
