@@ -27,15 +27,7 @@ public class Block : BaseState
         Debug.Log("block");
         renderer.color = Color.green;
 
-
-        /*if (blockReleased)
-        {
-            renderer.color = Color.white;
-            context.rb.linearVelocity = linearVel;
-            //state.TransitionState(state.walkState);
-            SwitchState(factory.Idleing());
-        }*/
-        if(context.isGrounded)
+        if(context.isGrounded && blockReleased)
         {
             renderer.color = Color.white;
             SwitchState(factory.Idleing());

@@ -137,12 +137,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -4245314250189916616, guid: d8d7cb8f930baec47ae7659ce3844c1a, type: 3}
+  m_Sprite: {fileID: -1572849347, guid: 23cb31c81eff9f547844eec09dad7ff3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 2.58, y: 1.3000782}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -269,6 +269,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea46ad4caa154e48b4ab56b9d79a620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rollStart: {fileID: 7400000, guid: 9d5cd4cd49b56b7449c86921712d8b41, type: 2}
+  rollLoop: {fileID: 7400000, guid: a1496eb003757e64881e3c8d5b1d1e14, type: 2}
+  rollEnd: {fileID: 7400000, guid: 303d7fad3766874439c8b6a077532b80, type: 2}
+  blockStart: {fileID: 7400000, guid: df466b40c5d9ba44db9c1f8669b78bcc, type: 2}
+  blockLoop: {fileID: 7400000, guid: 51add1b750a82d34bb345b092beaa014, type: 2}
+  blockEnd: {fileID: 7400000, guid: 4cb718a2e441f3442bc7b2f61ddb62f2, type: 2}
+  jumpStart: {fileID: 7400000, guid: 6d3ab1e6d53bfae4da7f385db3aa7e5a, type: 2}
+  jumpLoop: {fileID: 7400000, guid: 51add1b750a82d34bb345b092beaa014, type: 2}
+  jumpEnd: {fileID: 7400000, guid: fd9ac88a41611654c90dda9cc164246c, type: 2}
 --- !u!95 &9121781109231238378
 Animator:
   serializedVersion: 7
@@ -419,7 +428,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2.58, y: 1.3000782}
-    newSize: {x: 1, y: 2}
+    newSize: {x: 2.58, y: 1.3000782}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -1080,7 +1089,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
