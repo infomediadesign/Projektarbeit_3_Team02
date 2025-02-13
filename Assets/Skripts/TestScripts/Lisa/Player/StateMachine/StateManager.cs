@@ -33,6 +33,7 @@ public class StateManager : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask groundEnemyLayer;
 
+
     public bool isEnemy { get; private set; }
     public bool isGroundEnemy { get; private set; }
     public bool shielded { get; private set; }
@@ -43,6 +44,7 @@ public class StateManager : MonoBehaviour
     public LayerMask enemyLayer;
 
     private bool facingRight = false;
+    [HideInInspector] public bool counterPossible = true;
 
 
 
@@ -176,5 +178,13 @@ public class StateManager : MonoBehaviour
             isGrounded = false;
         }
 
+    }
+    public void setCounterPossible()
+    {
+        counterPossible = true;
+    }
+    public void setCounterNotPossible()
+    {
+        counterPossible = false;
     }
 }

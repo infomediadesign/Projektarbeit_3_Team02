@@ -40,7 +40,7 @@ public class Walk : BaseState
         {
             SwitchState(factory.Blocking());
         }
-        else if (context.playerControls.Counter.triggered)
+        else if (context.playerControls.Counter.triggered )
         {
             SwitchState(factory.Countering());
         }
