@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Unity.Cinemachine;
 
 public class Teleporter_neu : MonoBehaviour
 {
@@ -28,12 +29,11 @@ public class Teleporter_neu : MonoBehaviour
         Scene targetScene = SceneManager.GetSceneByBuildIndex(targetSceneBuildIndex);
         SceneManager.SetActiveScene(targetScene);
 
-        // Find SpawnPoint specifically in the target scene
+        // Find SpawnPoint and teleport player
         GameObject spawnPoint = null;
         GameObject[] rootObjects = targetScene.GetRootGameObjects();
         foreach (GameObject obj in rootObjects)
         {
-            // Look for SpawnPoint in root objects and their children
             spawnPoint = FindSpawnPointInHierarchy(obj);
             if (spawnPoint != null) break;
         }
@@ -41,6 +41,25 @@ public class Teleporter_neu : MonoBehaviour
         if (spawnPoint != null)
         {
             player.transform.position = spawnPoint.transform.position;
+
+            // Direktes Update der Cinemachine Camera
+            var vcam = GameObject.FindObjectOfType<CinemachineCamera>();
+            if (vcam != null)
+            {
+                // Setze den Follow-Target direkt
+                vcam.Follow = player.transform;
+
+                // Optional: Hartes Reset der Kameraposition
+                vcam.transform.position = new Vector3(
+                    player.transform.position.x,
+                    player.transform.position.y,
+                    vcam.transform.position.z
+                );
+
+                // Force Cinemachine Update
+                vcam.PreviousStateIsValid = false;
+            }
+
             Debug.Log($"Player teleported to spawn point in scene {targetScene.name}");
         }
         else

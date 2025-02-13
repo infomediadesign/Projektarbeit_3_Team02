@@ -516,6 +516,7 @@ GameObject:
   - component: {fileID: 8661350393790595544}
   - component: {fileID: 448301281740445756}
   - component: {fileID: 1787509230311135788}
+  - component: {fileID: 3453587327466228751}
   m_Layer: 0
   m_Name: PlayerFollowCamera
   m_TagString: Untagged
@@ -620,6 +621,20 @@ MonoBehaviour:
     MaxWindowSize: 9
     Padding: 0
   m_LegacyMaxWindowSize: -2
+--- !u!114 &3453587327466228751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242518753422773393}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9494f210cf8e44141922e88f7c292de5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2672584183661782627}
+  followSpeed: 10
 --- !u!1 &666530274734199632
 GameObject:
   m_ObjectHideFlags: 0
@@ -2877,7 +2892,7 @@ Transform:
   m_GameObject: {fileID: 6239491860012354114}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.397682, y: -1.5325612, z: -10.674077}
+  m_LocalPosition: {x: -7.4019394, y: -1.5325612, z: -10.674077}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
