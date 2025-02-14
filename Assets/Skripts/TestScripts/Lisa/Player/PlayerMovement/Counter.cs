@@ -42,7 +42,7 @@ public class Counter : BaseState
                 }
                 else
                 {
-                    Debug.LogError("Counter not Successful!");
+                    Debug.Log("Counter not Successful!");
                     if (context.counterPossible)
                     {
                         SwitchState(factory.Idleing());
