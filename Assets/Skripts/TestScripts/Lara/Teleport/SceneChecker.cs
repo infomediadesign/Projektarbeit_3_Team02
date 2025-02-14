@@ -57,7 +57,7 @@ public class SceneChecker : MonoBehaviour
         }
     }
 
-    // Optional: Debug-Informationen
+    /*Debug-Informationen
     void OnGUI()
     {
         if (Debug.isDebugBuild)
@@ -73,5 +73,5 @@ public class SceneChecker : MonoBehaviour
 
             GUILayout.EndArea();
         }
-    }
+    }*/
 }
