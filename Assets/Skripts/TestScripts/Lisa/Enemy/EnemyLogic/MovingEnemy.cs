@@ -9,7 +9,6 @@ public class MovingEnemy : StationaryEnemy
     public Transform groundCheck; 
     private float groundCheckDistance = 1f;
     public LayerMask groundLayer;
-    public CapsuleCollider2D enemyHitbox;
 
     public MovingEnemyStats mStats;
 
@@ -51,10 +50,6 @@ public class MovingEnemy : StationaryEnemy
 
     void Update()
     {
-        if (isDying)
-        {
-            anim.SetBool("Death", true);
-        }
         float direction = player.position.x - transform.position.x;
         Rotate();
         if (isPatroling && !playerInRange )
@@ -126,12 +121,8 @@ public class MovingEnemy : StationaryEnemy
             playerInRange = true;
             playerHealth = other.GetComponent<PlayerHealth>();
 
-            if (other.IsTouching(enemyHitbox))
-            {
-                playerHealth.TakeDamage(stats.damage);
-                Debug.Log("taking damage: " + stats.damage);
-            }
-           
+            playerHealth.TakeDamage(stats.damage);
+            Debug.Log("taking damage: " + stats.damage);
         }
      }
     

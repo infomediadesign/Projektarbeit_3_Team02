@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 
@@ -15,7 +14,6 @@ public class PlayerAnimation : MonoBehaviour
     const string playerRoll = "playerRoll";
     const string playerJump = "playerJump";
     const string playerBlock = "playerBlock";
-    const string playerDamage = "playerDamage";
 
     void Start()
     {
@@ -38,67 +36,50 @@ public class PlayerAnimation : MonoBehaviour
     void HandleGroundedAnimations(Grounded groundedState)
     {
         var currentSubState = groundedState.GetCurrentSubState();
-        if (!stateManager.damageAnim)
-        {
-            if (currentSubState is Walk)
-            {
-                AnimStateTransitionString(playerWalk);
 
-            }
-            else if (currentSubState is Idle)
-            {
-                AnimStateTransitionString(playerIdle);
-            }
-            else if (currentSubState is Roll)
-            {
-                AnimStateTransitionString(playerRoll);
-            }
-            else if (currentSubState is Block)
-            {
-                AnimStateTransitionString(playerBlock);
-            }
-            else if (currentSubState is Counter)
-            {
-                AnimStateTransitionString(playerCounter);
-            }
-        }
-        
-        else 
+        if (currentSubState is Walk)
         {
-            AnimStateTransitionString(playerDamage);
-  
+            AnimStateTransitionString(playerWalk);
+
         }
-    
+        else if (currentSubState is Idle)
+        {
+            AnimStateTransitionString(playerIdle);
+        }
+        else if (currentSubState is Roll)
+        {
+            AnimStateTransitionString(playerRoll);
+        }
+        else if (currentSubState is Block)
+        {
+            AnimStateTransitionString(playerBlock);
+        }
+        else if (currentSubState is Counter)
+        {
+            AnimStateTransitionString(playerCounter);
+        }
     }
 
     void HandleAirborneAnimations(Airborne airborneState)
     {
         var currentSubState = airborneState.GetCurrentSubState();
-        if (!stateManager.damageAnim)
+
+        if (currentSubState is Jump)
         {
-            if (currentSubState is Jump)
-            {
-                AnimStateTransitionString(playerJump);
-            }
-            else if (currentSubState is AirCounter)
-            {
-                AnimStateTransitionString(playerJump);
-            }
-            else if (currentSubState is Falling)
-            {
-                AnimStateTransitionString(playerFalling);
-            }
-            else if (currentSubState is Block)
-            {
-                AnimStateTransitionString(playerBlock);
-            }
+            AnimStateTransitionString(playerJump);
         }
-        else
+        else if (currentSubState is AirCounter)
         {
-            AnimStateTransitionString(playerDamage);
- 
+            AnimStateTransitionString(playerJump);
         }
-  
+        else if (currentSubState is Falling)
+        {
+            AnimStateTransitionString(playerFalling);
+        }
+        else if (currentSubState is Block)
+        {
+            AnimStateTransitionString(playerBlock);
+        }
     }
 
     public void AnimStateTransitionString(string stateNew)
@@ -109,8 +90,7 @@ public class PlayerAnimation : MonoBehaviour
         currentState = stateNew;
     }
 
-
-
+  
 
 
 }

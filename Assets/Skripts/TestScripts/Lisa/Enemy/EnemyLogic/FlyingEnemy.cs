@@ -34,10 +34,6 @@ public class FlyingEnemy : EnemyBase
     {
         Patrol();
         CheckForPlayerAndShoot();
-        if (isDying)
-        {
-            anim.SetBool("Death", true);
-        }
     }
 
     public override void Attack()
@@ -57,11 +53,11 @@ public class FlyingEnemy : EnemyBase
     {
         Vector2 direction = patrolPoints[targetPoint].position - transform.position;
 
-        if (direction.x > 0)
+        if (direction.x < 0)
         {
             spriteRenderer.flipX = true;
         }
-        else if (direction.x < 0)
+        else if (direction.x > 0)
         {
             spriteRenderer.flipX = false;
         }
@@ -87,7 +83,7 @@ public class FlyingEnemy : EnemyBase
             Debug.Log("trigger");
             playerHealth = other.GetComponent<PlayerHealth>();
 
-            //playerHealth.TakeDamage(stats.damage);
+            playerHealth.TakeDamage(stats.damage);
             Debug.Log("taking damage: " + stats.damage);
 
         }

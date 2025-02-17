@@ -10,18 +10,12 @@ public class Thorns : MonoBehaviour
 
     void Start()
     {
-        if (moveSpeed > 0 && moveRange > 0)
-        {
-            startPosition = transform.position;
-        }
+        startPosition = transform.position;
     }
 
     void Update()
     {
-        if (moveSpeed > 0 && moveRange > 0)
-        {
-            float offset = Mathf.PingPong(Time.time * moveSpeed, moveRange * 2) - moveRange;
-            transform.position = new Vector3(startPosition.x + offset, startPosition.y, startPosition.z);
-        }
+        float offset = Mathf.PingPong(Time.time * moveSpeed, moveRange * 2) - moveRange;
+        transform.position = new Vector3(startPosition.x + offset, startPosition.y, startPosition.z);
     }
 }
