@@ -45,6 +45,7 @@ public class StateManager : MonoBehaviour
 
     private bool facingRight = false;
     [HideInInspector] public bool counterPossible = true;
+    [HideInInspector] public bool counterWindow;
 
 
 
@@ -186,5 +187,13 @@ public class StateManager : MonoBehaviour
     public void setCounterNotPossible()
     {
         counterPossible = false;
+    }
+    public void setCounterWindow()
+    {
+        counterWindow = true;
+    }
+    public void setNoCounterWindow()
+    {
+        counterWindow = false;
     }
 }
