@@ -24,6 +24,10 @@ public class Projectile : EnemyBase
         {
             StartDestroySequence();
         }
+        if (isDying)
+        {
+            DestroyObject();
+        }
     }
     private void StartDestroySequence()
     {

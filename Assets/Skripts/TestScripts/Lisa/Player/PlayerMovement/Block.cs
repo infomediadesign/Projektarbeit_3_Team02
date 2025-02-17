@@ -17,6 +17,7 @@ public class Block : BaseState
 
         context.playerControls.Block.canceled += OnBlockCanceled;
         blockReleased = false;
+        context.playerControls.Jump.Disable();
 
 
     }
@@ -47,6 +48,7 @@ public class Block : BaseState
 
         context.playerControls.Block.canceled -= OnBlockCanceled;
         context.animator.SetBool("blockFinished", true);
+        context.playerControls.Jump.Enable();
 
     }
     private void OnBlockCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)
