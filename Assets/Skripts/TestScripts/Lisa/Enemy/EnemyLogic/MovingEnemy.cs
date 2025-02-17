@@ -126,7 +126,7 @@ public class MovingEnemy : StationaryEnemy
             playerInRange = true;
             playerHealth = other.GetComponent<PlayerHealth>();
 
-            if (other.IsTouching(enemyHitbox))
+            if (other.IsTouching(enemyHitbox) && !isDying)
             {
                 playerHealth.TakeDamage(stats.damage);
                 Debug.Log("taking damage: " + stats.damage);
