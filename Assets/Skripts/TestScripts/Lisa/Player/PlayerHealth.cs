@@ -6,9 +6,9 @@ public class PlayerHealth : MonoBehaviour
     private float currentHealth;
     public float maxHealth;
     private StateManager state;
-    //hier dann noch je nachdem healthslider oderso einf�gen
+  
     private void Start()
-    {
+    { 
         state = GetComponent<StateManager>();
         currentHealth = maxHealth;
         // Subscribe with a parameter
@@ -22,11 +22,10 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
+        state.damageAnim = true;
         if (!state.shielded && currentHealth > 0)
         {
             currentHealth -= damage;
-           
-            
         }
        
         else if (currentHealth <= 0)

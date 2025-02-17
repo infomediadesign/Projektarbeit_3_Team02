@@ -53,6 +53,10 @@ public class StationaryEnemy : EnemyBase
         {
             Rotate();
             CheckDistance();
+            if (isDying)
+            {
+                anim.SetBool("Death", true);
+            }
         }
       
     }

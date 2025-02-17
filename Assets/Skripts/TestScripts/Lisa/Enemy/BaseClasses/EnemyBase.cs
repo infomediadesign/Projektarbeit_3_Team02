@@ -6,9 +6,13 @@ public abstract class EnemyBase : MonoBehaviour
     public EnemyStats stats;
     protected float currentHealth;
     protected bool counterPossible;
+    protected bool isDying;
+    protected bool deathAnimPlayed;
     protected virtual void Start()
     {
         currentHealth = stats.maxHealth;
+        isDying = false;
+        deathAnimPlayed = false;
     }
 
     public virtual void TakeDamage(int damage)
@@ -16,7 +20,8 @@ public abstract class EnemyBase : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            Die();
+            isDying = true;
+   
         }
     }
 
@@ -28,6 +33,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         return counterPossible;
     }
+
     public abstract void Attack();
     public abstract void StopAttack();
 }
