@@ -11,8 +11,11 @@ public abstract class EnemyBase : MonoBehaviour
     protected bool deathAnimPlayed;
     protected SpriteRenderer sRenderer;
     private float flashDuration = 0.5f;
+    public BoxCollider2D attackCollider;
+    protected bool attackCollision;
     protected virtual void Start()
     {
+        attackCollision = false;
         currentHealth = stats.maxHealth;
         isDying = false;
         deathAnimPlayed = false;
@@ -56,6 +59,18 @@ public abstract class EnemyBase : MonoBehaviour
             yield return new WaitForSecondsRealtime(duration);
             animator.speed = 1; 
         }
+    }
+    public void EnableAttackCollider()
+    {
+    
+            attackCollision = true;
+        
+    }
+    public void DisableAttackCollider()
+    {
+
+            attackCollision = false;
+        
     }
 
     public abstract void Attack();

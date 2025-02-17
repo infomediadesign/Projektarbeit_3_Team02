@@ -44,15 +44,6 @@ public class Projectile : EnemyBase
         Destroy(gameObject);
     }
 
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerHealth = other.GetComponent<PlayerHealth>();
-            playerHealth.TakeDamage(stats.damage);
-        }
-    }
     public override void Attack()
     {
 

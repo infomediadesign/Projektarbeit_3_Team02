@@ -37,20 +37,22 @@ public class Counter : BaseState
                     context.playerCombat.Attack(enemy);
                     //context.StartCoroutine(context.FlashGreen());
                     context.StartCoroutine(context.FreezeAnimation(0.3f));
-                    Debug.Log("Counter Successful!");
+                   
                     if (context.counterPossible)
                     {
-                        SwitchState(factory.Idleing());
+                    Debug.Log("Counter Successful!");
+                    SwitchState(factory.Idleing());
                         attacked = true;
                     }
                     
                 }
                 else
                 {
-                    Debug.Log("Counter not Successful!");
+                    
                     if (context.counterPossible)
                     {
-                        SwitchState(factory.Idleing());
+                    Debug.Log("Counter not Successful!");
+                    SwitchState(factory.Idleing());
                     }
                     
                 }

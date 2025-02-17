@@ -12,6 +12,7 @@ public class StationaryEnemy : EnemyBase
     protected PlayerHealth playerHealth;
     protected SpriteRenderer spriteRenderer;
     private bool isObstacle;
+    public CapsuleCollider2D sEnemyHitbox;
 
     public GameObject counterUIPrefab; 
     protected CounterUI counterUIInstance;
@@ -108,32 +109,48 @@ public class StationaryEnemy : EnemyBase
             Cooldown(); 
         }
     }
-    private void OnTriggerEnter2D(Collider2D other) //weapon hitbox muss in den trigger
+    private void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.CompareTag("Player") && !isDying)
         {
-            Debug.Log("trigger");
             playerHealth = other.GetComponent<PlayerHealth>();
-         
-            playerHealth.TakeDamage(stats.damage);
-            Debug.Log("taking damage: " +stats.damage);
+
+            if (other.IsTouching(sEnemyHitbox))
+            {
+                playerHealth.TakeDamage(stats.damage);
+                Debug.Log("taking damage: " + stats.damage);
+            }
+
         }
+
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (damageCooldownTimer <= 0f)
+        if (other.CompareTag("Player") && !isDying && other.IsTouching(sEnemyHitbox))
         {
-            if (!isDying)
+            if (damageCooldownTimer <= 0f)
             {
+
                 playerHealth.TakeDamage(stats.damage);
-                Debug.Log("Player nimmt Schaden: " + stats.damage);
+                Debug.Log("taking damage: " + stats.damage);
 
                 damageCooldownTimer = damageCooldown;
+
+
             }
-            
+        }
+        else if (other.CompareTag("Player") && !isDying && other.IsTouching(attackCollider))
+        {
+            if (attackCollision)
+            {
+                playerHealth.TakeDamage(stats.damage);
+                Debug.Log("taking damage: " + stats.damage);
+                attackCollision = false;
+            }
         }
     }
+
     protected void SetCounterPossible()
     {
         counterPossible = true;

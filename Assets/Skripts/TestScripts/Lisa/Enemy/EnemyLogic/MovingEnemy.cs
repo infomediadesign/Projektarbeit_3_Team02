@@ -127,13 +127,14 @@ public class MovingEnemy : StationaryEnemy
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.CompareTag("Player"))
         {
             target = other.gameObject;
             playerInRange = true;
             playerHealth = other.GetComponent<PlayerHealth>();
 
-            if (other.IsTouching(enemyHitbox) && !isDying)
+            if (other.IsTouching(enemyHitbox) && !isDying || !isDying && other.IsTouching(attackCollider) && attackCollision)
             {
                 playerHealth.TakeDamage(stats.damage);
                 Debug.Log("taking damage: " + stats.damage);
@@ -164,9 +165,18 @@ public class MovingEnemy : StationaryEnemy
             {
 
                 playerHealth.TakeDamage(stats.damage);
-                Debug.Log("Player nimmt Schaden: " + stats.damage);
+                Debug.Log("taking damage: " + stats.damage);
 
                 damageCooldownTimer = damageCooldown;
+            }
+        }
+        else if(other.CompareTag("Player") && !isDying && other.IsTouching(attackCollider))
+        {
+            if (attackCollision)
+            {
+                playerHealth.TakeDamage(stats.damage);
+                Debug.Log("taking damage: " + stats.damage);
+                attackCollision = false;
             }
         }
     }

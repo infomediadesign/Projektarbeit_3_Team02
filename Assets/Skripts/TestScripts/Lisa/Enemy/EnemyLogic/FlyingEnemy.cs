@@ -7,6 +7,7 @@ public class FlyingEnemy : EnemyBase
     protected SpriteRenderer spriteRenderer;
     protected Animator anim;
     public Transform player;
+    public CapsuleCollider2D enemyHitbox;
 
     public Transform[] patrolPoints;
     private int targetPoint;
@@ -14,6 +15,12 @@ public class FlyingEnemy : EnemyBase
     public GameObject firePrefab;
     public Transform shootPoint;
     private float nextShootTime = 0f;
+
+    private float damageCooldown = 1.5f; // kann man in base machen
+    private float damageCooldownTimer = 0f;
+
+    private bool patroling;
+    public bool shootingEnemy = true;
 
     private void Awake()
     {
@@ -28,12 +35,27 @@ public class FlyingEnemy : EnemyBase
                 
             }
         }
+        if(patrolPoints == null)
+        {
+            patroling = false;
+        }
+        else
+        {
+            patroling = true;
+        }
     }
 
     void Update()
     {
-        Patrol();
-        CheckForPlayerAndShoot();
+        if (patroling)
+        {
+            Patrol();
+        }
+        if (shootingEnemy)
+        {
+            CheckForPlayerAndShoot();
+        }
+   
         if (isDying)
         {
             anim.SetBool("Death", true);
@@ -55,21 +77,24 @@ public class FlyingEnemy : EnemyBase
 
     public void Patrol()
     {
-        Vector2 direction = patrolPoints[targetPoint].position - transform.position;
+        if (!isDying)
+        {
+            Vector2 direction = patrolPoints[targetPoint].position - transform.position;
 
-        if (direction.x > 0)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else if (direction.x < 0)
-        {
-            spriteRenderer.flipX = false;
-        }
+            if (direction.x > 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else if (direction.x < 0)
+            {
+                spriteRenderer.flipX = false;
+            }
 
-        transform.position = Vector2.MoveTowards(transform.position, patrolPoints[targetPoint].position, fStats.flySpeed * Time.deltaTime);
-        if (Vector2.Distance(transform.position, patrolPoints[targetPoint].position) < 0.1f)
-        {
-            increaseTarget();
+            transform.position = Vector2.MoveTowards(transform.position, patrolPoints[targetPoint].position, fStats.flySpeed * Time.deltaTime);
+            if (Vector2.Distance(transform.position, patrolPoints[targetPoint].position) < 0.1f)
+            {
+                increaseTarget();
+            }
         }
     }
     void increaseTarget()
@@ -80,15 +105,30 @@ public class FlyingEnemy : EnemyBase
             targetPoint = 0;
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+
+    private void OnTriggerEnter2D(Collider2D other) //weapon hitbox muss in den trigger
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isDying && other.IsTouching(enemyHitbox))
         {
             Debug.Log("trigger");
             playerHealth = other.GetComponent<PlayerHealth>();
 
-            //playerHealth.TakeDamage(stats.damage);
+            playerHealth.TakeDamage(stats.damage);
             Debug.Log("taking damage: " + stats.damage);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (damageCooldownTimer <= 0f)
+        {
+            if (!isDying && other.IsTouching(enemyHitbox))
+            {
+                playerHealth.TakeDamage(stats.damage);
+                Debug.Log("Player nimmt Schaden: " + stats.damage);
+
+                damageCooldownTimer = damageCooldown;
+            }
 
         }
     }
