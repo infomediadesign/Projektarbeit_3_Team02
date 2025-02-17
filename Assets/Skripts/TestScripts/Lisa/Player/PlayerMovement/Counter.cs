@@ -1,5 +1,7 @@
 
 using UnityEngine;
+using UnityEngine.UIElements;
+using System.Collections;
 
 public class Counter : BaseState
 {
@@ -8,13 +10,13 @@ public class Counter : BaseState
     private bool attacked;
 
 
- 
+
     EnemyBase enemy;
     override public void EnterState()
-    {
-        
+    {  
         attacked = false;
         enemy = context.zone.GetCounterableEnemy();
+       
 
         if (enemy == null)
         {
@@ -33,6 +35,8 @@ public class Counter : BaseState
                 if (enemy != null && context.counterWindow)
                 {
                     context.playerCombat.Attack(enemy);
+                    //context.StartCoroutine(context.FlashGreen());
+                    context.StartCoroutine(context.FreezeAnimation(0.3f));
                     Debug.Log("Counter Successful!");
                     if (context.counterPossible)
                     {
@@ -62,6 +66,5 @@ public class Counter : BaseState
     {
 
     }
-
-   
+  
 }

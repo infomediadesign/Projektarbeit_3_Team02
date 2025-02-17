@@ -1,7 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using System.Collections;
 public class StateManager : MonoBehaviour
 {
     [HideInInspector] public PlayerCombat playerCombat;
@@ -13,6 +13,7 @@ public class StateManager : MonoBehaviour
     public CapsuleCollider2D jumpCollider;
     [HideInInspector] public CounterZone zone;
     [HideInInspector] public Animator animator;
+    private SpriteRenderer sRenderer;
 
     public InputSystem_Actions inputActions;
     public InputSystem_Actions.TestActions playerControls;
@@ -52,6 +53,7 @@ public class StateManager : MonoBehaviour
 
     void Awake()
     {
+        sRenderer = GetComponent<SpriteRenderer>();
         inputActions = new InputSystem_Actions();
         playerControls = inputActions.Test;
         states = new StateFactory(this);
@@ -201,4 +203,20 @@ public class StateManager : MonoBehaviour
     {
         counterWindow = false;
     }
+    public IEnumerator FlashGreen()
+    {
+        sRenderer.color = Color.green;
+        yield return new WaitForSeconds(0.5f);
+        sRenderer.color = Color.white;
+    }
+    public IEnumerator FreezeAnimation(float duration)
+    {
+        if (animator != null)
+        {
+            animator.speed = 0;
+            yield return new WaitForSecondsRealtime(duration);
+            animator.speed = 1;
+        }
+    }
+
 }
