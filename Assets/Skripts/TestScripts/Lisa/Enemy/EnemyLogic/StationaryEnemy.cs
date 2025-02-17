@@ -26,6 +26,8 @@ public class StationaryEnemy : EnemyBase
     public Transform player;
     protected bool canAttack = true;
     protected bool cooling;
+    protected float damageCooldown = 1.5f; // wann player schaden bekommen kann
+    protected float damageCooldownTimer = 0f;
 
     protected Animator anim; //base klasse?
     protected float distance; //zwischen player und enemy
@@ -56,6 +58,10 @@ public class StationaryEnemy : EnemyBase
             if (isDying)
             {
                 anim.SetBool("Death", true);
+            }
+            if (damageCooldownTimer > 0f)
+            {
+                damageCooldownTimer -= Time.deltaTime;
             }
         }
       
@@ -114,12 +120,20 @@ public class StationaryEnemy : EnemyBase
         }
     }
 
-    /*private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        //timer hinzufügen
-        playerHealth.TakeDamage(stats.damage);
-        Debug.Log("taking damage: " + stats.damage);
-    }*/
+        if (damageCooldownTimer <= 0f)
+        {
+            if (!isDying)
+            {
+                playerHealth.TakeDamage(stats.damage);
+                Debug.Log("Player nimmt Schaden: " + stats.damage);
+
+                damageCooldownTimer = damageCooldown;
+            }
+            
+        }
+    }
     protected void SetCounterPossible()
     {
         counterPossible = true;
