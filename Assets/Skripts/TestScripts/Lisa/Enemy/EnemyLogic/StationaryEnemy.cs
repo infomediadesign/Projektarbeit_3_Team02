@@ -104,7 +104,7 @@ public class StationaryEnemy : EnemyBase
     }
     private void OnTriggerEnter2D(Collider2D other) //weapon hitbox muss in den trigger
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isDying)
         {
             Debug.Log("trigger");
             playerHealth = other.GetComponent<PlayerHealth>();

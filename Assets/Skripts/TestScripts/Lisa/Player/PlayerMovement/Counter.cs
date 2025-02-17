@@ -7,6 +7,7 @@ public class Counter : BaseState
     : base(currentContext, factory) { }
     private bool attacked;
 
+
  
     EnemyBase enemy;
     override public void EnterState()
@@ -29,7 +30,7 @@ public class Counter : BaseState
             enemy = context.zone.GetCounterableEnemy();
 
             
-                if (enemy != null)
+                if (enemy != null && context.counterWindow)
                 {
                     context.playerCombat.Attack(enemy);
                     Debug.Log("Counter Successful!");
