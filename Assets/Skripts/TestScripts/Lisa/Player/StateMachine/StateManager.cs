@@ -46,6 +46,7 @@ public class StateManager : MonoBehaviour
     private bool facingRight = false;
     [HideInInspector] public bool counterPossible = true;
     [HideInInspector] public bool counterWindow;
+    [HideInInspector] public bool damageAnim;
 
 
 
@@ -179,6 +180,10 @@ public class StateManager : MonoBehaviour
             isGrounded = false;
         }
 
+    }
+    public void setDamageTaken()
+    {
+        damageAnim = false;
     }
     public void setCounterPossible()
     {
