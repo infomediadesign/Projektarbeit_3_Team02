@@ -305,6 +305,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   counterPossible: 1
+  counterWindow: 0
+  damageAnim: 0
 --- !u!114 &5051107444858795921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,6 +841,67 @@ MonoBehaviour:
   - groupID: StartGameButton
     clips:
     - {fileID: 8300000, guid: 0e90f0d196038844687c7ec54291f8d9, type: 3}
+  - groupID: Player_Walk
+    clips:
+    - {fileID: 8300000, guid: db4074acc7701fd41afaccef85f690cf, type: 3}
+  - groupID: Player_Jump
+    clips:
+    - {fileID: 8300000, guid: 47d3c6760a0b678449f187172111792d, type: 3}
+    - {fileID: 8300000, guid: a28d5a049d68a8049b77332c750a77de, type: 3}
+    - {fileID: 8300000, guid: 740d007f9e7f3b34ba324563138bf94c, type: 3}
+  - groupID: Player_Counter
+    clips:
+    - {fileID: 8300000, guid: 0aad94686ed634846bf1c91618dd0b89, type: 3}
+  - groupID: Player_DamageTaken
+    clips:
+    - {fileID: 8300000, guid: 9cb87cbeff3283d4e9f76797608a9c14, type: 3}
+    - {fileID: 8300000, guid: 658e3833428cf424082f552d216bd163, type: 3}
+    - {fileID: 8300000, guid: 9257c149149bc2244856635e691cfd7b, type: 3}
+    - {fileID: 8300000, guid: 515a09d1ad093484c816a0660840e09f, type: 3}
+  - groupID: Player_Death
+    clips:
+    - {fileID: 8300000, guid: 154c38f3c7ff1c8438f1dc4a89008a32, type: 3}
+  - groupID: Walking_Enemy_Walk
+    clips:
+    - {fileID: 8300000, guid: 1c42d384a27fbcd4f927a965b75d6c20, type: 3}
+  - groupID: Walking_Enemy_Attack
+    clips:
+    - {fileID: 8300000, guid: 4f31cb77a3cf7264b952162c57ab07e2, type: 3}
+  - groupID: Walking_Enemy_Death
+    clips:
+    - {fileID: 8300000, guid: 907f132b7fdfb264589f61232cb6dfd2, type: 3}
+  - groupID: Flying_Enemy_Walk
+    clips:
+    - {fileID: 8300000, guid: 0a64700bcff5ab34993c840c76decb7c, type: 3}
+  - groupID: Flying_Enemy_Attack
+    clips: []
+  - groupID: Flying_Enemy_Death
+    clips:
+    - {fileID: 8300000, guid: 907f132b7fdfb264589f61232cb6dfd2, type: 3}
+  - groupID: Stationary_Enemy_Attack
+    clips:
+    - {fileID: 8300000, guid: 4d1c3095c1595b043b50f128139ae7d4, type: 3}
+  - groupID: Stationary_Enemy_Death
+    clips:
+    - {fileID: 8300000, guid: 907f132b7fdfb264589f61232cb6dfd2, type: 3}
+  - groupID: Walking_Enemy_Idle
+    clips:
+    - {fileID: 8300000, guid: a6b8a7b0dc1a8c8458333b5b0cdab84a, type: 3}
+  - groupID: Wooden_Figure_Found
+    clips:
+    - {fileID: 8300000, guid: bb3e757bce8b9444797be816c9173083, type: 3}
+  - groupID: Player_Roll
+    clips:
+    - {fileID: 8300000, guid: 499e07a7258e6e041b981b1c5451234e, type: 3}
+  - groupID: Player_Counter_Success
+    clips:
+    - {fileID: 0}
+  - groupID: Boss_Idle
+    clips: []
+  - groupID: Boss_Stage_Change
+    clips: []
+  - groupID: Boss_Cleansing
+    clips: []
 --- !u!1 &1351223953169973113
 GameObject:
   m_ObjectHideFlags: 0
@@ -2892,7 +2955,7 @@ Transform:
   m_GameObject: {fileID: 6239491860012354114}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.4019394, y: -1.5325612, z: -10.674077}
+  m_LocalPosition: {x: -7.2778244, y: -3.329731, z: -10.674077}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
