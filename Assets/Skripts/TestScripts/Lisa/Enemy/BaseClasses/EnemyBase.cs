@@ -10,7 +10,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected bool isDying;
     protected bool deathAnimPlayed;
     protected SpriteRenderer sRenderer;
-    private float flashDuration = 0.5f;
+    private float flashDuration = 0.2f;
     public BoxCollider2D attackCollider;
     protected bool attackCollision;
     protected virtual void Start()
@@ -25,14 +25,9 @@ public abstract class EnemyBase : MonoBehaviour
     public virtual void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        StartCoroutine(FreezeAnimation(0.3f));
+        StartCoroutine(FreezeAnimation(0.2f));
         StartCoroutine(FlashRed());
         
-
-        if (currentHealth <= 0)
-        {
-            isDying = true;
-        }
     }
 
     protected virtual void Die()
@@ -57,7 +52,11 @@ public abstract class EnemyBase : MonoBehaviour
         {
             animator.speed = 0; 
             yield return new WaitForSecondsRealtime(duration);
-            animator.speed = 1; 
+            animator.speed = 1;
+            if (currentHealth <= 0)
+            {
+                 isDying = true;
+            }
         }
     }
     public void EnableAttackCollider()
