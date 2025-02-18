@@ -19,7 +19,7 @@ public class FlyingEnemy : EnemyBase
     private float damageCooldown = 1.5f; // kann man in base machen
     private float damageCooldownTimer = 0f;
 
-    private bool patroling;
+    public bool patroling;
     public bool shootingEnemy = true;
 
     private void Awake()
@@ -32,17 +32,10 @@ public class FlyingEnemy : EnemyBase
             if (playerObject != null)
             {
                 player = playerObject.transform;
-                
+
             }
         }
-        if(patrolPoints == null)
-        {
-            patroling = false;
-        }
-        else
-        {
-            patroling = true;
-        }
+
     }
 
     void Update()
@@ -77,7 +70,7 @@ public class FlyingEnemy : EnemyBase
 
     public void Patrol()
     {
-        if (!isDying)
+        if (!isDying && patroling)
         {
             Vector2 direction = patrolPoints[targetPoint].position - transform.position;
 
