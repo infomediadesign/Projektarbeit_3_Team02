@@ -118,20 +118,7 @@ public class FlyingEnemy : EnemyBase
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (damageCooldownTimer <= 0f)
-        {
-            if (!isDying && other.IsTouching(enemyHitbox))
-            {
-                playerHealth.TakeDamage(stats.damage);
-                Debug.Log("Player nimmt Schaden: " + stats.damage);
-
-                damageCooldownTimer = damageCooldown;
-            }
-
-        }
-    }
+  
     private void CheckForPlayerAndShoot()
     {
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
