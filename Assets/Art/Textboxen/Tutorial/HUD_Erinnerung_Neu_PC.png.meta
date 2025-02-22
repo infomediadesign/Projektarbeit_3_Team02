@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: a83863c94f8547e4daa1fadbc5f4c51d
+guid: 319d49a617db11a45865f57364aee935
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4815509903325437004
-    second: L1_Background_V1_Ebene5_0
-  - first:
-      213: 7353062873100716890
-    second: L1_Background_V1_Ebene5_1
-  - first:
-      213: -7019146745212826845
-    second: L1_Background_V1_Ebene5_2
+      213: -5430962489002628105
+    second: HUD_Erinnerung_Neu_PC_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -43,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -78,10 +72,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -106,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: L1_Background_V1_Ebene5_0
+      name: HUD_Erinnerung_Neu_PC_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 9600
+        width: 1920
         height: 1080
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.6645531, y: 0.2557706}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f03e00a0544c8f642ac4784ae9a4bbad
-      internalID: -947252638
+      spriteID: 7fbe686046851a4b0800000000000000
+      internalID: -5430962489002628105
       vertices: []
       indices: 
       edges: []
@@ -131,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e7e58e7fb7a3a764889c080c6fb12d51
+    spriteID: 4c619827f7d754543b3e833c6abe11bd
     internalID: 0
     vertices: []
     indices: 
@@ -141,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      L1_Background_V1_Ebene5_0: -947252638
+      HUD_Erinnerung_Neu_PC_0: -5430962489002628105
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

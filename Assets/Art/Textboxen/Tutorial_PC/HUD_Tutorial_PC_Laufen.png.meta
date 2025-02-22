@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: a83863c94f8547e4daa1fadbc5f4c51d
+guid: 448ad0c34f3dcd84c91def27e4b16b54
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4815509903325437004
-    second: L1_Background_V1_Ebene5_0
-  - first:
-      213: 7353062873100716890
-    second: L1_Background_V1_Ebene5_1
-  - first:
-      213: -7019146745212826845
-    second: L1_Background_V1_Ebene5_2
+      213: 3856218838625109961
+    second: HUD_Tutorial_PC_Laufen_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -43,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -78,10 +72,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -106,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: L1_Background_V1_Ebene5_0
+      name: HUD_Tutorial_PC_Laufen_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 9600
+        width: 1920
         height: 1080
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.118055545, y: 0.073269054}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f03e00a0544c8f642ac4784ae9a4bbad
-      internalID: -947252638
+      spriteID: 9c74b644a9a048530800000000000000
+      internalID: 3856218838625109961
       vertices: []
       indices: 
       edges: []
@@ -131,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e7e58e7fb7a3a764889c080c6fb12d51
+    spriteID: 2353b611abf325b4ba38f88c9234a757
     internalID: 0
     vertices: []
     indices: 
@@ -141,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      L1_Background_V1_Ebene5_0: -947252638
+      HUD_Tutorial_PC_Laufen_0: 3856218838625109961
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
