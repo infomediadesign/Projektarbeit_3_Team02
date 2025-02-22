@@ -7,6 +7,7 @@ public class Thorns : MonoBehaviour
     public float moveSpeed = 2f;
     public float damage = 25f;
     private PlayerHealth playerHealth;
+    public BoxCollider2D dmgHitbox;
 
     protected float damageCooldown = 1.5f; 
     protected float damageCooldownTimer = 0f;
@@ -33,7 +34,7 @@ public class Thorns : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.IsTouching(dmgHitbox))
         {
             Debug.Log("trigger");
             playerHealth = other.GetComponent<PlayerHealth>();
@@ -45,7 +46,7 @@ public class Thorns : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.IsTouching(dmgHitbox))
         {
             playerHealth = other.GetComponent<PlayerHealth>();
             if (damageCooldownTimer <= 0f)

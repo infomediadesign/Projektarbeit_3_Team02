@@ -88,6 +88,7 @@ public class StationaryEnemy : EnemyBase
         if (direction < 0)
         {
             spriteRenderer.flipX = false;
+            //offset hier noch bearbeiten
         }
         else if (direction > 0)
         {
