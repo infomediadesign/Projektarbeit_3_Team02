@@ -897,11 +897,28 @@ MonoBehaviour:
     clips:
     - {fileID: 0}
   - groupID: Boss_Idle
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 34a02a78a7b3ba5448c7ba2204bdd0ab, type: 3}
+    - {fileID: 8300000, guid: fa0d91b889abc344ba1bec2f384a7d00, type: 3}
+    - {fileID: 8300000, guid: d9989fe0c8f59b840925786f9d4fbb38, type: 3}
+    - {fileID: 8300000, guid: 280991258be88334cbc7db4d0f9ef48b, type: 3}
   - groupID: Boss_Stage_Change
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 4ab75b12e2c151644a786dfff6eab6c4, type: 3}
   - groupID: Boss_Cleansing
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 121eebcdc0827a94496766a8ef1fb6a0, type: 3}
+  - groupID: Boss_Defeat_Scream
+    clips:
+    - {fileID: 8300000, guid: f38a4bb172d6cbf4f859f8577722e44f, type: 3}
+  - groupID: Boss_Laugh
+    clips:
+    - {fileID: 8300000, guid: 79455fb291601c449910f01932f2037b, type: 3}
+    - {fileID: 8300000, guid: 3b252597f8cadde479591bfb7b419284, type: 3}
+  - groupID: Boss_Damage_Taken
+    clips:
+    - {fileID: 8300000, guid: d1d9d8bd17963bd43849377918af23ed, type: 3}
+    - {fileID: 8300000, guid: 3ac9852146a39bb42a805573645da5ad, type: 3}
 --- !u!1 &1351223953169973113
 GameObject:
   m_ObjectHideFlags: 0
@@ -2955,7 +2972,7 @@ Transform:
   m_GameObject: {fileID: 6239491860012354114}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.2778244, y: -3.329731, z: -10.674077}
+  m_LocalPosition: {x: -5.02697, y: -1.6952213, z: -10.674077}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
