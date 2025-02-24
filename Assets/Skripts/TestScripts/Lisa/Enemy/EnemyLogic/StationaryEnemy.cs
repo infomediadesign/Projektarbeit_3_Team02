@@ -13,6 +13,7 @@ public class StationaryEnemy : EnemyBase
     protected SpriteRenderer spriteRenderer;
     private bool isObstacle;
     public CapsuleCollider2D sEnemyHitbox;
+    private bool statEnemy;
 
     public GameObject counterUIPrefab; 
     protected CounterUI counterUIInstance;
@@ -34,9 +35,11 @@ public class StationaryEnemy : EnemyBase
     protected float distance; //zwischen player und enemy
     public float timer;
     protected float intTimer; //store den initial timer
+    private Vector3 originalOffset;
 
     private void Awake()
     {
+        statEnemy = true;
         intTimer = timer;
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -49,6 +52,7 @@ public class StationaryEnemy : EnemyBase
                 player = playerObject.transform;
             }
         }
+        originalOffset = spriteRenderer.transform.localPosition;
     }
     void Update()
     {
@@ -84,15 +88,30 @@ public class StationaryEnemy : EnemyBase
     protected void Rotate() // das einfach in base enemy packen
     {
         float direction = player.position.x - transform.position.x;
-
-        if (direction < 0)
+        if (statEnemy)
         {
-            spriteRenderer.flipX = false;
-            //offset hier noch bearbeiten
+            if (direction < 0)
+            {
+                spriteRenderer.flipX = false;
+                spriteRenderer.transform.localPosition = new Vector3(originalOffset.x, spriteRenderer.transform.localPosition.y, spriteRenderer.transform.localPosition.z);
+            }
+            else if (direction > 0)
+            {
+                spriteRenderer.flipX = true;
+                spriteRenderer.transform.localPosition = new Vector3(originalOffset.x + 0.45f, spriteRenderer.transform.localPosition.y, spriteRenderer.transform.localPosition.z);
+            }
         }
-        else if (direction > 0)
+        else
         {
-            spriteRenderer.flipX = true;
+            if (direction < 0)
+            {
+                spriteRenderer.flipX = false;
+
+            }
+            else if (direction > 0)
+            {
+                spriteRenderer.flipX = true;
+            }
         }
     }
     private void CheckDistance()
