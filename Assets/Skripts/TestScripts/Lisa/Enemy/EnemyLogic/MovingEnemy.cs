@@ -91,25 +91,32 @@ public class MovingEnemy : StationaryEnemy
         {
             StopAttack();
         }
+        if (damageCooldownTimer > 0f)
+        {
+            damageCooldownTimer -= Time.deltaTime;
+        }
     }
 
     public void Patrol()
     {
-        Vector2 direction = patrolPoints[targetPoint].position - transform.position;
+        if (!isDying)
+        {
+            Vector2 direction = patrolPoints[targetPoint].position - transform.position;
 
-        if (direction.x < 0)
-        {
-            spriteRenderer.flipX = false;
-        }
-        else if (direction.x > 0)
-        {
-            spriteRenderer.flipX = true;
-        }
+            if (direction.x < 0)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else if (direction.x > 0)
+            {
+                spriteRenderer.flipX = true;
+            }
 
-        transform.position = Vector2.MoveTowards(transform.position, patrolPoints[targetPoint].position, moveSpeed * Time.deltaTime);
-        if (Vector2.Distance(transform.position, patrolPoints[targetPoint].position) < 0.1f)
-        {
-            increaseTarget();
+            transform.position = Vector2.MoveTowards(transform.position, patrolPoints[targetPoint].position, moveSpeed * Time.deltaTime);
+            if (Vector2.Distance(transform.position, patrolPoints[targetPoint].position) < 0.1f)
+            {
+                increaseTarget();
+            }
         }
     }
     private bool IsGroundAhead()
@@ -120,13 +127,14 @@ public class MovingEnemy : StationaryEnemy
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.CompareTag("Player"))
         {
             target = other.gameObject;
             playerInRange = true;
             playerHealth = other.GetComponent<PlayerHealth>();
 
-            if (other.IsTouching(enemyHitbox) && !isDying)
+            if (other.IsTouching(enemyHitbox) && !isDying || !isDying && other.IsTouching(attackCollider) && attackCollision)
             {
                 playerHealth.TakeDamage(stats.damage);
                 Debug.Log("taking damage: " + stats.damage);
@@ -134,7 +142,7 @@ public class MovingEnemy : StationaryEnemy
            
         }
      }
-    
+
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -147,6 +155,28 @@ public class MovingEnemy : StationaryEnemy
             else
             {
                 playerInRange = false;
+            }
+
+        }
+        if (other.CompareTag("Player") && other.IsTouching(enemyHitbox) && !isDying)
+        {
+            playerHealth = other.GetComponent<PlayerHealth>();
+            if (damageCooldownTimer <= 0f)
+            {
+
+                playerHealth.TakeDamage(stats.damage);
+                Debug.Log("taking damage: " + stats.damage);
+
+                damageCooldownTimer = damageCooldown;
+            }
+        }
+        else if(other.CompareTag("Player") && !isDying && other.IsTouching(attackCollider))
+        {
+            if (attackCollision)
+            {
+                playerHealth.TakeDamage(stats.damage);
+                Debug.Log("taking damage: " + stats.damage);
+                attackCollision = false;
             }
         }
     }
@@ -179,13 +209,17 @@ public class MovingEnemy : StationaryEnemy
 
     private void Move()
     {
-        anim.SetBool("Moving", true);
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("enemyAttack"))
+        if (!isDying)
         {
-            Vector2 targetPostition = new Vector2(target.transform.position.x, transform.position.y);
-            transform.position = Vector2.MoveTowards(transform.position, targetPostition, moveSpeed * Time.deltaTime);
+            anim.SetBool("Moving", true);
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("enemyAttack"))
+            {
+                Vector2 targetPostition = new Vector2(target.transform.position.x, transform.position.y);
+                transform.position = Vector2.MoveTowards(transform.position, targetPostition, moveSpeed * Time.deltaTime);
+            }
         }
     }
+ 
     void increaseTarget()
     {
         targetPoint++;

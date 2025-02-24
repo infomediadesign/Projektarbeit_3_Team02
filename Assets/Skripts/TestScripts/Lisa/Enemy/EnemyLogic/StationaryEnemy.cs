@@ -12,6 +12,8 @@ public class StationaryEnemy : EnemyBase
     protected PlayerHealth playerHealth;
     protected SpriteRenderer spriteRenderer;
     private bool isObstacle;
+    public CapsuleCollider2D sEnemyHitbox;
+    private bool statEnemy;
 
     public GameObject counterUIPrefab; 
     protected CounterUI counterUIInstance;
@@ -26,14 +28,18 @@ public class StationaryEnemy : EnemyBase
     public Transform player;
     protected bool canAttack = true;
     protected bool cooling;
+    protected float damageCooldown = 1.5f; // wann player schaden bekommen kann
+    protected float damageCooldownTimer = 0f;
 
     protected Animator anim; //base klasse?
     protected float distance; //zwischen player und enemy
     public float timer;
     protected float intTimer; //store den initial timer
+    private Vector3 originalOffset;
 
     private void Awake()
     {
+        statEnemy = true;
         intTimer = timer;
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -46,6 +52,7 @@ public class StationaryEnemy : EnemyBase
                 player = playerObject.transform;
             }
         }
+        originalOffset = spriteRenderer.transform.localPosition;
     }
     void Update()
     {
@@ -56,6 +63,10 @@ public class StationaryEnemy : EnemyBase
             if (isDying)
             {
                 anim.SetBool("Death", true);
+            }
+            if (damageCooldownTimer > 0f)
+            {
+                damageCooldownTimer -= Time.deltaTime;
             }
         }
       
@@ -77,14 +88,30 @@ public class StationaryEnemy : EnemyBase
     protected void Rotate() // das einfach in base enemy packen
     {
         float direction = player.position.x - transform.position.x;
-
-        if (direction < 0)
+        if (statEnemy)
         {
-            spriteRenderer.flipX = false;
+            if (direction < 0)
+            {
+                spriteRenderer.flipX = false;
+                spriteRenderer.transform.localPosition = new Vector3(originalOffset.x, spriteRenderer.transform.localPosition.y, spriteRenderer.transform.localPosition.z);
+            }
+            else if (direction > 0)
+            {
+                spriteRenderer.flipX = true;
+                spriteRenderer.transform.localPosition = new Vector3(originalOffset.x + 0.45f, spriteRenderer.transform.localPosition.y, spriteRenderer.transform.localPosition.z);
+            }
         }
-        else if (direction > 0)
+        else
         {
-            spriteRenderer.flipX = true;
+            if (direction < 0)
+            {
+                spriteRenderer.flipX = false;
+
+            }
+            else if (direction > 0)
+            {
+                spriteRenderer.flipX = true;
+            }
         }
     }
     private void CheckDistance()
@@ -102,24 +129,48 @@ public class StationaryEnemy : EnemyBase
             Cooldown(); 
         }
     }
-    private void OnTriggerEnter2D(Collider2D other) //weapon hitbox muss in den trigger
+    private void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.CompareTag("Player") && !isDying)
         {
-            Debug.Log("trigger");
             playerHealth = other.GetComponent<PlayerHealth>();
-         
-            playerHealth.TakeDamage(stats.damage);
-            Debug.Log("taking damage: " +stats.damage);
+
+            if (other.IsTouching(sEnemyHitbox))
+            {
+                playerHealth.TakeDamage(stats.damage);
+                Debug.Log("taking damage: " + stats.damage);
+            }
+
+        }
+
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && !isDying && other.IsTouching(sEnemyHitbox))
+        {
+            if (damageCooldownTimer <= 0f)
+            {
+
+                playerHealth.TakeDamage(stats.damage);
+                Debug.Log("taking damage: " + stats.damage);
+
+                damageCooldownTimer = damageCooldown;
+
+
+            }
+        }
+        else if (other.CompareTag("Player") && !isDying && other.IsTouching(attackCollider))
+        {
+            if (attackCollision)
+            {
+                playerHealth.TakeDamage(stats.damage);
+                Debug.Log("taking damage: " + stats.damage);
+                attackCollision = false;
+            }
         }
     }
 
-    /*private void OnTriggerStay2D(Collider2D other)
-    {
-        //timer hinzufügen
-        playerHealth.TakeDamage(stats.damage);
-        Debug.Log("taking damage: " + stats.damage);
-    }*/
     protected void SetCounterPossible()
     {
         counterPossible = true;

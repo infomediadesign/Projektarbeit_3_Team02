@@ -16,6 +16,7 @@ public class PlayerAnimation : MonoBehaviour
     const string playerJump = "playerJump";
     const string playerBlock = "playerBlock";
     const string playerDamage = "playerDamage";
+    const string playerAirCounter = "playerAirCounter";
 
     void Start()
     {
@@ -82,7 +83,7 @@ public class PlayerAnimation : MonoBehaviour
             }
             else if (currentSubState is AirCounter)
             {
-                AnimStateTransitionString(playerJump);
+                AnimStateTransitionString(playerAirCounter);
             }
             else if (currentSubState is Falling)
             {

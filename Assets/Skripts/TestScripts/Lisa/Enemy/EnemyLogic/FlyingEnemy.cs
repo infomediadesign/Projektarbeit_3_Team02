@@ -7,6 +7,7 @@ public class FlyingEnemy : EnemyBase
     protected SpriteRenderer spriteRenderer;
     protected Animator anim;
     public Transform player;
+    public CapsuleCollider2D fEnemyHitbox;
 
     public Transform[] patrolPoints;
     private int targetPoint;
@@ -14,6 +15,12 @@ public class FlyingEnemy : EnemyBase
     public GameObject firePrefab;
     public Transform shootPoint;
     private float nextShootTime = 0f;
+
+    private float damageCooldown = 1.5f; // kann man in base machen
+    private float damageCooldownTimer = 0f;
+
+    public bool patroling;
+    public bool shootingEnemy = true;
 
     private void Awake()
     {
@@ -25,18 +32,30 @@ public class FlyingEnemy : EnemyBase
             if (playerObject != null)
             {
                 player = playerObject.transform;
-                
+
             }
         }
+       
     }
 
     void Update()
     {
-        Patrol();
-        CheckForPlayerAndShoot();
+        if (patroling)
+        {
+            Patrol();
+        }
+        if (shootingEnemy)
+        {
+            CheckForPlayerAndShoot();
+        }
+   
         if (isDying)
         {
             anim.SetBool("Death", true);
+        }
+        else
+        {
+            anim.SetBool("Death", false);
         }
     }
 
@@ -55,21 +74,24 @@ public class FlyingEnemy : EnemyBase
 
     public void Patrol()
     {
-        Vector2 direction = patrolPoints[targetPoint].position - transform.position;
+        if (!isDying && patroling)
+        {
+            Vector2 direction = patrolPoints[targetPoint].position - transform.position;
 
-        if (direction.x > 0)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else if (direction.x < 0)
-        {
-            spriteRenderer.flipX = false;
-        }
+            if (direction.x > 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else if (direction.x < 0)
+            {
+                spriteRenderer.flipX = false;
+            }
 
-        transform.position = Vector2.MoveTowards(transform.position, patrolPoints[targetPoint].position, fStats.flySpeed * Time.deltaTime);
-        if (Vector2.Distance(transform.position, patrolPoints[targetPoint].position) < 0.1f)
-        {
-            increaseTarget();
+            transform.position = Vector2.MoveTowards(transform.position, patrolPoints[targetPoint].position, fStats.flySpeed * Time.deltaTime);
+            if (Vector2.Distance(transform.position, patrolPoints[targetPoint].position) < 0.1f)
+            {
+                increaseTarget();
+            }
         }
     }
     void increaseTarget()
@@ -80,18 +102,23 @@ public class FlyingEnemy : EnemyBase
             targetPoint = 0;
         }
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isDying)
         {
             Debug.Log("trigger");
             playerHealth = other.GetComponent<PlayerHealth>();
-
-            //playerHealth.TakeDamage(stats.damage);
-            Debug.Log("taking damage: " + stats.damage);
+            if (other.IsTouching(fEnemyHitbox))
+            {
+                playerHealth.TakeDamage(stats.damage);
+                Debug.Log("taking damage: " + stats.damage);
+            }
 
         }
     }
+
+  
     private void CheckForPlayerAndShoot()
     {
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
