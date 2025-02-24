@@ -31,6 +31,15 @@ public class HealthDisplayManager : MonoBehaviour
         {
             healthSprites[0].spriteObject.SetActive(true);
         }
+
+        // Registriere die Methode für das HealthChanged-Event
+        EventManager.Instance.StartListening<int>("HealthChanged", UpdateHealthDisplay);
+    }
+
+    private void OnDestroy()
+    {
+        // Beim Zerstören abmelden
+        EventManager.Instance.StopListening<int>("HealthChanged", UpdateHealthDisplay);
     }
 
     // Diese Methode wird aufgerufen, wenn sich die Health ändert

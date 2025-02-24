@@ -13,6 +13,10 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         // Subscribe with a parameter
         EventManager.Instance.StartListening<int>("LifeCollected", HealPlayer);
+
+        // Initiales Event auslösen, damit die Gesundheitsanzeige aktualisiert wird
+        EventManager.Instance.TriggerEvent<int>("HealthChanged", (int)currentHealth);
+
     }
 
     private void OnDestroy()
@@ -26,6 +30,8 @@ public class PlayerHealth : MonoBehaviour
         if (!state.shielded && currentHealth > 0)
         {
             currentHealth -= damage;
+            // Event auslösen, wenn sich die Gesundheit ändert
+            EventManager.Instance.TriggerEvent<int>("HealthChanged", (int)currentHealth);
         }
        
         else if (currentHealth <= 0)
@@ -42,6 +48,9 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(float amount)
     {
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth); // heal AMOUNT - nicht over maxHelath
+        
+        // Event auslösen, wenn sich die Gesundheit ändert
+        EventManager.Instance.TriggerEvent<int>("HealthChanged", (int)currentHealth);
     }
 
     private void Die()
