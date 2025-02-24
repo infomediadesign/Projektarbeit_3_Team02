@@ -141,11 +141,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c1efc63e918d6479df445ad14b0c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnEnemyPrefab: {fileID: 0}
   stats: {fileID: 11400000, guid: 865f3fd16c41faf4fa11a4a8ea0fa34a, type: 2}
   attackCollider: {fileID: 3058841900799613563}
+  respawn: 0
+  respawnTime: 0
   fStats: {fileID: 11400000, guid: 865f3fd16c41faf4fa11a4a8ea0fa34a, type: 2}
   player: {fileID: 0}
-  enemyHitbox: {fileID: 605713249046476848}
+  fEnemyHitbox: {fileID: 605713249046476848}
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -253,7 +256,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.048864927, y: 0.14773045}
+  m_Offset: {x: -0.01383549, y: 0.057654962}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -263,7 +266,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.26589298, y: 0.22271064}
+  m_Size: {x: 0.8964211, y: 0.5029453}
   m_EdgeRadius: 0
 --- !u!1 &5420092315747877750
 GameObject:
@@ -331,6 +334,6 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.14100547, y: 0.28858608}
-  m_Size: {x: 0.58231896, y: 0.58231896}
-  m_Direction: 0
+  m_Offset: {x: 0.14100549, y: 0.16348073}
+  m_Size: {x: 0.582319, y: 0.33211076}
+  m_Direction: 1

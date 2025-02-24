@@ -7,7 +7,7 @@ public class FlyingEnemy : EnemyBase
     protected SpriteRenderer spriteRenderer;
     protected Animator anim;
     public Transform player;
-    public CapsuleCollider2D enemyHitbox;
+    public CapsuleCollider2D fEnemyHitbox;
 
     public Transform[] patrolPoints;
     private int targetPoint;
@@ -35,7 +35,7 @@ public class FlyingEnemy : EnemyBase
 
             }
         }
-
+       
     }
 
     void Update()
@@ -52,6 +52,10 @@ public class FlyingEnemy : EnemyBase
         if (isDying)
         {
             anim.SetBool("Death", true);
+        }
+        else
+        {
+            anim.SetBool("Death", false);
         }
     }
 
@@ -99,15 +103,18 @@ public class FlyingEnemy : EnemyBase
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) //weapon hitbox muss in den trigger
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !isDying && other.IsTouching(enemyHitbox))
+        if (other.CompareTag("Player") && !isDying)
         {
             Debug.Log("trigger");
             playerHealth = other.GetComponent<PlayerHealth>();
+            if (other.IsTouching(fEnemyHitbox))
+            {
+                playerHealth.TakeDamage(stats.damage);
+                Debug.Log("taking damage: " + stats.damage);
+            }
 
-            playerHealth.TakeDamage(stats.damage);
-            Debug.Log("taking damage: " + stats.damage);
         }
     }
 

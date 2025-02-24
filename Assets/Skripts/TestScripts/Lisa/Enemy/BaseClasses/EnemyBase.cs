@@ -4,35 +4,53 @@ using System.Collections;
 
 public abstract class EnemyBase : MonoBehaviour
 {
+    public GameObject respawnEnemyPrefab;
     public EnemyStats stats;
     protected float currentHealth;
     protected bool counterPossible;
     protected bool isDying;
-    protected bool deathAnimPlayed;
     protected SpriteRenderer sRenderer;
     private float flashDuration = 0.2f;
     public BoxCollider2D attackCollider;
     protected bool attackCollision;
+    public bool respawn;
+    public float respawnTime;
     protected virtual void Start()
     {
         attackCollision = false;
         currentHealth = stats.maxHealth;
         isDying = false;
-        deathAnimPlayed = false;
         sRenderer = GetComponent<SpriteRenderer>();
     }
 
     public virtual void TakeDamage(int damage)
     {
+        if (isDying) return;
         currentHealth -= damage;
         StartCoroutine(FreezeAnimation(0.2f));
         StartCoroutine(FlashRed());
+
         
     }
 
     protected virtual void Die()
     {
-        Destroy(gameObject);
+
+        if (!respawn)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Collider2D[] colliders = GetComponentsInChildren<Collider2D>();
+            foreach (Collider2D col in colliders)
+            {
+                col.enabled = false;
+            }
+            sRenderer.enabled = false;
+            StartCoroutine(RespawnEnemy());
+        }
+
     }
     public bool GetCounterPossible()
     {
@@ -55,9 +73,33 @@ public abstract class EnemyBase : MonoBehaviour
             animator.speed = 1;
             if (currentHealth <= 0)
             {
-                 isDying = true;
+                isDying = true;
             }
         }
+    }
+    private IEnumerator RespawnEnemy()
+    {
+        yield return new WaitForSeconds(respawnTime);
+
+        if (respawnEnemyPrefab != null)
+        {
+           GameObject newEnemy = Instantiate(respawnEnemyPrefab, transform.position, transform.rotation);
+            SpriteRenderer newEnemyRenderer = newEnemy.GetComponent<SpriteRenderer>();
+            if (newEnemyRenderer != null)
+            {
+                newEnemyRenderer.enabled = true;
+            }
+            Collider2D newEnemyCollider = newEnemy.GetComponent<Collider2D>();
+            if (newEnemyCollider != null)
+            {
+                newEnemyCollider.enabled = true; 
+            }
+        }
+        else
+        {
+            Debug.LogError("Enemy prefab is not assigned!");
+        }
+        Destroy(gameObject);
     }
     public void EnableAttackCollider()
     {
@@ -75,3 +117,4 @@ public abstract class EnemyBase : MonoBehaviour
     public abstract void Attack();
     public abstract void StopAttack();
 }
+

@@ -66,9 +66,9 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.14100547, y: 0.28858608}
-  m_Size: {x: 0.58231896, y: 0.58231896}
-  m_Direction: 0
+  m_Offset: {x: 0.17786579, y: 0.16990714}
+  m_Size: {x: 0.60210985, y: 0.34496796}
+  m_Direction: 1
 --- !u!1 &3296434879348932529
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,16 +210,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c1efc63e918d6479df445ad14b0c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnEnemyPrefab: {fileID: 3296434879348932529}
   stats: {fileID: 11400000, guid: 062c666885bc51a4aad8d44ddb33cb80, type: 2}
   attackCollider: {fileID: 4533973258898406104}
+  respawn: 1
+  respawnTime: 3
   fStats: {fileID: 11400000, guid: 062c666885bc51a4aad8d44ddb33cb80, type: 2}
   player: {fileID: 0}
-  enemyHitbox: {fileID: 6242000485889460614}
+  fEnemyHitbox: {fileID: 6242000485889460614}
   patrolPoints: []
   firePrefab: {fileID: 6485825918121921693, guid: a91f81ffa5c5fc54aa3d3779114e8c5a, type: 3}
   shootPoint: {fileID: 1211516438892815199}
   patroling: 0
-  shootingEnemy: 1
+  shootingEnemy: 0
 --- !u!114 &7839670926722840708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,7 +323,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.094320476, y: 0.06250139}
+  m_Offset: {x: -0.027788162, y: 0.06250125}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -330,5 +333,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.35680407, y: 0.22952895}
+  m_Size: {x: 0.84230673, y: 0.53881246}
   m_EdgeRadius: 0
