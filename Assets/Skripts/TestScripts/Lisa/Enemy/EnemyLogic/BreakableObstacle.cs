@@ -1,8 +1,10 @@
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BreakableObstacle : EnemyBase
 {
-    public ObstacleStats ObstStats;
+    public ObstacleStats obstStats;
     public Boss boss; 
     public bool weakness;
     void Awake()
@@ -13,18 +15,18 @@ public class BreakableObstacle : EnemyBase
         {
             boss = bossObject.GetComponent<Boss>(); 
         }
-    }
-
-    void Update()
-    {
 
     }
+
     public override void Attack()
     {
     }
-
     public override void StopAttack()
     {
+    }
+    void Update()
+    {
+
     }
 
     void OnDestroy() 
@@ -32,6 +34,7 @@ public class BreakableObstacle : EnemyBase
         if (weakness)
         {
             boss.OnWeaknessDestroyed();
+
         }
     }
 }

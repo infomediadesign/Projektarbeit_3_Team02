@@ -15,6 +15,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected bool attackCollision;
     public bool respawn;
     public float respawnTime;
+    public bool isObstacle;
     protected virtual void Start()
     {
         attackCollision = false;
@@ -26,17 +27,27 @@ public abstract class EnemyBase : MonoBehaviour
     public virtual void TakeDamage(int damage)
     {
         if (isDying) return;
-        currentHealth -= damage;
-        StartCoroutine(FreezeAnimation(0.2f));
-        StartCoroutine(FlashRed());
-
+        if (isObstacle)
+        {
+            currentHealth -= damage;
+            if(currentHealth <= 0)
+            {
+                Die();
+            }
+        }
+        else
+        {
+            currentHealth -= damage;
+            StartCoroutine(FreezeAnimation(0.2f));
+            StartCoroutine(FlashRed());
+        }
         
     }
 
     protected virtual void Die()
     {
 
-        if (!respawn)
+        if (!respawn || isObstacle)
         {
             Destroy(gameObject);
         }

@@ -35,7 +35,6 @@ public class Counter : BaseState
                 if (enemy != null && context.counterWindow)
                 {
                     context.playerCombat.Attack(enemy);
-                    //context.StartCoroutine(context.FlashGreen());
                     context.StartCoroutine(context.FreezeAnimation(0.2f));
                    
                     if (context.counterPossible)
