@@ -27,6 +27,7 @@ public class Block : BaseState
     {
         Debug.Log("block");
         renderer.color = Color.green;
+        context.shielded = true;
 
         if(context.isGrounded && blockReleased)
         {
@@ -49,6 +50,7 @@ public class Block : BaseState
         context.playerControls.Block.canceled -= OnBlockCanceled;
         context.animator.SetBool("blockFinished", true);
         context.playerControls.Jump.Enable();
+        context.shielded = false;
 
     }
     private void OnBlockCanceled(UnityEngine.InputSystem.InputAction.CallbackContext context)

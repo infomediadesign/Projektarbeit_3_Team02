@@ -14,6 +14,7 @@ public class StateManager : MonoBehaviour
     [HideInInspector] public CounterZone zone;
     [HideInInspector] public Animator animator;
     private SpriteRenderer sRenderer;
+    
 
     public InputSystem_Actions inputActions;
     public InputSystem_Actions.TestActions playerControls;
@@ -37,7 +38,7 @@ public class StateManager : MonoBehaviour
 
     public bool isEnemy { get; private set; }
     public bool isGroundEnemy { get; private set; }
-    public bool shielded { get; private set; }
+    public bool shielded;
     public bool rolling { get; private set; }
     public bool countering { get; private set; }
     public bool jumpReleased;
@@ -87,15 +88,16 @@ public class StateManager : MonoBehaviour
         isEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
         isGroundEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, groundEnemyLayer);
 
-        if (currentState == states.Blocking())
+       /* if (currentSubState == states.Blocking())
         {
             shielded = true;
+            Debug.Log("shielded is true");
         }
         else
         {
             shielded = false;
         }
-        if (currentState == states.Rolling()) //verwende ich das noch?
+        if (currentSubState == states.Rolling()) //verwende ich das noch?
         {
             rolling = true;
         }
@@ -103,14 +105,14 @@ public class StateManager : MonoBehaviour
         {
             rolling = false;
         }
-        if (currentState == states.Countering())
+        if (currentSubState == states.Countering())
         {
             countering = true;
         }
         else
         {
             countering = false;
-        }
+        }*/
 
         currentState.UpdateStates();
     }
