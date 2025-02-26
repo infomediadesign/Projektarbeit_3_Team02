@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.14, y: 3.46, z: 0}
-  m_LocalScale: {x: 0.7759, y: 0.7759, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1301342811438287999}
@@ -146,6 +146,7 @@ MonoBehaviour:
   attackCollider: {fileID: 3058841900799613563}
   respawn: 0
   respawnTime: 0
+  isObstacle: 0
   fStats: {fileID: 11400000, guid: 865f3fd16c41faf4fa11a4a8ea0fa34a, type: 2}
   player: {fileID: 0}
   fEnemyHitbox: {fileID: 605713249046476848}
