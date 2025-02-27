@@ -34,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
             EventManager.Instance.TriggerEvent<int>("HealthChanged", (int)currentHealth);
         }
        
-        else if (currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
