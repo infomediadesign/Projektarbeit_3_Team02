@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     private float currentHealth;
     public float maxHealth;
     private StateManager state;
+    private bool firstDeath;
   
     private void Start()
     { 
@@ -17,6 +18,7 @@ public class PlayerHealth : MonoBehaviour
 
         // Initiales Event auslösen, damit die Gesundheitsanzeige aktualisiert wird
         EventManager.Instance.TriggerEvent<int>("HealthChanged", (int)currentHealth);
+        firstDeath = false;
 
     }
 
@@ -59,14 +61,21 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        state.deathAnim = true;
-        //zoom
-        StartCoroutine(DieSequence());
+        if (!firstDeath)
+        {
+            state.deathAnim = true;
+            firstDeath = true;
+        }
+
+
+            //zoom
+            StartCoroutine(DieSequence());
     }
 
     private IEnumerator DieSequence()
     {
-        yield return new WaitForSeconds(5f); 
+        
+        yield return new WaitForSeconds(3f); 
         SceneManager.LoadScene("GameOver");  
     }
 }
