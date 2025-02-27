@@ -68,13 +68,13 @@ public class PlayerHealth : MonoBehaviour
         }
 
 
-            //zoom
+          
             StartCoroutine(DieSequence());
     }
 
     private IEnumerator DieSequence()
     {
-        
+        FindFirstObjectByType<CameraZoom>().ZoomIn();
         yield return new WaitForSeconds(3f); 
         SceneManager.LoadScene("GameOver");  
     }
