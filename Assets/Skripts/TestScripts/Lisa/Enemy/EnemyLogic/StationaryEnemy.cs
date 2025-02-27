@@ -11,7 +11,6 @@ public class StationaryEnemy : EnemyBase
     public StationaryEnemyStats eStats;
     protected PlayerHealth playerHealth;
     protected SpriteRenderer spriteRenderer;
-    private bool isObstacle;
     public CapsuleCollider2D sEnemyHitbox;
     private bool statEnemy;
 
@@ -56,8 +55,7 @@ public class StationaryEnemy : EnemyBase
     }
     void Update()
     {
-        if (!isObstacle)
-        {
+
             Rotate();
             CheckDistance();
             if (isDying)
@@ -68,7 +66,7 @@ public class StationaryEnemy : EnemyBase
             {
                 damageCooldownTimer -= Time.deltaTime;
             }
-        }
+        
       
     }
     public override void Attack()
@@ -90,15 +88,21 @@ public class StationaryEnemy : EnemyBase
         float direction = player.position.x - transform.position.x;
         if (statEnemy)
         {
-            if (direction < 0)
+            if (direction < -0.2)
             {
                 spriteRenderer.flipX = false;
                 spriteRenderer.transform.localPosition = new Vector3(originalOffset.x, spriteRenderer.transform.localPosition.y, spriteRenderer.transform.localPosition.z);
             }
-            else if (direction > 0)
+            else if (direction > 0.2)
             {
                 spriteRenderer.flipX = true;
                 spriteRenderer.transform.localPosition = new Vector3(originalOffset.x + 0.45f, spriteRenderer.transform.localPosition.y, spriteRenderer.transform.localPosition.z);
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+                spriteRenderer.transform.localPosition = new Vector3(originalOffset.x, spriteRenderer.transform.localPosition.y, spriteRenderer.transform.localPosition.z);
+
             }
         }
         else
@@ -111,6 +115,10 @@ public class StationaryEnemy : EnemyBase
             else if (direction > 0)
             {
                 spriteRenderer.flipX = true;
+            }
+            else if(direction == 0)
+            {
+                spriteRenderer.flipX = false;
             }
         }
     }
