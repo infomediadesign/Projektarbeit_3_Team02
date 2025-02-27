@@ -308,7 +308,9 @@ MonoBehaviour:
   counterPossible: 1
   counterWindow: 0
   damageAnim: 0
+  deathAnim: 0
   isObstacle: 0
+  deathLastFrame: 0
 --- !u!114 &5051107444858795921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,7 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581b4cfa63962e840875b642de51b9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 4
 --- !u!114 &4639915732160795084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2962,16 +2964,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSprites:
   - spriteObject: {fileID: 8006137256938496882}
-    maxHealth: 100
-    minHealth: 76
+    maxHealth: 4
+    minHealth: 4
   - spriteObject: {fileID: 6976755308871792642}
-    maxHealth: 75
-    minHealth: 51
+    maxHealth: 3
+    minHealth: 3
   - spriteObject: {fileID: 45107076793023213}
-    maxHealth: 50
-    minHealth: 26
+    maxHealth: 2
+    minHealth: 2
   - spriteObject: {fileID: 4481773604632608518}
-    maxHealth: 25
+    maxHealth: 1
     minHealth: 1
   - spriteObject: {fileID: 3187442965433252441}
     maxHealth: 0
@@ -3005,7 +3007,7 @@ Transform:
   m_GameObject: {fileID: 6239491860012354114}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.410164, y: -1.5325612, z: -10.674077}
+  m_LocalPosition: {x: -7.407234, y: -1.5325612, z: -10.674077}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
