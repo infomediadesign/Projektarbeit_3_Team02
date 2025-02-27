@@ -55,6 +55,9 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
+        state.deathAnim = true;
+        //zoom
+        //waitforsec
         SceneManager.LoadScene("GameOver");
     }
 }

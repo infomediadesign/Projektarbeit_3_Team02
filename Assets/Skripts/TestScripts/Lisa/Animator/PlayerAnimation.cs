@@ -17,6 +17,8 @@ public class PlayerAnimation : MonoBehaviour
     const string playerBlock = "playerBlock";
     const string playerDamage = "playerDamage";
     const string playerAirCounter = "playerAirCounter";
+    const string playerDeath = "playerDeath";
+    const string playerDeathLastFrame = "playerDeathLastFrame";
 
     void Start()
     {
@@ -39,7 +41,7 @@ public class PlayerAnimation : MonoBehaviour
     void HandleGroundedAnimations(Grounded groundedState)
     {
         var currentSubState = groundedState.GetCurrentSubState();
-        if (!stateManager.damageAnim)
+        if (!stateManager.damageAnim && !stateManager.deathAnim)
         {
             if (currentSubState is Walk)
             {
@@ -64,18 +66,23 @@ public class PlayerAnimation : MonoBehaviour
             }
         }
         
-        else 
+        else if(stateManager.damageAnim)
         {
             AnimStateTransitionString(playerDamage);
   
         }
-    
+        else if (stateManager.deathAnim)
+        {
+            AnimStateTransitionString(playerDeath);
+
+        }
+
     }
 
     void HandleAirborneAnimations(Airborne airborneState)
     {
         var currentSubState = airborneState.GetCurrentSubState();
-        if (!stateManager.damageAnim)
+        if (!stateManager.damageAnim && !stateManager.deathAnim)
         {
             if (currentSubState is Jump)
             {
@@ -94,12 +101,17 @@ public class PlayerAnimation : MonoBehaviour
                 AnimStateTransitionString(playerBlock);
             }
         }
-        else
+        else if (stateManager.damageAnim)
         {
             AnimStateTransitionString(playerDamage);
- 
+
         }
-  
+        else if (stateManager.deathAnim)
+        {
+            AnimStateTransitionString(playerDeath);
+
+        }
+
     }
 
     public void AnimStateTransitionString(string stateNew)

@@ -49,7 +49,9 @@ public class StateManager : MonoBehaviour
     [HideInInspector] public bool counterPossible = true;
     [HideInInspector] public bool counterWindow;
     [HideInInspector] public bool damageAnim;
+    [HideInInspector] public bool deathAnim = false;
     [HideInInspector] public bool isObstacle = false;
+    [HideInInspector] public bool deathLastFrame = false; //muss bei respawn zurückgesetzt werden
 
 
 
@@ -197,6 +199,11 @@ public class StateManager : MonoBehaviour
     public void setDamageTaken()
     {
         damageAnim = false;
+    }
+    public void setDeathAnimPlayed()
+    {
+        deathAnim = false;
+        //deathLastFrame = true;
     }
     public void setCounterPossible()
     {
