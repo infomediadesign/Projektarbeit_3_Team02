@@ -299,6 +299,7 @@ MonoBehaviour:
   groundEnemyLayer:
     serializedVersion: 2
     m_Bits: 2048
+  shielded: 0
   jumpReleased: 0
   enemyCheckPos: {fileID: 7860741209348396984}
   enemyLayer:
@@ -307,6 +308,7 @@ MonoBehaviour:
   counterPossible: 1
   counterWindow: 0
   damageAnim: 0
+  isObstacle: 0
 --- !u!114 &5051107444858795921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2563,7 +2565,7 @@ SpriteRenderer:
   m_Size: {x: 1.22, y: 1.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &5230392524000984389
@@ -2895,7 +2897,7 @@ Transform:
   m_GameObject: {fileID: 6239491860012354114}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.3916245, y: -1.5325612, z: -10.674077}
+  m_LocalPosition: {x: -7.4082565, y: -1.5325612, z: -10.674077}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
