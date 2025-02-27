@@ -11396,6 +11396,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7296470130243451373, guid: 289b194ed15650c4b8109d223badd7f4, type: 3}
   m_PrefabInstance: {fileID: 1049839720}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &712661154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 712661156}
+  - component: {fileID: 712661155}
+  m_Layer: 0
+  m_Name: CheckpointManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &712661155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712661154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f259809fe4526948aa3ace9a7988a7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnLives: 4
+--- !u!4 &712661156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712661154}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &713589647 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6139589470070623411, guid: 84bac6058479cc44a9760b81ae682aae, type: 3}
@@ -22439,3 +22484,4 @@ SceneRoots:
   - {fileID: 577311182}
   - {fileID: 2010705589}
   - {fileID: 1175152194}
+  - {fileID: 712661156}
