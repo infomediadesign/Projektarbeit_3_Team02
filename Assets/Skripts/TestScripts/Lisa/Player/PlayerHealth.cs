@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -26,14 +27,17 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        state.damageAnim = true;
-        if (!state.shielded && currentHealth > 0)
+        if(currentHealth > 0)
         {
-            currentHealth -= damage;
-            // Event auslösen, wenn sich die Gesundheit ändert
-            EventManager.Instance.TriggerEvent<int>("HealthChanged", (int)currentHealth);
+            state.damageAnim = true;
+            if (!state.shielded && currentHealth > 0)
+            {
+                currentHealth -= damage;
+                // Event auslösen, wenn sich die Gesundheit ändert
+                EventManager.Instance.TriggerEvent<int>("HealthChanged", (int)currentHealth);
+            }
         }
-       
+             
         if (currentHealth <= 0)
         {
             Die();
@@ -57,8 +61,13 @@ public class PlayerHealth : MonoBehaviour
     {
         state.deathAnim = true;
         //zoom
-        //waitforsec
-        SceneManager.LoadScene("GameOver");
+        StartCoroutine(DieSequence());
+    }
+
+    private IEnumerator DieSequence()
+    {
+        yield return new WaitForSeconds(5f); 
+        SceneManager.LoadScene("GameOver");  
     }
 }
 

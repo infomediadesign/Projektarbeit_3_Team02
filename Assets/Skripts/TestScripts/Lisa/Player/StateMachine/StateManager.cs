@@ -70,7 +70,10 @@ public class StateManager : MonoBehaviour
         playerCombat = GetComponent<PlayerCombat>();
         currentState = states.Ground();
         currentState.EnterState();
-       
+
+        deathAnim = false;
+        deathLastFrame = false;
+
 
     }
 
@@ -203,7 +206,7 @@ public class StateManager : MonoBehaviour
     public void setDeathAnimPlayed()
     {
         deathAnim = false;
-        //deathLastFrame = true;
+        deathLastFrame = true;
     }
     public void setCounterPossible()
     {
