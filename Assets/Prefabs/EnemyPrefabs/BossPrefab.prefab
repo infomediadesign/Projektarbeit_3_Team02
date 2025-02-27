@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4613753978372577725}
   - component: {fileID: 7062984959642016410}
   - component: {fileID: 4600545503617212725}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: BossPrefab
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 1, g: 0.97602814, b: 0, a: 1}
   m_FlipX: 0
@@ -100,7 +100,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99dae7dfb3c43842b2e4c744ae3c668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnEnemyPrefab: {fileID: 0}
   stats: {fileID: 11400000, guid: 865f3fd16c41faf4fa11a4a8ea0fa34a, type: 2}
-  firePrefab: {fileID: 6533098546035892700, guid: 0c09b4edceffddc4980287670b127069, type: 3}
+  attackCollider: {fileID: 0}
+  respawn: 0
+  respawnTime: 0
+  isObstacle: 0
+  normalMissilePrefab: {fileID: 6485825918121921693, guid: a91f81ffa5c5fc54aa3d3779114e8c5a, type: 3}
+  homingMissilePrefab: {fileID: 6533098546035892700, guid: 0c09b4edceffddc4980287670b127069, type: 3}
   shootPoint: {fileID: 4613753978372577725}
   fireCooldown: 3
+  thornSpeed: 2
+  thornRange: 5
+  platformPrefab: {fileID: 3170713206127356493, guid: b21b92b54a5715b45b2033cd4bbe5317, type: 3}
+  weaknessPrefab: {fileID: 4878521498029676930, guid: 16e9a42a00af08d458646d868e0cedb5, type: 3}
+  breakableWallPrefab: {fileID: 3563200504350864561, guid: 33c677755af9ca34780fe5984cb9f7c8, type: 3}
+  lifePrefab: {fileID: 7425351766473686780, guid: 0565670ac0bd1a1488a316254f9abf75, type: 3}
+  thornObstaclePrefab: {fileID: 1104251113396248280, guid: 9467b4b4ef79ce047898715aa755eef7, type: 3}
+  spawnPointsPlatformPhase1:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnPointsWeaknessPhase1:
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnPointsLifePhase1:
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnPointsPlatformPhase2:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnPointsWeaknessPhase2:
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnPointsLifePhase2:
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnPointsBrWallPhase2:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnPointsWeaknessPhase3:
+  - {fileID: 0}
+  - {fileID: 0}
+  enemySpawnPointsPhase1:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enemySpawnPointsPhase2:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

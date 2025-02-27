@@ -31,6 +31,10 @@ public class CounterZone : MonoBehaviour
             {
                 return enemy;
             }
+            else if (enemy.isObstacle)
+            {
+                return enemy;
+            }
         }
         return null;
     }

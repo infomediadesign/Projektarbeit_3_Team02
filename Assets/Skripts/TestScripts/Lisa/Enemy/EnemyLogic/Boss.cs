@@ -35,7 +35,7 @@ public class Boss : EnemyBase
     public Transform[] enemySpawnPointsPhase2;
     private List<GameObject> spawnedObjects = new List<GameObject>();
     private List<GameObject> spawnedEnemies = new List<GameObject>();
-    void Awake()
+    void OnEnable()
     {
         destroyedWeaknesses = 0;
         spawned = false;
@@ -45,7 +45,6 @@ public class Boss : EnemyBase
             if (playerObject != null)
             {
                 player = playerObject.transform;
-
             }
         }
     }
@@ -137,6 +136,7 @@ public class Boss : EnemyBase
             SpawnObjects(spawnPointsLifePhase2, lifePrefab);
 
             SpawnEnemies(new[] { "EnemyType1", "EnemyType2", "EnemyType3" }, enemySpawnPointsPhase2);
+            destroyedWeaknesses = 0;
             spawned= true;
         }
     }
@@ -145,6 +145,7 @@ public class Boss : EnemyBase
     {
         if (!spawned)
         {
+            destroyedWeaknesses = 0;
             DespawnEnemies();
             DespawnAllObjects();
             SpawnObjects(spawnPointsWeaknessPhase3, weaknessPrefab);

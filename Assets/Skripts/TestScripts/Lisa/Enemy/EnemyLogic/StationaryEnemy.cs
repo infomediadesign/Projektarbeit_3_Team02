@@ -86,23 +86,25 @@ public class StationaryEnemy : EnemyBase
     protected void Rotate() // das einfach in base enemy packen
     {
         float direction = player.position.x - transform.position.x;
+        float tolerance = 0.5f;
         if (statEnemy)
         {
-            if (direction < -0.2)
+            bool shouldFlipX = spriteRenderer.flipX; 
+
+            if (direction < -tolerance)
             {
-                spriteRenderer.flipX = false;
+                shouldFlipX = false;
                 spriteRenderer.transform.localPosition = new Vector3(originalOffset.x, spriteRenderer.transform.localPosition.y, spriteRenderer.transform.localPosition.z);
             }
-            else if (direction > 0.2)
+            else if (direction > tolerance)
             {
-                spriteRenderer.flipX = true;
+                shouldFlipX = true;
                 spriteRenderer.transform.localPosition = new Vector3(originalOffset.x + 0.45f, spriteRenderer.transform.localPosition.y, spriteRenderer.transform.localPosition.z);
             }
-            else
-            {
-                spriteRenderer.flipX = false;
-                spriteRenderer.transform.localPosition = new Vector3(originalOffset.x, spriteRenderer.transform.localPosition.y, spriteRenderer.transform.localPosition.z);
 
+            if (spriteRenderer.flipX != shouldFlipX)
+            {
+                spriteRenderer.flipX = shouldFlipX;
             }
         }
         else

@@ -49,6 +49,7 @@ public class StateManager : MonoBehaviour
     [HideInInspector] public bool counterPossible = true;
     [HideInInspector] public bool counterWindow;
     [HideInInspector] public bool damageAnim;
+    [HideInInspector] public bool isObstacle = false;
 
 
 
@@ -175,6 +176,10 @@ public class StateManager : MonoBehaviour
             isGrounded = true;
     
         }
+        else if(collision.gameObject.layer == LayerMask.NameToLayer("BreakableObstacle"))
+        {
+            isObstacle = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -182,6 +187,10 @@ public class StateManager : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = false;
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("BreakableObstacle"))
+        {
+            isObstacle = false;
         }
 
     }

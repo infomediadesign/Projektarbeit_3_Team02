@@ -58,6 +58,10 @@ public class Counter : BaseState
             
             
         }
+        else if (context.isObstacle)
+        {
+            context.playerCombat.Attack(enemy);
+        }
     }
     public override void InitializeSubState(){}
     public override void CheckSwitchStates()

@@ -9,12 +9,16 @@ public class BreakableObstacle : EnemyBase
     public bool weakness;
     void Awake()
     {
-        GameObject bossObject = GameObject.FindGameObjectWithTag("Boss");
-
-        if (bossObject != null)
+        if (weakness)
         {
-            boss = bossObject.GetComponent<Boss>(); 
+            GameObject bossObject = GameObject.FindGameObjectWithTag("Boss");
+
+            if (bossObject != null)
+            {
+                boss = bossObject.GetComponent<Boss>();
+            }
         }
+      
 
     }
 
