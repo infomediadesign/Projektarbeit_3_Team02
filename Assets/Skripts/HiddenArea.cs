@@ -24,6 +24,7 @@ public class HiddenArea : MonoBehaviour
                 StopCoroutine(currentCoroutine);
             }
             currentCoroutine = StartCoroutine(FadeSprite(true));
+            SoundManager.Instance.PlaySound2D("HiddenArea1");
         }
     }
 
