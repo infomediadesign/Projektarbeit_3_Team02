@@ -16,4 +16,18 @@ public class Persistence : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void ResetInstance()
+    {
+        Debug.LogError("Persistence wird komplett neu geladen...");
+        Initializer.DestroyInitializer();
+
+        Initializer.Execute();
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
+
 }

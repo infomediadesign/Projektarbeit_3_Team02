@@ -3,10 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour
 {
+    public static bool gameOver;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
+      
+
     }
 
     // Update is called once per frame
@@ -17,6 +20,8 @@ public class GameOverUI : MonoBehaviour
 
     public void OnMenuPress()
     {
+        gameOver = true;
+        Debug.Log("game over :" + gameOver);
         SceneManager.LoadScene("MainMenu");
     }
     public void OnResumePress()
