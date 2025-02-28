@@ -8,6 +8,8 @@ public class HiddenArea : MonoBehaviour
     Color hiddenColor;
     Coroutine currentCoroutine;
 
+    private bool hasDiscovered = false; //checks if hidden area was already discovered by the player
+
 
     void Start()
     {
@@ -24,6 +26,19 @@ public class HiddenArea : MonoBehaviour
                 StopCoroutine(currentCoroutine);
             }
             currentCoroutine = StartCoroutine(FadeSprite(true));
+            //SoundManager.Instance.PlaySound2D("HiddenArea1");
+
+            //Play sound based on wether the area was discovered already
+            if (!hasDiscovered)
+            {
+                SoundManager.Instance.PlaySound2D("HiddenArea1");
+                hasDiscovered = true;
+            }
+            else
+            {
+                SoundManager.Instance.PlaySound2D("HiddenArea2");
+            }
+
         }
     }
 
@@ -31,7 +46,7 @@ public class HiddenArea : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if(currentCoroutine != null)        //new
+            if(currentCoroutine != null)        //stop existing fade coroutine
             {
                 StopCoroutine(currentCoroutine);
             }
