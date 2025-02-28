@@ -202,6 +202,7 @@ public class StateManager : MonoBehaviour
             isObstacle = false;
         }
 
+
     }
     public void setDamageTaken()
     {

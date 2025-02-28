@@ -16,12 +16,16 @@ public class Boss : EnemyBase
     public float thornSpeed = 2f;
     public float thornRange = 5f;
 
+    public static bool bossActive;
+    private bool platformSpawned;
+
     public GameObject platformPrefab;
     public GameObject weaknessPrefab;
     public GameObject breakableWallPrefab;
     public GameObject lifePrefab;
     public GameObject thornObstaclePrefab;
 
+    public Transform[] spawnPointPlatformConst;
     public Transform[] spawnPointsPlatformPhase1;
     public Transform[] spawnPointsWeaknessPhase1;
     public Transform[] spawnPointsLifePhase1;
@@ -47,6 +51,7 @@ public class Boss : EnemyBase
                 player = playerObject.transform;
             }
         }
+        platformSpawned = false;
     }
 
     void Update()
@@ -62,6 +67,13 @@ public class Boss : EnemyBase
                 fireCooldownTimer = fireCooldown;
             }
         }
+        /*if (PlatformTrigger.platformActivated && !platformSpawned)
+        {
+            SpawnObjects(spawnPointPlatformConst, platformPrefab);
+            platformSpawned = true;
+          
+        }*/
+        
     }
 
     private void FireMissile()
@@ -254,5 +266,6 @@ public class Boss : EnemyBase
         Debug.Log("boss defeated");
         Destroy(gameObject);
         DespawnAllObjects();
+        bossActive = false;
     }
 }

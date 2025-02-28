@@ -167,5 +167,14 @@ public class UIManager : MonoBehaviour
             EventManager.Instance.StopListening("ResumeGame", OnGameResumePress);
         }
     }
+    private void Update()
+    {
+        if (Boss.bossActive)
+        {
+
+            MusicManager.Instance.PlayMusic("Boss");
+            Boss.bossActive = false;
+        }
+    }
 }
 
