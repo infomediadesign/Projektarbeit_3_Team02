@@ -217,7 +217,7 @@ public class MovingEnemy : StationaryEnemy
 
     private void Move()
     {
-        if (!isDying && !isPatroling || !isDying && !isWallAhead)
+        if (!isDying && !isWallAhead)
         {
             anim.SetBool("Moving", true);
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("enemyAttack"))
