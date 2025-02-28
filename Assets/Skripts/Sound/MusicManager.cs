@@ -20,7 +20,10 @@ public class MusicManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
+    public void ResetInstance()
+    {
+        Instance = null;
+    }
     public void PlayMusic(string trackName, float fadeDuration = 0.5f)
     {
         StartCoroutine(AnimateMusicCrossfade(musicLibrary.GetClipFromName(trackName), fadeDuration));

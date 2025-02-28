@@ -121,5 +121,6 @@ public class EventManager : MonoBehaviour
             Debug.LogError($"No event found for {eventName}.");
         }
     }
+
 }
 

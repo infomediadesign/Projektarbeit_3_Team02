@@ -75,5 +75,5 @@ public class SoundManager : MonoBehaviour
         EventManager.Instance.StopListening("ButtonClicked", PlayDefaultButtonSound);
         EventManager.Instance.StopListening("StartGameButtonClicked", PlayStartGameSound);
     }
-  
+
 }

@@ -3,6 +3,8 @@ using UnityEngine;
 public class Initializer : MonoBehaviour
 {
     private static GameObject instance;
+    private static GameObject eventInstance;
+    private static string prefabName = "PersistentDataPlayCam 1";
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void Execute()
     {
@@ -33,9 +35,14 @@ public class Initializer : MonoBehaviour
          Object.DontDestroyOnLoad(persistentData);*/
         if (instance == null)
         {
-            GameObject persistentData = Object.Instantiate(Resources.Load("PersistentDataPlayCam")) as GameObject;
+            GameObject persistentData = Object.Instantiate(Resources.Load(prefabName)) as GameObject;
+            GameObject persistentEventData = Object.Instantiate(Resources.Load("PersistentDataEvents")) as GameObject;
+            eventInstance = persistentEventData;
             instance = persistentData;
             DontDestroyOnLoad(persistentData);
+            DontDestroyOnLoad(persistentEventData);
+           // prefabName = "PersistentDataPlayCam";
+
         }
     }
     public static void DestroyInitializer()
@@ -44,7 +51,19 @@ public class Initializer : MonoBehaviour
         {
             Debug.Log("Initializer wird gelöscht!");
             Destroy(instance.gameObject);
+           // prefabName = "PersistentDataPlayCam 1";
             instance = null;
+        }
+    }
+    public static void Inititalize()
+    {
+        if (instance == null)
+        {
+            GameObject persistentData = Object.Instantiate(Resources.Load(prefabName)) as GameObject;     
+            instance = persistentData;
+            DontDestroyOnLoad(persistentData);
+           // prefabName = "PersistentDataPlayCam";
+
         }
     }
 

@@ -20,8 +20,10 @@ public class GameOverUI : MonoBehaviour
 
     public void OnMenuPress()
     {
-        gameOver = true;
-        Debug.Log("game over :" + gameOver);
+
+        Initializer.DestroyInitializer();
+        Initializer.Inititalize();
+        
         SceneManager.LoadScene("MainMenu");
     }
     public void OnResumePress()
