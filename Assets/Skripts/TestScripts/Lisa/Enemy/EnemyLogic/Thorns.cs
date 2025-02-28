@@ -5,7 +5,7 @@ public class Thorns : MonoBehaviour
 {
     public float moveRange = 5f;
     public float moveSpeed = 2f;
-    public float damage = 25f;
+    public float damage = 1f;
     private PlayerHealth playerHealth;
     public BoxCollider2D dmgHitbox;
 
