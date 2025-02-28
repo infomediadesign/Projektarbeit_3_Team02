@@ -118,7 +118,14 @@ public class FlyingEnemy : EnemyBase
         }
     }
 
-  
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            damageCooldownTimer = 0;
+        }
+
+    }
     private void CheckForPlayerAndShoot()
     {
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);

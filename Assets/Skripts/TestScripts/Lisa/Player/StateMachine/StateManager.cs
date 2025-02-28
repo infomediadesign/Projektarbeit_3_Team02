@@ -121,6 +121,10 @@ public class StateManager : MonoBehaviour
         }*/
 
         currentState.UpdateStates();
+        if (PlayerHealth.death)
+        {
+            playerControls.Disable();
+        }
     }
 
     public void SetFacingDirection(bool isFacingRight)

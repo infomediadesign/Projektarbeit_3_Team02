@@ -180,7 +180,13 @@ public class StationaryEnemy : EnemyBase
             }
         }
     }
-
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            damageCooldownTimer = 0;
+        }
+    }
     protected void SetCounterPossible()
     {
         counterPossible = true;
