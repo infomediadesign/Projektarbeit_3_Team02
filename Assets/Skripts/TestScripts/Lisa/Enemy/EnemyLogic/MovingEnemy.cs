@@ -10,6 +10,7 @@ public class MovingEnemy : StationaryEnemy
     private float groundCheckDistance = 1f;
     public LayerMask groundLayer;
     public CapsuleCollider2D enemyHitbox;
+    private bool isWallAhead;
 
     public MovingEnemyStats mStats;
 
@@ -46,6 +47,7 @@ public class MovingEnemy : StationaryEnemy
             counterUIInstance.target = transform;
             counterUIInstance.offset = new Vector3(-10, 4, 0);
         }
+        
     }
    
 
@@ -130,6 +132,7 @@ public class MovingEnemy : StationaryEnemy
         
         if (other.CompareTag("Player"))
         {
+            
             target = other.gameObject;
             playerInRange = true;
             playerHealth = other.GetComponent<PlayerHealth>();
@@ -138,8 +141,13 @@ public class MovingEnemy : StationaryEnemy
             {
                 playerHealth.TakeDamage(stats.damage);
                 Debug.Log("taking damage: " + stats.damage);
+
             }
            
+        }
+        if (other.CompareTag("Ground") && other.IsTouching(enemyHitbox))
+        {
+            isWallAhead = true;
         }
      }
 
@@ -157,27 +165,27 @@ public class MovingEnemy : StationaryEnemy
                 playerInRange = false;
             }
 
-        }
-        if (other.CompareTag("Player") && other.IsTouching(enemyHitbox) && !isDying)
-        {
-            playerHealth = other.GetComponent<PlayerHealth>();
-            if (damageCooldownTimer <= 0f)
+             if (!isDying && other.IsTouching(attackCollider))
             {
-
-                playerHealth.TakeDamage(stats.damage);
-                Debug.Log("taking damage: " + stats.damage);
-
-                damageCooldownTimer = damageCooldown;
+                if (attackCollision)
+                {
+                    playerHealth.TakeDamage(stats.damage);
+                    Debug.Log("taking damage: " + stats.damage);
+                    attackCollision = false;
+                }
             }
         }
-        else if(other.CompareTag("Player") && !isDying && other.IsTouching(attackCollider))
+       
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
         {
-            if (attackCollision)
-            {
-                playerHealth.TakeDamage(stats.damage);
-                Debug.Log("taking damage: " + stats.damage);
-                attackCollision = false;
-            }
+            damageCooldownTimer = 0;
+        }
+        if (other.CompareTag("Ground"))
+        {
+            isWallAhead = false;
         }
     }
 
@@ -209,7 +217,7 @@ public class MovingEnemy : StationaryEnemy
 
     private void Move()
     {
-        if (!isDying)
+        if (!isDying && !isPatroling || !isDying && !isWallAhead)
         {
             anim.SetBool("Moving", true);
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("enemyAttack"))

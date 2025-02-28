@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth;
     private StateManager state;
     private bool firstDeath;
+    static public bool death;
   
     private void Start()
     { 
@@ -19,6 +20,7 @@ public class PlayerHealth : MonoBehaviour
         // Initiales Event auslösen, damit die Gesundheitsanzeige aktualisiert wird
         EventManager.Instance.TriggerEvent<int>("HealthChanged", (int)currentHealth);
         firstDeath = false;
+        death = false;
 
     }
 
@@ -42,6 +44,7 @@ public class PlayerHealth : MonoBehaviour
              
         if (currentHealth <= 0)
         {
+            death = true;
             Die();
         }
     }

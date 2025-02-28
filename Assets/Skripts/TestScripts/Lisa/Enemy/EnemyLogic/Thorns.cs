@@ -30,6 +30,10 @@ public class Thorns : MonoBehaviour
             float offset = Mathf.PingPong(Time.time * moveSpeed, moveRange * 2) - moveRange;
             transform.position = new Vector3(startPosition.x + offset, startPosition.y, startPosition.z);
         }
+        if (damageCooldownTimer > 0f)
+        {
+            damageCooldownTimer -= Time.deltaTime;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
