@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Sirenix.OdinValidator.Editor;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -78,8 +79,9 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator DieSequence()
     {
         FindFirstObjectByType<CameraZoom>().ZoomIn();
-        yield return new WaitForSeconds(3f); 
-        SceneManager.LoadScene("GameOver");  
+        yield return new WaitForSeconds(3f);
+       // SceneManager.LoadScene("GameOver");
+        FindObjectOfType<SceneFader>().FadeToScene("GameOver");
     }
 }
 
