@@ -11,7 +11,7 @@ public class Fire : MonoBehaviour
     private bool isFollowing;
     private float followingTimer;
     public Transform playerTarget;
-
+    public LayerMask groundLayer;
     public void FireShot(Vector2 direction)
     {
         this.direction = direction;
@@ -43,6 +43,10 @@ public class Fire : MonoBehaviour
 
         //transform.Translate(direction * speed * Time.deltaTime);
         transform.position += (Vector3)(direction * speed * Time.deltaTime);
+        if (IsGrounded())
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -56,5 +60,10 @@ public class Fire : MonoBehaviour
             }
             Destroy(gameObject);
         }
+
+    }
+    bool IsGrounded()
+    {
+        return Physics2D.OverlapCircle(transform.position, 0.1f, groundLayer);
     }
 }
