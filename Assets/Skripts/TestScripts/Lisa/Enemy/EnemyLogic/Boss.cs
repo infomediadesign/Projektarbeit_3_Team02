@@ -17,8 +17,7 @@ public class Boss : EnemyBase
     public float thornRange = 5f;
 
     public static bool bossActive;
-    private bool platformSpawned;
-
+    
     public GameObject platformPrefab;
     public GameObject weaknessPrefab;
     public GameObject breakableWallPrefab;
@@ -51,7 +50,7 @@ public class Boss : EnemyBase
                 player = playerObject.transform;
             }
         }
-        platformSpawned = false;
+        
     }
 
     void Update()
@@ -67,12 +66,6 @@ public class Boss : EnemyBase
                 fireCooldownTimer = fireCooldown;
             }
         }
-        /*if (PlatformTrigger.platformActivated && !platformSpawned)
-        {
-            SpawnObjects(spawnPointPlatformConst, platformPrefab);
-            platformSpawned = true;
-          
-        }*/
         
     }
 
@@ -229,15 +222,16 @@ public class Boss : EnemyBase
     public void OnWeaknessDestroyed()
     {
         destroyedWeaknesses++;
+        Debug.Log("weakness destroyed: " + destroyedWeaknesses);
 
-        if (destroyedWeaknesses >= spawnPointsWeaknessPhase1.Length) 
+        if (destroyedWeaknesses >= 2) 
         {
             StopAttack();
         }
-        else if (destroyedWeaknesses >= spawnPointsWeaknessPhase1.Length + spawnPointsWeaknessPhase2.Length)
+       /*else if (destroyedWeaknesses >= spawnPointsWeaknessPhase1.Length + spawnPointsWeaknessPhase2.Length)
         {
             StopAttack();
-        }
+        }*/
     }
     private void DespawnEnemies()
     {
