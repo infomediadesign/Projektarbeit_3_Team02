@@ -25,8 +25,18 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         //ensure that main menu is active at start
-       // ShowScreen(mainMenuScreen);
-        MusicManager.Instance.PlayMusic("MainMenu");
+        // ShowScreen(mainMenuScreen);
+
+        string lastTrack = GameOverUI.lastTrackPlayed;
+
+        if (!string.IsNullOrEmpty(lastTrack) && lastTrack != "MainMenu")
+        {
+            MusicManager.Instance.PlayMusic(lastTrack);
+        }
+        else
+        {
+            MusicManager.Instance.PlayMusic("MainMenu");
+        }
 
         memoryUIText = Object.FindFirstObjectByType<MemoryUIText>();
         lifeUIText = Object.FindFirstObjectByType<LifeUIText>();

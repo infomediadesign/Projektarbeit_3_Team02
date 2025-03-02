@@ -8,6 +8,8 @@ public class MusicManager : MonoBehaviour
 
     [SerializeField] private MusicLibrary musicLibrary;
     [SerializeField] private AudioSource musicSource;
+
+    private string lastTrackPlayed;
     private void Awake()
     {
         if (Instance != null)       //checks if instance is already set
@@ -26,9 +28,13 @@ public class MusicManager : MonoBehaviour
     }
     public void PlayMusic(string trackName, float fadeDuration = 0.5f)
     {
+        lastTrackPlayed = trackName;
         StartCoroutine(AnimateMusicCrossfade(musicLibrary.GetClipFromName(trackName), fadeDuration));
     }
-
+    public string GetLastTrackPlayed()
+    {
+        return lastTrackPlayed; 
+    }
     IEnumerator AnimateMusicCrossfade(AudioClip nextTrack, float fadeDuration = 0.5f)  //coroutine
     {
         float percent = 0;

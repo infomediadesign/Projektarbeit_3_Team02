@@ -5,6 +5,7 @@ using System.Collections;
 public class GameOverUI : MonoBehaviour
 {
     public static bool gameOver;
+    public static string lastTrackPlayed;
     private const int GAME_OVER_SCENE_INDEX = 5;
     private const int FIRST_LEVEL_SCENE_INDEX = 1;
 
@@ -33,9 +34,9 @@ public class GameOverUI : MonoBehaviour
     public void OnResumePress()
     {
         Debug.Log("[GameOverUI] OnResumePress wurde aufgerufen!");
+        lastTrackPlayed = MusicManager.Instance.GetLastTrackPlayed();
         Initializer.DestroyInitializer();
         Initializer.Inititalize();
-
         // Überprüfe, ob der CheckpointManager existiert
         if (CheckpointManager.Instance != null)
         {
