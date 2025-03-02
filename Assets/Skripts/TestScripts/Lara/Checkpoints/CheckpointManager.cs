@@ -81,14 +81,19 @@ public class CheckpointManager : MonoBehaviour
         if (hasCheckpoint)
         {
             // Load the scene where the checkpoint was activated
+            Debug.Log($"[CheckpointManager] Lade Szene {lastCheckpointScene} und positioniere Spieler an Checkpoint {lastCheckpointPosition}");
             SceneManager.LoadScene(lastCheckpointScene);
             // We need to wait for the scene to load before positioning the player
             StartCoroutine(PositionPlayerAfterLoad());
         }
         else
         {
-            // If no checkpoint was activated, restart the current scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            // If no checkpoint was activated, load level 1 (index 1)
+            Debug.Log("[CheckpointManager] Kein Checkpoint aktiviert. Lade Level 1 (Build Index 1)");
+            SceneManager.LoadScene(1);
+
+            // Player will be at the default spawn position in the level
+            Debug.Log("[CheckpointManager] Spieler wird am ursprünglichen Spawn-Punkt erscheinen");
         }
     }
 

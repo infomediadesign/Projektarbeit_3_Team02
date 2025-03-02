@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameOverUI : MonoBehaviour
 {
     public static bool gameOver;
+    private const int GAME_OVER_SCENE_INDEX = 5;
+    private const int FIRST_LEVEL_SCENE_INDEX = 1;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,37 +32,61 @@ public class GameOverUI : MonoBehaviour
     }
     public void OnResumePress()
     {
-        Debug.Log("OnResumePress wurde aufgerufen!");
+        Debug.Log("[GameOverUI] OnResumePress wurde aufgerufen!");
+        Initializer.DestroyInitializer();
+        Initializer.Inititalize();
 
         // Überprüfe, ob der CheckpointManager existiert
         if (CheckpointManager.Instance != null)
         {
-            Debug.Log("CheckpointManager gefunden, versuche zu respawnen...");
+            Debug.Log("[GameOverUI] CheckpointManager gefunden");
 
-            // Verwende den CheckpointManager, um den Spieler zum letzten Checkpoint zurückzubringen
-            CheckpointManager.Instance.RespawnPlayer();
+            if (CheckpointManager.Instance.HasCheckpoint())
+            {
+                Debug.Log("[GameOverUI] Letzter Checkpoint gefunden bei Position: " +
+                    CheckpointManager.Instance.GetLastCheckpointPosition());
+
+                // Zuerst respawnen, was die Zielszene lädt
+                CheckpointManager.Instance.RespawnPlayer();
+
+                // Dann die Game-Over-Szene entladen (asynchron)
+                StartCoroutine(UnloadGameOverScene());
+            }
+            else
+            {
+                Debug.Log("[GameOverUI] Kein Checkpoint gefunden. Lade Level 1.");
+
+                // Level 1 laden
+                SceneManager.LoadScene(FIRST_LEVEL_SCENE_INDEX);
+
+                // Dann die Game-Over-Szene entladen (asynchron)
+                StartCoroutine(UnloadGameOverScene());
+            }
         }
         else
         {
-            Debug.LogWarning("CheckpointManager nicht gefunden! Stelle sicher, dass er im Persistent Data Prefab vorhanden ist.");
+            Debug.LogWarning("[GameOverUI] CheckpointManager nicht gefunden! Stelle sicher, dass er im Persistent Data Prefab vorhanden ist.");
 
             // Versuche herauszufinden, welche Szene geladen werden sollte
-            Debug.Log("Aktuelle Szene: " + SceneManager.GetActiveScene().name + " (Index: " + SceneManager.GetActiveScene().buildIndex + ")");
-            Debug.Log("Anzahl der Szenen in den Build-Einstellungen: " + SceneManager.sceneCountInBuildSettings);
+            Debug.Log("[GameOverUI] Aktuelle Szene: " + SceneManager.GetActiveScene().name +
+                " (Index: " + SceneManager.GetActiveScene().buildIndex + ")");
 
-            // Fallback: Lade das letzte Level, falls kein CheckpointManager gefunden wurde
-            if (SceneManager.sceneCountInBuildSettings > 1)
-            {
-                int targetScene = SceneManager.GetActiveScene().buildIndex - 1;
-                Debug.Log("Versuche, zur Szene mit Index " + targetScene + " zurückzukehren");
-                SceneManager.LoadScene(targetScene);
-            }
+            // Fallback: Lade Level 1, falls kein CheckpointManager gefunden wurde
+            Debug.Log("[GameOverUI] Kein CheckpointManager gefunden. Lade Level 1.");
+            SceneManager.LoadScene(FIRST_LEVEL_SCENE_INDEX);
         }
     }
 
-    public void TestButton()
+    private IEnumerator UnloadGameOverScene()
     {
-        Debug.Log("TestButton wurde gedrückt!");
-        SceneManager.LoadScene("Tech Demo Level 1"); 
+        // Kurz warten, um sicherzustellen, dass die Zielszene geladen ist
+        yield return new WaitForSeconds(0.1f);
+
+        // GameOver-Szene entladen
+        AsyncOperation unloadOperation = SceneManager.UnloadSceneAsync(GAME_OVER_SCENE_INDEX);
+
+        yield return unloadOperation;
+
+        Debug.Log("[GameOverUI] GameOver-Szene erfolgreich entladen");
     }
 }
