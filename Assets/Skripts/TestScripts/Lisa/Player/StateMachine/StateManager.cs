@@ -89,36 +89,9 @@ public class StateManager : MonoBehaviour
 
     void Update()
     {
-       // isGrounded = Physics2D.OverlapCircle(groundCheckPos.position, playerStats.groundCheckRad, groundLayer);
 
         isEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
         isGroundEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, groundEnemyLayer);
-
-       /* if (currentSubState == states.Blocking())
-        {
-            shielded = true;
-            Debug.Log("shielded is true");
-        }
-        else
-        {
-            shielded = false;
-        }
-        if (currentSubState == states.Rolling()) //verwende ich das noch?
-        {
-            rolling = true;
-        }
-        else
-        {
-            rolling = false;
-        }
-        if (currentSubState == states.Countering())
-        {
-            countering = true;
-        }
-        else
-        {
-            countering = false;
-        }*/
 
         currentState.UpdateStates();
         if (PlayerHealth.death)
@@ -148,12 +121,16 @@ public class StateManager : MonoBehaviour
     {
 
         jumpReleased = true;
+        mainCollider.enabled = true;
+        jumpCollider.enabled = false; ;
 
     }
     private void OnJumpStarted(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
 
         jumpReleased = false;
+        jumpCollider.enabled = true;
+        mainCollider.enabled = false;
 
     }
     public bool CheckForEnemy() //radius für berühren und counter (extra)
