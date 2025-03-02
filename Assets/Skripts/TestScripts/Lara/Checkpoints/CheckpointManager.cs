@@ -52,10 +52,23 @@ public class CheckpointManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Reset checkpoint if we load a different scene (not from GameOver)
-        if (scene.name != "GameOver" && scene.name != lastCheckpointScene)
+        // Kritische Änderung: Nicht den Checkpoint zurücksetzen beim Szenenwechsel,
+        // außer wenn wir zum Hauptmenü zurückkehren
+        if (scene.name == "MainMenu")
         {
+            Debug.Log("[CheckpointManager] Zum Hauptmenü zurückgekehrt. Setze Checkpoint-Daten zurück.");
             hasCheckpoint = false;
+        }
+        else if (scene.name == "GameOver")
+        {
+            // Im Game-Over-Bildschirm keine Änderungen an den Checkpoint-Daten vornehmen
+            Debug.Log("[CheckpointManager] Game-Over-Szene geladen. Checkpoint-Daten bleiben erhalten.");
+        }
+        else
+        {
+            // Bei allen anderen Szenen die Checkpoint-Daten beibehalten
+            Debug.Log($"[CheckpointManager] Szene {scene.name} geladen. Checkpoint-Daten bleiben erhalten: " +
+                     $"HasCheckpoint={hasCheckpoint}, Position={lastCheckpointPosition}, Szene={lastCheckpointScene}");
         }
     }
 
@@ -68,16 +81,19 @@ public class CheckpointManager : MonoBehaviour
 
     public void SetLastCheckpoint(Vector3 position)
     {
-        Debug.Log($"[CheckpointManager] Position vom letzten Checkpoint wird aktualisiert");
+        Debug.Log($"[CheckpointManager] SetLastCheckpoint aufgerufen mit Position {position}");
+
         lastCheckpointPosition = position;
         lastCheckpointScene = SceneManager.GetActiveScene().name;
         hasCheckpoint = true;
 
-        Debug.Log($"[CheckpointManager] Position vom letzten Checkpoint lautet: {position} in Szene {lastCheckpointScene}");
+        Debug.Log($"[CheckpointManager] Checkpoint-Daten aktualisiert: HasCheckpoint={hasCheckpoint}, Position={lastCheckpointPosition}, Szene={lastCheckpointScene}");
     }
 
     public void RespawnPlayer()
     {
+        Debug.Log($"[CheckpointManager] RespawnPlayer aufgerufen. Aktueller Status: HasCheckpoint={hasCheckpoint}, Position={lastCheckpointPosition}, Szene={lastCheckpointScene}");
+
         if (hasCheckpoint)
         {
             // Load the scene where the checkpoint was activated
@@ -108,6 +124,8 @@ public class CheckpointManager : MonoBehaviour
         {
             // Move player to checkpoint position
             player.transform.position = lastCheckpointPosition;
+            Debug.Log($"[CheckpointManager] Spieler an Checkpoint-Position {lastCheckpointPosition} platziert");
+
             // Reset player health
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
             if (playerHealth)
