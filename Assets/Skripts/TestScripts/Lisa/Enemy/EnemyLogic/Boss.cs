@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -131,18 +132,24 @@ public class Boss : EnemyBase
 
     private void Phase2()
     {
+       
         if (!spawned)
         {
+            spawned = true;
             DespawnEnemies();
             DespawnAllObjects();
-            SpawnObjects(spawnPointsPlatformPhase2, platformPrefab);
-            SpawnObjects(spawnPointsWeaknessPhase2, weaknessPrefab);
-            SpawnObjects(spawnPointsBrWallPhase2, breakableWallPrefab);
-            SpawnObjects(spawnPointsLifePhase2, lifePrefab);
+            StartCoroutine(SpawnAfterDelay(2f, () =>
+            {
+                
+                SpawnObjects(spawnPointsPlatformPhase2, platformPrefab);
+                SpawnObjects(spawnPointsWeaknessPhase2, weaknessPrefab);
+                SpawnObjects(spawnPointsBrWallPhase2, breakableWallPrefab);
+                SpawnObjects(spawnPointsLifePhase2, lifePrefab);
 
-            SpawnEnemies(new[] { "EnemyType1", "EnemyType2", "EnemyType3" }, enemySpawnPointsPhase2);
-            destroyedWeaknesses = 0;
-            spawned= true;
+                SpawnEnemies(new[] { "EnemyType1", "EnemyType2", "EnemyType3" }, enemySpawnPointsPhase2);
+                destroyedWeaknesses = 0;
+                
+            }));
         }
     }
 
@@ -150,12 +157,16 @@ public class Boss : EnemyBase
     {
         if (!spawned)
         {
-            destroyedWeaknesses = 0;
+            spawned = true;
             DespawnEnemies();
             DespawnAllObjects();
-            SpawnObjects(spawnPointsWeaknessPhase3, weaknessPrefab);
-            SpawnThornObstacle();
-            spawned = true;
+            StartCoroutine(SpawnAfterDelay(2f, () =>
+            {
+                destroyedWeaknesses = 0;
+                
+                SpawnObjects(spawnPointsWeaknessPhase3, weaknessPrefab);
+                SpawnThornObstacle();
+            }));
         }
     }
 
@@ -261,5 +272,10 @@ public class Boss : EnemyBase
         Destroy(gameObject);
         DespawnAllObjects();
         bossActive = false;
+    }
+    private IEnumerator SpawnAfterDelay(float delay, System.Action spawnAction)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        spawnAction?.Invoke();
     }
 }
