@@ -120,12 +120,11 @@ public class CheckpointManager : MonoBehaviour
     // Hilfsmethode zum Finden des MemoryUIText-Objekts
     private MemoryUIText FindMemoryUIText()
     {
-        // Du könntest hier verschiedene Strategien verwenden, je nach Struktur deines Spiels
         // 1. Über Tag
-        GameObject uiObject = GameObject.FindGameObjectWithTag("MemoryUI");
+        GameObject uiObject = GameObject.FindGameObjectWithTag("Memory");
         if (uiObject) return uiObject.GetComponent<MemoryUIText>();
 
-        // 2. Direkt über Typ
+        // 2. Direkt über Typ als Backup
         MemoryUIText[] memoryUIs = FindObjectsOfType<MemoryUIText>();
         if (memoryUIs.Length > 0) return memoryUIs[0];
 
