@@ -15,6 +15,9 @@ public class CheckpointManager : MonoBehaviour
     private string lastCheckpointScene;
     private bool hasCheckpoint = false;
 
+    // Memory count at last checkpoint
+    private int lastCheckpointMemoryCount = 0;
+
     // Event-Name für die Checkpoint-Aktivierung
     private const string CHECKPOINT_ACTIVATED_EVENT = "OnCheckpointActivated";
 
@@ -58,6 +61,7 @@ public class CheckpointManager : MonoBehaviour
         {
             Debug.Log("[CheckpointManager] Zum Hauptmenü zurückgekehrt. Setze Checkpoint-Daten zurück.");
             hasCheckpoint = false;
+            lastCheckpointMemoryCount = 0;
         }
         else if (scene.name == "GameOver")
         {
@@ -68,7 +72,8 @@ public class CheckpointManager : MonoBehaviour
         {
             // Bei allen anderen Szenen die Checkpoint-Daten beibehalten
             Debug.Log($"[CheckpointManager] Szene {scene.name} geladen. Checkpoint-Daten bleiben erhalten: " +
-                     $"HasCheckpoint={hasCheckpoint}, Position={lastCheckpointPosition}, Szene={lastCheckpointScene}");
+                     $"HasCheckpoint={hasCheckpoint}, Position={lastCheckpointPosition}, Szene={lastCheckpointScene}, " +
+                     $"Erinnerungen={lastCheckpointMemoryCount}");
         }
     }
 
@@ -87,12 +92,51 @@ public class CheckpointManager : MonoBehaviour
         lastCheckpointScene = SceneManager.GetActiveScene().name;
         hasCheckpoint = true;
 
-        Debug.Log($"[CheckpointManager] Checkpoint-Daten aktualisiert: HasCheckpoint={hasCheckpoint}, Position={lastCheckpointPosition}, Szene={lastCheckpointScene}");
+        // Speichere die aktuelle Anzahl an Erinnerungen
+        SaveCurrentMemoryCount();
+
+        Debug.Log($"[CheckpointManager] Checkpoint-Daten aktualisiert: HasCheckpoint={hasCheckpoint}, " +
+                 $"Position={lastCheckpointPosition}, Szene={lastCheckpointScene}, " +
+                 $"Erinnerungen={lastCheckpointMemoryCount}");
+    }
+
+    // Neue Methode zum Speichern der aktuellen Erinnerungen
+    private void SaveCurrentMemoryCount()
+    {
+        // Finde das UI-Objekt für die Erinnerungen
+        MemoryUIText memoryUI = FindMemoryUIText();
+        if (memoryUI != null)
+        {
+            // Speichere den aktuellen Stand der Erinnerungen
+            lastCheckpointMemoryCount = memoryUI.memoryCount;
+            Debug.Log($"[CheckpointManager] Erinnerungen zum Zeitpunkt des Checkpoints gespeichert: {lastCheckpointMemoryCount}");
+        }
+        else
+        {
+            Debug.LogWarning("[CheckpointManager] MemoryUIText konnte nicht gefunden werden!");
+        }
+    }
+
+    // Hilfsmethode zum Finden des MemoryUIText-Objekts
+    private MemoryUIText FindMemoryUIText()
+    {
+        // Du könntest hier verschiedene Strategien verwenden, je nach Struktur deines Spiels
+        // 1. Über Tag
+        GameObject uiObject = GameObject.FindGameObjectWithTag("MemoryUI");
+        if (uiObject) return uiObject.GetComponent<MemoryUIText>();
+
+        // 2. Direkt über Typ
+        MemoryUIText[] memoryUIs = FindObjectsOfType<MemoryUIText>();
+        if (memoryUIs.Length > 0) return memoryUIs[0];
+
+        return null;
     }
 
     public void RespawnPlayer()
     {
-        Debug.Log($"[CheckpointManager] RespawnPlayer aufgerufen. Aktueller Status: HasCheckpoint={hasCheckpoint}, Position={lastCheckpointPosition}, Szene={lastCheckpointScene}");
+        Debug.Log($"[CheckpointManager] RespawnPlayer aufgerufen. Aktueller Status: HasCheckpoint={hasCheckpoint}, " +
+                 $"Position={lastCheckpointPosition}, Szene={lastCheckpointScene}, " +
+                 $"Erinnerungen={lastCheckpointMemoryCount}");
 
         if (hasCheckpoint)
         {
@@ -132,6 +176,29 @@ public class CheckpointManager : MonoBehaviour
             {
                 playerHealth.Heal(respawnLives);
             }
+
+            // Stelle die Anzahl der Erinnerungen wieder her
+            RestoreMemoryCount();
+        }
+    }
+
+    // Neue Methode zum Wiederherstellen der Erinnerungen
+    private void RestoreMemoryCount()
+    {
+        MemoryUIText memoryUI = FindMemoryUIText();
+        if (memoryUI != null)
+        {
+            // Setze den Memory Count auf 0
+            memoryUI.IncrementMemoryCount(-memoryUI.memoryCount); // Zurücksetzen auf 0
+
+            // Stelle den gespeicherten Wert wieder her
+            memoryUI.IncrementMemoryCount(lastCheckpointMemoryCount);
+
+            Debug.Log($"[CheckpointManager] Erinnerungen auf {lastCheckpointMemoryCount} zurückgesetzt");
+        }
+        else
+        {
+            Debug.LogWarning("[CheckpointManager] MemoryUIText konnte nach dem Laden der Szene nicht gefunden werden!");
         }
     }
 
@@ -145,5 +212,11 @@ public class CheckpointManager : MonoBehaviour
     public bool HasCheckpoint()
     {
         return hasCheckpoint;
+    }
+
+    // Optional: Getter-Methode für die gespeicherte Anzahl an Erinnerungen
+    public int GetMemoryCount()
+    {
+        return lastCheckpointMemoryCount;
     }
 }
