@@ -57,6 +57,10 @@ public class FlyingEnemy : EnemyBase
         {
             anim.SetBool("Death", false);
         }
+        if (damageCooldownTimer > 0f)
+        {
+            damageCooldownTimer -= Time.deltaTime;
+        }
     }
 
     public override void Attack()
@@ -111,12 +115,18 @@ public class FlyingEnemy : EnemyBase
             playerHealth = other.GetComponent<PlayerHealth>();
             if (other.IsTouching(fEnemyHitbox))
             {
-                playerHealth.TakeDamage(stats.damage);
-                Debug.Log("taking damage: " + stats.damage);
+                if (damageCooldownTimer <= 0f)
+                {
+                    Debug.Log("trigger dmg");
+                    playerHealth.TakeDamage(stats.damage);
+                    Debug.Log("taking damage: " + stats.damage);
+                    damageCooldownTimer = damageCooldown;
+                }
             }
 
         }
     }
+
 
     private void OnTriggerExit2D(Collider2D other)
     {
