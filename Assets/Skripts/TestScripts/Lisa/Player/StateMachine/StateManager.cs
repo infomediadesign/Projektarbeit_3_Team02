@@ -93,7 +93,6 @@ public class StateManager : MonoBehaviour
 
     void Update()
     {
-
         isEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
         isGroundEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, groundEnemyLayer);
 
