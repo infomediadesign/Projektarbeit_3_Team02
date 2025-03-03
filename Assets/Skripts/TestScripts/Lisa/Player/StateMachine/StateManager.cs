@@ -167,6 +167,19 @@ public class StateManager : MonoBehaviour
             isObstacle = true;
         }
     }
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGrounded = true;
+
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("BreakableObstacle"))
+        {
+            isObstacle = true;
+        }
+    }
+
 
     void OnTriggerExit2D(Collider2D collision)
     {
