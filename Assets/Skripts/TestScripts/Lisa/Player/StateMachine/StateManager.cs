@@ -14,7 +14,9 @@ public class StateManager : MonoBehaviour
     [HideInInspector] public CounterZone zone;
     [HideInInspector] public Animator animator;
     private SpriteRenderer sRenderer;
-    
+
+    private float stuckTime = 0f;
+    private float maxStuckTime = 0.5f; 
 
     public InputSystem_Actions inputActions;
     public InputSystem_Actions.TestActions playerControls;
@@ -35,6 +37,8 @@ public class StateManager : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask groundEnemyLayer;
 
+    private bool walkDisabled;
+
 
     public bool isEnemy { get; private set; }
     public bool isGroundEnemy { get; private set; }
@@ -51,7 +55,7 @@ public class StateManager : MonoBehaviour
     [HideInInspector] public bool damageAnim;
     [HideInInspector] public bool deathAnim = false;
     [HideInInspector] public bool isObstacle = false;
-    [HideInInspector] public bool deathLastFrame = false; //muss bei respawn zurückgesetzt werden
+    [HideInInspector] public bool deathLastFrame = false; //muss bei respawn zurï¿½ckgesetzt werden
 
 
 
@@ -98,6 +102,26 @@ public class StateManager : MonoBehaviour
         {
             playerControls.Disable();
         }
+        if (!isGrounded && Mathf.Abs(rb.linearVelocity.y) < 0.1f)
+        {
+            playerControls.Walk.Disable();
+            Debug.Log("Walk disabled");
+            walkDisabled = true;
+            stuckTime += Time.deltaTime;
+        }
+        else
+        {
+            stuckTime = 0f; // Reset, wenn wieder grounded oder normale Bewegung
+        }
+
+        if (walkDisabled && (isGrounded || Mathf.Abs(rb.linearVelocity.y) > 0.1f || stuckTime > maxStuckTime))
+        {
+            playerControls.Walk.Enable();
+            Debug.Log("Walk enabled");
+            walkDisabled = false;
+            stuckTime = 0f;
+        }
+
     }
 
     public void SetFacingDirection(bool isFacingRight)
@@ -133,7 +157,7 @@ public class StateManager : MonoBehaviour
         mainCollider.enabled = false;
 
     }
-    public bool CheckForEnemy() //radius für berühren und counter (extra)
+    public bool CheckForEnemy() //radius fï¿½r berï¿½hren und counter (extra)
     {
         Collider2D enemyCollider = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
         if (enemyCollider != null)
@@ -157,7 +181,7 @@ public class StateManager : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("ConstGround"))
         {
             isGrounded = true;
     
@@ -167,10 +191,23 @@ public class StateManager : MonoBehaviour
             isObstacle = true;
         }
     }
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("ConstGround"))
+        {
+            isGrounded = true;
+
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("BreakableObstacle"))
+        {
+            isObstacle = true;
+        }
+    }
+
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("ConstGround"))
         {
             isGrounded = false;
         }

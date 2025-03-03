@@ -201,10 +201,97 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 0e90f0d196038844687c7ec54291f8d9, type: 3}
   - groupID: HiddenArea1
     clips:
-    - {fileID: 8300000, guid: cee5932a37322a440956c9d2bf09c1cb, type: 3}
+    - {fileID: 8300000, guid: 5f2ecb473cc216943822da16a8314482, type: 3}
   - groupID: HiddenArea2
     clips:
-    - {fileID: 8300000, guid: 4ac4767b19525174db7f224e87f0feaa, type: 3}
+    - {fileID: 8300000, guid: 1bc581b71dd4779418a2b5e4f2059626, type: 3}
+  - groupID: MCRunSound
+    clips:
+    - {fileID: 8300000, guid: db4074acc7701fd41afaccef85f690cf, type: 3}
+  - groupID: MCRollSound
+    clips:
+    - {fileID: 8300000, guid: 499e07a7258e6e041b981b1c5451234e, type: 3}
+  - groupID: MCJumpSound
+    clips:
+    - {fileID: 8300000, guid: 47d3c6760a0b678449f187172111792d, type: 3}
+    - {fileID: 8300000, guid: a28d5a049d68a8049b77332c750a77de, type: 3}
+    - {fileID: 8300000, guid: 740d007f9e7f3b34ba324563138bf94c, type: 3}
+  - groupID: MCSuccessfulCounter
+    clips:
+    - {fileID: 8300000, guid: 75aa759ad8b36e74e9f8adcb784798f3, type: 3}
+  - groupID: MCCounter
+    clips:
+    - {fileID: 8300000, guid: 0aad94686ed634846bf1c91618dd0b89, type: 3}
+  - groupID: MCTakesDamage
+    clips:
+    - {fileID: 8300000, guid: 9cb87cbeff3283d4e9f76797608a9c14, type: 3}
+    - {fileID: 8300000, guid: 658e3833428cf424082f552d216bd163, type: 3}
+    - {fileID: 8300000, guid: 9257c149149bc2244856635e691cfd7b, type: 3}
+    - {fileID: 8300000, guid: 515a09d1ad093484c816a0660840e09f, type: 3}
+  - groupID: MCTalk
+    clips:
+    - {fileID: 8300000, guid: c32d5fc422253a7468c830e432a78da6, type: 3}
+    - {fileID: 8300000, guid: 6cdfd62e7648bfe42aa3f4eb7f787b35, type: 3}
+    - {fileID: 8300000, guid: 29e4cfbf3585db240ab88b19d959d27b, type: 3}
+    - {fileID: 8300000, guid: 5fdc167c4fc2dec4b860778309165be4, type: 3}
+  - groupID: MCDeath
+    clips:
+    - {fileID: 8300000, guid: 154c38f3c7ff1c8438f1dc4a89008a32, type: 3}
+  - groupID: ProjectileFlight
+    clips:
+    - {fileID: 8300000, guid: 6f46c162843608e4eafd3f17af25a44c, type: 3}
+  - groupID: ProjectileImpact
+    clips:
+    - {fileID: 8300000, guid: 34e03faed0b54d145809caa74c908397, type: 3}
+  - groupID: WalkingEnemyIdle
+    clips:
+    - {fileID: 8300000, guid: a6b8a7b0dc1a8c8458333b5b0cdab84a, type: 3}
+  - groupID: WalkingEnemyWalk
+    clips:
+    - {fileID: 8300000, guid: 1c42d384a27fbcd4f927a965b75d6c20, type: 3}
+  - groupID: WalkingEnemyAttack
+    clips:
+    - {fileID: 8300000, guid: 4f31cb77a3cf7264b952162c57ab07e2, type: 3}
+  - groupID: EnemyDeath
+    clips:
+    - {fileID: 8300000, guid: 907f132b7fdfb264589f61232cb6dfd2, type: 3}
+  - groupID: FlyingEnemyIdle
+    clips:
+    - {fileID: 8300000, guid: 0a64700bcff5ab34993c840c76decb7c, type: 3}
+  - groupID: WoodenFigureFound
+    clips:
+    - {fileID: 8300000, guid: bb3e757bce8b9444797be816c9173083, type: 3}
+  - groupID: WoodenFigureTalk
+    clips:
+    - {fileID: 0}
+  - groupID: MCRollEnd
+    clips:
+    - {fileID: 8300000, guid: 499e07a7258e6e041b981b1c5451234e, type: 3}
+  - groupID: StaticEnemyIdle
+    clips:
+    - {fileID: 8300000, guid: db8c0a3e5d6cf29469be5ebe113f7c95, type: 3}
+  - groupID: StaticEnemyAttack
+    clips:
+    - {fileID: 8300000, guid: 4d1c3095c1595b043b50f128139ae7d4, type: 3}
+  - groupID: BossIdle
+    clips:
+    - {fileID: 8300000, guid: 34a02a78a7b3ba5448c7ba2204bdd0ab, type: 3}
+    - {fileID: 8300000, guid: fa0d91b889abc344ba1bec2f384a7d00, type: 3}
+    - {fileID: 8300000, guid: b8ed1d65816c7c444a43e4b315f8d906, type: 3}
+    - {fileID: 8300000, guid: 280991258be88334cbc7db4d0f9ef48b, type: 3}
+  - groupID: BossLaugh
+    clips:
+    - {fileID: 8300000, guid: 79455fb291601c449910f01932f2037b, type: 3}
+    - {fileID: 8300000, guid: 3b252597f8cadde479591bfb7b419284, type: 3}
+  - groupID: BossStageChange
+    clips:
+    - {fileID: 8300000, guid: 4ab75b12e2c151644a786dfff6eab6c4, type: 3}
+  - groupID: BossDeath
+    clips:
+    - {fileID: 8300000, guid: f38a4bb172d6cbf4f859f8577722e44f, type: 3}
+  - groupID: BossCleansing
+    clips:
+    - {fileID: 8300000, guid: 4ab75b12e2c151644a786dfff6eab6c4, type: 3}
 --- !u!1 &1358462585886135289
 GameObject:
   m_ObjectHideFlags: 0
