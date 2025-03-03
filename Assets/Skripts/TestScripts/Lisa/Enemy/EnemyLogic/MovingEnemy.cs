@@ -131,16 +131,18 @@ public class MovingEnemy : StationaryEnemy
     {
         
         if (other.CompareTag("Player"))
-        {
-            
+        {           
             target = other.gameObject;
             playerInRange = true;
             playerHealth = other.GetComponent<PlayerHealth>();
 
             if (other.IsTouching(enemyHitbox) && !isDying || !isDying && other.IsTouching(attackCollider) && attackCollision)
             {
-                playerHealth.TakeDamage(stats.damage);
-                Debug.Log("taking damage: " + stats.damage);
+                if (other.transform.position.y < transform.position.y)
+                {
+                    playerHealth.TakeDamage(stats.damage);
+                    Debug.Log("taking damage: " + stats.damage);
+                }
 
             }
            
