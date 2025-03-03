@@ -20,6 +20,7 @@ public class Boss : EnemyBase
     public static bool bossActive;
     
     public GameObject platformPrefab;
+    public GameObject spawnerPrefab;
     public GameObject weaknessPrefab;
     public GameObject breakableWallPrefab;
     public GameObject lifePrefab;
@@ -34,6 +35,7 @@ public class Boss : EnemyBase
     public Transform[] spawnPointsLifePhase2;
     public Transform[] spawnPointsBrWallPhase2;
     public Transform[] spawnPointsWeaknessPhase3; //only weakness
+    public Transform[] spawnPointsSpawnerPhase3;
 
     public Transform[] enemySpawnPointsPhase1;
     public Transform[] enemySpawnPointsPhase2;
@@ -165,6 +167,7 @@ public class Boss : EnemyBase
                 destroyedWeaknesses = 0;
                 
                 SpawnObjects(spawnPointsWeaknessPhase3, weaknessPrefab);
+                SpawnObjects(spawnPointsSpawnerPhase3, spawnerPrefab);
                 SpawnThornObstacle();
             }));
         }
