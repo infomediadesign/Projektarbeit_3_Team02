@@ -109,14 +109,16 @@ MonoBehaviour:
   normalMissilePrefab: {fileID: 6485825918121921693, guid: a91f81ffa5c5fc54aa3d3779114e8c5a, type: 3}
   homingMissilePrefab: {fileID: 6533098546035892700, guid: 0c09b4edceffddc4980287670b127069, type: 3}
   shootPoint: {fileID: 4613753978372577725}
-  fireCooldown: 3
+  fireCooldown: 4
   thornSpeed: 2
   thornRange: 5
   platformPrefab: {fileID: 3170713206127356493, guid: b21b92b54a5715b45b2033cd4bbe5317, type: 3}
+  spawnerPrefab: {fileID: 0}
   weaknessPrefab: {fileID: 4878521498029676930, guid: 16e9a42a00af08d458646d868e0cedb5, type: 3}
   breakableWallPrefab: {fileID: 3563200504350864561, guid: 33c677755af9ca34780fe5984cb9f7c8, type: 3}
   lifePrefab: {fileID: 8861935898963863591, guid: 94abd5228794a114caa8a8d7600c328b, type: 3}
   thornObstaclePrefab: {fileID: 1104251113396248280, guid: 9467b4b4ef79ce047898715aa755eef7, type: 3}
+  spawnPointPlatformConst: []
   spawnPointsPlatformPhase1:
   - {fileID: 0}
   - {fileID: 0}
@@ -151,6 +153,7 @@ MonoBehaviour:
   spawnPointsWeaknessPhase3:
   - {fileID: 0}
   - {fileID: 0}
+  spawnPointsSpawnerPhase3: []
   enemySpawnPointsPhase1:
   - {fileID: 0}
   - {fileID: 0}
