@@ -144,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawnEnemyPrefab: {fileID: 0}
   stats: {fileID: 11400000, guid: 865f3fd16c41faf4fa11a4a8ea0fa34a, type: 2}
-  attackCollider: {fileID: 3058841900799613563}
+  attackCollider: {fileID: 0}
   respawn: 0
   respawnTime: 0
   isObstacle: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   - {fileID: 0}
   firePrefab: {fileID: 6485825918121921693, guid: a91f81ffa5c5fc54aa3d3779114e8c5a, type: 3}
   shootPoint: {fileID: 1301342811438287999}
-  patroling: 1
+  patroling: 0
   shootingEnemy: 1
 --- !u!114 &549806979074308791
 MonoBehaviour:
