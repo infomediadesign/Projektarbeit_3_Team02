@@ -1342,20 +1342,10 @@ MonoBehaviour:
   tracks:
   - trackName: MainMenu
     clip: {fileID: 8300000, guid: 1648949b36cbcc5408fdaafc3c6788dd, type: 3}
+  - trackName: GameBackground
+    clip: {fileID: 8300000, guid: bde8814c2dfade540ac04157fc81764b, type: 3}
   - trackName: Game
     clip: {fileID: 8300000, guid: 8fc38641e7cef0f419757db5fe085f29, type: 3}
-  - trackName: Level1Environment
-    clip: {fileID: 8300000, guid: bde8814c2dfade540ac04157fc81764b, type: 3}
-  - trackName: Level2.1Environment
-    clip: {fileID: 8300000, guid: 59b03f72999a7b24fb53d25f17d1e29c, type: 3}
-  - trackName: Level2.2Environment
-    clip: {fileID: 8300000, guid: 25b08ea09f864914b9772b7ceafe9b33, type: 3}
-  - trackName: Level3Screen1
-    clip: {fileID: 8300000, guid: 15196940e9680f2428dffb7416cf0ba6, type: 3}
-  - trackName: Level3Screen2/3/4
-    clip: {fileID: 8300000, guid: bd3434acc9f3efa49a48eeb7593c969e, type: 3}
-  - trackName: Level3Screen5
-    clip: {fileID: 8300000, guid: cb39a3123f13ef84abdcfb25b11a5425, type: 3}
 --- !u!1 &1876124289185248837
 GameObject:
   m_ObjectHideFlags: 0
@@ -3084,11 +3074,7 @@ Transform:
   m_GameObject: {fileID: 6239491860012354114}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-<<<<<<< HEAD
   m_LocalPosition: {x: -7.416298, y: -1.5325612, z: -10.674077}
-=======
-  m_LocalPosition: {x: 6.6868057, y: -1.5325712, z: -10.674077}
->>>>>>> f54a4b8 (Environment Sounds added)
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
