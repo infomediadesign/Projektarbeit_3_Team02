@@ -49,7 +49,7 @@ public class Grounded : BaseState
 
     public override void CheckSwitchStates()
     {
-        if(context.playerControls.Jump.phase == UnityEngine.InputSystem.InputActionPhase.Performed || !context.isGrounded )
+        if(context.playerControls.Jump.phase == UnityEngine.InputSystem.InputActionPhase.Performed || !context.isGrounded && context.rb.linearVelocityY < 0 )
         {
             SwitchState(factory.Air());
         }
