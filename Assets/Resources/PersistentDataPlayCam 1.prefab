@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 5129718317667544122}
   - component: {fileID: 5667675869393969557}
   - component: {fileID: 1841281942444013812}
+  - component: {fileID: 3715491453596507145}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -466,6 +467,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.4421616, y: 0.09390575}
   m_EdgeRadius: 0
+--- !u!114 &3715491453596507145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228800061242163865}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bcf9e6d62e782645b3d2ae1582874bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  framesToWait: 5
 --- !u!1 &242518753422773393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,7 +1037,7 @@ Transform:
   m_GameObject: {fileID: 2540395189238504914}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -132.33908, y: 2.3601608, z: -9.060473}
+  m_LocalPosition: {x: -132.17908, y: 1.9201609, z: 0.9395267}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1063,8 +1077,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 9.43
+  orthographic: 1
+  orthographic size: 16.11566
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1155,7 +1169,7 @@ MonoBehaviour:
     Enabled: 0
     DefaultMode: 2
   DefaultBlend:
-    Style: 1
+    Style: 0
     Time: 2
     CustomCurve:
       serializedVersion: 2
@@ -1176,7 +1190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0df3454c6b1cc4daf3c6b8aab985e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialCameraTag: Camera1
+  initialCameraTag: Camera0
   initDelay: 0.1
 --- !u!1 &2869858439936589656
 GameObject:
