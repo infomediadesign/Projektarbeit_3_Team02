@@ -8,10 +8,6 @@ public class Teleporter_neu : MonoBehaviour
     public int targetSceneBuildIndex;
     public int currentSceneBuildIndex;
 
-    // LoadingScreen Parameter
-    public float loadingScreenDuration = 2.0f; // Dauer in Sekunden, einstellbar im Inspector
-    public float fadeOutDuration = 1.0f;      // Dauer des Fade-Effekts
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -46,7 +42,7 @@ public class Teleporter_neu : MonoBehaviour
         {
             player.transform.position = spawnPoint.transform.position;
 
-            // Direktes Update der Cinemachine Camera
+            /* Direktes Update der Cinemachine Camera
             var vcam = GameObject.FindObjectOfType<CinemachineCamera>();
             if (vcam != null)
             {
@@ -63,9 +59,9 @@ public class Teleporter_neu : MonoBehaviour
             }
 
             Debug.Log($"Player teleported to spawn point in scene {targetScene.name}");
-
+            */
             // Hier beginnt der neue Code für den LoadingScreen
-            StartCoroutine(HandleLoadingScreen(targetScene));
+            //StartCoroutine(HandleLoadingScreen(targetScene));
         }
         else
         {
@@ -79,7 +75,7 @@ public class Teleporter_neu : MonoBehaviour
         }
     }
 
-    private IEnumerator HandleLoadingScreen(Scene targetScene)
+    /*private IEnumerator HandleLoadingScreen(Scene targetScene)
     {
         // Suche nach dem LoadingScreen GameObject in der Ziel-Scene
         GameObject loadingScreen = null;
@@ -147,7 +143,7 @@ public class Teleporter_neu : MonoBehaviour
         {
             Debug.LogWarning("Kein GameObject mit dem Tag 'LoadingScreen' in der Zielszene gefunden.");
         }
-    }
+    }*/
 
     private GameObject FindSpawnPointInHierarchy(GameObject obj)
     {

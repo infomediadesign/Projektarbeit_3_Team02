@@ -13356,8 +13356,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSceneBuildIndex: 2
   currentSceneBuildIndex: 1
-  loadingScreenDuration: 2
-  fadeOutDuration: 1
 --- !u!114 &484189719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18508,6 +18506,7 @@ GameObject:
   - component: {fileID: 997937575}
   - component: {fileID: 997937572}
   - component: {fileID: 997937571}
+  - component: {fileID: 997937576}
   m_Layer: 0
   m_Name: CineCam1
   m_TagString: Camera1
@@ -18561,7 +18560,7 @@ MonoBehaviour:
   Damping: 0.5
   SlowingDistance: 5
   OversizeWindow:
-    Enabled: 0
+    Enabled: 1
     MaxWindowSize: 0
     Padding: 0
   m_LegacyMaxWindowSize: -2
@@ -18589,12 +18588,12 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60
+    FieldOfView: 1
     OrthographicSize: 9.43
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
-    ModeOverride: 0
+    ModeOverride: 1
     PhysicalProperties:
       GateFit: 2
       SensorSize: {x: 21.946, y: 16.002}
@@ -18627,6 +18626,20 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
   FollowOffset: {x: 0, y: 0, z: -10}
+--- !u!114 &997937576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997937569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba63c25accfb37a4c84353b18e474df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomAmount: 2
+  zoomDuration: 0.5
 --- !u!4 &998724808 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5786526039667214893, guid: 24299326f4d1c87409bcd67ce3d9d5e7, type: 3}
@@ -25960,8 +25973,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSceneBuildIndex: 4
   currentSceneBuildIndex: 1
-  loadingScreenDuration: 2
-  fadeOutDuration: 1
 --- !u!114 &1303545998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31179,8 +31190,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 143.8, y: 10}
-      - {x: -16.8, y: 10}
+    - - {x: 143.8, y: 9.5}
+      - {x: -16.8, y: 9.5}
       - {x: -16.8, y: -9}
       - {x: 143.8, y: -9}
   m_UseDelaunayMesh: 0
@@ -33137,8 +33148,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSceneBuildIndex: 2
   currentSceneBuildIndex: 1
-  loadingScreenDuration: 2
-  fadeOutDuration: 1
 --- !u!114 &2099813630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33177,8 +33186,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSceneBuildIndex: 3
   currentSceneBuildIndex: 1
-  loadingScreenDuration: 2
-  fadeOutDuration: 1
 --- !u!114 &2131800880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34069,6 +34076,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1823583496}
   - {fileID: 1222016671}
   - {fileID: 786889279}
   - {fileID: 1792696913}
@@ -34094,6 +34102,5 @@ SceneRoots:
   - {fileID: 815755591}
   - {fileID: 1397940999}
   - {fileID: 173337409}
-  - {fileID: 1823583496}
   - {fileID: 1118979542}
   - {fileID: 360313848}

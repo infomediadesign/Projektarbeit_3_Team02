@@ -9239,6 +9239,7 @@ GameObject:
   - component: {fileID: 997937573}
   - component: {fileID: 997937572}
   - component: {fileID: 997937571}
+  - component: {fileID: 997937575}
   m_Layer: 0
   m_Name: CineCam22
   m_TagString: Camera22
@@ -9370,6 +9371,20 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &997937575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997937569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba63c25accfb37a4c84353b18e474df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomAmount: 2
+  zoomDuration: 0.5
 --- !u!1001 &1009733319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12530,8 +12545,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSceneBuildIndex: 4
   currentSceneBuildIndex: 3
-  loadingScreenDuration: 2
-  fadeOutDuration: 1
 --- !u!114 &1862753104
 MonoBehaviour:
   m_ObjectHideFlags: 0
