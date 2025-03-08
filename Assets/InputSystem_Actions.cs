@@ -1085,15 +1085,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Walk"",
-                    ""type"": ""Value"",
-                    ""id"": ""883f6e78-bcbc-443f-af6b-2d57a399a6be"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""AirCounter"",
                     ""type"": ""Button"",
                     ""id"": ""11a43ef8-9a77-4d58-a8f4-6b5b5588dc29"",
@@ -1101,6 +1092,33 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MoveLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""5b737e30-7a20-41c5-8322-ebb79717e409"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MoveRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""c087e312-a850-4b91-8e09-928b08d2bffb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Walk"",
+                    ""type"": ""Value"",
+                    ""id"": ""721e7930-10f7-489d-99c4-ff4b571535f4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -1193,72 +1211,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""7461f953-d376-48fa-83a8-54f30f9bf555"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walk"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""Negative"",
-                    ""id"": ""62d4f67e-c859-4671-a0dc-3e80e032ca7b"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walk"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Positive"",
-                    ""id"": ""94de749f-5bed-4fcc-9e70-28739735519f"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walk"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""e29a1226-630e-4136-b5c0-ad48ac3cf857"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walk"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""Negative"",
-                    ""id"": ""4a504bd6-720f-477d-8ca9-68f1a65d4cc7"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walk"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Positive"",
-                    ""id"": ""28a2f5bb-77c9-4ef2-a428-23d27e4f9461"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walk"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""dd4d7461-a77e-4c5e-8853-96092528e2c2"",
                     ""path"": ""<Keyboard>/k"",
@@ -1279,6 +1231,116 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""AirCounter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4c2da56-79c9-4983-93c5-073baa3d6e66"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b0b8362-f2e3-4bbb-898f-901cabd39d30"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c0e33b3-8ec7-4c6d-a505-7cc9a14aafcc"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2469a4d9-ea38-4d88-af79-af587e89223a"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""28c66b5c-06c5-4ad5-b604-6e732dde82ce"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walk"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""afac4fdf-22c7-4bf6-bc45-addfe7538bda"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""4d54a31c-e10f-4642-8087-648a0ced72fa"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""0df0520f-36c8-4a1e-b3ab-bf93e43a8129"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walk"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""eac9e889-faf1-48ea-be09-5a31471a7e21"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""9b133237-8fcb-408a-a41e-4c3e537c0004"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -1376,8 +1438,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Test_Block = m_Test.FindAction("Block", throwIfNotFound: true);
         m_Test_Counter = m_Test.FindAction("Counter", throwIfNotFound: true);
         m_Test_Roll = m_Test.FindAction("Roll", throwIfNotFound: true);
-        m_Test_Walk = m_Test.FindAction("Walk", throwIfNotFound: true);
         m_Test_AirCounter = m_Test.FindAction("AirCounter", throwIfNotFound: true);
+        m_Test_MoveLeft = m_Test.FindAction("MoveLeft", throwIfNotFound: true);
+        m_Test_MoveRight = m_Test.FindAction("MoveRight", throwIfNotFound: true);
+        m_Test_Walk = m_Test.FindAction("Walk", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1686,8 +1750,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Test_Block;
     private readonly InputAction m_Test_Counter;
     private readonly InputAction m_Test_Roll;
-    private readonly InputAction m_Test_Walk;
     private readonly InputAction m_Test_AirCounter;
+    private readonly InputAction m_Test_MoveLeft;
+    private readonly InputAction m_Test_MoveRight;
+    private readonly InputAction m_Test_Walk;
     public struct TestActions
     {
         private @InputSystem_Actions m_Wrapper;
@@ -1696,8 +1762,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @Block => m_Wrapper.m_Test_Block;
         public InputAction @Counter => m_Wrapper.m_Test_Counter;
         public InputAction @Roll => m_Wrapper.m_Test_Roll;
-        public InputAction @Walk => m_Wrapper.m_Test_Walk;
         public InputAction @AirCounter => m_Wrapper.m_Test_AirCounter;
+        public InputAction @MoveLeft => m_Wrapper.m_Test_MoveLeft;
+        public InputAction @MoveRight => m_Wrapper.m_Test_MoveRight;
+        public InputAction @Walk => m_Wrapper.m_Test_Walk;
         public InputActionMap Get() { return m_Wrapper.m_Test; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1719,12 +1787,18 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Roll.started += instance.OnRoll;
             @Roll.performed += instance.OnRoll;
             @Roll.canceled += instance.OnRoll;
-            @Walk.started += instance.OnWalk;
-            @Walk.performed += instance.OnWalk;
-            @Walk.canceled += instance.OnWalk;
             @AirCounter.started += instance.OnAirCounter;
             @AirCounter.performed += instance.OnAirCounter;
             @AirCounter.canceled += instance.OnAirCounter;
+            @MoveLeft.started += instance.OnMoveLeft;
+            @MoveLeft.performed += instance.OnMoveLeft;
+            @MoveLeft.canceled += instance.OnMoveLeft;
+            @MoveRight.started += instance.OnMoveRight;
+            @MoveRight.performed += instance.OnMoveRight;
+            @MoveRight.canceled += instance.OnMoveRight;
+            @Walk.started += instance.OnWalk;
+            @Walk.performed += instance.OnWalk;
+            @Walk.canceled += instance.OnWalk;
         }
 
         private void UnregisterCallbacks(ITestActions instance)
@@ -1741,12 +1815,18 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Roll.started -= instance.OnRoll;
             @Roll.performed -= instance.OnRoll;
             @Roll.canceled -= instance.OnRoll;
-            @Walk.started -= instance.OnWalk;
-            @Walk.performed -= instance.OnWalk;
-            @Walk.canceled -= instance.OnWalk;
             @AirCounter.started -= instance.OnAirCounter;
             @AirCounter.performed -= instance.OnAirCounter;
             @AirCounter.canceled -= instance.OnAirCounter;
+            @MoveLeft.started -= instance.OnMoveLeft;
+            @MoveLeft.performed -= instance.OnMoveLeft;
+            @MoveLeft.canceled -= instance.OnMoveLeft;
+            @MoveRight.started -= instance.OnMoveRight;
+            @MoveRight.performed -= instance.OnMoveRight;
+            @MoveRight.canceled -= instance.OnMoveRight;
+            @Walk.started -= instance.OnWalk;
+            @Walk.performed -= instance.OnWalk;
+            @Walk.canceled -= instance.OnWalk;
         }
 
         public void RemoveCallbacks(ITestActions instance)
@@ -1841,7 +1921,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnBlock(InputAction.CallbackContext context);
         void OnCounter(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
-        void OnWalk(InputAction.CallbackContext context);
         void OnAirCounter(InputAction.CallbackContext context);
+        void OnMoveLeft(InputAction.CallbackContext context);
+        void OnMoveRight(InputAction.CallbackContext context);
+        void OnWalk(InputAction.CallbackContext context);
     }
 }
