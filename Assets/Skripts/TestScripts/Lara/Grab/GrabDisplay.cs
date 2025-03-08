@@ -27,7 +27,6 @@ public class GrabDisplay : MonoBehaviour
             if (!isActivated)
             {
                 ActivateGrave();
-                SoundManager.Instance.PlaySound2D("WoodenFigureFound");
             }
         }
     }
@@ -53,5 +52,6 @@ public class GrabDisplay : MonoBehaviour
         {
             spriteRenderer.sprite = activeSprite;
         }
+        //SoundManager.Instance.PlaySound2D("WoodenFigureFound");
     }
 }
