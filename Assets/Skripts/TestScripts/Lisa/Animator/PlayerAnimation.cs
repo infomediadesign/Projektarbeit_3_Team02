@@ -68,8 +68,13 @@ public class PlayerAnimation : MonoBehaviour
         
         else if(stateManager.damageAnim)
         {
+            if(currentSubState is not Block)
             AnimStateTransitionString(playerDamage);
-  
+            else
+            {
+                stateManager.damageAnim = false;
+            }
+
         }
         else if (stateManager.deathAnim)
         {
@@ -107,7 +112,12 @@ public class PlayerAnimation : MonoBehaviour
         }
         else if (stateManager.damageAnim)
         {
-            AnimStateTransitionString(playerDamage);
+            if (currentSubState is not Block)
+                AnimStateTransitionString(playerDamage);
+            else
+            {
+                stateManager.damageAnim = false;
+            }
 
         }
         else if (stateManager.deathAnim)
