@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour
     private MemoryUIText memoryUIText;
     private LifeUIText lifeUIText;
     private bool isGamePaused = false;
+    private CameraSelector cameraSelector;
 
     private void Start()
     {
@@ -62,6 +64,12 @@ public class UIManager : MonoBehaviour
         EventManager.Instance.StartListening("PauseGame", OnEnterPausePress);
         EventManager.Instance.StartListening("ResumeGame", OnGameResumePress);
         RegisterDefaultButtons();
+
+        cameraSelector = FindObjectOfType<CameraSelector>();
+        if (cameraSelector == null)
+        {
+            Debug.LogWarning("CameraSelector nicht gefunden. Kamerawechsel nicht möglich.");
+        }
     }
 
    
@@ -131,7 +139,35 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(1);
         MusicManager.Instance.PlayMusic("Game");
-        //MusicManager.Instance.PlayMusic("GameBackground");
+
+        // Zur Cinemachine1 wechseln, falls CameraSelector verfügbar ist
+        if (cameraSelector != null)
+        {
+            cameraSelector.SwitchToCamera("Cinemachine1");
+        }
+        else
+        {
+            // Falls der CameraSelector nach dem Szenenwechsel nicht mehr vorhanden ist
+            // kannst du den CameraSelector in der neuen Szene suchen und aufrufen
+            StartCoroutine(SwitchCameraAfterSceneLoad());
+        }
+    }
+
+    private IEnumerator SwitchCameraAfterSceneLoad()
+    {
+        // Warten, bis die Szene geladen ist
+        yield return new WaitForSeconds(0.5f);
+
+        // CameraSelector in der neuen Szene suchen
+        CameraSelector newSceneCameraSelector = FindObjectOfType<CameraSelector>();
+        if (newSceneCameraSelector != null)
+        {
+            newSceneCameraSelector.SwitchToCamera("Cinemachine1");
+        }
+        else
+        {
+            Debug.LogWarning("CameraSelector in der neuen Szene nicht gefunden.");
+        }
     }
 
     public void ExitGame()
