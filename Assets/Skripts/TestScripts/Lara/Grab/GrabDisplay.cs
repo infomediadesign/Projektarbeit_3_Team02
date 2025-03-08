@@ -1,17 +1,18 @@
 using UnityEngine;
+
 public class GrabDisplay : MonoBehaviour
 {
     public Sprite activeSprite;
     public Sprite inactiveSprite;
     private SpriteRenderer spriteRenderer;
     private bool isActivated = false;
+
     // Event-Name für die Checkpoint-Aktivierung
     private const string GRAVE_ACTIVATED_EVENT = "OnCheckpointActivated";
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-
         // Set default to inactive sprite
         if (spriteRenderer && inactiveSprite)
         {
@@ -39,19 +40,26 @@ public class GrabDisplay : MonoBehaviour
         // Direkte Aktualisierung über den CheckpointManager
         //CheckpointManager.Instance.SetLastCheckpoint(transform.position);
 
-        // Event auslösen mit der Position als Parameter
-        /*
+        // Event auslösen ohne Parameter (wir verwenden einen einfachen Action-Event)
         if (EventManager.Instance != null)
         {
-            EventManager.Instance.TriggerEvent(GRAVE_ACTIVATED_EVENT, transform.position);
-            Debug.Log($"[Checkpoint] Event '{GRAVE_ACTIVATED_EVENT}' mit Position {transform.position} wurde ausgelöst");
-        }*/
+            EventManager.Instance.TriggerEvent(GRAVE_ACTIVATED_EVENT);
+            Debug.Log($"[Checkpoint] Event '{GRAVE_ACTIVATED_EVENT}' wurde ausgelöst");
+        }
+
+        // Direkter Aufruf bleibt als Fallback
+        if (GrabManager.Instance != null)
+        {
+            GrabManager.Instance.OnGraveActivated();
+            Debug.Log($"[Grab] GrabManager wurde direkt über Aktivierung bei Position {transform.position} informiert");
+        }
 
         // Change visual appearance to active sprite
         if (spriteRenderer && activeSprite)
         {
             spriteRenderer.sprite = activeSprite;
         }
+
         //SoundManager.Instance.PlaySound2D("WoodenFigureFound");
     }
 }
