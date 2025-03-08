@@ -11854,7 +11854,7 @@ GameObject:
   - component: {fileID: 295695590}
   - component: {fileID: 295695589}
   m_Layer: 0
-  m_Name: Schuppen einsammeln
+  m_Name: Bewegung Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11899,7 +11899,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4496513122794721676, guid: cef125f48773b0f44b1338f646dba406, type: 3}
+  m_Sprite: {fileID: -6120185728222415232, guid: 85ca15b81c6c5ad419dc1baef1c67736, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -18523,6 +18523,7 @@ RectTransform:
   m_Children:
   - {fileID: 469337675}
   - {fileID: 295695588}
+  - {fileID: 1223604702}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -25013,6 +25014,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1223604701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1223604702}
+  - component: {fileID: 1223604704}
+  - component: {fileID: 1223604703}
+  m_Layer: 0
+  m_Name: Bewegung PC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1223604702
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223604701}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1008145380}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -953.35, y: -64.67999}
+  m_SizeDelta: {x: 665, y: 132}
+  m_Pivot: {x: 0.01, y: 0.01}
+--- !u!114 &1223604703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223604701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -2706841897471547988, guid: 20d9f5966e7025b4f9e482ddef720a2e, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1223604704
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223604701}
+  m_CullTransparentMesh: 1
 --- !u!1 &1229918264
 GameObject:
   m_ObjectHideFlags: 0
@@ -29166,7 +29242,7 @@ GameObject:
   - component: {fileID: 1792696912}
   - component: {fileID: 1792696911}
   m_Layer: 0
-  m_Name: MessageTriggerLeben
+  m_Name: MessageTriggerBewegung
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29184,8 +29260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bac2901f069a9b439c41944c6b16e3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageImageKeyboard: {fileID: 0}
-  messageImageController: {fileID: 0}
+  messageImageKeyboard: {fileID: 1223604701}
+  messageImageController: {fileID: 295695587}
   displayDuration: 5
 --- !u!61 &1792696912
 BoxCollider2D:
@@ -29242,7 +29318,7 @@ Transform:
   m_GameObject: {fileID: 1792696910}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.933717, y: -6.3030357, z: -0.08107077}
+  m_LocalPosition: {x: -7.933717, y: -5.3030357, z: -0.08107077}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
