@@ -19,6 +19,7 @@ public class MusicManager : MonoBehaviour
         else 
         {
             Instance = this;
+            //musicSource.loop = true; //tracks automatically loop
             DontDestroyOnLoad(gameObject);
         }
     }
@@ -46,6 +47,7 @@ public class MusicManager : MonoBehaviour
         }
 
         musicSource.clip = nextTrack;       //replace with new track
+        musicSource.loop = true;    //loops track 
         musicSource.Play();
 
         percent = 0;    //turn up volume of new track
