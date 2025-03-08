@@ -15,7 +15,7 @@ public class MainMenuScript : MonoBehaviour
     private void Start()
     {
         MusicManager.Instance.PlayMusic("MainMenu");
-        startGamePressed = false;
+     
     }
 
     public void ExitGame()

@@ -3,12 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    public static bool gameStarted;
     void Start()
     {
 
     
         if (SceneManager.GetSceneByName("Tech Demo Level 1").isLoaded == false)
         {
+            gameStarted = false;
             SceneManager.LoadScene("Tech Demo Level 1", LoadSceneMode.Additive);
         }
     }
@@ -16,5 +18,6 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         gameObject.SetActive(false);
+        gameStarted = true;
     }
 }

@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button[] defaultSoundButtons; //buttons will use the default sound
     [SerializeField] private string defaultButtonSoundEvent = "ButtonClicked"; //event for default sound (for example: start game button)
 
+    public static bool startPressed;
     public static UIManager Instance { get; private set; }
     public GameObject mainMenuScreen;
     public GameObject optionsScreen;
@@ -26,7 +27,7 @@ public class UIManager : MonoBehaviour
     {
         //ensure that main menu is active at start
         // ShowScreen(mainMenuScreen);
-
+        startPressed = false;
         string lastTrack = GameOverUI.lastTrackPlayed;
 
         if (!string.IsNullOrEmpty(lastTrack) && lastTrack != "MainMenu")
@@ -132,6 +133,7 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadSceneAsync(1);
         MusicManager.Instance.PlayMusic("Game");
         //MusicManager.Instance.PlayMusic("GameBackground");
+        startPressed = true;
     }
 
     public void ExitGame()

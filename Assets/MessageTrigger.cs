@@ -34,7 +34,7 @@ public class MessageTrigger : MonoBehaviour
 
     private IEnumerator ShowMessage()
     {
-        if (MainMenuScript.startGamePressed)
+        if (UIManager.startPressed)
         {
             if (!InputCheck.controller)
             {
