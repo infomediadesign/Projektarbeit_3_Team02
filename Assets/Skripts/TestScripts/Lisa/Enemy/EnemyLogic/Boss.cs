@@ -5,6 +5,7 @@ using UnityEngine.TestTools;
 
 public class Boss : EnemyBase
 {
+    private Animator animator;
     private int phaseCount = 0;
     public GameObject normalMissilePrefab;
     public GameObject homingMissilePrefab;
@@ -53,7 +54,7 @@ public class Boss : EnemyBase
                 player = playerObject.transform;
             }
         }
-        
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -235,6 +236,7 @@ public class Boss : EnemyBase
     }
     public void OnWeaknessDestroyed()
     {
+        animator.SetBool("DMG", true);
         destroyedWeaknesses++;
         Debug.Log("weakness destroyed: " + destroyedWeaknesses);
 
@@ -280,5 +282,9 @@ public class Boss : EnemyBase
     {
         yield return new WaitForSecondsRealtime(delay);
         spawnAction?.Invoke();
+    }
+    public void StopDMGAnim()
+    {
+        animator.SetBool("DMG", false);
     }
 }
