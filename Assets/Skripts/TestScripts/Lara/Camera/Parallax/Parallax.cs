@@ -3,43 +3,37 @@ using Unity.Cinemachine; // Cinemachine Namespace hinzufügen
 
 public class Parallax : MonoBehaviour
 {
-    [HideInInspector] public Transform cameraTarget;  // Geändert zu Transform statt Camera
+    [HideInInspector] public Camera mainCamera;
     private float length, startpos;
     public float parallaxEffect;
-
     void Start()
     {
-        // Suche nach Cinemachine Virtual Camera
-        CinemachineCamera virtualCamera = FindObjectOfType<CinemachineCamera>();
-        if (virtualCamera != null)
+        // Finde die Main Camera, die das CinemachineBrain hat
+        // Diese Methode funktioniert auch, wenn die Main Camera in einem persistent data prefab ist
+        CinemachineBrain brain = GameObject.FindObjectOfType<CinemachineBrain>();
+        if (brain != null)
         {
-            cameraTarget = virtualCamera.transform;
-            Debug.Log("Cinemachine Virtual Camera gefunden: " + virtualCamera.name);
+            mainCamera = brain.GetComponent<Camera>();
+            if (mainCamera != null)
+            {
+                Debug.Log("Found camera with CinemachineBrain: " + mainCamera.name);
+            }
         }
-        else
+
+        // Fallback zur MainCamera, falls keine Cinemachine Camera gefunden wurde
+        if (mainCamera == null)
         {
-            // Alternativer Versuch: Brain finden
-            CinemachineBrain cinemachineBrain = FindObjectOfType<CinemachineBrain>();
-            if (cinemachineBrain != null)
+            mainCamera = Camera.main;
+            if (mainCamera != null)
             {
-                cameraTarget = cinemachineBrain.transform;
-                Debug.Log("Cinemachine Brain gefunden: " + cinemachineBrain.name);
+                Debug.Log("Fallback to main camera: " + mainCamera.name);
             }
-            else
-            {
-                // Fallback zur MainCamera
-                Camera mainCamera = Camera.main;
-                if (mainCamera != null)
-                {
-                    cameraTarget = mainCamera.transform;
-                    Debug.Log("Fallback zur Main Camera: " + mainCamera.name);
-                }
-                else
-                {
-                    Debug.LogWarning("Keine Kamera für Parallax-Effekt gefunden auf: " + gameObject.name);
-                    return;
-                }
-            }
+        }
+
+        if (mainCamera == null)
+        {
+            Debug.LogWarning("Could not find camera for parallax effect on: " + gameObject.name);
+            return;
         }
 
         startpos = transform.position.x;
@@ -48,13 +42,10 @@ public class Parallax : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (cameraTarget == null) return;  // Sicherheitscheck
-
-        float temp = (cameraTarget.position.x * (1 - parallaxEffect));
-        float dist = (cameraTarget.position.x * parallaxEffect);
-
+        if (mainCamera == null) return;  // Sicherheitscheck
+        float temp = (mainCamera.transform.position.x * (1 - parallaxEffect));
+        float dist = (mainCamera.transform.position.x * parallaxEffect);
         transform.position = new Vector3(startpos + dist, transform.position.y, transform.position.z);
-
         /*
         if (temp > startpos + length) startpos += length;
         else if (temp < startpos - length) startpos -= length;
