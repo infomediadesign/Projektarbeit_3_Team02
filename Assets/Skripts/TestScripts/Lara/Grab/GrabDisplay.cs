@@ -8,7 +8,7 @@ public class GrabDisplay : MonoBehaviour
     private bool isActivated = false;
 
     // Event-Name für die Checkpoint-Aktivierung
-    private const string GRAVE_ACTIVATED_EVENT = "OnCheckpointActivated";
+    private const string GRAVE_ACTIVATED_EVENT = "OnGraveActivated";
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class GrabDisplay : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log($"[Checkpoint] Player kam an Grab bei Position {transform.position} vorbei");
+            Debug.Log($"[Grab] Player kam an Grab bei Position {transform.position} vorbei");
             if (!isActivated)
             {
                 ActivateGrave();
@@ -44,7 +44,7 @@ public class GrabDisplay : MonoBehaviour
         if (EventManager.Instance != null)
         {
             EventManager.Instance.TriggerEvent(GRAVE_ACTIVATED_EVENT);
-            Debug.Log($"[Checkpoint] Event '{GRAVE_ACTIVATED_EVENT}' wurde ausgelöst");
+            Debug.Log($"[Grab] Event '{GRAVE_ACTIVATED_EVENT}' wurde ausgelöst");
         }
 
         // Direkter Aufruf bleibt als Fallback
