@@ -103,7 +103,7 @@ public class StateManager : MonoBehaviour
         }
         if (!isGrounded && Mathf.Abs(rb.linearVelocity.y) < 0.1f)
         {
-            playerControls.Walk.Disable();
+            //playerControls.Walk.Disable();
             Debug.Log("Walk disabled");
             walkDisabled = true;
             stuckTime += Time.deltaTime;
@@ -115,7 +115,7 @@ public class StateManager : MonoBehaviour
 
         if (walkDisabled && (isGrounded || Mathf.Abs(rb.linearVelocity.y) > 0.1f || stuckTime > maxStuckTime))
         {
-            playerControls.Walk.Enable();
+            //playerControls.Walk.Enable();
             Debug.Log("Walk enabled");
             walkDisabled = false;
             stuckTime = 0f;
