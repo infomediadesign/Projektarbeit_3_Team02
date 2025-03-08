@@ -25,6 +25,7 @@ public class SoundManager : MonoBehaviour
         //register for button click events
         EventManager.Instance.StartListening("ButtonClicked", PlayDefaultButtonSound);
         EventManager.Instance.StartListening("StartGameButtonClicked", PlayStartGameSound);
+
     }
 
     public void PlaySound3D(AudioClip clip, Vector3 pos)
@@ -44,6 +45,22 @@ public class SoundManager : MonoBehaviour
     {
         sfx2DSource.PlayOneShot(sfxLibrary.GetClipFromName(soundName));
     }
+    public void StopSound2D()
+    {
+        sfx2DSource.Stop();
+    }
+  
+    public void PlaySoundLoop2D(string soundName)
+    {
+        AudioClip clip = sfxLibrary.GetClipFromName(soundName);
+        if (clip != null)
+        {
+            Debug.Log("sound found");
+            sfx2DSource.clip = clip;
+            sfx2DSource.loop = true;
+            sfx2DSource.Play();
+        }
+    }
 
     public void SetVolume(float volume)
     {
@@ -54,7 +71,10 @@ public class SoundManager : MonoBehaviour
     {
         return sfx2DSource.volume; //retrieve the current volume for the slider
     }
-
+    public bool IsSoundPlaying()
+    {
+        return sfx2DSource.isPlaying;
+    }
     private void PlayDefaultButtonSound()
     {
         Debug.Log("Playing default button click sound.");
@@ -68,6 +88,7 @@ public class SoundManager : MonoBehaviour
 
         SoundManager.Instance.PlaySound2D("StartGameButton");
     }
+
 
     private void OnDestroy()
     {

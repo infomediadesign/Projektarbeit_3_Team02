@@ -1,17 +1,21 @@
 using UnityEngine;
-
+using System.Collections;
+using UnityEngine.Audio;
 public class Walk : BaseState
 {
     public Walk(StateManager currentContext, StateFactory factory)
     : base(currentContext, factory) { }
     private float xInput;
-
+    private float soundTimer = 0f;  // Timer für den Intervall
+    private float soundInterval = 5f;
     override public void EnterState()
     {
+
     }
 
     override public void UpdateState()
     {
+
         xInput = context.playerControls.Walk.ReadValue<float>();
         context.rb.linearVelocity = new Vector2(xInput * context.playerStats.walkingSpeed, context.rb.linearVelocity.y);
 
@@ -49,8 +53,7 @@ public class Walk : BaseState
     }
     override public void ExitState()
     {
-        
+        SoundManager.Instance.StopSound2D();   
     }
-
   
 }

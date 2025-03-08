@@ -46,7 +46,7 @@ public class PlayerAnimation : MonoBehaviour
             if (currentSubState is Walk)
             {
                 AnimStateTransitionString(playerWalk);
-
+                PlaySound("MCRunSound");
             }
             else if (currentSubState is Idle)
             {
@@ -130,7 +130,14 @@ public class PlayerAnimation : MonoBehaviour
         currentState = stateNew;
     }
 
-
+    public void PlaySound(string soundName)
+    {
+        if (!SoundManager.Instance.IsSoundPlaying())
+        {
+            SoundManager.Instance.PlaySoundLoop2D(soundName);
+        }
+      
+    }
 
 
 
