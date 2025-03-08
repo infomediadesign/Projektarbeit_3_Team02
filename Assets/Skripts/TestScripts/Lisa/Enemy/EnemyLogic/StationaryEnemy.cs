@@ -15,7 +15,6 @@ public class StationaryEnemy : EnemyBase
     private bool statEnemy;
 
     public GameObject counterUIPrefab; 
-    protected CounterUI counterUIInstance;
     protected float counterTimer = 0.6f; // frame 1-6
     protected float counterPossibleTimer = 0.4f; // frame 7 bis 10
     protected float counterAfterTimer = 0.5f; // frame 11 bis 15
