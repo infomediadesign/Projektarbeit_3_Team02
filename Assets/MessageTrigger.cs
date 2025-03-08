@@ -34,40 +34,44 @@ public class MessageTrigger : MonoBehaviour
 
     private IEnumerator ShowMessage()
     {
-        if (!InputCheck.controller)
+        if (MainMenuScript.startGamePressed)
         {
-            // Bild einblenden
-            if (messageImageKeyboard != null)
+            if (!InputCheck.controller)
             {
-                messageImageKeyboard.SetActive(true);
+                // Bild einblenden
+                if (messageImageKeyboard != null)
+                {
+                    messageImageKeyboard.SetActive(true);
+                }
+
+                // Warten für die angegebene Dauer
+                yield return new WaitForSeconds(displayDuration);
+
+                // Bild ausblenden
+                if (messageImageKeyboard != null)
+                {
+                    messageImageKeyboard.SetActive(false);
+                }
             }
-
-            // Warten für die angegebene Dauer
-            yield return new WaitForSeconds(displayDuration);
-
-            // Bild ausblenden
-            if (messageImageKeyboard != null)
+            else
             {
-                messageImageKeyboard.SetActive(false);
+                // Bild einblenden
+                if (messageImageController != null)
+                {
+                    messageImageController.SetActive(true);
+                }
+
+                // Warten für die angegebene Dauer
+                yield return new WaitForSeconds(displayDuration);
+
+                // Bild ausblenden
+                if (messageImageController != null)
+                {
+                    messageImageController.SetActive(false);
+                }
             }
         }
-        else
-        {
-            // Bild einblenden
-            if (messageImageController != null)
-            {
-                messageImageController.SetActive(true);
-            }
-
-            // Warten für die angegebene Dauer
-            yield return new WaitForSeconds(displayDuration);
-
-            // Bild ausblenden
-            if (messageImageController != null)
-            {
-                messageImageController.SetActive(false);
-            }
-        }
+       
         
     }
 }
