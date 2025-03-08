@@ -40,13 +40,7 @@ public class MovingEnemy : StationaryEnemy
                 player = playerObject.transform;
             }
         }
-        if (counterUIPrefab != null)
-        {
-            GameObject ui = Instantiate(counterUIPrefab);
-            counterUIInstance = ui.GetComponent<CounterUI>();
-            counterUIInstance.target = transform;
-            counterUIInstance.offset = new Vector3(-10, 4, 0);
-        }
+
         
     }
    
