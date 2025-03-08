@@ -1,18 +1,45 @@
 using UnityEngine;
+using Unity.Cinemachine; // Cinemachine Namespace hinzufügen
+
 public class Parallax : MonoBehaviour
 {
-    [HideInInspector] public Camera mainCamera;  
+    [HideInInspector] public Transform cameraTarget;  // Geändert zu Transform statt Camera
     private float length, startpos;
     public float parallaxEffect;
 
     void Start()
     {
-        // Finde die Kamera
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
-        if (mainCamera == null)
+        // Suche nach Cinemachine Virtual Camera
+        CinemachineCamera virtualCamera = FindObjectOfType<CinemachineCamera>();
+        if (virtualCamera != null)
         {
-            Debug.LogWarning("Could not find camera for parallax effect on: " + gameObject.name);
-            return;
+            cameraTarget = virtualCamera.transform;
+            Debug.Log("Cinemachine Virtual Camera gefunden: " + virtualCamera.name);
+        }
+        else
+        {
+            // Alternativer Versuch: Brain finden
+            CinemachineBrain cinemachineBrain = FindObjectOfType<CinemachineBrain>();
+            if (cinemachineBrain != null)
+            {
+                cameraTarget = cinemachineBrain.transform;
+                Debug.Log("Cinemachine Brain gefunden: " + cinemachineBrain.name);
+            }
+            else
+            {
+                // Fallback zur MainCamera
+                Camera mainCamera = Camera.main;
+                if (mainCamera != null)
+                {
+                    cameraTarget = mainCamera.transform;
+                    Debug.Log("Fallback zur Main Camera: " + mainCamera.name);
+                }
+                else
+                {
+                    Debug.LogWarning("Keine Kamera für Parallax-Effekt gefunden auf: " + gameObject.name);
+                    return;
+                }
+            }
         }
 
         startpos = transform.position.x;
@@ -21,10 +48,10 @@ public class Parallax : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (mainCamera == null) return;  // Sicherheitscheck
+        if (cameraTarget == null) return;  // Sicherheitscheck
 
-        float temp = (mainCamera.transform.position.x * (1 - parallaxEffect));
-        float dist = (mainCamera.transform.position.x * parallaxEffect);
+        float temp = (cameraTarget.position.x * (1 - parallaxEffect));
+        float dist = (cameraTarget.position.x * parallaxEffect);
 
         transform.position = new Vector3(startpos + dist, transform.position.y, transform.position.z);
 

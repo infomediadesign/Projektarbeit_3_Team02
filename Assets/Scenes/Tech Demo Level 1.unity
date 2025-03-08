@@ -18557,11 +18557,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BoundingShape2D: {fileID: 1957691139}
-  Damping: 0.5
+  Damping: 0.7
   SlowingDistance: 5
   OversizeWindow:
     Enabled: 1
-    MaxWindowSize: 0
+    MaxWindowSize: 9.05
     Padding: 0
   m_LegacyMaxWindowSize: -2
 --- !u!114 &997937574
@@ -18589,7 +18589,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 1
-    OrthographicSize: 9.43
+    OrthographicSize: 9.05
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -31190,10 +31190,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 143.8, y: 9.5}
-      - {x: -16.8, y: 9.5}
-      - {x: -16.8, y: -9}
-      - {x: 143.8, y: -9}
+    - - {x: 143.8, y: 9.3}
+      - {x: -16.5, y: 9.3}
+      - {x: -16.5, y: -8.8}
+      - {x: 143.8, y: -8.8}
   m_UseDelaunayMesh: 0
 --- !u!50 &1957691140
 Rigidbody2D:
