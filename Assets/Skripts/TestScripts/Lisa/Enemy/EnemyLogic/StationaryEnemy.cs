@@ -15,7 +15,6 @@ public class StationaryEnemy : EnemyBase
     private bool statEnemy;
 
     public GameObject counterUIPrefab; 
-    protected CounterUI counterUIInstance;
     protected float counterTimer = 0.6f; // frame 1-6
     protected float counterPossibleTimer = 0.4f; // frame 7 bis 10
     protected float counterAfterTimer = 0.5f; // frame 11 bis 15
@@ -35,9 +34,10 @@ public class StationaryEnemy : EnemyBase
     public float timer;
     protected float intTimer; //store den initial timer
     private Vector3 originalOffset;
-
+    private bool playerInSoundRange;
     private void Awake()
     {
+        playerInSoundRange = false;
         statEnemy = true;
         intTimer = timer;
         anim = GetComponent<Animator>();
@@ -55,18 +55,33 @@ public class StationaryEnemy : EnemyBase
     }
     void Update()
     {
-
+        if(Vector2.Distance(player.transform.position, transform.position) <= 5f)
+        {
+            playerInSoundRange = true;
+        }
+        else
+        {
+            playerInSoundRange = false;
+        }
             Rotate();
             CheckDistance();
             if (isDying)
             {
                 anim.SetBool("Death", true);
+            if (playerInSoundRange)
+            {
+                SoundManager.Instance.StopEnemySound2D();
+                PlaySound("EnemyDeath");
+            }
             }
             if (damageCooldownTimer > 0f)
             {
                 damageCooldownTimer -= Time.deltaTime;
             }
-        
+        if (playerInSoundRange && !isDying && !canAttack)
+        {
+            PlaySound("StaticEnemyIdle");
+        }
       
     }
     public override void Attack()
@@ -75,6 +90,12 @@ public class StationaryEnemy : EnemyBase
         timer = intTimer;
         anim.SetBool("Moving", false);
         anim.SetBool("Attacking", true);
+        if (playerInSoundRange)
+        {
+            SoundManager.Instance.StopEnemySound2D();
+            PlaySound("StaticEnemyAttack");
+        }
+      
 
     }  
     public override void StopAttack()

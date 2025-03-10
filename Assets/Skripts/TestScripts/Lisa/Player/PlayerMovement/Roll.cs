@@ -12,7 +12,7 @@ public class Roll : BaseState
 
     override public void EnterState()
     {
-        context.rolling = true;
+        soundStop = false;
         context.animator.SetBool("rollFinished", false);
         startPositionX = context.transform.position.x;
 
@@ -29,6 +29,10 @@ public class Roll : BaseState
         
         context.rollTrigger.enabled = true;
         context.mainCollider.enabled = false;
+        if (!soundStop)
+        {
+            PlaySound("MCRollSound");
+        }
     }
 
     override public void UpdateState()
@@ -122,11 +126,12 @@ public class Roll : BaseState
     }
     override public void ExitState()
     {
+        soundStop = true;
+        SoundManager.Instance.StopPlayerSound2D();
         context.mainCollider.enabled = true;
         context.rollTrigger.enabled = false;
 
         context.animator.SetBool("rollFinished", true);
-        context.rolling = false;
 
     }
 }

@@ -22,11 +22,16 @@ public class Counter : BaseState
         {
             Debug.LogError("no enemy!");
         }
-
+        soundStop = false;
     }
    
     override public void UpdateState()
     {
+        if (!soundStop)
+        {
+            PlaySound("MCCounter");
+            soundStop = true;
+        }
         if (!attacked)
         {
             enemy = context.zone.GetCounterableEnemy();
@@ -69,7 +74,6 @@ public class Counter : BaseState
     }
     override public void ExitState()
     {
-
     }
   
 }
