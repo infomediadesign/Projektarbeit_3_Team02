@@ -46,7 +46,6 @@ public class PlayerAnimation : MonoBehaviour
             if (currentSubState is Walk)
             {
                 AnimStateTransitionString(playerWalk);
-                PlaySound("MCRunSound");
             }
             else if (currentSubState is Idle)
             {
@@ -55,10 +54,12 @@ public class PlayerAnimation : MonoBehaviour
             else if (currentSubState is Roll)
             {
                 AnimStateTransitionString(playerRoll);
+
             }
             else if (currentSubState is Block)
             {
                 AnimStateTransitionString(playerBlock);
+
             }
             else if (currentSubState is Counter)
             {
@@ -69,12 +70,14 @@ public class PlayerAnimation : MonoBehaviour
         else if(stateManager.damageAnim)
         {
             AnimStateTransitionString(playerDamage);
-  
+            PlaySound("MCTakesDamage");
+
         }
         else if (stateManager.deathAnim)
         {
             AnimStateTransitionString(playerDeath);
-            
+            PlaySound("MCDeath");
+
         }
         else if (stateManager.deathLastFrame)
         {
@@ -91,10 +94,12 @@ public class PlayerAnimation : MonoBehaviour
             if (currentSubState is Jump)
             {
                 AnimStateTransitionString(playerJump);
+               
             }
             else if (currentSubState is AirCounter)
             {
                 AnimStateTransitionString(playerAirCounter);
+                PlaySound("MCCounter");
             }
             else if (currentSubState is Falling)
             {
@@ -108,12 +113,14 @@ public class PlayerAnimation : MonoBehaviour
         else if (stateManager.damageAnim)
         {
             AnimStateTransitionString(playerDamage);
+            PlaySound("MCTakesDamage");
 
         }
         else if (stateManager.deathAnim)
         {
             AnimStateTransitionString(playerDeath);
-            
+            PlaySound("MCDeath");
+
         }
         else if (stateManager.deathLastFrame)
         {
@@ -130,13 +137,22 @@ public class PlayerAnimation : MonoBehaviour
         currentState = stateNew;
     }
 
+    public void PlaySoundLoop(string soundName)
+    {
+        if (!SoundManager.Instance.IsSoundPlaying())
+        {
+            SoundManager.Instance.StopSound2D();
+            SoundManager.Instance.PlaySound2D(soundName);
+        }
+      
+    }
     public void PlaySound(string soundName)
     {
         if (!SoundManager.Instance.IsSoundPlaying())
         {
-            SoundManager.Instance.PlaySoundLoop2D(soundName);
+            SoundManager.Instance.StopSound2D();
+            SoundManager.Instance.PlaySound2D(soundName);
         }
-      
     }
 
 

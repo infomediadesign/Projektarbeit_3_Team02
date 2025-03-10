@@ -8,10 +8,19 @@ public abstract class BaseState
     protected StateManager context;
     protected BaseState currentSubState;
     protected BaseState currentSuperState;
+    protected bool soundStop;
     public BaseState(StateManager currentContext, StateFactory sFactory)
     {
         context = currentContext;
         factory = sFactory;
+    }
+    public void PlaySound(string soundName)
+    {
+        if (!SoundManager.Instance.IsSoundPlaying())
+        {
+            SoundManager.Instance.StopSound2D();
+            SoundManager.Instance.PlaySound2D(soundName);
+        }
     }
     public abstract void EnterState();
 

@@ -10,12 +10,12 @@ public class Walk : BaseState
     private float soundInterval = 5f;
     override public void EnterState()
     {
-
+        soundStop = false;
     }
 
     override public void UpdateState()
     {
-
+ 
         xInput = context.playerControls.Walk.ReadValue<float>();
         context.rb.linearVelocity = new Vector2(xInput * context.playerStats.walkingSpeed, context.rb.linearVelocity.y);
 
@@ -26,6 +26,13 @@ public class Walk : BaseState
         if (context.rb.linearVelocity.x < 0)
         {
             context.SetFacingDirection(false);
+        }
+        if(context.rb.linearVelocityX != 0 && context.rb.linearVelocityY == 0)
+        {
+            if (!soundStop)
+            {
+                PlaySound("MCRunSound");
+            }
         }
         
         CheckSwitchStates();
@@ -51,9 +58,14 @@ public class Walk : BaseState
         }
         
     }
+
+
     override public void ExitState()
     {
-        SoundManager.Instance.StopSound2D();   
+        soundStop = true;
+        SoundManager.Instance.StopSound2D();
+        Debug.Log("sound stopped");
+        Debug.Log("exiting state");
     }
   
 }
