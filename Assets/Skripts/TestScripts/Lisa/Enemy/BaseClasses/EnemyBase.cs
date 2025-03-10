@@ -124,7 +124,14 @@ public abstract class EnemyBase : MonoBehaviour
             attackCollision = false;
         
     }
-
+    protected void PlaySound(string soundName)
+    {
+        if (!SoundManager.Instance.IsEnemySoundPlaying())
+        {
+            SoundManager.Instance.StopEnemySound2D();
+            SoundManager.Instance.PlayEnemySound(soundName);
+        }
+    }
     public abstract void Attack();
     public abstract void StopAttack();
 }
