@@ -33,7 +33,7 @@ public class Walk : BaseState
         {
             xInput = 1;
         }*/
-            Debug.Log("xInput: " + xInput);
+ 
          //   xInput = (moveRight * 1) + (moveLeft * -1);
         context.rb.linearVelocity = new Vector2(xInput * context.playerStats.walkingSpeed, context.rb.linearVelocity.y);
 
@@ -47,7 +47,6 @@ public class Walk : BaseState
         }
         
         CheckSwitchStates();
-        Debug.Log($"xInput: {xInput}");
         
     }
     public override void InitializeSubState(){}

@@ -43,7 +43,7 @@ public class StateManager : MonoBehaviour
     public bool isEnemy { get; private set; }
     public bool isGroundEnemy { get; private set; }
     public bool shielded;
-    public bool rolling { get; private set; }
+    public bool rolling;
     public bool countering { get; private set; }
     public bool jumpReleased;
     public Transform enemyCheckPos;

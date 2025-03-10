@@ -34,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
         if(currentHealth > 0)
         {
             state.damageAnim = true;
-            if (!state.shielded && currentHealth > 0)
+            if (!state.shielded && currentHealth > 0 && !state.rolling)
             {
                 currentHealth -= damage;
                 // Event auslösen, wenn sich die Gesundheit ändert

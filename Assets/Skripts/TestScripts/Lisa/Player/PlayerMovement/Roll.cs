@@ -12,6 +12,7 @@ public class Roll : BaseState
 
     override public void EnterState()
     {
+        context.rolling = true;
         context.animator.SetBool("rollFinished", false);
         startPositionX = context.transform.position.x;
 
@@ -125,6 +126,7 @@ public class Roll : BaseState
         context.rollTrigger.enabled = false;
 
         context.animator.SetBool("rollFinished", true);
+        context.rolling = false;
 
     }
 }
