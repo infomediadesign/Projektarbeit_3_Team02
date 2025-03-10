@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,6 +7,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button[] defaultSoundButtons; //buttons will use the default sound
     [SerializeField] private string defaultButtonSoundEvent = "ButtonClicked"; //event for default sound (for example: start game button)
 
+    public static bool startPressed;
     public static UIManager Instance { get; private set; }
     public GameObject mainMenuScreen;
     public GameObject optionsScreen;
@@ -22,23 +22,21 @@ public class UIManager : MonoBehaviour
     private MemoryUIText memoryUIText;
     private LifeUIText lifeUIText;
     private bool isGamePaused = false;
-    private CameraSelector cameraSelector;
 
     private void Start()
     {
         //ensure that main menu is active at start
         // ShowScreen(mainMenuScreen);
-
+        startPressed = false;
         string lastTrack = GameOverUI.lastTrackPlayed;
-        string lastBackground = GameOverUI.lastBackgroundPlayed;
 
         if (!string.IsNullOrEmpty(lastTrack) && lastTrack != "MainMenu")
         {
-            MusicManager.Instance.PlayMusic(lastTrack, lastBackground);
+            MusicManager.Instance.PlayMusic(lastTrack);
         }
         else
         {
-            MusicManager.Instance.PlayMusic("MainMenu", "placeholder");
+            MusicManager.Instance.PlayMusic("MainMenu");
         }
 
         memoryUIText = Object.FindFirstObjectByType<MemoryUIText>();
@@ -65,12 +63,6 @@ public class UIManager : MonoBehaviour
         EventManager.Instance.StartListening("PauseGame", OnEnterPausePress);
         EventManager.Instance.StartListening("ResumeGame", OnGameResumePress);
         RegisterDefaultButtons();
-
-        cameraSelector = FindObjectOfType<CameraSelector>();
-        if (cameraSelector == null)
-        {
-            Debug.LogWarning("CameraSelector nicht gefunden. Kamerawechsel nicht möglich.");
-        }
     }
 
    
@@ -139,36 +131,9 @@ public class UIManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadSceneAsync(1);
-        MusicManager.Instance.PlayMusic("Game","GameBackground");
-
-        // Zur Cinemachine1 wechseln, falls CameraSelector verfügbar ist
-        if (cameraSelector != null)
-        {
-            cameraSelector.SwitchToCamera("Cinemachine1");
-        }
-        else
-        {
-            // Falls der CameraSelector nach dem Szenenwechsel nicht mehr vorhanden ist
-            // kannst du den CameraSelector in der neuen Szene suchen und aufrufen
-            StartCoroutine(SwitchCameraAfterSceneLoad());
-        }
-    }
-
-    private IEnumerator SwitchCameraAfterSceneLoad()
-    {
-        // Warten, bis die Szene geladen ist
-        yield return new WaitForSeconds(0.5f);
-
-        // CameraSelector in der neuen Szene suchen
-        CameraSelector newSceneCameraSelector = FindObjectOfType<CameraSelector>();
-        if (newSceneCameraSelector != null)
-        {
-            newSceneCameraSelector.SwitchToCamera("Cinemachine1");
-        }
-        else
-        {
-            Debug.LogWarning("CameraSelector in der neuen Szene nicht gefunden.");
-        }
+        MusicManager.Instance.PlayMusic("Game");
+        //MusicManager.Instance.PlayMusic("GameBackground");
+        startPressed = true;
     }
 
     public void ExitGame()
@@ -219,7 +184,7 @@ public class UIManager : MonoBehaviour
         if (Boss.bossActive)
         {
 
-            MusicManager.Instance.PlayMusic("Boss","placeHolder");
+            MusicManager.Instance.PlayMusic("Boss");
             Boss.bossActive = false;
         }
     }

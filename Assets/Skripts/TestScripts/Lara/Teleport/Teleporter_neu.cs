@@ -42,6 +42,25 @@ public class Teleporter_neu : MonoBehaviour
         {
             player.transform.position = spawnPoint.transform.position;
 
+            // Direktes Update der Cinemachine Camera
+            var vcam = GameObject.FindObjectOfType<CinemachineCamera>();
+            if (vcam != null)
+            {
+                // Setze den Follow-Target direkt
+                vcam.Follow = player.transform;
+
+                // Optional: Hartes Reset der Kameraposition
+                vcam.transform.position = new Vector3(
+                    player.transform.position.x,
+                    player.transform.position.y,
+                    vcam.transform.position.z
+                );
+
+                // Force Cinemachine Update
+                vcam.PreviousStateIsValid = false;
+            }
+
+            Debug.Log($"Player teleported to spawn point in scene {targetScene.name}");
         }
         else
         {

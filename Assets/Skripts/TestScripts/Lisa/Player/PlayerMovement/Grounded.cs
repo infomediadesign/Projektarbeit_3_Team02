@@ -52,17 +52,11 @@ public class Grounded : BaseState
         if(context.playerControls.Jump.phase == UnityEngine.InputSystem.InputActionPhase.Performed || !context.isGrounded && context.rb.linearVelocityY < 0 )
         {
             SwitchState(factory.Air());
-            if(context.playerControls.Jump.phase == UnityEngine.InputSystem.InputActionPhase.Performed)
-            {
-                soundStop = true;
-                SoundManager.Instance.StopPlayerSound2D();
-                PlaySound("MCJumpSound");
-            }
         }
     }
     override public void ExitState()
     {
-        Debug.Log("exiting grounded state");
+
     }
 
 }

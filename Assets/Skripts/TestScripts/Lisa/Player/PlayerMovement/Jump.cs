@@ -12,7 +12,6 @@ public class Jump : BaseState
 
     override public void EnterState()
     {
-   
         hasReleased = false;
         hasJumped = false;
         context.jumpCollider.enabled = true;
@@ -32,8 +31,6 @@ public class Jump : BaseState
             {
                 context.rb.linearVelocity = new Vector2(context.rb.linearVelocity.x, context.playerStats.jumpForce);
                 hasJumped = true;
-
-
             }
             
         }

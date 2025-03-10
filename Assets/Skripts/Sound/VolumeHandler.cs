@@ -11,7 +11,7 @@ public class VolumeHandler : MonoBehaviour
         // Initialize sliders with saved values or default to max
         if (MusicManager.Instance != null)
         {
-            musicSlider.value = MusicManager.Instance.GetMusicVolume() * 10f; // Scale from 0-1 to 0-10
+            musicSlider.value = MusicManager.Instance.GetVolume() * 10f; // Scale from 0-1 to 0-10
         }
 
         if (SoundManager.Instance != null)

@@ -46,6 +46,7 @@ public class PlayerAnimation : MonoBehaviour
             if (currentSubState is Walk)
             {
                 AnimStateTransitionString(playerWalk);
+
             }
             else if (currentSubState is Idle)
             {
@@ -54,12 +55,10 @@ public class PlayerAnimation : MonoBehaviour
             else if (currentSubState is Roll)
             {
                 AnimStateTransitionString(playerRoll);
-
             }
             else if (currentSubState is Block)
             {
                 AnimStateTransitionString(playerBlock);
-
             }
             else if (currentSubState is Counter)
             {
@@ -69,15 +68,18 @@ public class PlayerAnimation : MonoBehaviour
         
         else if(stateManager.damageAnim)
         {
+            if(currentSubState is not Block)
             AnimStateTransitionString(playerDamage);
-            PlaySound("MCTakesDamage");
+            else
+            {
+                stateManager.damageAnim = false;
+            }
 
         }
         else if (stateManager.deathAnim)
         {
             AnimStateTransitionString(playerDeath);
-            PlaySound("MCDeath");
-
+            
         }
         else if (stateManager.deathLastFrame)
         {
@@ -94,12 +96,10 @@ public class PlayerAnimation : MonoBehaviour
             if (currentSubState is Jump)
             {
                 AnimStateTransitionString(playerJump);
-               
             }
             else if (currentSubState is AirCounter)
             {
                 AnimStateTransitionString(playerAirCounter);
-                PlaySound("MCCounter");
             }
             else if (currentSubState is Falling)
             {
@@ -112,15 +112,18 @@ public class PlayerAnimation : MonoBehaviour
         }
         else if (stateManager.damageAnim)
         {
-            AnimStateTransitionString(playerDamage);
-            PlaySound("MCTakesDamage");
+            if (currentSubState is not Block)
+                AnimStateTransitionString(playerDamage);
+            else
+            {
+                stateManager.damageAnim = false;
+            }
 
         }
         else if (stateManager.deathAnim)
         {
             AnimStateTransitionString(playerDeath);
-            PlaySound("MCDeath");
-
+            
         }
         else if (stateManager.deathLastFrame)
         {
@@ -136,14 +139,8 @@ public class PlayerAnimation : MonoBehaviour
         animator.Play(stateNew);
         currentState = stateNew;
     }
-    public void PlaySound(string soundName)
-    {
-        if (!SoundManager.Instance.IsSoundPlaying())
-        {
-            SoundManager.Instance.StopPlayerSound2D();
-            SoundManager.Instance.PlayPlayerSound(soundName);
-        }
-    }
+
+
 
 
 

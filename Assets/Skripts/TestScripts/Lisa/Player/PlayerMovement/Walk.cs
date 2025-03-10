@@ -1,22 +1,40 @@
 using UnityEngine;
-using System.Collections;
-using UnityEngine.Audio;
+
 public class Walk : BaseState
 {
     public Walk(StateManager currentContext, StateFactory factory)
     : base(currentContext, factory) { }
     private float xInput;
-    private float soundTimer = 0f;  // Timer für den Intervall
-    private float soundInterval = 5f;
+
     override public void EnterState()
     {
-        soundStop = false;
     }
 
     override public void UpdateState()
     {
+        //xInput = context.playerControls.Walk.ReadValue<float>();
+        float moveLeft = context.playerControls.MoveLeft.ReadValue<float>();  // Gibt 1, wenn gedrückt
+        float moveRight = context.playerControls.MoveRight.ReadValue<float>(); // Gibt 1, wenn gedrückt
+        //float walk = context.playerControls.Walk.ReadValue<float>(); // für controller
+
+        if(moveLeft != 0)
+        {
+            xInput = -1;
+        }
+        else if(moveRight != 0)
+        {
+            xInput = 1;
+        }
+       /* if(walk < 0)
+        {
+            xInput = -1;
+        }
+        else if(walk > 0)
+        {
+            xInput = 1;
+        }*/
  
-        xInput = context.playerControls.Walk.ReadValue<float>();
+         //   xInput = (moveRight * 1) + (moveLeft * -1);
         context.rb.linearVelocity = new Vector2(xInput * context.playerStats.walkingSpeed, context.rb.linearVelocity.y);
 
         if (context.rb.linearVelocity.x > 0)
@@ -27,16 +45,9 @@ public class Walk : BaseState
         {
             context.SetFacingDirection(false);
         }
-        if(context.rb.linearVelocityX != 0 && context.rb.linearVelocityY == 0)
-        {
-            if (!soundStop)
-            {
-                PlaySound("MCRunSound");
-            }
-        }
         
         CheckSwitchStates();
-
+        
     }
     public override void InitializeSubState(){}
 
@@ -58,14 +69,10 @@ public class Walk : BaseState
         }
         
     }
-
-
     override public void ExitState()
     {
-        soundStop = true;
-        SoundManager.Instance.StopPlayerSound2D();
-        Debug.Log("sound stopped");
-        Debug.Log("exiting state");
+        
     }
+
   
 }
