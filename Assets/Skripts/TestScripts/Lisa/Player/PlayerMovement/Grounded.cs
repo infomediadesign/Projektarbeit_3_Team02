@@ -55,7 +55,7 @@ public class Grounded : BaseState
             if(context.playerControls.Jump.phase == UnityEngine.InputSystem.InputActionPhase.Performed)
             {
                 soundStop = true;
-                SoundManager.Instance.StopSound2D();
+                SoundManager.Instance.StopPlayerSound2D();
                 PlaySound("MCJumpSound");
             }
         }

@@ -24,10 +24,12 @@ public class MovingEnemy : StationaryEnemy
 
     public Transform[] patrolPoints;
     public int targetPoint;
+    private bool playerInSoundRange;
 
 
     public void Awake()
     {
+        playerInSoundRange = false;
         intTimer = timer;
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -47,9 +49,21 @@ public class MovingEnemy : StationaryEnemy
 
     void Update()
     {
+        if (Vector2.Distance(player.transform.position, transform.position) <= 5f)
+        {
+            playerInSoundRange = true;
+        }
+        else
+        {
+            playerInSoundRange = false;
+        }
         if (isDying)
         {
             anim.SetBool("Death", true);
+            if (playerInSoundRange)
+            {
+                PlaySound("EnemyDeath");
+            }
         }
         float direction = player.position.x - transform.position.x;
         Rotate();
@@ -57,6 +71,10 @@ public class MovingEnemy : StationaryEnemy
         {
             anim.SetBool("Moving", true);
             Patrol();
+            if (playerInSoundRange)
+            {
+                PlaySound("WalkingEnemyWalk");
+            }
         }
         else if(playerInRange)
         {
@@ -82,6 +100,10 @@ public class MovingEnemy : StationaryEnemy
         {
             anim.SetBool("Moving", false);
             StopAttack();
+            if (playerInSoundRange)
+            {
+                PlaySound("WalkingEnemyIdle");
+            }
         }
         else if(!playerInRange && isPatroling)
         {
@@ -203,6 +225,10 @@ public class MovingEnemy : StationaryEnemy
         if (mStats.attackRad >= distance && verticalDifference <= mStats.maxVerticalRange && !cooling)
         {
             Attack();
+            if (playerInSoundRange)
+            {
+                PlaySound("WalkingEnemyAttack");
+            }
         }
         if (cooling)
         {

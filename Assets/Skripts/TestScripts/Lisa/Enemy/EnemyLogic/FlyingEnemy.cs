@@ -21,9 +21,11 @@ public class FlyingEnemy : EnemyBase
 
     public bool patroling;
     public bool shootingEnemy = true;
+    private bool playerInSoundRange;
 
     private void Awake()
     {
+        playerInSoundRange = false;
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (player == null)
@@ -40,9 +42,18 @@ public class FlyingEnemy : EnemyBase
 
     void Update()
     {
+        if(Vector2.Distance(player.transform.position, transform.position) <= 5f)
+        {
+            playerInSoundRange = true;
+        }
+        else
+        {
+            playerInSoundRange = false;
+        }
         if (patroling)
         {
             Patrol();
+           
         }
         if (shootingEnemy)
         {
@@ -52,6 +63,10 @@ public class FlyingEnemy : EnemyBase
         if (isDying)
         {
             anim.SetBool("Death", true);
+            if (playerInSoundRange)
+            {
+                PlaySound("EnemyDeath");
+            }
         }
         else
         {
@@ -60,6 +75,10 @@ public class FlyingEnemy : EnemyBase
         if (damageCooldownTimer > 0f)
         {
             damageCooldownTimer -= Time.deltaTime;
+        }
+        if (playerInSoundRange)
+        {
+            PlaySound("FlyingEnemyIdle");
         }
     }
 

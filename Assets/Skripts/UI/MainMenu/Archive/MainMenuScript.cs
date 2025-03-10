@@ -6,13 +6,13 @@ public class MainMenuScript : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadSceneAsync(1);
-        MusicManager.Instance.PlayMusic("Level1");
+        MusicManager.Instance.PlayMusic("Level1", "GameBackground");
     }
 
     //Test
     private void Start()
     {
-        MusicManager.Instance.PlayMusic("MainMenu");
+        MusicManager.Instance.PlayMusic("MainMenu","placeHolder");
     }
 
     public void ExitGame()

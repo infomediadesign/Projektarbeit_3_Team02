@@ -16,10 +16,10 @@ public abstract class BaseState
     }
     public void PlaySound(string soundName)
     {
-        if (!SoundManager.Instance.IsSoundPlaying())
+        if (!SoundManager.Instance.IsEnemySoundPlaying())
         {
-            SoundManager.Instance.StopSound2D();
-            SoundManager.Instance.PlaySound2D(soundName);
+            SoundManager.Instance.StopPlayerSound2D();
+            SoundManager.Instance.PlayPlayerSound(soundName);
         }
     }
     public abstract void EnterState();

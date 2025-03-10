@@ -63,7 +63,7 @@ public class Walk : BaseState
     override public void ExitState()
     {
         soundStop = true;
-        SoundManager.Instance.StopSound2D();
+        SoundManager.Instance.StopPlayerSound2D();
         Debug.Log("sound stopped");
         Debug.Log("exiting state");
     }
