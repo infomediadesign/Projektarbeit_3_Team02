@@ -6,6 +6,8 @@ public class SoundManager : MonoBehaviour
     
     [SerializeField] private SoundLibrary sfxLibrary;   //reference to sound library
     [SerializeField] private AudioSource sfx2DSource;
+    [SerializeField] private AudioSource playerAudioSource;
+    [SerializeField] private AudioSource enemyAudioSource;
 
     private void Awake()
     {
@@ -25,6 +27,7 @@ public class SoundManager : MonoBehaviour
         //register for button click events
         EventManager.Instance.StartListening("ButtonClicked", PlayDefaultButtonSound);
         EventManager.Instance.StartListening("StartGameButtonClicked", PlayStartGameSound);
+
     }
 
     public void PlaySound3D(AudioClip clip, Vector3 pos)
@@ -42,7 +45,48 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound2D(string soundName)
     {
+
         sfx2DSource.PlayOneShot(sfxLibrary.GetClipFromName(soundName));
+    }
+    public void PlayPlayerSound(string soundName)
+    {
+        AudioClip clip = sfxLibrary.GetClipFromName(soundName);
+        if (clip != null)
+        {
+            playerAudioSource.PlayOneShot(clip);
+        }
+    }
+    public void PlayEnemySound(string soundName)
+    {
+        AudioClip clip = sfxLibrary.GetClipFromName(soundName);
+        if (clip != null)
+        {
+            enemyAudioSource.PlayOneShot(clip);
+        }
+    }
+    public void StopSound2D()
+    {
+        sfx2DSource.Stop();
+    }
+    public void StopPlayerSound2D()
+    {
+        playerAudioSource.Stop();
+    }
+    public void StopEnemySound2D()
+    {
+        enemyAudioSource.Stop();
+    }
+
+    public void PlaySoundLoop2D(string soundName)
+    {
+        AudioClip clip = sfxLibrary.GetClipFromName(soundName);
+        if (clip != null)
+        {
+            Debug.Log("sound found");
+            sfx2DSource.clip = clip;
+            sfx2DSource.loop = true;
+            sfx2DSource.Play();
+        }
     }
 
     public void SetVolume(float volume)
@@ -54,7 +98,14 @@ public class SoundManager : MonoBehaviour
     {
         return sfx2DSource.volume; //retrieve the current volume for the slider
     }
-
+    public bool IsSoundPlaying()
+    {
+        return playerAudioSource.isPlaying;
+    }
+    public bool IsEnemySoundPlaying()
+    {
+        return enemyAudioSource.isPlaying;
+    }
     private void PlayDefaultButtonSound()
     {
         Debug.Log("Playing default button click sound.");
@@ -68,6 +119,7 @@ public class SoundManager : MonoBehaviour
 
         SoundManager.Instance.PlaySound2D("StartGameButton");
     }
+
 
     private void OnDestroy()
     {

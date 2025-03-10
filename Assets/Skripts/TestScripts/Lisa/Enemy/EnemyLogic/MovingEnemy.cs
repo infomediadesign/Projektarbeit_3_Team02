@@ -24,10 +24,12 @@ public class MovingEnemy : StationaryEnemy
 
     public Transform[] patrolPoints;
     public int targetPoint;
+    private bool playerInSoundRange;
 
 
     public void Awake()
     {
+        playerInSoundRange = false;
         intTimer = timer;
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -40,22 +42,29 @@ public class MovingEnemy : StationaryEnemy
                 player = playerObject.transform;
             }
         }
-        if (counterUIPrefab != null)
-        {
-            GameObject ui = Instantiate(counterUIPrefab);
-            counterUIInstance = ui.GetComponent<CounterUI>();
-            counterUIInstance.target = transform;
-            counterUIInstance.offset = new Vector3(-10, 4, 0);
-        }
+
         
     }
    
 
     void Update()
     {
+        if (Vector2.Distance(player.transform.position, transform.position) <= 5f)
+        {
+            playerInSoundRange = true;
+        }
+        else
+        {
+            playerInSoundRange = false;
+        }
         if (isDying)
         {
             anim.SetBool("Death", true);
+            if (playerInSoundRange)
+            {
+                SoundManager.Instance.StopEnemySound2D();
+                PlaySound("EnemyDeath");
+            }
         }
         float direction = player.position.x - transform.position.x;
         Rotate();
@@ -63,6 +72,10 @@ public class MovingEnemy : StationaryEnemy
         {
             anim.SetBool("Moving", true);
             Patrol();
+            if (playerInSoundRange && !isDying)
+            {
+                PlaySound("WalkingEnemyWalk");
+            }
         }
         else if(playerInRange)
         {
@@ -88,6 +101,10 @@ public class MovingEnemy : StationaryEnemy
         {
             anim.SetBool("Moving", false);
             StopAttack();
+            if (playerInSoundRange && !isDying)
+            {
+                PlaySound("WalkingEnemyIdle");
+            }
         }
         else if(!playerInRange && isPatroling)
         {
@@ -209,6 +226,11 @@ public class MovingEnemy : StationaryEnemy
         if (mStats.attackRad >= distance && verticalDifference <= mStats.maxVerticalRange && !cooling)
         {
             Attack();
+            if (playerInSoundRange)
+            {
+                SoundManager.Instance.StopEnemySound2D();
+                PlaySound("WalkingEnemyAttack");
+            }
         }
         if (cooling)
         {
@@ -221,6 +243,10 @@ public class MovingEnemy : StationaryEnemy
     {
         if (!isDying && !isWallAhead)
         {
+            if (playerInSoundRange)
+            {
+                PlaySound("WalkingEnemyWalk");
+            }
             anim.SetBool("Moving", true);
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("enemyAttack"))
             {
