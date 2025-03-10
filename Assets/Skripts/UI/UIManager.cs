@@ -23,12 +23,13 @@ public class UIManager : MonoBehaviour
     private LifeUIText lifeUIText;
     private bool isGamePaused = false;
     private CameraSelector cameraSelector;
+    public static bool startPressed;
 
     private void Start()
     {
         //ensure that main menu is active at start
         // ShowScreen(mainMenuScreen);
-
+        startPressed = false;
         string lastTrack = GameOverUI.lastTrackPlayed;
         string lastBackground = GameOverUI.lastBackgroundPlayed;
 
@@ -138,6 +139,7 @@ public class UIManager : MonoBehaviour
 
     public void StartGame()
     {
+        startPressed = true;
         SceneManager.LoadSceneAsync(1);
         MusicManager.Instance.PlayMusic("Game","GameBackground");
 
