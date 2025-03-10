@@ -23,12 +23,13 @@ public class UIManager : MonoBehaviour
     private LifeUIText lifeUIText;
     private bool isGamePaused = false;
     private CameraSelector cameraSelector;
+    public static bool startPressed;
 
     private void Start()
     {
         //ensure that main menu is active at start
         // ShowScreen(mainMenuScreen);
-
+        startPressed = false;
         string lastTrack = GameOverUI.lastTrackPlayed;
         string lastBackground = GameOverUI.lastBackgroundPlayed;
 
@@ -140,7 +141,7 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(1);
         MusicManager.Instance.PlayMusic("Game","GameBackground");
-
+        startPressed = true;
         // Zur Cinemachine1 wechseln, falls CameraSelector verfügbar ist
         if (cameraSelector != null)
         {
