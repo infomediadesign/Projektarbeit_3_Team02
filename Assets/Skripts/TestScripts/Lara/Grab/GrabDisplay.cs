@@ -1,8 +1,8 @@
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 public class GrabDisplay : MonoBehaviour
 {
-    public Sprite activeSprite;
     public Sprite inactiveSprite;
     private SpriteRenderer spriteRenderer;
     private bool isActivated = false;
@@ -54,11 +54,8 @@ public class GrabDisplay : MonoBehaviour
             Debug.Log($"[Grab] GrabManager wurde direkt über Aktivierung bei Position {transform.position} informiert");
         }
 
-        // Change visual appearance to active sprite
-        if (spriteRenderer && activeSprite)
-        {
-            spriteRenderer.sprite = activeSprite;
-        }
+        // Sprite ausblenden
+        spriteRenderer.enabled = false;
 
         //SoundManager.Instance.PlaySound2D("WoodenFigureFound");
     }
