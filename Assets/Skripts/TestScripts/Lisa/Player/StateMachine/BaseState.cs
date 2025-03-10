@@ -16,7 +16,7 @@ public abstract class BaseState
     }
     public void PlaySound(string soundName)
     {
-        if (!SoundManager.Instance.IsEnemySoundPlaying())
+        if (!SoundManager.Instance.IsSoundPlaying())
         {
             SoundManager.Instance.StopPlayerSound2D();
             SoundManager.Instance.PlayPlayerSound(soundName);

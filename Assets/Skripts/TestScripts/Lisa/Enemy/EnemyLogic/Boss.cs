@@ -58,7 +58,11 @@ public class Boss : EnemyBase
 
     void Update()
     {
-        PlaySound("BossIdle");
+        if (!isDying)
+        {
+            PlaySound("BossIdle");
+        }
+        
         Attack();
 
         if (phaseCount == 1 || phaseCount == 2)
@@ -75,6 +79,7 @@ public class Boss : EnemyBase
 
     private void FireMissile()
     {
+        SoundManager.Instance.StopEnemySound2D();
         PlaySound("BossLaugh");
         GameObject missileInstance = null;
 

@@ -62,6 +62,7 @@ public class MovingEnemy : StationaryEnemy
             anim.SetBool("Death", true);
             if (playerInSoundRange)
             {
+                SoundManager.Instance.StopEnemySound2D();
                 PlaySound("EnemyDeath");
             }
         }
@@ -71,7 +72,7 @@ public class MovingEnemy : StationaryEnemy
         {
             anim.SetBool("Moving", true);
             Patrol();
-            if (playerInSoundRange)
+            if (playerInSoundRange && !isDying)
             {
                 PlaySound("WalkingEnemyWalk");
             }
@@ -100,7 +101,7 @@ public class MovingEnemy : StationaryEnemy
         {
             anim.SetBool("Moving", false);
             StopAttack();
-            if (playerInSoundRange)
+            if (playerInSoundRange && !isDying)
             {
                 PlaySound("WalkingEnemyIdle");
             }
@@ -227,6 +228,7 @@ public class MovingEnemy : StationaryEnemy
             Attack();
             if (playerInSoundRange)
             {
+                SoundManager.Instance.StopEnemySound2D();
                 PlaySound("WalkingEnemyAttack");
             }
         }
@@ -241,6 +243,10 @@ public class MovingEnemy : StationaryEnemy
     {
         if (!isDying && !isWallAhead)
         {
+            if (playerInSoundRange)
+            {
+                PlaySound("WalkingEnemyWalk");
+            }
             anim.SetBool("Moving", true);
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("enemyAttack"))
             {

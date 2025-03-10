@@ -65,6 +65,7 @@ public class FlyingEnemy : EnemyBase
             anim.SetBool("Death", true);
             if (playerInSoundRange)
             {
+                SoundManager.Instance.StopEnemySound2D();
                 PlaySound("EnemyDeath");
             }
         }
@@ -76,7 +77,7 @@ public class FlyingEnemy : EnemyBase
         {
             damageCooldownTimer -= Time.deltaTime;
         }
-        if (playerInSoundRange)
+        if (playerInSoundRange && !isDying)
         {
             PlaySound("FlyingEnemyIdle");
         }

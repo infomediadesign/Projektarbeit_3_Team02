@@ -70,6 +70,7 @@ public class StationaryEnemy : EnemyBase
                 anim.SetBool("Death", true);
             if (playerInSoundRange)
             {
+                SoundManager.Instance.StopEnemySound2D();
                 PlaySound("EnemyDeath");
             }
             }
@@ -77,7 +78,7 @@ public class StationaryEnemy : EnemyBase
             {
                 damageCooldownTimer -= Time.deltaTime;
             }
-        if (playerInSoundRange)
+        if (playerInSoundRange && !isDying && !canAttack)
         {
             PlaySound("StaticEnemyIdle");
         }
@@ -91,6 +92,7 @@ public class StationaryEnemy : EnemyBase
         anim.SetBool("Attacking", true);
         if (playerInSoundRange)
         {
+            SoundManager.Instance.StopEnemySound2D();
             PlaySound("StaticEnemyAttack");
         }
       

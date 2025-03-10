@@ -32,7 +32,8 @@ public class Jump : BaseState
             {
                 context.rb.linearVelocity = new Vector2(context.rb.linearVelocity.x, context.playerStats.jumpForce);
                 hasJumped = true;
-             
+
+
             }
             
         }
