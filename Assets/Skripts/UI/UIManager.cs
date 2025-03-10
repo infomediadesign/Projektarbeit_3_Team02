@@ -30,14 +30,15 @@ public class UIManager : MonoBehaviour
         // ShowScreen(mainMenuScreen);
 
         string lastTrack = GameOverUI.lastTrackPlayed;
+        string lastBackground = GameOverUI.lastBackgroundPlayed;
 
         if (!string.IsNullOrEmpty(lastTrack) && lastTrack != "MainMenu")
         {
-            MusicManager.Instance.PlayMusic(lastTrack);
+            MusicManager.Instance.PlayMusic(lastTrack, lastBackground);
         }
         else
         {
-            MusicManager.Instance.PlayMusic("MainMenu");
+            MusicManager.Instance.PlayMusic("MainMenu", "placeholder");
         }
 
         memoryUIText = Object.FindFirstObjectByType<MemoryUIText>();
@@ -138,7 +139,7 @@ public class UIManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadSceneAsync(1);
-        MusicManager.Instance.PlayMusic("Game");
+        MusicManager.Instance.PlayMusic("Game","GameBackground");
 
         // Zur Cinemachine1 wechseln, falls CameraSelector verfügbar ist
         if (cameraSelector != null)
@@ -218,7 +219,7 @@ public class UIManager : MonoBehaviour
         if (Boss.bossActive)
         {
 
-            MusicManager.Instance.PlayMusic("Boss");
+            MusicManager.Instance.PlayMusic("Boss","placeHolder");
             Boss.bossActive = false;
         }
     }

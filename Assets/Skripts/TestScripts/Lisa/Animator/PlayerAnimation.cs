@@ -136,22 +136,12 @@ public class PlayerAnimation : MonoBehaviour
         animator.Play(stateNew);
         currentState = stateNew;
     }
-
-    public void PlaySoundLoop(string soundName)
-    {
-        if (!SoundManager.Instance.IsSoundPlaying())
-        {
-            SoundManager.Instance.StopSound2D();
-            SoundManager.Instance.PlaySound2D(soundName);
-        }
-      
-    }
     public void PlaySound(string soundName)
     {
         if (!SoundManager.Instance.IsSoundPlaying())
         {
-            SoundManager.Instance.StopSound2D();
-            SoundManager.Instance.PlaySound2D(soundName);
+            SoundManager.Instance.StopPlayerSound2D();
+            SoundManager.Instance.PlayPlayerSound(soundName);
         }
     }
 

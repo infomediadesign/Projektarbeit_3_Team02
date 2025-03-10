@@ -34,9 +34,10 @@ public class StationaryEnemy : EnemyBase
     public float timer;
     protected float intTimer; //store den initial timer
     private Vector3 originalOffset;
-
+    private bool playerInSoundRange;
     private void Awake()
     {
+        playerInSoundRange = false;
         statEnemy = true;
         intTimer = timer;
         anim = GetComponent<Animator>();
@@ -54,18 +55,32 @@ public class StationaryEnemy : EnemyBase
     }
     void Update()
     {
-
+        if(Vector2.Distance(player.transform.position, transform.position) <= 5f)
+        {
+            playerInSoundRange = true;
+        }
+        else
+        {
+            playerInSoundRange = false;
+        }
             Rotate();
             CheckDistance();
             if (isDying)
             {
                 anim.SetBool("Death", true);
+            if (playerInSoundRange)
+            {
+                PlaySound("EnemyDeath");
+            }
             }
             if (damageCooldownTimer > 0f)
             {
                 damageCooldownTimer -= Time.deltaTime;
             }
-        
+        if (playerInSoundRange)
+        {
+            PlaySound("StaticEnemyIdle");
+        }
       
     }
     public override void Attack()
@@ -74,6 +89,11 @@ public class StationaryEnemy : EnemyBase
         timer = intTimer;
         anim.SetBool("Moving", false);
         anim.SetBool("Attacking", true);
+        if (playerInSoundRange)
+        {
+            PlaySound("StaticEnemyAttack");
+        }
+      
 
     }  
     public override void StopAttack()

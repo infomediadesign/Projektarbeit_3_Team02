@@ -127,7 +127,7 @@ public class Roll : BaseState
     override public void ExitState()
     {
         soundStop = true;
-        SoundManager.Instance.StopSound2D();
+        SoundManager.Instance.StopPlayerSound2D();
         context.mainCollider.enabled = true;
         context.rollTrigger.enabled = false;
 

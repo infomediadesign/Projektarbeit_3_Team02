@@ -58,6 +58,7 @@ public class Boss : EnemyBase
 
     void Update()
     {
+        PlaySound("BossIdle");
         Attack();
 
         if (phaseCount == 1 || phaseCount == 2)
@@ -74,6 +75,7 @@ public class Boss : EnemyBase
 
     private void FireMissile()
     {
+        PlaySound("BossLaugh");
         GameObject missileInstance = null;
 
         if (phaseCount == 1)
@@ -123,6 +125,7 @@ public class Boss : EnemyBase
     {
         if (!spawned)
         {
+            PlaySound("BossStageChange");
             SpawnObjects(spawnPointsPlatformPhase1, platformPrefab);
             SpawnObjects(spawnPointsWeaknessPhase1, weaknessPrefab);
             SpawnObjects(spawnPointsLifePhase1, lifePrefab);
@@ -142,7 +145,8 @@ public class Boss : EnemyBase
             DespawnAllObjects();
             StartCoroutine(SpawnAfterDelay(2f, () =>
             {
-                
+                PlaySound("BossStageChange");
+
                 SpawnObjects(spawnPointsPlatformPhase2, platformPrefab);
                 SpawnObjects(spawnPointsWeaknessPhase2, weaknessPrefab);
                 SpawnObjects(spawnPointsBrWallPhase2, breakableWallPrefab);
@@ -164,6 +168,7 @@ public class Boss : EnemyBase
             DespawnAllObjects();
             StartCoroutine(SpawnAfterDelay(2f, () =>
             {
+                PlaySound("BossStageChange");
                 destroyedWeaknesses = 0;
                 
                 SpawnObjects(spawnPointsWeaknessPhase3, weaknessPrefab);
@@ -271,6 +276,7 @@ public class Boss : EnemyBase
 
     private void Die()
     {
+        PlaySound("BossDeath");
         Debug.Log("boss defeated");
         Destroy(gameObject);
         DespawnAllObjects();

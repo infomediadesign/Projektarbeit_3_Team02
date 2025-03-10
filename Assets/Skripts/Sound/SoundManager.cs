@@ -6,6 +6,8 @@ public class SoundManager : MonoBehaviour
     
     [SerializeField] private SoundLibrary sfxLibrary;   //reference to sound library
     [SerializeField] private AudioSource sfx2DSource;
+    [SerializeField] private AudioSource playerAudioSource;
+    [SerializeField] private AudioSource enemyAudioSource;
 
     private void Awake()
     {
@@ -46,11 +48,35 @@ public class SoundManager : MonoBehaviour
 
         sfx2DSource.PlayOneShot(sfxLibrary.GetClipFromName(soundName));
     }
+    public void PlayPlayerSound(string soundName)
+    {
+        AudioClip clip = sfxLibrary.GetClipFromName(soundName);
+        if (clip != null)
+        {
+            playerAudioSource.PlayOneShot(clip);
+        }
+    }
+    public void PlayEnemySound(string soundName)
+    {
+        AudioClip clip = sfxLibrary.GetClipFromName(soundName);
+        if (clip != null)
+        {
+            enemyAudioSource.PlayOneShot(clip);
+        }
+    }
     public void StopSound2D()
     {
         sfx2DSource.Stop();
     }
-  
+    public void StopPlayerSound2D()
+    {
+        playerAudioSource.Stop();
+    }
+    public void StopEnemySound2D()
+    {
+        enemyAudioSource.Stop();
+    }
+
     public void PlaySoundLoop2D(string soundName)
     {
         AudioClip clip = sfxLibrary.GetClipFromName(soundName);
@@ -74,7 +100,11 @@ public class SoundManager : MonoBehaviour
     }
     public bool IsSoundPlaying()
     {
-        return sfx2DSource.isPlaying;
+        return playerAudioSource.isPlaying;
+    }
+    public bool IsEnemySoundPlaying()
+    {
+        return enemyAudioSource.isPlaying;
     }
     private void PlayDefaultButtonSound()
     {
