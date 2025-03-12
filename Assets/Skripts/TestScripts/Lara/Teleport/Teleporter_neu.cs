@@ -8,16 +8,28 @@ public class Teleporter_neu : MonoBehaviour
     public int targetSceneBuildIndex;
     public int currentSceneBuildIndex;
 
+    // Neues Feld für den Namen des zu aktivierenden Loading-Screens
+    public string loadingScreenName;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            // Zeige Loading-Screen an, bevor das Teleportieren beginnt
+            if (!string.IsNullOrEmpty(loadingScreenName))
+            {
+                EventManager.Instance.TriggerEvent("ShowLoadingScreen", loadingScreenName);
+            }
+
             StartCoroutine(TeleportPlayer(collision.gameObject));
         }
     }
 
     private IEnumerator TeleportPlayer(GameObject player)
     {
+        // Eine kurze Pause, um sicherzustellen, dass der Loading-Screen angezeigt wird
+        yield return new WaitForSeconds(0.1f);
+
         // Load target scene asynchronously
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(targetSceneBuildIndex, LoadSceneMode.Additive);
         while (!loadOperation.isDone)
@@ -41,7 +53,6 @@ public class Teleporter_neu : MonoBehaviour
         if (spawnPoint != null)
         {
             player.transform.position = spawnPoint.transform.position;
-
         }
         else
         {
@@ -53,6 +64,8 @@ public class Teleporter_neu : MonoBehaviour
         {
             yield return SceneManager.UnloadSceneAsync(currentSceneBuildIndex);
         }
+
+        // Der Loading-Screen wird nun durch seinen eigenen Timer ausgeblendet
     }
 
     private GameObject FindSpawnPointInHierarchy(GameObject obj)

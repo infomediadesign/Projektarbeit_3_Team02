@@ -1962,6 +1962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSceneBuildIndex: 2
   currentSceneBuildIndex: 1
+  loadingScreenName: LSLevel21
 --- !u!4 &119480136 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 743067629717392949, guid: 071776517b7f69545b3a537ad9c8a96c, type: 3}
@@ -13683,6 +13684,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TeleportToLevel2.1
       objectReference: {fileID: 0}
+    - target: {fileID: 8027178637801751379, guid: 1f61c3890069a0e4394ec17994837a54, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13718,6 +13723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSceneBuildIndex: 2
   currentSceneBuildIndex: 1
+  loadingScreenName: 
 --- !u!114 &484189719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26845,6 +26851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSceneBuildIndex: 4
   currentSceneBuildIndex: 1
+  loadingScreenName: LSLevel3
 --- !u!114 &1303545998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28567,6 +28574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSceneBuildIndex: 2
   currentSceneBuildIndex: 1
+  loadingScreenName: LSLevel21
 --- !u!1 &1452844581
 GameObject:
   m_ObjectHideFlags: 0
@@ -34370,6 +34378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSceneBuildIndex: 3
   currentSceneBuildIndex: 1
+  loadingScreenName: LSLevel22
 --- !u!114 &2131800880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35033,7 +35042,8 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 425211233896688231, guid: 9691a6c93dd534246b4ef09889213e10, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
