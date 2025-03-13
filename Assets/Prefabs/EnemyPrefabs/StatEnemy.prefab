@@ -105,8 +105,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3ca137b67c33b3449c97a591cefd5b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnEnemyPrefab: {fileID: 0}
   stats: {fileID: 11400000, guid: bafa283836e405b4a815cf40ecbb005b, type: 2}
   attackCollider: {fileID: 7596564872098733136}
+  respawn: 0
+  respawnTime: 0
+  isObstacle: 0
   eStats: {fileID: 11400000, guid: bafa283836e405b4a815cf40ecbb005b, type: 2}
   sEnemyHitbox: {fileID: 97486783960957677}
   counterUIPrefab: {fileID: 933634645434190062, guid: 999df9d5fedee014cb15e9525515e8c1, type: 3}
@@ -261,7 +265,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8500035092933795450}
   - component: {fileID: 7596564872098733136}
-  - component: {fileID: 97161992834308138}
   - component: {fileID: 2248795882304583688}
   m_Layer: 11
   m_Name: HitboxWeapon
@@ -331,21 +334,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.7076106, y: 0.5031452}
   m_EdgeRadius: 0
---- !u!114 &97161992834308138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6873853912095171827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee9991822515d804fa1364f63947b99a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  offset: {x: 0, y: 0, z: 0}
-  timerImage: {fileID: 0}
 --- !u!225 &2248795882304583688
 CanvasGroup:
   m_ObjectHideFlags: 0
