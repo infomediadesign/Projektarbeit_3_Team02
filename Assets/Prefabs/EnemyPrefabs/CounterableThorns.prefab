@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3595446125107719408}
   - component: {fileID: 5776449165237153649}
   - component: {fileID: 3480923987238055225}
-  - component: {fileID: 8489319550628004491}
   - component: {fileID: 7075821596626414362}
   m_Layer: 7
   m_Name: CounterableThorns
@@ -137,22 +136,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.5572326, y: 1.7732987}
   m_EdgeRadius: 0
---- !u!114 &8489319550628004491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6165902181841577009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c6a4afd7a244854c9d159ac729a73b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveRange: 0
-  moveSpeed: 0
-  damage: 0
-  dmgHitbox: {fileID: 3178235091919604533}
 --- !u!95 &7075821596626414362
 Animator:
   serializedVersion: 7
