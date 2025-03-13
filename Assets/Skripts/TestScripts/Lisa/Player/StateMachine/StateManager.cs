@@ -55,6 +55,7 @@ public class StateManager : MonoBehaviour
     [HideInInspector] public bool damageAnim;
     [HideInInspector] public bool deathAnim = false;
     [HideInInspector] public bool isObstacle = false;
+    [HideInInspector] public bool isLevel2Thorn = false;
     [HideInInspector] public bool deathLastFrame = false; //muss bei respawn zur�ckgesetzt werden
 
 
@@ -189,6 +190,7 @@ public class StateManager : MonoBehaviour
         {
             isObstacle = true;
         }
+
     }
     void OnTriggerStay2D(Collider2D collision)
     {
@@ -201,6 +203,7 @@ public class StateManager : MonoBehaviour
         {
             isObstacle = true;
         }
+
     }
 
 

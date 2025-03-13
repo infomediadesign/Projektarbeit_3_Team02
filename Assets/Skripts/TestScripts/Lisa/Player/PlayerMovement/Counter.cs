@@ -12,11 +12,12 @@ public class Counter : BaseState
 
 
     EnemyBase enemy;
+    DamageableAsset dmgAsset;
     override public void EnterState()
     {  
         attacked = false;
         enemy = context.zone.GetCounterableEnemy();
-       
+
 
         if (enemy == null)
         {
@@ -60,13 +61,18 @@ public class Counter : BaseState
                     }
                     
                 }
-            
-            
+
+
+             if (context.isObstacle)
+            {
+                context.playerCombat.Attack(enemy);
+                attacked = true;
+                SwitchState(factory.Idleing());
+            }
         }
-        else if (context.isObstacle)
-        {
-            context.playerCombat.Attack(enemy);
-        }
+        
+
+
     }
     public override void InitializeSubState(){}
     public override void CheckSwitchStates()

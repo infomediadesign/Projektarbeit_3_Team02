@@ -15,4 +15,15 @@ public class PlayerCombat : MonoBehaviour
             Debug.LogWarning("Kein Enemy getroffen");
         }
     }
+    public void AttackThorn(DamageableAsset dmgAsset)
+    {
+        if (dmgAsset != null)
+        {
+            dmgAsset.TakeThornDamage();
+        }
+        else
+        {
+            Debug.LogWarning("Kein Enemy getroffen");
+        }
+    }
 }

@@ -85,13 +85,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5553859198595983796}
   - component: {fileID: 6852972857386192176}
+  - component: {fileID: 6479014852306090013}
   m_Layer: 5
-  m_Name: Level21
+  m_Name: LSLevel21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5553859198595983796
 RectTransform:
   m_ObjectHideFlags: 0
@@ -101,7 +102,7 @@ RectTransform:
   m_GameObject: {fileID: 55419898979519313}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -5399.9995}
-  m_LocalScale: {x: 338.54117, y: 338.54117, z: 338.54117}
+  m_LocalScale: {x: 101.64895, y: 101.64895, z: 101.64895}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7256408888193322397}
@@ -152,9 +153,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 688351575
+  m_SortingLayer: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: -7649481441912505366, guid: 59272a6b2f5a22842befac3b32682a89, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -166,6 +167,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6479014852306090013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55419898979519313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1de067d0b0c751d488c4b8c1cde27644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayDuration: 2.5
 --- !u!1 &216208638869920940
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +293,6 @@ GameObject:
   - component: {fileID: 5129718317667544122}
   - component: {fileID: 5667675869393969557}
   - component: {fileID: 1841281942444013812}
-  - component: {fileID: 3715491453596507145}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -650,19 +663,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.4421616, y: 0.09390575}
   m_EdgeRadius: 0
---- !u!114 &3715491453596507145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 228800061242163865}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bcf9e6d62e782645b3d2ae1582874bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  framesToWait: 5
 --- !u!1 &242518753422773393
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,13 +913,14 @@ GameObject:
   m_Component:
   - component: {fileID: 9064440467734073774}
   - component: {fileID: 4268842782008285123}
+  - component: {fileID: 6980499966410872116}
   m_Layer: 5
-  m_Name: Level22
+  m_Name: LSLevel22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9064440467734073774
 RectTransform:
   m_ObjectHideFlags: 0
@@ -980,9 +981,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 688351575
+  m_SortingLayer: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: 2726874116695765879, guid: c215864d5b58b184e95e0b6de4d90bfa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -994,6 +995,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6980499966410872116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849150587270127776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1de067d0b0c751d488c4b8c1cde27644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayDuration: 2.5
 --- !u!1 &1201498835483969132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,13 +1018,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5294053557735699394}
   - component: {fileID: 1604611095465275336}
+  - component: {fileID: 5472142731956538702}
   m_Layer: 5
-  m_Name: Level3
+  m_Name: LSLevel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5294053557735699394
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1071,9 +1086,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 688351575
+  m_SortingLayer: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: 5946854476396525628, guid: 49b53beeb03bc5e4c91c12bc77774e18, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1085,6 +1100,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5472142731956538702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201498835483969132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1de067d0b0c751d488c4b8c1cde27644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayDuration: 2.5
 --- !u!1 &1351223953169973113
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,7 +1431,7 @@ Transform:
   m_GameObject: {fileID: 2540395189238504914}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 155.81485, y: 1.9201609, z: -9.060473}
+  m_LocalPosition: {x: 156.81934, y: 1.9201609, z: -9.060473}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3709,13 +3737,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2591075811512874043}
   - component: {fileID: 1294944541222763887}
+  - component: {fileID: 5162668882517597879}
   m_Layer: 5
-  m_Name: Level1
+  m_Name: LSLevel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2591075811512874043
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3776,9 +3805,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 688351575
+  m_SortingLayer: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3790,6 +3819,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5162668882517597879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7106695433007638810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1de067d0b0c751d488c4b8c1cde27644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayDuration: 2.5
 --- !u!1 &7122104007377613016
 GameObject:
   m_ObjectHideFlags: 0
@@ -4183,6 +4225,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7256408888193322397}
+  - component: {fileID: 57517235890875220}
+  - component: {fileID: 8277369351620576823}
   m_Layer: 5
   m_Name: LoadingScreens
   m_TagString: Untagged
@@ -4213,6 +4257,30 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &57517235890875220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7221761534490957610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb5c5a51fe9a91428984b13facd5e92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8277369351620576823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7221761534490957610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc252a448b26ca6469c151d89e9850a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7874107617068256710
 GameObject:
   m_ObjectHideFlags: 0
