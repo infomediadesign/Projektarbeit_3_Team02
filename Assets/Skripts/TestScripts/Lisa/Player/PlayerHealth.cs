@@ -9,7 +9,9 @@ public class PlayerHealth : MonoBehaviour
     private StateManager state;
     private bool firstDeath;
     static public bool death;
-  
+
+    private float lastDamageTime = -999f; 
+    private float damageCooldown = 1.5f;
     private void Start()
     { 
         state = GetComponent<StateManager>();
@@ -31,7 +33,10 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        if(currentHealth > 0)
+        if (Time.time - lastDamageTime < damageCooldown) return;
+
+        lastDamageTime = Time.time; // Zeit aktualisieren
+        if (currentHealth > 0)
         {
             if (!state.shielded)
             {
