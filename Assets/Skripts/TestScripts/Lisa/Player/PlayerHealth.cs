@@ -33,13 +33,17 @@ public class PlayerHealth : MonoBehaviour
     {
         if(currentHealth > 0)
         {
-            state.damageAnim = true;
-            if (!state.shielded && currentHealth > 0 && !state.rolling)
+            if (!state.shielded)
             {
-                currentHealth -= damage;
-                // Event auslösen, wenn sich die Gesundheit ändert
-                EventManager.Instance.TriggerEvent<int>("HealthChanged", (int)currentHealth);
+                state.damageAnim = true;
+                if (currentHealth > 0 && !state.rolling)
+                {
+                    currentHealth -= damage;
+                    // Event auslösen, wenn sich die Gesundheit ändert
+                    EventManager.Instance.TriggerEvent<int>("HealthChanged", (int)currentHealth);
+                }
             }
+         
         }
              
         if (currentHealth <= 0)
@@ -77,7 +81,7 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator DieSequence()
     {
-        FindFirstObjectByType<CameraZoom>().ZoomIn();
+        //FindFirstObjectByType<CameraZoom>().ZoomIn();
         yield return new WaitForSeconds(3f);
        // SceneManager.LoadScene("GameOver");
         FindObjectOfType<SceneFader>().FadeToScene("GameOver");

@@ -12,9 +12,9 @@ public class CameraZoom : MonoBehaviour
 
     void Start()
     {
-        cinemachineBrain = FindFirstObjectByType<CinemachineBrain>();
-        mainCamera = Camera.main;
-        defaultSize = mainCamera.orthographicSize;
+        //cinemachineBrain = FindFirstObjectByType<CinemachineBrain>();
+        //mainCamera = Camera.main;
+        //defaultSize = mainCamera.orthographicSize;
     }
 
     public void ZoomIn()

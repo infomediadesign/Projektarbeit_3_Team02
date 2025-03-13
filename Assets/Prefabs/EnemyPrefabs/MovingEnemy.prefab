@@ -219,7 +219,6 @@ GameObject:
   m_Component:
   - component: {fileID: 967709782772763182}
   - component: {fileID: 768040657855109248}
-  - component: {fileID: 7358659979665326261}
   - component: {fileID: 5578169878180834537}
   m_Layer: 11
   m_Name: HitboxWeapon
@@ -289,21 +288,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.0317986, y: 0.67964363}
   m_EdgeRadius: 0
---- !u!114 &7358659979665326261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8003362064515256425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee9991822515d804fa1364f63947b99a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  offset: {x: 0, y: 0, z: 0}
-  timerImage: {fileID: 0}
 --- !u!225 &5578169878180834537
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -458,10 +442,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17f31faa42aadfa47ac68658aed8bcc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnEnemyPrefab: {fileID: 0}
   stats: {fileID: 11400000, guid: 76000f2320a195c459b1ab5bb94df094, type: 2}
   attackCollider: {fileID: 768040657855109248}
+  respawn: 0
+  respawnTime: 0
+  isObstacle: 0
   eStats: {fileID: 0}
-  counterUIPrefab: {fileID: 933634645434190062, guid: 999df9d5fedee014cb15e9525515e8c1, type: 3}
+  sEnemyHitbox: {fileID: 0}
   player: {fileID: 0}
   timer: 2
   isPatroling: 0
@@ -469,6 +457,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  constGroundLayer:
+    serializedVersion: 2
+    m_Bits: 8192
   enemyHitbox: {fileID: 2214601546202897573}
   mStats: {fileID: 11400000, guid: 76000f2320a195c459b1ab5bb94df094, type: 2}
   raycast: {fileID: 5987959701736534727}
