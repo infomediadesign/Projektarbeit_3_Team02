@@ -7,6 +7,7 @@ public class HiddenArea : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Color hiddenColor;
     Coroutine currentCoroutine;
+    private Collider2D triggerZone;
 
     private bool hasDiscovered = false; //checks if hidden area was already discovered by the player
 
@@ -15,11 +16,13 @@ public class HiddenArea : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         hiddenColor = spriteRenderer.color;
+        triggerZone = GetComponent<Collider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        // if (collision.gameObject.CompareTag("Player"))
+        if (triggerZone.IsTouchingLayers(LayerMask.GetMask("Player")))
         {
             if(currentCoroutine != null)        //new
             {
@@ -44,9 +47,10 @@ public class HiddenArea : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        //if (collision.gameObject.CompareTag("Player"))
+        if (triggerZone.IsTouchingLayers(LayerMask.GetMask("Player")))
         {
-            if(currentCoroutine != null)        //stop existing fade coroutine
+            if (currentCoroutine != null)        //stop existing fade coroutine
             {
                 StopCoroutine(currentCoroutine);
             }
