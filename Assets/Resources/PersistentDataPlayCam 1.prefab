@@ -463,7 +463,6 @@ MonoBehaviour:
   damageAnim: 0
   deathAnim: 0
   isObstacle: 0
-  isLevel2Thorn: 0
   deathLastFrame: 0
 --- !u!114 &5051107444858795921
 MonoBehaviour:
@@ -652,7 +651,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.12367821, y: -0.64721704}
+  m_Offset: {x: 0.12367821, y: -0.6724105}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -662,7 +661,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.4421616, y: 0.023364246}
+  m_Size: {x: 1.4421616, y: 0.09390575}
   m_EdgeRadius: 0
 --- !u!1 &242518753422773393
 GameObject:
@@ -1432,7 +1431,7 @@ Transform:
   m_GameObject: {fileID: 2540395189238504914}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 60.634262, y: -33.979836, z: -9.060473}
+  m_LocalPosition: {x: 156.81934, y: 1.9201609, z: -9.060473}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1471,9 +1470,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 1
+  field of view: 60
   orthographic: 1
-  orthographic size: 8.9
+  orthographic size: 9
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
