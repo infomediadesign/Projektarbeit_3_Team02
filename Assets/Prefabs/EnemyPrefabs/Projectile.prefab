@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: -3139842814916191837, guid: c196bb1cd4bc8134c8ef532f15c59c92, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -104,8 +104,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2ae29550fddbe948a209f6a91eb73c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnEnemyPrefab: {fileID: 0}
   stats: {fileID: 11400000, guid: 8fc8277bf14ed694694c75c232163f92, type: 2}
   attackCollider: {fileID: 3879529143502615345}
+  respawn: 0
+  respawnTime: 0
+  isObstacle: 0
   p_stats: {fileID: 11400000, guid: 8fc8277bf14ed694694c75c232163f92, type: 2}
   groundLayer:
     serializedVersion: 2

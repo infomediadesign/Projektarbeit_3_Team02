@@ -9,6 +9,7 @@ public class MovingEnemy : StationaryEnemy
     public Transform groundCheck; 
     private float groundCheckDistance = 1f;
     public LayerMask groundLayer;
+    public LayerMask constGroundLayer;
     public CapsuleCollider2D enemyHitbox;
     private bool isWallAhead;
 
@@ -24,12 +25,12 @@ public class MovingEnemy : StationaryEnemy
 
     public Transform[] patrolPoints;
     public int targetPoint;
-    private bool playerInSoundRange;
+    private bool playerInSoundRangeM;
 
 
     public void Awake()
     {
-        playerInSoundRange = false;
+        playerInSoundRangeM = false;
         intTimer = timer;
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -51,16 +52,16 @@ public class MovingEnemy : StationaryEnemy
     {
         if (Vector2.Distance(player.transform.position, transform.position) <= 5f)
         {
-            playerInSoundRange = true;
+            playerInSoundRangeM = true;
         }
         else
         {
-            playerInSoundRange = false;
+            playerInSoundRangeM = false;
         }
         if (isDying)
         {
             anim.SetBool("Death", true);
-            if (playerInSoundRange)
+            if (playerInSoundRangeM)
             {
                 SoundManager.Instance.StopEnemySound2D();
                 PlaySound("EnemyDeath");
@@ -72,7 +73,7 @@ public class MovingEnemy : StationaryEnemy
         {
             anim.SetBool("Moving", true);
             Patrol();
-            if (playerInSoundRange && !isDying)
+            if (playerInSoundRangeM && !isDying)
             {
                 PlaySound("WalkingEnemyWalk");
             }
@@ -101,7 +102,7 @@ public class MovingEnemy : StationaryEnemy
         {
             anim.SetBool("Moving", false);
             StopAttack();
-            if (playerInSoundRange && !isDying)
+            if (playerInSoundRangeM && !isDying)
             {
                 PlaySound("WalkingEnemyIdle");
             }
@@ -141,6 +142,10 @@ public class MovingEnemy : StationaryEnemy
     private bool IsGroundAhead()
     {
         RaycastHit2D groundHit = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
+        if(groundHit.collider == null)
+        {
+            groundHit = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, constGroundLayer);
+        }        
         return groundHit.collider != null; 
     }
 
@@ -155,10 +160,10 @@ public class MovingEnemy : StationaryEnemy
 
             if (other.IsTouching(enemyHitbox) && !isDying || !isDying && other.IsTouching(attackCollider) && attackCollision)
             {
-                if (other.transform.position.y < transform.position.y)
+                if (other.transform.position.y < transform.position.y && playerHealth != null)
                 {
-                    playerHealth.TakeDamage(stats.damage);
-                    Debug.Log("taking damage: " + stats.damage);
+                    playerHealth.TakeDamage(mStats.damage);
+                    Debug.Log("taking damage: " + mStats.damage);
                 }
 
             }
@@ -215,7 +220,7 @@ public class MovingEnemy : StationaryEnemy
         if (!IsGroundAhead())
         {
             playerInRange = false;
-            isPatroling = true;
+            //isPatroling = true;
             return;
         }
         if (distance > mStats.attackRad)
@@ -226,7 +231,7 @@ public class MovingEnemy : StationaryEnemy
         if (mStats.attackRad >= distance && verticalDifference <= mStats.maxVerticalRange && !cooling)
         {
             Attack();
-            if (playerInSoundRange)
+            if (playerInSoundRangeM)
             {
                 SoundManager.Instance.StopEnemySound2D();
                 PlaySound("WalkingEnemyAttack");
@@ -243,7 +248,7 @@ public class MovingEnemy : StationaryEnemy
     {
         if (!isDying && !isWallAhead)
         {
-            if (playerInSoundRange)
+            if (playerInSoundRangeM)
             {
                 PlaySound("WalkingEnemyWalk");
             }
