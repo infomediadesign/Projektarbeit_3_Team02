@@ -2,13 +2,12 @@ using UnityEngine;
 
 public class DamageableAsset : EnemyBase
 {
-    private SpriteRenderer spriteRenderer; 
-    public Sprite[] sprites; 
+    private SpriteRenderer spriteRenderer;
+    public Sprite[] sprites;
     public GameObject spawnOnDestroy;
     public Transform player;
-    private bool hitcountUpdated = false;
 
-    private int hitCount = 0;
+    private int hitCount = 0; // Zählt Treffer
 
     private void Start()
     {
@@ -22,21 +21,17 @@ public class DamageableAsset : EnemyBase
         }
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    public override void Attack()
-    {
+
+    public override void Attack() 
+    { 
+    
     }
-    public override void StopAttack()
+    public override void StopAttack() { }
+
+    public void TakeThornDamage()
     {
-    }
-    public override void TakeDamage(int damage)
-    {
-        if (!hitcountUpdated)
-        {
-            hitCount++;
-            hitcountUpdated = true;
-        }
-       
-        if (hitCount < 3)
+
+        if (hitCount < sprites.Length)
         {
             UpdateAppearance();
         }
@@ -44,19 +39,22 @@ public class DamageableAsset : EnemyBase
         {
             DestroyAsset();
         }
+
+        hitCount++; // Erhöhe erst nach der Prüfung!
+
     }
 
     private void UpdateAppearance()
     {
-        if (spriteRenderer != null)
+        if (spriteRenderer != null && hitCount < sprites.Length)
         {
             spriteRenderer.sprite = sprites[hitCount];
         }
-        hitcountUpdated = false;
     }
 
     private void DestroyAsset()
     {
+        Debug.Log("thorn destroyed!");
         if (spawnOnDestroy != null && player != null)
         {
             Instantiate(spawnOnDestroy, player.position, Quaternion.identity);

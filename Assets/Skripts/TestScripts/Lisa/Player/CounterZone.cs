@@ -5,6 +5,7 @@ public class CounterZone : MonoBehaviour
 {
     private List<EnemyBase> enemiesInRange = new List<EnemyBase>();
 
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         EnemyBase enemy = other.GetComponent<EnemyBase>();
@@ -12,6 +13,7 @@ public class CounterZone : MonoBehaviour
         {
             enemiesInRange.Add(enemy);
         }
+
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -21,6 +23,7 @@ public class CounterZone : MonoBehaviour
         {
             enemiesInRange.Remove(enemy);
         }
+
     }
 
     public EnemyBase GetCounterableEnemy()
@@ -38,4 +41,5 @@ public class CounterZone : MonoBehaviour
         }
         return null;
     }
+
 }

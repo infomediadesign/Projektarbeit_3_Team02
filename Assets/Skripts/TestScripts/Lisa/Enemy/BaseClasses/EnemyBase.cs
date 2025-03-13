@@ -16,6 +16,7 @@ public abstract class EnemyBase : MonoBehaviour
     public bool respawn;
     public float respawnTime;
     public bool isObstacle;
+
     protected virtual void Start()
     {
         attackCollision = false;
