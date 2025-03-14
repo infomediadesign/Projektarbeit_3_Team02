@@ -142,13 +142,16 @@ public class UIManager : MonoBehaviour
 
     public void StartGame()
     {
-        startPressed = true;
+      
 
         // Zeige die Intro-Bilder an, bevor die Szene geladen wird
         EventManager.Instance.TriggerEvent("ShowIntroBild");
 
         // Starte das Laden der nächsten Szene
         StartCoroutine(LoadGameScene());
+
+        startPressed = true;
+        
     }
 
     private IEnumerator LoadGameScene()
@@ -178,6 +181,7 @@ public class UIManager : MonoBehaviour
             // kannst du den CameraSelector in der neuen Szene suchen und aufrufen
             StartCoroutine(SwitchCameraAfterSceneLoad());
         }
+        
     }
 
     private IEnumerator SwitchCameraAfterSceneLoad()
@@ -195,6 +199,7 @@ public class UIManager : MonoBehaviour
         {
             Debug.LogWarning("CameraSelector in der neuen Szene nicht gefunden.");
         }
+        
     }
 
     public void ExitGame()

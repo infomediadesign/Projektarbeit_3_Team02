@@ -16,6 +16,7 @@ public class IntroBildHandler : MonoBehaviour
     public List<IntroBild> introBilder = new List<IntroBild>();
 
     private Coroutine bilderSequenceCoroutine;
+    public static bool introFinished = false;
 
     private void Awake()
     {
@@ -86,7 +87,8 @@ public class IntroBildHandler : MonoBehaviour
                 bild.spriteRenderer.enabled = false;
             }
         }
-
+        introFinished = true;
+        Debug.Log("setze  finish" + introFinished);
         bilderSequenceCoroutine = null;
     }
 }
