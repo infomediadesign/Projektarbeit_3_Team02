@@ -38,6 +38,12 @@ public class TeleportLSCutscene : MonoBehaviour
                 tempVideoHolder = new GameObject("TempVideoHolder");
                 DontDestroyOnLoad(tempVideoHolder);
 
+                // Deaktiviere das originale Video-Canvas, bevor wir die Sequenz starten
+                if (videoCanvas != null)
+                {
+                    videoCanvas.SetActive(false);
+                }
+
                 // Starte die komplette Sequenz mit Cutscene
                 tempVideoHolder.AddComponent<VideoSequenceManager>().StartSequence(
                     this,
@@ -143,6 +149,7 @@ public class VideoSequenceManager : MonoBehaviour
     private GameObject player;
     private TeleportLSCutscene teleporter;
     private string loadingScreenName;
+    private GameObject originalVideoCanvas; // Referenz auf das Original-Canvas
 
     public void StartSequence(TeleportLSCutscene teleporterRef, GameObject playerRef, VideoClip video,
                              VideoPlayer vidPlayer, GameObject vidCanvas, string loadScreen,
@@ -151,6 +158,7 @@ public class VideoSequenceManager : MonoBehaviour
         teleporter = teleporterRef;
         player = playerRef;
         loadingScreenName = loadScreen;
+        originalVideoCanvas = vidCanvas; // Speichere Referenz auf Original-Canvas
 
         // Klone den VideoPlayer und das Canvas, damit sie während des Scene-Wechsels bestehen bleiben
         videoPlayer = Instantiate(vidPlayer, transform);
@@ -204,5 +212,15 @@ public class VideoSequenceManager : MonoBehaviour
         // Teleportation starten
         Debug.Log("VideoSequenceManager: Starte Teleportation");
         StartCoroutine(teleporter.TeleportPlayer(player));
+    }
+
+    private void OnDestroy()
+    {
+        // Wenn das temporäre Objekt zerstört wird und das Original-Canvas noch existiert,
+        // stellen wir seinen ursprünglichen Zustand wieder her
+        if (originalVideoCanvas != null)
+        {
+            originalVideoCanvas.SetActive(true);
+        }
     }
 }
