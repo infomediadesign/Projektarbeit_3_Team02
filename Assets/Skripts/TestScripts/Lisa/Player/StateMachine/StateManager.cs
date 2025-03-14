@@ -49,7 +49,7 @@ public class StateManager : MonoBehaviour
     public bool jumpReleased;
     public Transform enemyCheckPos;
     public LayerMask enemyLayer;
-    private bool controlsEnabled;
+    private bool controlsEnabled = true;
 
     private bool facingRight = false;
     [HideInInspector] public bool counterPossible = true;
@@ -98,18 +98,21 @@ public class StateManager : MonoBehaviour
     {
         isEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
         isGroundEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, groundEnemyLayer);
-        if (UIManager.startPressed && !controlsEnabled)
+        if (!UIManager.startPressed && controlsEnabled)
         {
-            playerControls.Enable();
-            UIManager.startPressed = false;
-            controlsEnabled = true;
-        }
-        else if (!UIManager.startPressed && controlsEnabled)
-        {
+            Debug.Log("controls diabled");
             playerControls.Disable();
+            playerControls.Jump.Disable();
             controlsEnabled = false;
         }
-        else if (FakeLoadingScreens.paused && controlsEnabled)
+        else if (UIManager.startPressed && !controlsEnabled)
+        {
+            playerControls.Enable();
+            playerControls.Jump.Enable();
+            controlsEnabled = true;
+        }
+        
+       /* else if (FakeLoadingScreens.paused && controlsEnabled)
         {
             playerControls.Disable();
             controlsEnabled = false;
@@ -118,7 +121,7 @@ public class StateManager : MonoBehaviour
         {
             playerControls.Enable();
             controlsEnabled = true;
-        }
+        }*/
 
         currentState.UpdateStates();
 
