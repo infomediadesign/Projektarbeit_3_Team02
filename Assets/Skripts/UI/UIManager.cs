@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     private CameraSelector cameraSelector;
     public static bool startPressed;
 
+
     private void Start()
     {
         //ensure that main menu is active at start
