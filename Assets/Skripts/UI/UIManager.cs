@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
     public GameObject mainMenuScreen;
     public GameObject optionsScreen;
-    public GameObject audioScreen; 
+    public GameObject audioScreen;
     public GameObject controlsScreen;
     public GameObject memoriesScreen;
     public GameObject creditsScreen;
@@ -77,7 +77,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-   
+
     private void HandleShowScreen(string screenName)
     {
         //activate screen based on screen name
@@ -93,7 +93,7 @@ public class UIManager : MonoBehaviour
         {
             ShowScreen(audioScreen);
         }
-         else if (screenName == "CONTROLS SCREEN")
+        else if (screenName == "CONTROLS SCREEN")
         {
             ShowScreen(controlsScreen);
         }
@@ -101,11 +101,11 @@ public class UIManager : MonoBehaviour
         {
             ShowScreen(memoriesScreen);
         }
-         else if (screenName == "CREDITS SCREEN")
+        else if (screenName == "CREDITS SCREEN")
         {
             ShowScreen(creditsScreen);
         }
-         else if (screenName == "EXIT GAME SCREEN")
+        else if (screenName == "EXIT GAME SCREEN")
         {
             ShowScreen(exitgameScreen);
         }
@@ -143,8 +143,29 @@ public class UIManager : MonoBehaviour
     public void StartGame()
     {
         startPressed = true;
-        SceneManager.LoadSceneAsync(1);
-        MusicManager.Instance.PlayMusic("Game","GameBackground");
+
+        // Zeige die Intro-Bilder an, bevor die Szene geladen wird
+        EventManager.Instance.TriggerEvent("ShowIntroBild");
+
+        // Starte das Laden der nächsten Szene
+        StartCoroutine(LoadGameScene());
+    }
+
+    private IEnumerator LoadGameScene()
+    {
+        // Kurze Verzögerung, damit das Intro-Bild angezeigt werden kann
+        yield return new WaitForSeconds(0.1f);
+
+        // Lade die Spielszene asynchron
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(1);
+
+        // Warte bis die Szene geladen ist
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        MusicManager.Instance.PlayMusic("Game", "GameBackground");
 
         // Zur Cinemachine1 wechseln, falls CameraSelector verfügbar ist
         if (cameraSelector != null)
@@ -178,9 +199,9 @@ public class UIManager : MonoBehaviour
 
     public void ExitGame()
     {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #endif
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
         Application.Quit();
     }
 
@@ -234,9 +255,8 @@ public class UIManager : MonoBehaviour
         if (Boss.bossActive)
         {
 
-            MusicManager.Instance.PlayMusic("Boss","placeHolder");
+            MusicManager.Instance.PlayMusic("Boss", "placeHolder");
             Boss.bossActive = false;
         }
     }
 }
-
