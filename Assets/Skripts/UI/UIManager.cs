@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     {
         //ensure that main menu is active at start
         // ShowScreen(mainMenuScreen);
+
         startPressed = false;
         string lastTrack = GameOverUI.lastTrackPlayed;
         string lastBackground = GameOverUI.lastBackgroundPlayed;
