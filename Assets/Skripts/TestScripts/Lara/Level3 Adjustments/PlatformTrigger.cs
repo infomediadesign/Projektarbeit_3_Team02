@@ -7,6 +7,7 @@ public class PlatformTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject platform; // Referenz zur Plattform
     [SerializeField] private GameObject platformDelete; // Referenz zur Delete Plattform
+    [SerializeField] private GameObject platformSprite; // Referenz zur Delete Plattform
     private CameraSelector cameraSelector;
 
     public static bool platformActivated = false; // Flag, um zu prüfen, ob die Plattform bereits aktiviert wurde
@@ -18,9 +19,11 @@ public class PlatformTrigger : MonoBehaviour
         {
             // Deaktiviere den Renderer (unsichtbar)
             TilemapRenderer platformRenderer = platform.GetComponent<TilemapRenderer>();
+            SpriteRenderer platformSpriteRenderer = platformSprite.GetComponent<SpriteRenderer>();
             if (platformRenderer != null)
             {
                 platformRenderer.enabled = false;
+                platformSpriteRenderer.enabled = false;
             }
 
             // Deaktiviere den Collider (keine Interaktion)
@@ -78,9 +81,11 @@ public class PlatformTrigger : MonoBehaviour
         {
             // Aktiviere den Renderer (sichtbar)
             TilemapRenderer platformRenderer = platform.GetComponent<TilemapRenderer>();
+            SpriteRenderer platformSpriteRenderer = platformSprite.GetComponent<SpriteRenderer>();
             if (platformRenderer != null)
             {
                 platformRenderer.enabled = true;
+                platformSpriteRenderer.enabled = true;
             }
 
             // Aktiviere den Collider (Interaktion)
