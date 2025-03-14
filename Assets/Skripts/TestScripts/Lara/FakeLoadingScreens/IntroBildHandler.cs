@@ -15,7 +15,14 @@ public class IntroBildHandler : MonoBehaviour
     [Tooltip("Liste der Intro-Bilder in der Reihenfolge der Anzeige")]
     public List<IntroBild> introBilder = new List<IntroBild>();
 
+    [Tooltip("Falls true, kann mit Mausklick zum nächsten Bild gesprungen werden")]
+    public bool allowSkipWithClick = true;
+
     private Coroutine bilderSequenceCoroutine;
+    private bool isShowingSequence = false;
+    private int currentBildIndex = -1;
+    private float currentBildTimer = 0f;
+    private bool waitingForNextBild = false;
 
     private void Awake()
     {
@@ -37,6 +44,15 @@ public class IntroBildHandler : MonoBehaviour
     {
         // Event-Listener registrieren
         EventManager.Instance.StartListening("ShowIntroBild", ShowIntroBilder);
+    }
+
+    private void Update()
+    {
+        // Auf Mausklick reagieren, wenn Sequenz läuft und Klick-Skip aktiviert ist
+        if (isShowingSequence && allowSkipWithClick && Input.GetMouseButtonDown(0))
+        {
+            SkipToNextBild();
+        }
     }
 
     private void OnDestroy()
@@ -66,11 +82,74 @@ public class IntroBildHandler : MonoBehaviour
         bilderSequenceCoroutine = StartCoroutine(ShowBilderSequence());
     }
 
-    private IEnumerator ShowBilderSequence()
+    private void SkipToNextBild()
     {
-        // Alle Bilder nacheinander anzeigen
+        // Wenn wir gerade auf das nächste Bild warten, unterbrechen wir dieses Warten
+        if (waitingForNextBild)
+        {
+            waitingForNextBild = false;
+            return;
+        }
+
+        // Aktuelles Bild ausblenden, wenn eines angezeigt wird
+        if (currentBildIndex >= 0 && currentBildIndex < introBilder.Count)
+        {
+            var currentBild = introBilder[currentBildIndex];
+            if (currentBild.spriteRenderer != null)
+            {
+                currentBild.spriteRenderer.enabled = false;
+            }
+        }
+
+        // Zum nächsten Bild weitergehen
+        currentBildIndex++;
+
+        // Wenn wir am Ende der Sequenz angelangt sind, Sequenz beenden
+        if (currentBildIndex >= introBilder.Count)
+        {
+            EndSequence();
+            return;
+        }
+
+        // Nächstes Bild anzeigen
+        var nextBild = introBilder[currentBildIndex];
+        if (nextBild.spriteRenderer != null)
+        {
+            nextBild.spriteRenderer.enabled = true;
+        }
+
+        // Timer zurücksetzen
+        currentBildTimer = 0f;
+    }
+
+    private void EndSequence()
+    {
+        // Alle Bilder ausblenden
         foreach (var bild in introBilder)
         {
+            if (bild.spriteRenderer != null)
+            {
+                bild.spriteRenderer.enabled = false;
+            }
+        }
+
+        // Sequenz als beendet markieren
+        isShowingSequence = false;
+        currentBildIndex = -1;
+        bilderSequenceCoroutine = null;
+    }
+
+    private IEnumerator ShowBilderSequence()
+    {
+        isShowingSequence = true;
+        currentBildIndex = -1;
+
+        // Alle Bilder nacheinander anzeigen
+        for (int i = 0; i < introBilder.Count; i++)
+        {
+            currentBildIndex = i;
+            var bild = introBilder[i];
+
             // Aktuelles Bild anzeigen
             if (bild.spriteRenderer != null)
             {
@@ -78,7 +157,23 @@ public class IntroBildHandler : MonoBehaviour
             }
 
             // Warte für die angegebene Zeit
-            yield return new WaitForSeconds(bild.displayDuration);
+            currentBildTimer = 0f;
+            float targetDuration = bild.displayDuration;
+
+            while (currentBildTimer < targetDuration)
+            {
+                waitingForNextBild = true;
+                yield return null;
+
+                // Wenn durch einen Klick unterbrochen, brechen wir die Warteschleife ab
+                if (!waitingForNextBild)
+                {
+                    break;
+                }
+
+                currentBildTimer += Time.deltaTime;
+            }
+            waitingForNextBild = false;
 
             // Bild wieder ausblenden
             if (bild.spriteRenderer != null)
@@ -87,6 +182,6 @@ public class IntroBildHandler : MonoBehaviour
             }
         }
 
-        bilderSequenceCoroutine = null;
+        EndSequence();
     }
 }
