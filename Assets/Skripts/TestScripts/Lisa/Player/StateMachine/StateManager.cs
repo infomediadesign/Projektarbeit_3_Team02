@@ -98,7 +98,7 @@ public class StateManager : MonoBehaviour
     {
         isEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
         isGroundEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, groundEnemyLayer);
-        if (UIManager.startPressed && !controlsEnabled)
+       /* if (UIManager.startPressed && !controlsEnabled)
         {
             playerControls.Enable();
             UIManager.startPressed = false;
@@ -118,7 +118,7 @@ public class StateManager : MonoBehaviour
         {
             playerControls.Enable();
             controlsEnabled = true;
-        }
+        }*/
 
         currentState.UpdateStates();
 
