@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4569281047951937730}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 281.08795, y: 36.977596, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &2226236416320877223
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -79,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.98742133, g: 0.0093151415, b: 0.88361156, a: 1}
+  m_Sprite: {fileID: -6885975914607953051, guid: 365ee317fcb5a6640b34d6d117bfb352, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -111,6 +111,10 @@ MonoBehaviour:
   obstStats: {fileID: 11400000, guid: c7ba7831ec65f6843a25b30c6da30122, type: 2}
   boss: {fileID: 0}
   weakness: 0
+  thornLevel2: 0
+  sprites: []
+  spawnOnDestroy: {fileID: 0}
+  player: {fileID: 0}
 --- !u!61 &8871758195604756957
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -145,17 +149,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.05470276, y: -0.25519753}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 7.15, y: 3.6333334}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 6.6264954, y: 1.510395}
   m_EdgeRadius: 0
 --- !u!70 &6641908591674673664
 CapsuleCollider2D:
@@ -191,6 +195,6 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.039871216, y: 0.034880638}
-  m_Size: {x: 1.6776428, y: 1.3288746}
-  m_Direction: 0
+  m_Offset: {x: 0.09988401, y: -0.26968694}
+  m_Size: {x: 7.085391, y: 2.5386927}
+  m_Direction: 1

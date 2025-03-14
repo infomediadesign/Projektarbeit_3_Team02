@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8741666989880316718}
   - component: {fileID: 8625788319574421038}
   - component: {fileID: 6012901995977469676}
+  - component: {fileID: -2812683772922916658}
   m_Layer: 7
   m_Name: Weakness
   m_TagString: Untagged
@@ -78,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.59269714, g: 0, b: 1, a: 1}
+  m_Sprite: {fileID: 1912751154, guid: ecdda95cdd158ed41929e17254c24115, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -146,3 +147,29 @@ MonoBehaviour:
   obstStats: {fileID: 11400000, guid: c7ba7831ec65f6843a25b30c6da30122, type: 2}
   boss: {fileID: 0}
   weakness: 1
+  thornLevel2: 0
+  sprites: []
+  spawnOnDestroy: {fileID: 0}
+  player: {fileID: 0}
+--- !u!95 &-2812683772922916658
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4878521498029676930}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b96e7e6242199844b9b08e02c096590f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
