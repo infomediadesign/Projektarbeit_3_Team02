@@ -78,7 +78,7 @@ public class StateManager : MonoBehaviour
 
         deathAnim = false;
         deathLastFrame = false;
-
+        playerControls.Disable();
 
     }
 
@@ -96,8 +96,14 @@ public class StateManager : MonoBehaviour
     {
         isEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
         isGroundEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, groundEnemyLayer);
+        if (!UIManager.startPressed)
+        {
+            playerControls.Enable();
+            UIManager.startPressed = false;
+        }
 
         currentState.UpdateStates();
+
         if (PlayerHealth.death)
         {
             playerControls.Disable();
