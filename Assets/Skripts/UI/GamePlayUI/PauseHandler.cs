@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PauseHandler : MonoBehaviour
 {
@@ -17,13 +18,20 @@ public class PauseHandler : MonoBehaviour
             if (Time.timeScale == 0)
             {
                 EventManager.Instance.TriggerEvent("ResumeGame");
+                UIManager.startPressed = true;
             }
             else
             {
                 EventManager.Instance.TriggerEvent("PauseGame");
+                UIManager.startPressed = false;
             }
+          
         }
-        //hier noch die anderen Buttons einfügen
+
+    }
+    public void OnMenuPress()
+    {
+        EventManager.Instance.TriggerEvent("OnBackToMenuPress");
     }
     private void OnEnable()
     {

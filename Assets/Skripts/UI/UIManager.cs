@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -187,8 +188,18 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0; //pause game
         pauseScreen.SetActive(true);
         isGamePaused = true;
+        EventSystem.current.UpdateModules();
     }
+    public void OnBackToMenuPress()
+    {
+        Time.timeScale = 1; //pause game
+        pauseScreen.SetActive(false);
+        isGamePaused = false;
+        Initializer.DestroyInitializer();
+        Initializer.Inititalize();
 
+        SceneManager.LoadScene("MainMenu");
+    }
     public void OnGameResumePress()
     {
         if (isGamePaused)
