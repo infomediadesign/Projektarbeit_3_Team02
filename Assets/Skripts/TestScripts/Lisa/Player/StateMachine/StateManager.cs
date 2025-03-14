@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEngine.Android;
 public class StateManager : MonoBehaviour
 {
     [HideInInspector] public PlayerCombat playerCombat;
@@ -48,6 +49,7 @@ public class StateManager : MonoBehaviour
     public bool jumpReleased;
     public Transform enemyCheckPos;
     public LayerMask enemyLayer;
+    private bool controlsEnabled;
 
     private bool facingRight = false;
     [HideInInspector] public bool counterPossible = true;
@@ -78,7 +80,7 @@ public class StateManager : MonoBehaviour
 
         deathAnim = false;
         deathLastFrame = false;
-        playerControls.Disable();
+       
 
     }
 
@@ -96,10 +98,26 @@ public class StateManager : MonoBehaviour
     {
         isEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, enemyLayer);
         isGroundEnemy = Physics2D.OverlapCircle(enemyCheckPos.position, playerStats.enemyCheckRad, groundEnemyLayer);
-        if (!UIManager.startPressed)
+        if (UIManager.startPressed && !controlsEnabled)
         {
             playerControls.Enable();
             UIManager.startPressed = false;
+            controlsEnabled = true;
+        }
+        else if (!UIManager.startPressed && controlsEnabled)
+        {
+            playerControls.Disable();
+            controlsEnabled = false;
+        }
+        else if (FakeLoadingScreens.paused && controlsEnabled)
+        {
+            playerControls.Disable();
+            controlsEnabled = false;
+        }
+        else if (!FakeLoadingScreens.paused && !controlsEnabled)
+        {
+            playerControls.Enable();
+            controlsEnabled = true;
         }
 
         currentState.UpdateStates();

@@ -14,6 +14,7 @@ public class FakeLoadingScreens : MonoBehaviour
     [Header("Optional Settings")]
     [SerializeField] private bool autoStart = true;
     [SerializeField] private CanvasGroup canvasGroup;
+    static public bool paused = false;
 
     private void Start()
     {
@@ -40,6 +41,7 @@ public class FakeLoadingScreens : MonoBehaviour
 
     public void StartLoadingSequence()
     {
+        paused = true;
         StartCoroutine(LoadingSequence());
     }
 
@@ -79,7 +81,7 @@ public class FakeLoadingScreens : MonoBehaviour
 
         // Ensure it's fully faded out
         canvasGroup.alpha = 0;
-
+        paused = false;
         // If we loaded a scene, activate it now
         if (asyncLoad != null)
         {
@@ -90,5 +92,6 @@ public class FakeLoadingScreens : MonoBehaviour
             // If no scene to load, just deactivate the loading screen
             gameObject.SetActive(false);
         }
+        
     }
 }
