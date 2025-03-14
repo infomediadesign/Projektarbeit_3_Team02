@@ -36,6 +36,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _CameraSortingLayerTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -54,7 +58,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Size: 0.05
+    - _ShockwaveStrength: 0.1
+    - _Size: 0
+    - _WaveDistanceFromCenter: -0.1
+    - _XSizeRatio: 1.777
     m_Colors:
     - _RingSpawnPos: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
