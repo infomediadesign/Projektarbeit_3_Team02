@@ -7,6 +7,7 @@ public class PlatformTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject platform; // Referenz zur Plattform
     [SerializeField] private GameObject platformDelete; // Referenz zur Delete Plattform
+    private CameraSelector cameraSelector;
 
     public static bool platformActivated = false; // Flag, um zu prüfen, ob die Plattform bereits aktiviert wurde
 
@@ -34,6 +35,13 @@ public class PlatformTrigger : MonoBehaviour
             Debug.LogError("Platform ist nicht zugewiesen! Bitte im Inspector zuweisen.");
         }
 
+        // CameraSelector finden und zuweisen
+        cameraSelector = FindObjectOfType<CameraSelector>();
+        if (cameraSelector == null)
+        {
+            Debug.LogWarning("CameraSelector konnte nicht gefunden werden!");
+        }
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -45,6 +53,22 @@ public class PlatformTrigger : MonoBehaviour
             ActivatePlatform();
             DestroyPlatform();
             Destroy(gameObject);
+
+
+            // Zur Cinemachine1 wechseln, falls CameraSelector verfügbar ist
+            if (cameraSelector != null)
+            {
+                cameraSelector.SwitchToCamera("CineCamBoss");
+                Debug.Log("CineCamBoss wurde aktiviert!");
+
+            }
+            else
+            {
+                Debug.Log("CineCamBoss wurde nicht gefunden! Suche CameraSelector...");
+                // Falls der CameraSelector nach dem Szenenwechsel nicht mehr vorhanden ist
+                // kannst du den CameraSelector in der neuen Szene suchen und aufrufen
+                StartCoroutine(SwitchCameraAfterSceneLoad());
+            }
         }
     }
 
@@ -71,10 +95,31 @@ public class PlatformTrigger : MonoBehaviour
 
             Debug.Log("Plattform wurde aktiviert!");
             Boss.bossActive = true;
+
             //Destroy(gameObject);
         }
     }
-     void DestroyPlatform()
+
+    private IEnumerator SwitchCameraAfterSceneLoad()
+    {
+        // Warten, bis die Szene geladen ist
+        yield return new WaitForSeconds(0.5f);
+
+        // CameraSelector in der neuen Szene suchen
+        CameraSelector newSceneCameraSelector = FindObjectOfType<CameraSelector>();
+        if (newSceneCameraSelector != null)
+        {
+            newSceneCameraSelector.SwitchToCamera("CineCamBoss");
+            Debug.Log("CameraSelector und CineCamBoss doch noch gefunden!");
+
+        }
+        else
+        {
+            Debug.LogWarning("CameraSelector in der neuen Szene nicht gefunden.");
+        }
+    }
+
+    void DestroyPlatform()
     {
         if (platformDelete != null)
         {
