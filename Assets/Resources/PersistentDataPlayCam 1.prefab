@@ -189,7 +189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4179347762247870385}
-  - component: {fileID: 836951406596426813}
+  - component: {fileID: 7931356034677416474}
   m_Layer: 5
   m_Name: Holzfigur
   m_TagString: Holzfigur
@@ -206,17 +206,17 @@ RectTransform:
   m_GameObject: {fileID: 216208638869920940}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -5399.9995}
-  m_LocalScale: {x: 6.0083, y: 6.0083, z: 6.0083}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7118137280486694501}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: 385}
-  m_SizeDelta: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!212 &836951406596426813
+--- !u!212 &7931356034677416474
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -260,12 +260,12 @@ SpriteRenderer:
   m_SortingLayerID: 688351575
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6478533816064171135, guid: 28b3fc827feda5d418885efcfce491b4, type: 3}
+  m_Sprite: {fileID: 1033602984, guid: ff5ef405eda0b2743b7a1cf35036c341, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1432,7 +1432,7 @@ Transform:
   m_GameObject: {fileID: 2540395189238504914}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 60.634262, y: -33.979836, z: -9.060473}
+  m_LocalPosition: {x: 28.394257, y: 1.8701608, z: -9.060473}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1473,7 +1473,7 @@ Camera:
   far clip plane: 1000
   field of view: 1
   orthographic: 1
-  orthographic size: 8.9
+  orthographic size: 8.85
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -3494,10 +3494,10 @@ RectTransform:
   - {fileID: 4179347762247870385}
   m_Father: {fileID: 6997552897865999081}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3957740295490496720
 MonoBehaviour:
