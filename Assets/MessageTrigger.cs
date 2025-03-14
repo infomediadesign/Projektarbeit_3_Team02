@@ -5,10 +5,12 @@ public class MessageTrigger : MonoBehaviour
 {
     public GameObject messageImageKeyboard; // Referenz zum UI-Image im Canvas
     public GameObject messageImageController; // Referenz zum UI-Image im Canvas
+    public GameObject firstMessageImageKeyboard; // Referenz zum UI-Image im Canvas
+    public GameObject firstMessageImageController;
     public float displayDuration = 3f; // Dauer in Sekunden, wie lange das Bild angezeigt wird
 
     private bool hasBeenTriggered = false; // Prüft, ob der Trigger schon aktiviert wurde
-    private bool firstMessage;
+    private bool firstMessage = false;
 
     private void Start()
     {
@@ -21,7 +23,6 @@ public class MessageTrigger : MonoBehaviour
         {
             messageImageController.SetActive(false);
         }
-        firstMessage = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -33,15 +34,15 @@ public class MessageTrigger : MonoBehaviour
             StartCoroutine(ShowMessage());
         }
     }
-    private void OnTriggerStay2D(Collider2D other)
+    private void Update()
     {
-        // Überprüfen, ob der Spieler in den Trigger läuft und der Trigger noch nicht aktiviert wurde
-        if (other.CompareTag("Player") && !firstMessage)
+        if (!firstMessage)
         {
-            Debug.Log("ontriggerstay");
-            hasBeenTriggered = true; // Markieren, dass der Trigger bereits aktiviert wurde
-            StartCoroutine(ShowFirstMessage());
-            firstMessage = true;
+            if (IntroBildHandler.introFinished)
+            {
+                StartCoroutine(ShowFirstMessage());
+                firstMessage = true;
+            }
         }
     }
 
@@ -90,39 +91,39 @@ public class MessageTrigger : MonoBehaviour
     private IEnumerator ShowFirstMessage()
     {
 
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(1f);
             if (!InputCheck.controller)
             {
                 // Bild einblenden
-                if (messageImageKeyboard != null)
+                if (firstMessageImageKeyboard != null)
                 {
-                    messageImageKeyboard.SetActive(true);
+                    firstMessageImageKeyboard.SetActive(true);
                 }
 
                 // Warten für die angegebene Dauer
                 yield return new WaitForSeconds(displayDuration);
 
                 // Bild ausblenden
-                if (messageImageKeyboard != null)
+                if (firstMessageImageKeyboard != null)
                 {
-                    messageImageKeyboard.SetActive(false);
+                    firstMessageImageKeyboard.SetActive(false);
                 }
             }
             else
             {
                 // Bild einblenden
-                if (messageImageController != null)
+                if (firstMessageImageController != null)
                 {
-                    messageImageController.SetActive(true);
+                    firstMessageImageController.SetActive(true);
                 }
 
                 // Warten für die angegebene Dauer
                 yield return new WaitForSeconds(displayDuration);
 
                 // Bild ausblenden
-                if (messageImageController != null)
+                if (firstMessageImageController != null)
                 {
-                    messageImageController.SetActive(false);
+                    firstMessageImageController.SetActive(false);
                 }
             }
         
