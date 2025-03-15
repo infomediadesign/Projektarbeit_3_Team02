@@ -1529,6 +1529,84 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5623458148029385208, guid: ea55c9d35cc4e27438e1fdc103ff0b93, type: 3}
   m_PrefabInstance: {fileID: 122592802}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &122959730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 122959731}
+  - component: {fileID: 122959732}
+  m_Layer: 12
+  m_Name: DMG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &122959731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122959730}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.29543632, w: 0.9553624}
+  m_LocalPosition: {x: -1.88, y: -1.41, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 134821347}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 34.367}
+--- !u!61 &122959732
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122959730}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 2.7129786, y: 0.22491121}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 3.3896604, y: 11.62695}
+  m_EdgeRadius: 0
 --- !u!1 &126393662
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,6 +1803,7 @@ GameObject:
   - component: {fileID: 134821350}
   - component: {fileID: 134821351}
   - component: {fileID: 134821352}
+  - component: {fileID: 134821353}
   m_Layer: 12
   m_Name: "Lv2_ Screen 5_ Dornen Ranke Gro\xDF_0"
   m_TagString: Untagged
@@ -1799,7 +1878,8 @@ Transform:
   m_LocalPosition: {x: 263.48, y: -32.82, z: 0}
   m_LocalScale: {x: 1.05, y: 1.05, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 122959731}
   m_Father: {fileID: 1154306570}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &134821350
@@ -1913,6 +1993,22 @@ MonoBehaviour:
   - {fileID: 1733357353378298766, guid: 30c37242da49cc046b46798c9f0c8217, type: 3}
   spawnOnDestroy: {fileID: 1862753101}
   player: {fileID: 0}
+--- !u!114 &134821353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134821345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c6a4afd7a244854c9d159ac729a73b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveRange: 0
+  moveSpeed: 0
+  damage: 1
+  dmgHitbox: {fileID: 122959732}
 --- !u!1 &148148422
 GameObject:
   m_ObjectHideFlags: 0
