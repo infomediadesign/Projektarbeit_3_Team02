@@ -180,7 +180,7 @@ public class Boss : EnemyBase
                 
                 SpawnObjects(spawnPointsWeaknessPhase3, weaknessPrefab);
                 SpawnObjects(spawnPointsSpawnerPhase3, spawnerPrefab);
-                SpawnThornObstacle();
+                //SpawnThornObstacle();
             }));
         }
     }
@@ -286,11 +286,12 @@ public class Boss : EnemyBase
     {
         PlaySound("BossDeath");
         Debug.Log("boss defeated");
-        Destroy(gameObject);
+        SceneManager.LoadScene("End");
         DespawnAllObjects();
         bossActive = false;
-        SceneManager.LoadScene("End");
-        
+        Destroy(gameObject);
+
+
     }
     private IEnumerator SpawnAfterDelay(float delay, System.Action spawnAction)
     {
