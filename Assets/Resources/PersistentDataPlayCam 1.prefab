@@ -213,7 +213,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -17, y: 17}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &7931356034677416474
@@ -260,7 +260,7 @@ SpriteRenderer:
   m_SortingLayerID: 688351575
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1033602984, guid: ff5ef405eda0b2743b7a1cf35036c341, type: 3}
+  m_Sprite: {fileID: 532991489, guid: 183528dcc30cba742986e512c0f20588, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1149,7 +1149,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 925, y: 389}
+  m_AnchoredPosition: {x: 939, y: 361}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4160169848527293974
@@ -2244,10 +2244,10 @@ RectTransform:
   - {fileID: 4698392005949124457}
   m_Father: {fileID: 1239457210323241159}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4047332994988796290
 GameObject:
@@ -3979,7 +3979,7 @@ Transform:
   m_GameObject: {fileID: 6954214354157094891}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 746.3091, y: 417.77798, z: -5460.674}
+  m_LocalPosition: {x: -275, y: -73, z: -5460.674}
   m_LocalScale: {x: 137.12408, y: 129.98221, z: 60.674156}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4029,7 +4029,7 @@ SpriteRenderer:
   m_SortingLayerID: 688351575
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 809080484, guid: 286373ee195b62845afaca9a60016a09, type: 3}
+  m_Sprite: {fileID: 2099691531, guid: e67dae2bcc787e94bb03006f863718cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4048,7 +4048,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6954214354157094891}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a278015953d18764c8ad63e631220877, type: 2}
   m_CullingMode: 0
