@@ -161,6 +161,7 @@ public class UIManager : MonoBehaviour
 
         // Lade die Spielszene asynchron
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(1);
+        MusicManager.Instance.PlayMusic("Game", "GameBackground");
 
         // Warte bis die Szene geladen ist
         while (!asyncLoad.isDone)
@@ -168,12 +169,13 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
 
-        MusicManager.Instance.PlayMusic("Game", "GameBackground");
+        
 
         // Zur Cinemachine1 wechseln, falls CameraSelector verfügbar ist
         if (cameraSelector != null)
         {
             cameraSelector.SwitchToCamera("Cinemachine1");
+            
         }
         else
         {
@@ -194,6 +196,7 @@ public class UIManager : MonoBehaviour
         if (newSceneCameraSelector != null)
         {
             newSceneCameraSelector.SwitchToCamera("Cinemachine1");
+        
         }
         else
         {

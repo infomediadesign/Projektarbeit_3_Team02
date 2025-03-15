@@ -40,6 +40,18 @@ public class Teleporter_neu : MonoBehaviour
         // Get the target scene
         Scene targetScene = SceneManager.GetSceneByBuildIndex(targetSceneBuildIndex);
         SceneManager.SetActiveScene(targetScene);
+        if (targetSceneBuildIndex == 2)
+        {
+            MusicManager.Instance.PlayMusic("Level2.1", "GameBackground");
+        }
+        else if (targetSceneBuildIndex == 3)
+        {
+            MusicManager.Instance.PlayMusic("Level2.2", "GameBackground");
+        }
+        else if (targetSceneBuildIndex == 4)
+        {
+            MusicManager.Instance.PlayMusic("Level3", "GameBackground");
+        }
 
         // Find SpawnPoint and teleport player
         GameObject spawnPoint = null;
@@ -66,6 +78,7 @@ public class Teleporter_neu : MonoBehaviour
         }
 
         // Der Loading-Screen wird nun durch seinen eigenen Timer ausgeblendet
+       
     }
 
     private GameObject FindSpawnPointInHierarchy(GameObject obj)

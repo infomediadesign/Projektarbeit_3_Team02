@@ -29,7 +29,8 @@ public class GameOverUI : MonoBehaviour
 
         Initializer.DestroyInitializer();
         Initializer.Inititalize();
-        
+        IntroBildHandler.introFinished = false;
+
         SceneManager.LoadScene("MainMenu");
     }
     public void OnResumePress()

@@ -11,6 +11,7 @@ public class MessageTrigger : MonoBehaviour
 
     private bool hasBeenTriggered = false; // Prüft, ob der Trigger schon aktiviert wurde
     private bool firstMessage = false;
+    public static bool gameOver = false;
 
     private void Start()
     {
@@ -43,6 +44,11 @@ public class MessageTrigger : MonoBehaviour
                 StartCoroutine(ShowFirstMessage());
                 firstMessage = true;
             }
+        }
+        if (gameOver)
+        {
+            firstMessage = false;
+            gameOver = false;
         }
     }
 
@@ -126,8 +132,6 @@ public class MessageTrigger : MonoBehaviour
                     firstMessageImageController.SetActive(false);
                 }
             }
-        
-
 
     }
 }
