@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
 public class IntroBildHandler : MonoBehaviour
 {
     [System.Serializable]
@@ -11,12 +10,12 @@ public class IntroBildHandler : MonoBehaviour
         [Tooltip("Zeit in Sekunden, die das Bild angezeigt wird")]
         public float displayDuration = 3.0f;
     }
-
     [Tooltip("Liste der Intro-Bilder in der Reihenfolge der Anzeige")]
     public List<IntroBild> introBilder = new List<IntroBild>();
-
     private Coroutine bilderSequenceCoroutine;
     public static bool introFinished = false;
+    private int currentBildIndex = 0;
+    private bool skipRequested = false;
 
     private void Awake()
     {
@@ -33,11 +32,19 @@ public class IntroBildHandler : MonoBehaviour
             }
         }
     }
-
     private void Start()
     {
         // Event-Listener registrieren
         EventManager.Instance.StartListening("ShowIntroBild", ShowIntroBilder);
+    }
+
+    private void Update()
+    {
+        // Überspringen mit Leertaste
+        if (Input.GetKeyDown(KeyCode.Space) && bilderSequenceCoroutine != null)
+        {
+            skipRequested = true;
+        }
     }
 
     private void OnDestroy()
@@ -47,14 +54,12 @@ public class IntroBildHandler : MonoBehaviour
         {
             EventManager.Instance.StopListening("ShowIntroBild", ShowIntroBilder);
         }
-
         // Laufende Sequenz stoppen
         if (bilderSequenceCoroutine != null)
         {
             StopCoroutine(bilderSequenceCoroutine);
         }
     }
-
     private void ShowIntroBilder()
     {
         // Stoppe eine möglicherweise laufende Sequenz
@@ -62,24 +67,34 @@ public class IntroBildHandler : MonoBehaviour
         {
             StopCoroutine(bilderSequenceCoroutine);
         }
-
+        // Zurücksetzen der Variablen
+        currentBildIndex = 0;
+        skipRequested = false;
         // Starte die Sequenz
         bilderSequenceCoroutine = StartCoroutine(ShowBilderSequence());
     }
-
     private IEnumerator ShowBilderSequence()
     {
         // Alle Bilder nacheinander anzeigen
-        foreach (var bild in introBilder)
+        for (currentBildIndex = 0; currentBildIndex < introBilder.Count; currentBildIndex++)
         {
+            var bild = introBilder[currentBildIndex];
+
             // Aktuelles Bild anzeigen
             if (bild.spriteRenderer != null)
             {
                 bild.spriteRenderer.enabled = true;
             }
 
-            // Warte für die angegebene Zeit
-            yield return new WaitForSeconds(bild.displayDuration);
+            // Warte für die angegebene Zeit oder bis zum Überspringen
+            float timer = 0f;
+            skipRequested = false;
+
+            while (timer < bild.displayDuration && !skipRequested)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
 
             // Bild wieder ausblenden
             if (bild.spriteRenderer != null)
@@ -87,8 +102,9 @@ public class IntroBildHandler : MonoBehaviour
                 bild.spriteRenderer.enabled = false;
             }
         }
+
         introFinished = true;
-        Debug.Log("setze  finish" + introFinished);
+        Debug.Log("setze finish" + introFinished);
         bilderSequenceCoroutine = null;
     }
 }
