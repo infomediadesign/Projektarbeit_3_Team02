@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
 public class Boss : EnemyBase
@@ -288,6 +289,8 @@ public class Boss : EnemyBase
         Destroy(gameObject);
         DespawnAllObjects();
         bossActive = false;
+        SceneManager.LoadScene("End");
+        
     }
     private IEnumerator SpawnAfterDelay(float delay, System.Action spawnAction)
     {
