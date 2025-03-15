@@ -14,30 +14,6 @@ public class PlatformTrigger : MonoBehaviour
 
     void Start()
     {
-        // Beim Start die Plattform deaktivieren
-        if (platform != null)
-        {
-            // Deaktiviere den Renderer (unsichtbar)
-            TilemapRenderer platformRenderer = platform.GetComponent<TilemapRenderer>();
-            SpriteRenderer platformSpriteRenderer = platformSprite.GetComponent<SpriteRenderer>();
-            if (platformRenderer != null)
-            {
-                platformRenderer.enabled = false;
-                platformSpriteRenderer.enabled = false;
-            }
-
-            // Deaktiviere den Collider (keine Interaktion)
-            TilemapCollider2D platformCollider = platform.GetComponent<TilemapCollider2D>();
-            if (platformCollider != null)
-            {
-                platformCollider.enabled = false;
-            }
-        }
-        else
-        {
-            Debug.LogError("Platform ist nicht zugewiesen! Bitte im Inspector zuweisen.");
-        }
-
         // CameraSelector finden und zuweisen
         cameraSelector = FindObjectOfType<CameraSelector>();
         if (cameraSelector == null)
@@ -45,6 +21,56 @@ public class PlatformTrigger : MonoBehaviour
             Debug.LogWarning("CameraSelector konnte nicht gefunden werden!");
         }
 
+        // Beim Start die Plattform basierend auf dem platformActivated Status setzen
+        if (platformActivated)
+        {
+            // Wenn die Plattform bereits aktiviert war (z.B. durch Checkpoint-Wiederherstellung)
+            Debug.Log("[PlatformTrigger] Plattform beim Start bereits aktiviert, stelle sie wieder her");
+            ActivatePlatformVisuals();
+            DestroyPlatform();
+
+            // Kamera zum Boss umschalten
+            if (cameraSelector != null)
+            {
+                cameraSelector.SwitchToCamera("CineCamBoss");
+                Debug.Log("[PlatformTrigger] CineCamBoss nach Wiederherstellung aktiviert");
+            }
+
+            // Boss aktivieren
+            Boss.bossActive = true;
+
+            // Destroy trigger since platform is already activated
+            Destroy(gameObject);
+        }
+        else
+        {
+            // Normal den Zustand deaktivieren
+            if (platform != null)
+            {
+                // Deaktiviere den Renderer (unsichtbar)
+                TilemapRenderer platformRenderer = platform.GetComponent<TilemapRenderer>();
+                SpriteRenderer platformSpriteRenderer = platformSprite?.GetComponent<SpriteRenderer>();
+                if (platformRenderer != null)
+                {
+                    platformRenderer.enabled = false;
+                    if (platformSpriteRenderer != null)
+                    {
+                        platformSpriteRenderer.enabled = false;
+                    }
+                }
+
+                // Deaktiviere den Collider (keine Interaktion)
+                TilemapCollider2D platformCollider = platform.GetComponent<TilemapCollider2D>();
+                if (platformCollider != null)
+                {
+                    platformCollider.enabled = false;
+                }
+            }
+            else
+            {
+                Debug.LogError("Platform ist nicht zugewiesen! Bitte im Inspector zuweisen.");
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -52,18 +78,15 @@ public class PlatformTrigger : MonoBehaviour
         // Überprüfen, ob es der Spieler ist (du kannst hier dein Tag anpassen)
         if (other.CompareTag("Player") && !platformActivated)
         {
-
             ActivatePlatform();
             DestroyPlatform();
             Destroy(gameObject);
-
 
             // Zur Cinemachine1 wechseln, falls CameraSelector verfügbar ist
             if (cameraSelector != null)
             {
                 cameraSelector.SwitchToCamera("CineCamBoss");
                 Debug.Log("CineCamBoss wurde aktiviert!");
-
             }
             else
             {
@@ -75,17 +98,21 @@ public class PlatformTrigger : MonoBehaviour
         }
     }
 
-    void ActivatePlatform()
+    // Hilfsmethode zum Aktivieren der Plattform-Visuals ohne Flag-Änderung
+    private void ActivatePlatformVisuals()
     {
-        if (platform != null && !platformActivated)
+        if (platform != null)
         {
             // Aktiviere den Renderer (sichtbar)
             TilemapRenderer platformRenderer = platform.GetComponent<TilemapRenderer>();
-            SpriteRenderer platformSpriteRenderer = platformSprite.GetComponent<SpriteRenderer>();
+            SpriteRenderer platformSpriteRenderer = platformSprite?.GetComponent<SpriteRenderer>();
             if (platformRenderer != null)
             {
                 platformRenderer.enabled = true;
-                platformSpriteRenderer.enabled = true;
+                if (platformSpriteRenderer != null)
+                {
+                    platformSpriteRenderer.enabled = true;
+                }
             }
 
             // Aktiviere den Collider (Interaktion)
@@ -94,14 +121,21 @@ public class PlatformTrigger : MonoBehaviour
             {
                 platformCollider.enabled = true;
             }
+        }
+    }
+
+    void ActivatePlatform()
+    {
+        if (platform != null && !platformActivated)
+        {
+            // Aktiviere die Visuals
+            ActivatePlatformVisuals();
 
             // Setze Flag auf true, damit es nur einmal ausgelöst wird
             platformActivated = true;
 
             Debug.Log("Plattform wurde aktiviert!");
             Boss.bossActive = true;
-
-            //Destroy(gameObject);
         }
     }
 
@@ -116,7 +150,6 @@ public class PlatformTrigger : MonoBehaviour
         {
             newSceneCameraSelector.SwitchToCamera("CineCamBoss");
             Debug.Log("CameraSelector und CineCamBoss doch noch gefunden!");
-
         }
         else
         {
